@@ -16,7 +16,6 @@ public class Product {
 	private String name;
 	private String description;
 	private Category category;
-	private Double rating;
 	private List<WarehouseProduct> warehouseProducts;
 
 	public Integer getId() {
@@ -51,14 +50,6 @@ public class Product {
 		this.category = category;
 	}
 
-	public Double getRating() {
-		return rating;
-	}
-
-	public void setRating(Double rating) {
-		this.rating = rating;
-	}
-	
 	public List<WarehouseProduct> getWarehouseProducts() {
 		return warehouseProducts;
 	}
