@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-5.3.5.dtd"> 
+
+<hibernate-mapping>
+    <class name = "com.ideas2it.ecommerce.model.Product" table = "PRODUCT">
+      
+        <meta attribute = "class-description">
+            This class contains the Product details. 
+        </meta>
+      
+        <id name = "id" type = "int" column = "ID">
+            <generator class="increment"/>
+        </id>
+      
+        <property name = "name" column = "NAME" type = "string"/>
+        <property name = "description" column = "DESCRIPTION" type = "string"/>
+        <property name = "rating" column = "RATING" type = "double"/>
+
+        <many-to-one name = "category" column = "CATEGORY" 
+            class = "com.ideas2it.ecommerce.model.Category"/>
+    </class>
+</hibernate-mapping>
