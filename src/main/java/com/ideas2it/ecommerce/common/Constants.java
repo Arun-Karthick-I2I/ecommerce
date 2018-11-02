@@ -9,6 +9,8 @@ public class Constants {
     public static final String LABEL_ISACTIVE = "isActive";
     
     public static final String LABEL_ID = "id";
+
+    public static final String LABEL_MESSAGE = "message";
     
     public static final String MESSAGE_SESSION_FACTORY_FAIL =
         "Failed to Create Session Factory";
@@ -38,17 +40,21 @@ public class Constants {
         "Something went wrong in displaying customers...";
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //Seller Specific Constants
     
     
     //Admin Specific Constants
+    
+
+
+    public static final String MESSAGE_CATEGORY_DISPLAY_FAILURE = 
+        "No Categories are available";
+    
+    public static final String MESSAGE_CATEGORIES_UNAVAILABLE = 
+        "No Categories are available";
+    
+    public static final String MESSAGE_CATEGORIES_DISPLAY_FAILURE =
+        "Unsuccessful display of Categories";
+
+    public static final String QUERY_GET_CATEGORY = "from Category";
 }
