@@ -2,7 +2,7 @@ package com.ideas2it.ecommerce.model;
 
 /**
  * <p>
- * Uesr contains role of the user such as customer, seller, admin and their
+ * User contains role of the user such as customer, seller, admin and their
  * login credentials
  * </p>
  * 
