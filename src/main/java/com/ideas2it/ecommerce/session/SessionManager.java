@@ -1,56 +1,59 @@
 package com.ideas2it.ecommerce.session;
 
 import com.ideas2it.ecommerce.common.Constants;
+import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
  * <p>
- * The {@code SessionManager} Class is used to a create a singleton object for
- * the session factory and provides access to it.
+ * The {@code SessionManager} creates an singleton session factory object 
+ * and makes use of it for creating new session objects.
  * </p>
+ * 
+ * @author Arun Karthick.J
  */
 public class SessionManager {
-    private static SessionManager sessionManager;
     private static SessionFactory sessionFactory;
 
     private SessionManager() {
-        try {
-            sessionFactory = (new Configuration())
-                    .configure("hibernate.cfg.xml").buildSessionFactory();
-        } catch (Throwable cause) {
-            EcommerceLogger.error(Constants.MESSAGE_SESSION_FACTORY_FAIL,
-                    cause);
-        }
     }
 
     /**
      * <p>
-     * Returns the session manager object that restricts the session factory
-     * object to be a singleton object for the entire e-commerce application
+     * Returns the session object. It initialises the session factory object if
+     * it is not initialised previously and then creates a session object.
      * </p>
-     *
-     * @return sessionManager Returns the sessionManager object that can access
-     *         the intialised session factory.
      */
-    public static synchronized SessionManager getInstance() {
-        if (null == sessionManager) {
-            sessionManager = new SessionManager();
+    public static Session getSession() throws EcommerceException {
+        if (null == sessionFactory) {
+            synchronized (SessionManager.class) {
+                try {
+                    sessionFactory = (new Configuration())
+                            .configure("hibernate.cfg.xml")
+                            .buildSessionFactory();
+                } catch (Throwable cause) {
+                    EcommerceLogger.error(
+                            Constants.MESSAGE_SESSION_FACTORY_FAIL, cause);
+                    throw new EcommerceException(
+                            Constants.MESSAGE_SESSION_FACTORY_FAIL);
+                }
+            }
         }
-        return sessionManager;
+        return sessionFactory.openSession();
     }
 
     /**
      * <p>
-     * Returns the session factory object intialised with the specified
-     * hibernate configuration.
+     * Closes the specified session object if it is not null.
      * </p>
-     *
-     * @return sessionFactory Returns the session factory.
      */
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public static void closeSession(Session session) {
+        if (null != session) {
+            session.close();
+        }
     }
 }
