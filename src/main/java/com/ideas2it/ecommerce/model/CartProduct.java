@@ -2,7 +2,7 @@ package com.ideas2it.ecommerce.model;
 
 /**
  * <p>
- * Holds the various Products along with their respective prices and quantity 
+ * Holds the various Products along with their respective prices and quantity
  * required by the Customer who wishes to place the Order
  * </p>
  * 
@@ -16,43 +16,43 @@ public class CartProduct {
 	Customer customer;
 	WarehouseProduct warehouseProduct;
 
-	private Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	private void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	private Integer getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	private void setQuantity(Integer quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	private Double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	private void setPrice(Double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	private Customer getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	private void setCustomer(Customer customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-	private WarehouseProduct getWarehouseProduct() {
+	public WarehouseProduct getWarehouseProduct() {
 		return warehouseProduct;
 	}
 
-	private void setWarehouseProduct(WarehouseProduct warehouseProduct) {
+	public void setWarehouseProduct(WarehouseProduct warehouseProduct) {
 		this.warehouseProduct = warehouseProduct;
 	}
 }
