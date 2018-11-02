@@ -1,10 +1,11 @@
 package com.ideas2it.ecommerce.session;
 
+import com.ideas2it.ecommerce.common.Constants;
+import com.ideas2it.ecommerce.logger.EcommerceLogger;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.ideas2it.ecommerce.common.Constants;
-import com.ideas2it.ecommerce.logger.DvdStoreLogger;
 
 /**
  * <p>
