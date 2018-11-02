@@ -6,6 +6,16 @@ import java.util.List;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Customer;
 
+/**
+ * <p>
+ * CustomerDao interface class is used to insert the new customer, 
+ * soft delete on existing customer details from database,
+ * update existing customer detail in the e-commerce website.
+ * </p>
+ * 
+ * @author Anantharaj.S
+ * 
+ */
 public interface CustomerDao {
 
 
@@ -24,7 +34,7 @@ public interface CustomerDao {
 
     /**
      * <p>
-     * Getting particular customer detail from dvd store based on mobile number.
+     * Getting particular customer detail from database based on mobile number.
      *
      * @param mobile
      *        Needed for check the customer details
@@ -32,7 +42,7 @@ public interface CustomerDao {
      * @param status
      *        needed for check active or inactive
      *
-     * @return Dvd
+     * @return Customer
      *        Returns particular customer details from database
      * </p>
      */
@@ -41,15 +51,15 @@ public interface CustomerDao {
 
     /**
      * <p>
-     * Getting particular customer detail from dvd store based on customer id.
+     * Getting particular customer detail from database based on customer id.
      *
      * @param id
-     *        Needed for check customer detail from store.
+     *        Needed for check customer detail.
      *
      * @param status
      *        needed for check active or inactive.
      *
-     * @return Dvd
+     * @return Customer
      *        Returns particular customer details form database.
      * </p>
      */
@@ -71,7 +81,7 @@ public interface CustomerDao {
 
     /** 
      * <p>
-     * Update existing customer detail in database, based on updated values
+     * Update existing customer detail to database, using updated values
      * 
      * @param customer
      *        Needed for updating customer
@@ -84,13 +94,13 @@ public interface CustomerDao {
 
     /**
      * <p>
-     * Getting all active customer details in ecommerce
+     * Getting all active customer details in e-commerce
      *
      * @param status
      *        needed for check active or inactive customer
      *
      * @return List<Customer>
-     *        Returns set of customer details form dvd store
+     *        Returns list of customer details form database
      * </p>
      */
     public List<Customer> getCustomers(Boolean status) throws EcommerceException ; 

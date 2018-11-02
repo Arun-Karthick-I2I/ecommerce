@@ -27,7 +27,7 @@ import com.ideas2it.ecommerce.common.Constants;
  * update existing customer detail in the ecommerce website.
  * </p>
  *
- * @author Anantharaj
+ * @author Anantharaj.S
  * 
  */
 public class CustomerDaoImpl {
