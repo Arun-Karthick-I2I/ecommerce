@@ -25,7 +25,8 @@ public class Customer {
 	private List<Address> addresses;
 	private List<CartProduct> cartProducts;
 	private User user;
-
+	private Boolean isActive;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -89,5 +90,13 @@ public class Customer {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
 
 }

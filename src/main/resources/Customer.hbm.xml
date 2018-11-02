@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>  
-<!DOCTYPE hibernate-mapping PUBLIC  
-     "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
-     "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.3//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
      
 <hibernate-mapping>
 	<class name="com.ideas2it.ecommerce.Customer" table="CUSTOMER">
@@ -13,6 +11,7 @@
 	<property name="mobileNumber" column="MOBILE_NUMBER" type="string" />
 	<property name="emailId" column="EMAIL_ID" type="string" />
 	<property name="user" column="USER_ID" type="integer" />
+	<property name="isActive" column="IS_ACTIVE" type="boolean" />
 	
 	<bag name="orders">
 		<key column="CUSTOMER_ID" />
