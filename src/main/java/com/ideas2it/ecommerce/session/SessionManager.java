@@ -36,10 +36,9 @@ public class SessionManager {
                             .configure("hibernate.cfg.xml")
                             .buildSessionFactory();
                 } catch (Throwable cause) {
-                    EcommerceLogger.error(
-                            Constants.MESSAGE_SESSION_FACTORY_FAIL, cause);
+                    EcommerceLogger.error(cause);
                     throw new EcommerceException(
-                            Constants.MESSAGE_SESSION_FACTORY_FAIL);
+                            Constants.MSG_SESSION_FACTORY_FAIL);
                 }
             }
         }
