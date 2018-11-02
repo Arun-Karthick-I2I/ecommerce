@@ -1,7 +1,5 @@
 package com.ideas2it.ecommerce.model;
 
-import java.util.List;
-
 /**
  * <p>
  * Order contains customer details, product, delivery address, quantity and price

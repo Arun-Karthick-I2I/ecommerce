@@ -36,7 +36,7 @@ public class SessionManager {
      *         the intialised session factory.
      */
     public static synchronized SessionManager getInstance() {
-        if (null == SessionManager) {
+        if (null == sessionManager) {
             sessionManager = new SessionManager();
         }
         return sessionManager;
