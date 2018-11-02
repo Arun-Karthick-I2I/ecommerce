@@ -15,6 +15,7 @@ public class Seller {
     private String name;
     private String mobileNumber;
     private String emailId;
+    private Float rating;
     private List<WarehouseProduct> warehouseProducts;
     private List<Address> addresses;
     private User user;
@@ -49,6 +50,14 @@ public class Seller {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 
     public List<WarehouseProduct> getWarehouseProducts() {
