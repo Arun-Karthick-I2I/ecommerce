@@ -12,8 +12,6 @@ public interface CategoryService {
      * Used to display the details of all the Categories in the List
      * </p>
      *
-     * @param  status  Status of the Category checking whether it has been 
-     *                 deleted or not
      * @return Returns the details of all the Categories. Otherwise, 
      *         returns an empty String object.
      */

@@ -6,12 +6,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 
-import com.ideas2it.ecommerce.session.SessionManager;
+import com.ideas2it.ecommerce.common.Constants;
+import com.ideas2it.ecommerce.dao.CategoryDao;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Category;
+import com.ideas2it.ecommerce.session.SessionManager;
 
-public class CategoryDaoImpl {
+public class CategoryDaoImpl implements CategoryDao {
 	
 	/**
      * {@inheritDoc}
@@ -21,11 +23,11 @@ public class CategoryDaoImpl {
         List<Category> categories;
         try {
             session = SessionManager.getSession();
-            Query query = session.createQuery("from Category");
+            Query query = session.createQuery(Constants.QUERY_GET_CATEGORY);
             categories = query.getResultList();
         } catch (HibernateException e) {       
-        	EcommerceLogger.error("Unsuccessful display of Categories",e);
-            throw new EcommerceException("Unsuccessful display of Categories");
+        	EcommerceLogger.error(Constants.MESSAGE_CATEGORIES_DISPLAY_FAILURE,e);
+            throw new EcommerceException(Constants.MESSAGE_CATEGORIES_DISPLAY_FAILURE);
         } finally {
         	SessionManager.closeSession(session);
         }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam; 
 import org.springframework.web.servlet.ModelAndView;  
 
+import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Category;
@@ -18,7 +19,8 @@ import com.ideas2it.ecommerce.service.impl.CategoryServiceImpl;
 
 /**
  * <p>
- * 
+ * The CategoryController gets the inputs from the user on which the operations 
+ * such as add, delete, update and display are performed.
  * </p>
  * @author Pavithra.S
  *
@@ -37,7 +39,7 @@ public class CategoryController {
                 "caegories",categories);  
         } else {
             return new ModelAndView("displayCategories",
-                "message","No Categories are available");
+                Constants.LABEL_MESSAGE,Constants.MESSAGE_CATEGORIES_UNAVAILABLE);
         }
     }
     

@@ -6,8 +6,9 @@ import com.ideas2it.ecommerce.dao.CategoryDao;
 import com.ideas2it.ecommerce.dao.impl.CategoryDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
+import com.ideas2it.ecommerce.service.CategoryService;
 
-public class CategoryServiceImpl {
+public class CategoryServiceImpl implements CategoryService {
 	private CategoryDao categoryDao = new CategoryDaoImpl();
 	
 	/**
