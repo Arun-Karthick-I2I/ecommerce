@@ -12,9 +12,6 @@ import com.ideas2it.ecommerce.model.User;
  *
  * @author Arun Karthick.J
  *
- * @see    com.ideas2it.dvdstore.exception.EcommerceException
- * @see    com.ideas2it.dvdstore.model.User
- *
  */
 public interface UserDao {
 
