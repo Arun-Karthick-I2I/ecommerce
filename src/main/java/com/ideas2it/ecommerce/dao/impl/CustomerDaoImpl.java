@@ -18,6 +18,7 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.session.SessionManager;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.common.Constants;
+import com.ideas2it.ecommerce.dao.CustomerDao;
 
 /**
  * <p>
@@ -30,14 +31,14 @@ import com.ideas2it.ecommerce.common.Constants;
  * @author Anantharaj.S
  * 
  */
-public class CustomerDaoImpl {
+public class CustomerDaoImpl implements CustomerDao {
 
     private StringBuilder stringBuilder = new StringBuilder();
 
     /**
      * @(@inheritDoc)
      */
-    public Boolean insertCustomer(Customer customer) throws EcommerceException {
+    public Boolean insertCustomer(Customer customer) throws EcommerceException{
         Session session = null;
         Transaction transaction = null;
         try {
@@ -62,7 +63,7 @@ public class CustomerDaoImpl {
     /** 
      * @(@inheritDoc)
      */
-    public Customer getCustomerByMobile(String mobile, Boolean status) throws EcommerceException {
+    public Customer getCustomerByMobile(String mobile, Boolean isActive) throws EcommerceException {
         Transaction transaction = null;
         Session session = null;
         try {
@@ -74,7 +75,7 @@ public class CustomerDaoImpl {
             criteriaQuery.select(root);
             criteriaQuery.where(builder.and(builder.equal(root.get
                 (Constants.LABEL_MOBILE_NUMBER), mobile), builder.equal(root.get
-                (Constants.LABEL_ISACTIVE), status)));
+                (Constants.LABEL_ISACTIVE), isActive)));
             Query query = session.createQuery(criteriaQuery);
             List<Customer> customerCollection = query.getResultList();
             for (Customer customer : customerCollection) {
@@ -92,7 +93,7 @@ public class CustomerDaoImpl {
     /** 
      * @(@inheritDoc)
      */
-    public Customer getCustomerById(Integer id, Boolean status) throws EcommerceException {
+    public Customer getCustomerById(Integer id, Boolean isActive) throws EcommerceException {
         Session session = null;
         try {
             session = SessionManager.getSession();
@@ -103,7 +104,7 @@ public class CustomerDaoImpl {
             criteriaQuery.select(root);
             criteriaQuery.where(builder.and(builder.equal(root.get
                 (Constants.LABEL_ID), id), builder.equal(root.get
-                (Constants.LABEL_ISACTIVE), status)));
+                (Constants.LABEL_ISACTIVE), isActive)));
             Query query = session.createQuery(criteriaQuery);
             List<Customer> customerCollection = query.getResultList();
             for (Customer customer : customerCollection) {
@@ -115,6 +116,34 @@ public class CustomerDaoImpl {
             throw new EcommerceException(Constants.MSG_SERVER_ERROR);
         } finally {
             SessionManager.closeSession(session);
+        }
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    public Customer getCustomerByUserId(Integer userId, Boolean isActive) 
+            throws EcommerceException {
+        Session session = null;
+        try {
+            session = SessionManager.getSession();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(
+                Customer.class);
+            Root<Customer> root = criteriaQuery.from(Customer.class);
+            criteriaQuery.select(root).where(criteriaBuilder.and(
+                criteriaBuilder.equal(root.get(Constants.LABEL_USER),
+                userId), criteriaBuilder.equal(root.get(Constants.LABEL_ISACTIVE),
+                isActive)));
+            return session.createQuery(criteriaQuery).uniqueResult();
+        } catch (HibernateException e) {
+            String exceptionMessage = new StringBuilder(
+                Constants.MESSAGE_EXCEPTION_SEARCH_CUSTOMER).
+                append(Constants.SPACE).append(Constants.LABEL_USER_ID).
+                append(Constants.COLON_SYMBOL).
+                append(userId).toString();
+            EcommerceLogger.error(exceptionMessage, e);
+            throw new EcommerceException(exceptionMessage);
         }
     }
     
@@ -172,7 +201,7 @@ public class CustomerDaoImpl {
     /**
      * @(@inheritDoc)
      */
-    public List<Customer> getCustomers(Boolean status) throws EcommerceException {
+    public List<Customer> getCustomers(Boolean isActive) throws EcommerceException {
         Session session = null;
         List<Customer> customers;
         try {
@@ -182,7 +211,7 @@ public class CustomerDaoImpl {
             Root<Customer> root = criteriaQuery.from(Customer.class);
             criteriaQuery.select(root);
             criteriaQuery.where(builder.equal(root.get(Constants.LABEL_ISACTIVE),
-                status));
+                isActive));
             Query query = session.createQuery(criteriaQuery);
             List<Customer> customerCollection = query.getResultList();
             customers = new ArrayList<Customer>(customerCollection);

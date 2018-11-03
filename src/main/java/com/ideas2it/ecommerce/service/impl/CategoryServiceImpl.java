@@ -17,4 +17,43 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getCategories() throws EcommerceException { 
         return categoryDao.getCategories(); 
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean insertCategory(Category category) throws EcommerceException { 
+        if ((null != category) 
+                && (null != retrieveByName(category.getName()))) {
+            return categoryDao.insertCategory(category);
+        }
+        return Boolean.FALSE;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean deleteCategory(Integer id) throws EcommerceException {
+        return categoryDao.deleteCategory(id);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */ 
+    public Boolean updateCategory(Category category) throws EcommerceException {
+        return categoryDao.updateCategory(category);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Category retrieveById(Integer id) throws EcommerceException {
+        return categoryDao.retrieveById(id);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Category retrieveByName(String name) throws EcommerceException {
+        return categoryDao.retrieveByName(name);
+    }
 }

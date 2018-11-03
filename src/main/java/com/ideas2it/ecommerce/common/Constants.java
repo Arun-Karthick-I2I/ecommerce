@@ -21,6 +21,12 @@ public class Constants {
     public static final String LABEL_SELLER = "seller";
     
     public static final String LABEL_USERNAME = "userName";
+
+    public static final String LABEL_NAME = "name";
+
+    public static final String LABEL_USER = "user";
+    
+    public static final String LABEL_USER_ID = "userId";
     
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
@@ -36,18 +42,40 @@ public class Constants {
     
 
     //Admin Specific Constants
+    public static final String MSG_CATEGORY_ID = "\tCategory ID";
+    
+    public static final String MSG_CATEGORY_NAME = "\tCategory Name:";    
+            
+    public static final String MSG_CATEGORY_SEARCH_FAILURE =
+        "Unsuccessful search of Category";
 
-    public static final String MESSAGE_CATEGORY_DISPLAY_FAILURE = 
+    public static final String MSG_CATEGORIES_UNAVAILABLE = 
         "No Categories are available";
     
-    public static final String MESSAGE_CATEGORIES_UNAVAILABLE = 
-        "No Categories are available";
-    
-    public static final String MESSAGE_CATEGORIES_DISPLAY_FAILURE =
+    public static final String MSG_CATEGORIES_DISPLAY_FAILURE =
         "Unsuccessful display of Categories";
-
-    public static final String QUERY_GET_CATEGORY = "from Category";
     
+    public static final String MSG_INSERT_CATEGORY_SUCCESS = 
+        "Category inserted successfully";
+    
+    public static final String MSG_CATEGORY_EXISTS =
+        "Category already exits";
+    
+    public static final String MSG_CATEGORY_INSERT_FAILURE =
+        "Unsuccessful insertion of Category";
+    
+    public static final String MSG_CATEGORY_DELETE_SUCCESS =
+        "Category deleted successfully";    
+    
+    public static final String MSG_CATEGORY_DELETE_FAILURE =
+        "Unsuccessful deletion of Category";
+    
+    public static final String MSG_CATEGORY_UPDATE_SUCCESS = 
+        "Category updated successfully";
+    
+    public static final String MSG_CATEGORY_UPDATE_FAILURE = 
+        "Unsuccessful updation of Category";
+
     
     //Customer Specific Constants
 
@@ -68,7 +96,9 @@ public class Constants {
 
     public static final String ERROR_GET_CUSTOMERS = 
         "Something went wrong while displaying customers...";
-    
+
+    public static final String MESSAGE_EXCEPTION_SEARCH_CUSTOMER = 
+        "Problem with Database while searching Customer : Try Again Later ";
     
     //Seller Specific Constants
     
