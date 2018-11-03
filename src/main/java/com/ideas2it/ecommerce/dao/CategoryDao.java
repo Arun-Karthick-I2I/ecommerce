@@ -13,7 +13,6 @@ public interface CategoryDao {
      * </p>
      * 
      * @return
-     * @throws EcommerceException
      */
     List<Category> getCategories() throws EcommerceException;
     
@@ -24,7 +23,6 @@ public interface CategoryDao {
      * 
      * @param category
      * @return
-     * @throws EcommerceException
      */
     Boolean insertCategory(Category category) throws EcommerceException;
     
@@ -35,7 +33,6 @@ public interface CategoryDao {
      * 
      * @param id
      * @return
-     * @throws EcommerceException
      */
     Boolean deleteCategory(Integer id) throws EcommerceException;
     
@@ -46,7 +43,6 @@ public interface CategoryDao {
      * 
      * @param newCategory
      * @return
-     * @throws EcommerceException
      */
     Boolean updateCategory(Category newCategory) throws EcommerceException;
     
@@ -57,9 +53,8 @@ public interface CategoryDao {
      * 
      * @param id
      * @return
-     * @throws EcommerceException
      */
-    Category retrieveById(Integer id) throws EcommerceException;
+    Category getById(Integer id) throws EcommerceException;
     
     /**
      * <p>
@@ -68,7 +63,6 @@ public interface CategoryDao {
      * 
      * @param name
      * @return
-     * @throws EcommerceException
      */
-    Category retrieveByName(String name) throws EcommerceException;
+    Category getByName(String name) throws EcommerceException;
 }

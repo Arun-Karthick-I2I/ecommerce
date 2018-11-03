@@ -20,6 +20,8 @@ public class Constants {
     
     public static final String LABEL_SELLER = "seller";
     
+    public static final String LABEL_SELLER_ID = "sellerId";
+    
     public static final String LABEL_USERNAME = "userName";
 
     public static final String LABEL_NAME = "name";
@@ -46,7 +48,15 @@ public class Constants {
     //Admin Specific Constants
     public static final String MSG_CATEGORY_ID = "\tCategory ID";
     
-    public static final String MSG_CATEGORY_NAME = "\tCategory Name:";    
+    public static final String MSG_CATEGORY_NAME = "\tCategory Name:";  
+    
+    public static final String MSG_PRODUCT_ID = "\tProduct ID";
+    
+    public static final String MSG_PRODUCT_NAME = "\tProduct Name:"; 
+    
+    public static final String MSG_CART_PRODUCT_ID = "\tCart Product ID";
+    
+    public static final String MSG_ORDER_ID = "\tOrder ID";
             
     public static final String MSG_CATEGORY_SEARCH_FAILURE =
         "Unsuccessful search of Category";
@@ -77,7 +87,36 @@ public class Constants {
     
     public static final String MSG_CATEGORY_UPDATE_FAILURE = 
         "Unsuccessful updation of Category";
-
+    
+    public static final String MSG_CATEGORY_NOT_AVAILABLE =
+        "Category not available";
+    
+    public static final String MSG_CATEGORY_PRODUCTS_UNAVAILABLE =
+        "Products not available for this Category";
+    
+    public static final String MSG_CART_PRODUCT_INSERT_FAILURE =
+        "Unsuccessful insertion of Cart Product";
+    
+    public static final String MSG_CART_PRODUCT_DELETE_FAILURE =
+        "Unsuccessful deletion of Cart Product";
+    
+    public static final String MSG_PRODUCTS_DISPLAY_FAILURE = 
+        "Unsuccessful display of Products";
+    
+    public static final String MSG_PRODUCT_SEARCH_FAILURE = 
+        "Unsuccessful search of Product";
+    
+    public static final String MSG_PRODUCTS_UNAVAILABLE =
+        "No Products are available";
+    
+    public static final String MSG_PRODUCT_NOT_AVAILABLE = 
+        "Product not available";
+    
+    public static final String MSG_ORDERS_DISPLAY_FAILURE = 
+        "Unsuccessful display of Orders";
+        
+    public static final String MSG_ORDER_SEARCH_FAILURE = 
+        "Unsuccessful search of Order";
     
     //Customer Specific Constants
 
@@ -132,5 +171,21 @@ public class Constants {
     
     //Seller Specific Constants
     
+    public static final String MSG_SELLER_DELETE_SUCCESS = 
+        "Seller details have been removed successfully from the store";
+        
+    public static final String MSG_SELLER_DELETE_FAIL = 
+        "Something went wrong while deleting Seller details..Try Again later";
+
+    public static final String MSG_SELLER_UPDATE_SUCCESS = 
+        "Your details have been updated successfully";
     
+    public static final String MSG_SELLER_UPDATE_FAIL = 
+        "Something went wrong while updating Seller details..Try Again later";
+
+    public static final String MSG_SELLER_SEARCH_FAIL = 
+        "Something went wrong while finding Seller details..Try Again later";
+    
+    public static final String MSG_EXCEPTION_GET_SELLERS =
+        "Something went wrong while retrieving sellers...Try Again Later";
 }

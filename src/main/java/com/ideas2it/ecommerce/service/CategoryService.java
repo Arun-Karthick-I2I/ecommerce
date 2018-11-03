@@ -13,7 +13,6 @@ public interface CategoryService {
 	 * </p>
 	 * 
 	 * @return
-	 * @throws EcommerceException
 	 */
     List<Category> getCategories() throws EcommerceException;
     
@@ -24,7 +23,6 @@ public interface CategoryService {
      * 
      * @param category
      * @return
-     * @throws EcommerceException
      */
     Boolean insertCategory(Category category) throws EcommerceException;
     
@@ -35,7 +33,6 @@ public interface CategoryService {
      * 
      * @param id
      * @return
-     * @throws EcommerceException
      */
     Boolean deleteCategory(Integer id) throws EcommerceException;
     
@@ -46,7 +43,6 @@ public interface CategoryService {
      * 
      * @param category
      * @return
-     * @throws EcommerceException
      */
     Boolean updateCategory(Category category) throws EcommerceException;
     
@@ -57,7 +53,16 @@ public interface CategoryService {
      * 
      * @param id
      * @return
-     * @throws EcommerceException
      */
-    Category retrieveById(Integer id) throws EcommerceException;
+    Category searchById(Integer id) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param name
+     * @return
+     */
+    Category searchByName(String name) throws EcommerceException;
 }
