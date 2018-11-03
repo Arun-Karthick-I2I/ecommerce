@@ -6,6 +6,7 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.dao.CustomerDao;
 import com.ideas2it.ecommerce.dao.impl.CustomerDaoImpl;
+import com.ideas2it.ecommerce.service.CustomerService;
 
 /**
  * <p>
@@ -17,13 +18,12 @@ import com.ideas2it.ecommerce.dao.impl.CustomerDaoImpl;
  * This class have the methods of the DvdStore functions
  * </p>
  * 
- *  @author Anantharaj
+ *  @author Anantharaj.S
  * 
  */
-public class CustomerServiceImpl {
-
+public class CustomerServiceImpl implements CustomerService {
         
-        private CustomerDao customerDao = new CustomerDaoImpl();
+    private CustomerDao customerDao = new CustomerDaoImpl();
   
     /** 
      * @(inheritDoc)
@@ -35,18 +35,25 @@ public class CustomerServiceImpl {
     /** 
      * @(inheritDoc)
      */
-    public Customer getCustomerByMobile(String mobile, Boolean status) throws EcommerceException  {
-        return customerDao.getCustomerByMobile(mobile,status);
+    public Customer getCustomerByMobile(String mobile, Boolean isActive) throws EcommerceException  {
+        return customerDao.getCustomerByMobile(mobile,isActive);
     }
 
     /** 
      * @(inheritDoc)
      */
-    public Customer getCustomerById(Integer id, Boolean status) 
+    public Customer getCustomerById(Integer id, Boolean isActive) 
             throws EcommerceException  {
-        return customerDao.getCustomerById(id, status);
+        return customerDao.getCustomerById(id, isActive);
     }
 
+    /** 
+     * @(inheritDoc)
+     */
+    public Customer getCustomerByUserId(Integer userId) throws EcommerceException {
+        return customerDao.getCustomerByUserId(userId, Boolean.TRUE);
+    }
+    
     /** 
      * @(inheritDoc)
      */
@@ -62,15 +69,15 @@ public class CustomerServiceImpl {
                (customer.getId(), Boolean.TRUE);
            completeCustomerdetail.setName(customer.getName());
            completeCustomerdetail.setMobileNumber(customer.getMobileNumber());
-           completeCustomerdetail.setMailId(customer.getMailId());
+           completeCustomerdetail.setEmailId(customer.getEmailId());
         return customerDao.updateCustomer(completeCustomerdetail);
     }
 
     /** 
      * @(inheritDoc)
      */
-    public List<Customer> getCustomers(Boolean status) throws EcommerceException {
-        return customerDao.getCustomers(status);
+    public List<Customer> getCustomers(Boolean isActive) throws EcommerceException {
+        return customerDao.getCustomers(isActive);
     }
 
 }
