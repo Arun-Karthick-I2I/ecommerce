@@ -18,6 +18,10 @@ public class Constants {
 
     public static final String LABEL_MESSAGE = "message";
     
+    public static final String LABEL_USER = "user";
+    
+    public static final String LABEL_USER_ID = "userId";
+    
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
     
@@ -41,6 +45,7 @@ public class Constants {
 
     public static final String QUERY_GET_CATEGORY = "from Category";
     
+
     
     //Customer Specific Constants
 
@@ -61,7 +66,9 @@ public class Constants {
 
     public static final String ERROR_GET_CUSTOMERS = 
         "Something went wrong while displaying customers...";
-    
+
+    public static final String MESSAGE_EXCEPTION_SEARCH_CUSTOMER = 
+        "Problem with Database while searching Customer : Try Again Later ";
     
     //Seller Specific Constants
     

@@ -30,7 +30,7 @@ public interface CustomerDao {
      *        If customer details added to database returns true, otherwise false
      * </p> 
      */
-    public Boolean insertCustomer(Customer customer)  throws EcommerceException ;
+    public Boolean insertCustomer(Customer customer) throws EcommerceException ;
 
     /**
      * <p>
@@ -46,8 +46,8 @@ public interface CustomerDao {
      *        Returns particular customer details from database
      * </p>
      */
-    public Customer getCustomerByMobile(String mobile, Boolean status)
-        throws EcommerceException ; 
+    public Customer getCustomerByMobile(String mobile, Boolean isActive)
+        throws EcommerceException;
 
     /**
      * <p>
@@ -63,9 +63,26 @@ public interface CustomerDao {
      *        Returns particular customer details form database.
      * </p>
      */
-    public Customer getCustomerById(Integer id, Boolean status) 
+    public Customer getCustomerById(Integer id, Boolean isActive) 
         throws EcommerceException ;
 
+    /**
+     * <p>
+     * Getting particular customer detail from database based on userId.
+     *
+     * @param userId
+     *        Needed for check customer detail.
+     *
+     * @param status
+     *        needed for check customer active or inactive.
+     *
+     * @return Customer
+     *        Returns particular customer details form database.
+     * </p>
+     */
+    public Customer getCustomerByUserId(Integer userId, Boolean isActive)
+        throws EcommerceException ;
+    
     /** 
      * <p>
      * Delete existing customer detail in the store, if available
@@ -103,6 +120,6 @@ public interface CustomerDao {
      *        Returns list of customer details form database
      * </p>
      */
-    public List<Customer> getCustomers(Boolean status) throws EcommerceException ; 
+    public List<Customer> getCustomers(Boolean isActive) throws EcommerceException ; 
 
 }

@@ -1,5 +1,7 @@
 package com.ideas2it.ecommerce.model;
 
+import java.time.LocalDate;
+
 /**
  * <p>
  * Order contains customer details, product, delivery address, quantity and
@@ -15,6 +17,7 @@ public class Order {
     private WarehouseProduct warehouseProduct;
     private Integer quantity;
     private Float price;
+    private LocalDate orderDate;
     private Address address;
     private String status;
 
@@ -56,6 +59,14 @@ public class Order {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
     public Address getAddress() {
