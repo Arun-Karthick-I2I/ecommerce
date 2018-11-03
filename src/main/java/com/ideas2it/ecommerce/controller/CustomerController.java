@@ -1,5 +1,7 @@
 package com.ideas2it.ecommerce.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
 
@@ -108,6 +111,56 @@ public class CustomerController {
         modelAndView.setViewName("OrdersDisplay");
         return modelAndView;
     }
+    
+
+    /**
+     * <p>
+     * This method is used to place order for customer want to purchase...
+     * </p>
+     * @return ModelAndView
+     *        ModelAndView is an object that holds both the model and view. In 
+     *        this method "OrdersDisplay" is the view name and set of orders
+     *        and customer is the model.
+     * 
+     */
+   @PostMapping("placeOrder")
+    public ModelAndView placeOrder(@RequestParam("id") String id, HttpServletRequest request) {
+        HttpSession session=request.getSession(false);  
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer)session.getAttribute("customer");
+        try {
+            Integer quantity = Integer.parseInt((String)request.getParameter("quantity"));
+            Integer addressId = Integer.parseInt(request.getParameter("addressId"));
+            WarehouseProduct warehouseProduct = customerService.getWareHouseProduct(Integer.parseInt(id));
+            Address address = new Address();
+            address.setId(addressId);
+            Order order = new Order();
+            order.setCustomer(customer);
+            order.setWarehouseProduct(warehouseProduct);
+            order.setPrice(quantity * warehouseProduct.getPrice());
+            order.setQuantity(quantity);
+            order.setAddress(address);
+            LocalDate todayDate = LocalDate.now();
+            order.setOrderDate(todayDate);
+            order.setStatus("ORDERED");
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(order);
+            customer.setOrders(orders);
+            if (customerService.updateCustomer(customer)) {
+                session.setAttribute("customer", customer);
+                modelAndView.addObject(Constants.LABEL_MESSAGE,  
+                    Constants.MSG_ADD_ORDER_SUCCESS);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_ADD_ORDER_FAIL);
+            }
+            modelAndView.setViewName("CustomerOperations");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return myOrders(request);
+    }
+    
     
     /**
      * <p>

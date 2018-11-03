@@ -159,6 +159,13 @@ public class Constants {
     public static final String MSG_NO_ORDER_PLACED = 
         "No orders has been placed..";
         
+    public static final String MSG_ADD_ORDER_SUCCESS = 
+        "Your order has been successfully placed...";
+    
+
+    public static final String MSG_ADD_ORDER_FAIL = 
+        "Fail to place an order...";
+
     public static final String MSG_CANCEL_ORDER_SUCCESS = 
         "Order has been successfully cancelled..";
 
