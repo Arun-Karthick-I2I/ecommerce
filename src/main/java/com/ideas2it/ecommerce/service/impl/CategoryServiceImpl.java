@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     public Boolean insertCategory(Category category) throws EcommerceException { 
         if ((null != category) 
-                && (null != retrieveByName(category.getName()))) {
+                && (null != searchByName(category.getName()))) {
             return categoryDao.insertCategory(category);
         }
         return Boolean.FALSE;
@@ -46,14 +46,14 @@ public class CategoryServiceImpl implements CategoryService {
     /**
      * {@inheritDoc}
      */
-    public Category retrieveById(Integer id) throws EcommerceException {
-        return categoryDao.retrieveById(id);
+    public Category searchById(Integer id) throws EcommerceException {
+        return categoryDao.getById(id);
     }
     
     /**
      * {@inheritDoc}
      */
-    public Category retrieveByName(String name) throws EcommerceException {
-        return categoryDao.retrieveByName(name);
+    public Category searchByName(String name) throws EcommerceException {
+        return categoryDao.getByName(name);
     }
 }
