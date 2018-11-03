@@ -8,12 +8,56 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 public interface CategoryService {
 	
 	/**
-     * <p>
-     * Used to display the details of all the Categories in the List
-     * </p>
-     *
-     * @return Returns the details of all the Categories. Otherwise, 
-     *         returns an empty String object.
-     */
+	 * <p>
+	 * 
+	 * </p>
+	 * 
+	 * @return
+	 * @throws EcommerceException
+	 */
     List<Category> getCategories() throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param category
+     * @return
+     * @throws EcommerceException
+     */
+    Boolean insertCategory(Category category) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     * @throws EcommerceException
+     */
+    Boolean deleteCategory(Integer id) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param category
+     * @return
+     * @throws EcommerceException
+     */
+    Boolean updateCategory(Category category) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     * @throws EcommerceException
+     */
+    Category retrieveById(Integer id) throws EcommerceException;
 }
