@@ -116,6 +116,12 @@ public class Constants {
     public static final String MSG_ORDER_SEARCH_FAILURE = 
         "Unsuccessful search of Order";
     
+    public static final String MSG_ORDERS_UNAVAILABLE = 
+        "No Orders are available";
+    
+    public static final String MSG_ORDER_NOT_AVAILABLE =
+        "Order not available";
+    
     //Customer Specific Constants
 
     public static final String ERROR_INSERT_CUSTOMER = 

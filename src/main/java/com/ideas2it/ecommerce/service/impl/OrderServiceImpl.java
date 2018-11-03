@@ -9,7 +9,7 @@ import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
-private OrderDao orderDao = new OrderDaoImpl();
+    private OrderDao orderDao = new OrderDaoImpl();
     
     /**
      * {@inheritDoc}
