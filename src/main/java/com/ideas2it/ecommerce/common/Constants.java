@@ -20,6 +20,8 @@ public class Constants {
     
     public static final String LABEL_SELLER = "seller";
     
+    public static final String LABEL_SELLER_ID = "sellerId";
+    
     public static final String LABEL_USERNAME = "userName";
 
     public static final String LABEL_NAME = "name";
@@ -102,5 +104,21 @@ public class Constants {
     
     //Seller Specific Constants
     
+    public static final String MSG_SELLER_DELETE_SUCCESS = 
+        "Seller details have been removed successfully from the store";
+        
+    public static final String MSG_SELLER_DELETE_FAIL = 
+        "Something went wrong while deleting Seller details..Try Again later";
+
+    public static final String MSG_SELLER_UPDATE_SUCCESS = 
+        "Your details have been updated successfully";
     
+    public static final String MSG_SELLER_UPDATE_FAIL = 
+        "Something went wrong while updating Seller details..Try Again later";
+
+    public static final String MSG_SELLER_SEARCH_FAIL = 
+        "Something went wrong while finding Seller details..Try Again later";
+    
+    public static final String MSG_EXCEPTION_GET_SELLERS =
+        "Something went wrong while retrieving sellers...Try Again Later";
 }
