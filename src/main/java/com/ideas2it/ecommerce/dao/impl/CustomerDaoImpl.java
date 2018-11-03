@@ -6,11 +6,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.Query;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.Filter;
 import org.hibernate.HibernateException; 
 import org.hibernate.Session; 
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.ideas2it.ecommerce.model.Customer;
@@ -22,18 +19,16 @@ import com.ideas2it.ecommerce.dao.CustomerDao;
 
 /**
  * <p>
- * This class is used to insert the new customer to ecommerce website, 
- * delete existing customer in the ecommerce website,
- *  retrieve all available customer details ecommerce website,
- * update existing customer detail in the ecommerce website.
+ * This class is used to insert the new customer to e-commerce web-site, 
+ * delete existing customer in the e-commerce web-site,
+ * retrieve all available customer details e-commerce web-site,
+ * update existing customer detail in the e-commerce web-site.
  * </p>
  *
  * @author Anantharaj.S
  * 
  */
 public class CustomerDaoImpl implements CustomerDao {
-
-    private StringBuilder stringBuilder = new StringBuilder();
 
     /**
      * @(@inheritDoc)
@@ -82,8 +77,8 @@ public class CustomerDaoImpl implements CustomerDao {
                 return customer;
             }
         } catch (HibernateException e) {
-            EcommerceLogger.error(Constants.ERROR_SERACH_CUSTOMER, e);
-            throw new EcommerceException(Constants.ERROR_SERACH_CUSTOMER);
+            EcommerceLogger.error(Constants.ERROR_SEARCH_CUSTOMER, e);
+            throw new EcommerceException(Constants.ERROR_SEARCH_CUSTOMER);
         } finally {
             SessionManager.closeSession(session);
         }
@@ -112,7 +107,7 @@ public class CustomerDaoImpl implements CustomerDao {
             }
             return null;
         } catch (HibernateException e) {
-            EcommerceLogger.error(Constants.ERROR_SERACH_CUSTOMER, e);
+            EcommerceLogger.error(Constants.ERROR_SEARCH_CUSTOMER, e);
             throw new EcommerceException(Constants.MSG_SERVER_ERROR);
         } finally {
             SessionManager.closeSession(session);

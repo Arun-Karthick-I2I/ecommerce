@@ -25,6 +25,8 @@ public class Constants {
     public static final String LABEL_NAME = "name";
 
     public static final String LABEL_USER = "user";
+
+    public static final String LABEL_CUSTOMER = "customer";
     
     public static final String LABEL_USER_ID = "userId";
     
@@ -82,7 +84,7 @@ public class Constants {
     public static final String ERROR_INSERT_CUSTOMER = 
         "Something went wrong while insertng customer :";
     
-    public static final String ERROR_SERACH_CUSTOMER = 
+    public static final String ERROR_SEARCH_CUSTOMER = 
         "Something went wrong while fetching customer.. ";
 
     public static final String ERROR_DELETE_CUSTOMER = 
@@ -99,6 +101,34 @@ public class Constants {
 
     public static final String MESSAGE_EXCEPTION_SEARCH_CUSTOMER = 
         "Problem with Database while searching Customer : Try Again Later ";
+
+    public static final String MSG_ADD_CUSTOMER_SUCCESS = 
+        " account created successfully.. ";
+    
+    public static final String MSG_ADD_CUSTOMER_FAIL = 
+        " account failed to create..";
+    
+    public static final String ERROR_INSERT_ORDER = 
+        "Something went wrong while placing an order...";
+
+    public static final String MSG_SERACH_CUSTOMER_BY_ID_FAIL = 
+        "No account match with this ID..";;
+
+    public static final String MSG_SERACH_CUSTOMER_BY_MOBILE_FAIL = 
+        "No account match with this mobile number..";
+        
+    public static final String MSG_NO_ORDER_PLACED = 
+        "No orders has been placed..";
+        
+    public static final String MSG_CANCEL_ORDER_SUCCESS = 
+        "Order has been successfully cancelled..";
+
+    public static final String MSG_CANCEL_ORDER_FAIL = 
+        "Failed to cancel order..";
+        
+        
+        
+        
     
     //Seller Specific Constants
     
