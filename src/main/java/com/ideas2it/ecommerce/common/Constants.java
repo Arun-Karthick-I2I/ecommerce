@@ -8,8 +8,8 @@ public class Constants {
     
     public static final Character SPACE = ' ';
 
-    public static final String LABEL_USERNAME = "userName";
-    
+    public static final String LABEL_EMAIL_ID = "emailId";
+
     public static final String LABEL_MOBILE_NUMBER = "mobileNumber";
     
     public static final String LABEL_ISACTIVE = "isActive";
@@ -17,6 +17,10 @@ public class Constants {
     public static final String LABEL_ID = "id";
 
     public static final String LABEL_MESSAGE = "message";
+    
+    public static final String LABEL_SELLER = "seller";
+    
+    public static final String LABEL_USERNAME = "userName";
     
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
@@ -26,6 +30,9 @@ public class Constants {
     
     public static final String MSG_EXCEPTION_SEARCH_USER = 
         "Something went wrong while fetching User..Try Again Later";
+    
+    public static final String MSG_LOG_NO_SUCH_ALGORITHM =
+        "Problem Hashing Password : No Such Algorithm Found";
     
 
     //Admin Specific Constants
