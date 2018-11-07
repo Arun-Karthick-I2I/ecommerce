@@ -18,6 +18,10 @@ public class Constants {
 
     public static final String LABEL_MESSAGE = "message";
     
+    public static final String LABEL_PRODUCT = "product";
+    
+    public static final String LABEL_PRODUCT_NAME = "productName";
+
     public static final String LABEL_SELLER = "seller";
     
     public static final String LABEL_SELLER_ID = "sellerId";
@@ -31,6 +35,10 @@ public class Constants {
     public static final String LABEL_CUSTOMER = "customer";
     
     public static final String LABEL_USER_ID = "userId";
+    
+    public static final String LABEL_WAREHOUSE_PRODUCT_ID = "warehouseProductId";
+    
+    public static final String LABEL_WAREHOUSE_PRODUCT_NAME = "warehouseProductName";
     
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
@@ -227,4 +235,19 @@ public class Constants {
     
     public static final String MSG_EXCEPTION_GET_SELLERS =
         "Something went wrong while retrieving sellers...Try Again Later";
+    
+    public static final String MSG_ADD_WAREHOUSE_PRODUCT_FAIL =
+        "Something went wrong while adding product...Try Again Later";
+    
+    public static final String MSG_GET_WAREHOUSE_PRODUCTS_FAIL =
+        "Something went wrong while fetching products...Try Again Later";
+
+    public static final String MSG_REMOVE_WAREHOUSE_PRODUCT_FAIL =
+        "Something went wrong while removing product...Try Again Later";
+
+    public static final String MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL =
+        "Something went wrong while searching product...Try Again Later";
+
+    public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_FAIL =
+        "Something went wrong while updating product...Try Again Later";
 }

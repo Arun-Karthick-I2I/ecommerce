@@ -9,11 +9,10 @@ import com.ideas2it.ecommerce.dao.UserDao;
 import com.ideas2it.ecommerce.dao.impl.UserDaoImpl;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Customer;
+import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
 import com.ideas2it.ecommerce.service.CustomerService;
-import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
 import com.ideas2it.ecommerce.service.SellerService;
-import com.ideas2it.ecommerce.service.impl.SellerServiceImpl;
 import com.ideas2it.ecommerce.service.UserService;
 
 /**
@@ -30,18 +29,10 @@ public class UserServiceImpl implements UserService {
     private static final String ALGORITHM = "SHA-256";
     private static final String SALT = "Its404NotFound";
 
-    private UserDao userDao;
-    private CustomerService customerService;
-    private SellerService sellerService;
+    private UserDao userDao = new UserDaoImpl();
+    private CustomerService customerService = new CustomerServiceImpl();
+    private SellerService sellerService = new SellerServiceImpl();
     
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }    
-
     /**
      * @{inheritDoc}
      */
@@ -54,7 +45,7 @@ public class UserServiceImpl implements UserService {
      * @{inheritDoc}
      */
     public Customer searchCustomer(Integer userId) throws EcommerceException {
-        return customerService.searchCustomerByUserId(userId);
+        return customerService.getCustomerByUserId(userId);
     }
 
     public Seller searchSeller(Integer userId) throws EcommerceException {
