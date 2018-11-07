@@ -1,5 +1,7 @@
 package com.ideas2it.ecommerce.model;
 
+import com.ideas2it.ecommerce.common.enums.Role.USER_ROLES;
+
 /**
  * <p>
  * User contains role of the user such as customer, seller, admin and their
@@ -14,7 +16,7 @@ public class User {
 	private Integer id;
 	private String userName;
 	private String password;
-	private String role;
+	private USER_ROLES role;
 
 	public Integer getId() {
 		return id;
@@ -40,11 +42,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public USER_ROLES getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(USER_ROLES role) {
 		this.role = role;
 	}
 

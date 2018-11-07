@@ -20,13 +20,15 @@ import com.ideas2it.ecommerce.service.impl.CategoryServiceImpl;
 
 /**
  * <p>
- * 
+ * Used to perform basic functionalities such as displaying all the available 
+ * Categories, adding new Category, deleting or updating an existing Category,
+ * fetching a Category by ID, and displaying all the products for a specific
+ * Category.
  * </p>
  * 
  * @author Pavithra.S
  *
  */
-
 @Controller
 @RequestMapping("category")
 public class CategoryController {
@@ -34,10 +36,11 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to display the details of all the Categories available.
      * </p>
      * 
-     * @return 
+     * @return  Returns the list of Categories. Otherwise, returns a failure 
+     *          message indicating that no Categories are available. 
      */
     @PostMapping("display")
     private ModelAndView displayCategories() {
@@ -54,10 +57,10 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Displays the form to add a new Category
      * </p>
      * 
-     * @return
+     * @return  Returns an empty Category object 
      */
     @PostMapping("add")  
     public ModelAndView addForm(){  
@@ -66,11 +69,14 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Gets the input such as Category Name from the user and stores the new
+     * Category obtained to the database. 
      * </p>
      * 
-     * @param category
-     * @return
+     * @param   category  New Category to be inserted
+     * @return            Returns success message, if the Category has been 
+     *                    inserted successfully. Otherwise returns failure 
+     *                    message, if the insertion is unsuccessful. 
      */
     @PostMapping("insert") 
     private ModelAndView addCategory(@ModelAttribute("category") 
@@ -96,11 +102,13 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to delete the Category based on the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Category to deleted.
+     * @return      Returns success message, if the Category has been deleted
+     *              successfully. Otherwise returns failure message, if the
+     *              deletion is unsuccessful. 
      */
     @PostMapping("delete") 
     private ModelAndView deleteCategory(@RequestParam("id")Integer id) {
@@ -125,11 +133,11 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Displays form to edit the Category.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Category to be updated.
+     * @return      Returns the Category for the ID specified.
      */
     @PostMapping("edit")
     private ModelAndView editForm(@RequestParam("id")Integer id) {
@@ -143,11 +151,13 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to alter the Name of the Category for the ID specified.
      * </p>
      * 
-     * @param category
-     * @return
+     * @param   category  Updated Category to be inserted
+     * @return            Returns success message, if the Category has been 
+     *                    updated successfully. Otherwise returns failure 
+     *                    message, if the update is unsuccessful
      */
     @PostMapping("update")
     private ModelAndView updateCategory(@ModelAttribute("category") 
@@ -173,11 +183,13 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Category for the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Category whose details are to retrieved.
+     * @return      Returns the Category for the ID specified. Otherwise,
+     *              returns a failure message indicating that the Category 
+     *              of the specified ID isn't available.
      */
     @PostMapping("searchById") 
     private ModelAndView searchById(@RequestParam("id")Integer id) {
@@ -203,11 +215,13 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Category based on the name specified. 
      * </p>
      * 
-     * @param name
-     * @return
+     * @param   name  Name of the Category whose details are to retrieved
+     * @return        Returns the Category for the name specified. 
+     *                Otherwise, returns a failure message indicating that the
+     *                Category is not available for the name specified. 
      */
     @PostMapping("searchByName") 
     private ModelAndView searchByName(@RequestParam("name")String name) {
@@ -233,11 +247,13 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to display all the products for the Category specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Category whose Products to be displayed.
+     * @return      Returns list of Products to be displayed for the Category
+     *              ID specified. Otherwise, returns failure message indicating
+     *              no products are available.
      */
     @PostMapping("displayProducts") 
     private ModelAndView displayProducts(@RequestParam("id")Integer id) {
@@ -266,11 +282,12 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to fetch the Category for the ID specified. 
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Category to be fetched.
+     * @return      Returns the Category for the ID specified. Otherwise,
+     *              returns an empty object.
      */
     private Category getCategory(Integer id) {
         Category category = new Category();
@@ -284,10 +301,11 @@ public class CategoryController {
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the Categories available.
      * </p>
      * 
-     * @return
+     * @return  Returns the list of Categories available. Otherwise, returns 
+     *          an empty object.
      */
     private List<Category> getCategories() {
         List<Category> categories = new ArrayList<Category>();

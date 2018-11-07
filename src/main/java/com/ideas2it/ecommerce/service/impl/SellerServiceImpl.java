@@ -15,7 +15,8 @@ import com.ideas2it.ecommerce.service.WarehouseProductService;
 /**
  * <p>
  * The {@code SellerServiceImpl} provides seller related functionality such
- * as working on seller related data like warehouse products.
+ * as working on seller related data like warehouse products and other details
+ * of a seller.
  * </p>
  *
  * @author Arun Karthick.J

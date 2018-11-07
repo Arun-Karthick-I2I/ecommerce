@@ -18,7 +18,8 @@ import com.ideas2it.ecommerce.service.impl.ProductServiceImpl;
 
 /**
  * <p>
- * 
+ * Used to perform basic functionalities such as displaying all Products
+ * and fetching the details of the Products based on ID or name.
  * </p>
  * 
  * @author Pavithra.S
@@ -29,6 +30,14 @@ import com.ideas2it.ecommerce.service.impl.ProductServiceImpl;
 public class ProductController {
     private ProductService productService = new ProductServiceImpl();
     
+    /**
+     * <p>
+     * Used to display the details of all the Products available
+     * </p>
+     * 
+     * @return  Returns the list of Products. Otherwise, returns a failure 
+     *          message indicating that no Products are available. 
+     */
     @PostMapping("display")
     private ModelAndView displayProducts() {
         List<Product> products = new ArrayList<Product>();
@@ -44,11 +53,13 @@ public class ProductController {
 
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Product for the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the product to be fetched.
+     * @return      Returns the Product for the ID specified. Otherwise,
+     *              returns a failure message indicating that the Product 
+     *              of the specified ID isn't available.
      */
     @PostMapping("searchById") 
     private ModelAndView searchById(@RequestParam("id")Integer id) {
@@ -74,11 +85,13 @@ public class ProductController {
     
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Product based on the name specified. 
      * </p>
      * 
-     * @param name
-     * @return
+     * @param   name  Name of the Product to be fetched.
+     * @return        Returns the list of Products for the name specified. 
+     *                Otherwise, returns a failure message indicating that no 
+     *                Product is available for the name specified. 
      */
     @PostMapping("searchByName") 
     private ModelAndView searchByName(@RequestParam("name")String name) {
@@ -104,10 +117,11 @@ public class ProductController {
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the Products available.
      * </p>
      * 
-     * @return
+     * @return  Returns the list of Products available. Otherwise, returns 
+     *          an empty object.
      */
     private List<Product> getProducts() {
         List<Product> products = new ArrayList<Product>();
