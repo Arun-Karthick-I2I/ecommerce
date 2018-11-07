@@ -16,6 +16,14 @@ import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.service.ProductService;
 import com.ideas2it.ecommerce.service.impl.ProductServiceImpl;
 
+/**
+ * <p>
+ * 
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 @Controller
 @RequestMapping("product")
 public class ProductController {
@@ -34,6 +42,14 @@ public class ProductController {
         }
     }
 
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
     @PostMapping("searchById") 
     private ModelAndView searchById(@RequestParam("id")Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -56,6 +72,14 @@ public class ProductController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param name
+     * @return
+     */
     @PostMapping("searchByName") 
     private ModelAndView searchByName(@RequestParam("name")String name) {
         ModelAndView modelAndView = new ModelAndView();
@@ -78,6 +102,13 @@ public class ProductController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @return
+     */
     private List<Product> getProducts() {
         List<Product> products = new ArrayList<Product>();
         try {

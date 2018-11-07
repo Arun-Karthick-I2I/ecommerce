@@ -24,4 +24,11 @@ public class OrderServiceImpl implements OrderService {
     public Order searchById(Integer id) throws EcommerceException {
         return orderDao.getById(id);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean addOrder(Order order) throws EcommerceException {
+        return orderDao.addOrder(order);
+    }
 }

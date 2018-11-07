@@ -18,11 +18,32 @@ import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.service.AdminService;
 import com.ideas2it.ecommerce.service.impl.AdminServiceImpl;
 
+/**
+ * <p>
+ * Admin is given privileges such as displaying all the Orders placed by the 
+ * Customer, searching a specific Order by ID, viewing all the active Customers
+ * and Sellers, searching a specific Customer or Seller by their respective ID
+ * or by Name.
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 @Controller
 @RequestMapping("admin")
 public class AdminController {
     private AdminService adminService = new AdminServiceImpl();
     
+    /**
+     * <p>
+     * Used to display the details of all the Orders placed by several
+     * Customers.
+     * </p>
+     * 
+     * @return  Returns the list of Orders placed by the Customers.
+     *          Otherwise, returns a failure message indicating that no Orders 
+     *          are available.
+     */
     @PostMapping("displayOrders")
     private ModelAndView displayOrders() {
         List<Order> orders = new ArrayList<Order>();
@@ -36,6 +57,16 @@ public class AdminController {
         }
     }
 
+    /**
+     * <p>
+     * Used to retrieve the details of the Order placed for the ID specified.
+     * </p>
+     * 
+     * @param id  ID of the Order whose details are to retrieved 
+     * @return    Returns the Order for the ID specified. Otherwise, returns
+     *            a failure message indicating that the Order of the specified 
+     *            ID isn't available.
+     */
     @PostMapping("searchByOrderId") 
     private ModelAndView searchByOrderId(@RequestParam("id")Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -58,6 +89,14 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * Used to display the details of all the active Customers.
+     * </p>
+     * 
+     * @return  Returns the list of Customers. Otherwise, returns a failure 
+     *          message indicating no Customers are available.
+     */
     @PostMapping("displayCustomers")
     private ModelAndView displayCustomers() {
         List<Customer> customers = new ArrayList<Customer>();
@@ -71,6 +110,16 @@ public class AdminController {
         }
     }
     
+    /**
+     * <p>
+     * Used to retrieve the details of the Customer for the ID specified.
+     * </p>
+     * 
+     * @param id  ID of the Customer whose details are to retrieved 
+     * @return    Returns the Customer for the ID specified. Otherwise, returns
+     *            a failure message indicating that the Customer of the specified 
+     *            ID isn't available.
+     */
     @PostMapping("searchByCustomerId") 
     private ModelAndView searchByCustomerId(@RequestParam("id")Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -93,6 +142,16 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * Used to retrieve the details of the Customer based on the name specified. 
+     * </p>
+     * 
+     * @param name Name of the Customer whose details are to retrieved 
+     * @return     Returns the list of Customers for the name specified. 
+     *             Otherwise, returns a failure message indicating that no 
+     *             Customer is available for the name specified. 
+     */
     @PostMapping("searchByCustomerName") 
     private ModelAndView searchByCustomerName(@RequestParam("name")String name) {
         ModelAndView modelAndView = new ModelAndView();
@@ -115,6 +174,14 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
     @PostMapping("deleteCustomer") 
     private ModelAndView deleteCustomer(@RequestParam("id")Integer id) {
         Customer customer = new Customer();
@@ -138,6 +205,15 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * Used to display the details of all the Sellers who would sell products
+     * belonging to various Categories. 
+     * </p>
+     * 
+     * @return  Returns the list of Sellers. Otherwise, returns a failure 
+     *          message indicating no Sellers are available.
+     */
     @PostMapping("displaySellers")
     private ModelAndView displaySellers() {
         List<Seller> sellers = new ArrayList<Seller>();
@@ -151,6 +227,16 @@ public class AdminController {
         }
     }
     
+    /**
+     * <p>
+     * Used to retrieve the details of the Seller for the ID specified.
+     * </p>
+     * 
+     * @param id  ID of the Seller whose details are to retrieved 
+     * @return    Returns the Seller for the ID specified. Otherwise, returns
+     *            a failure message indicating that the Seller of the specified 
+     *            ID isn't available.
+     */
     @PostMapping("searchBySellerId") 
     private ModelAndView searchBySellerId(@RequestParam("id")Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -173,6 +259,16 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * Used to retrieve the details of the Seller based on the name specified. 
+     * </p>
+     * 
+     * @param name  Name of the Seller whose details are to retrieved
+     * @return      Returns the list of Sellers for the name specified. 
+     *              Otherwise, returns a failure message indicating that no 
+     *              Seller is available for the name specified. 
+     */
     @PostMapping("searchBySellerName") 
     private ModelAndView searchBySellerName(@RequestParam("name")String name) {
         ModelAndView modelAndView = new ModelAndView();
@@ -195,6 +291,14 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
     @PostMapping("deleteSeller") 
     private ModelAndView deleteSeller(@RequestParam("id")Integer id) {
         Seller seller = new Seller();
@@ -218,6 +322,13 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @return
+     */
     private List<Seller> getSellers() {
         List<Seller> sellers = new ArrayList<Seller>();
         try {
@@ -228,6 +339,14 @@ public class AdminController {
         return sellers;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param status
+     * @return
+     */
     private List<Customer> getCustomers(Boolean status) {
         List<Customer> customers = new ArrayList<Customer>();
         try {
@@ -238,6 +357,13 @@ public class AdminController {
         return customers;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @return
+     */
     private List<Order> getOrders() {
         List<Order> orders = new ArrayList<Order>();
         try {

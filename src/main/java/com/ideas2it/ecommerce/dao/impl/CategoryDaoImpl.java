@@ -19,6 +19,14 @@ import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.session.SessionManager;
 
+/**
+ * <p>
+ * 
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public class CategoryDaoImpl implements CategoryDao {
     public static final String QUERY_GET_CATEGORY = "from Category";
 

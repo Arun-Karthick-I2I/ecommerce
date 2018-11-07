@@ -5,6 +5,14 @@ import java.util.List;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 
+/**
+ * <p>
+ * 
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public interface CategoryDao {
 
     /**
