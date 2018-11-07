@@ -76,20 +76,6 @@ public interface SellerDao {
     
     /**
      * <p>
-     * Searches through the database based on user ID.
-     * </p>
-     * 
-     * @param userId
-     *        User ID of the Seller whose details have to be found.
-     *
-     * @return Seller    
-     *         Returns the Seller with the desired user id if it exist
-     *         Returns null if no such Seller exist.
-     */
-    Seller getSeller(Integer userId) throws EcommerceException;
-    
-    /**
-     * <p>
      * Searches through the database based on Seller ID.
      * </p>
      * 
@@ -100,7 +86,21 @@ public interface SellerDao {
      *         Returns the Seller with the desired id if it exist
      *         Returns null if no such Seller exist.
      */
-    Seller searchSeller(Integer sellerId) throws EcommerceException;
+    Seller getSeller(Integer sellerId) throws EcommerceException;
+    
+    /**
+     * <p>
+     * Searches through the database based on user ID.
+     * </p>
+     * 
+     * @param userId
+     *        User ID of the Seller whose details have to be found.
+     *
+     * @return Seller    
+     *         Returns the Seller with the desired user id if it exist
+     *         Returns null if no such Seller exist.
+     */
+    Seller getSellerByUserId(Integer userId) throws EcommerceException;
     
     /**
      * <p>

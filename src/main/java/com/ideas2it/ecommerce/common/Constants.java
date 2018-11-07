@@ -7,6 +7,8 @@ public class Constants {
     public static final Character COLON_SYMBOL = ':';
     
     public static final Character SPACE = ' ';
+    
+    public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;
 
     public static final String LABEL_EMAIL_ID = "emailId";
 
@@ -18,9 +20,15 @@ public class Constants {
 
     public static final String LABEL_MESSAGE = "message";
     
+    public static final String LABEL_PASSWORD = "password";
+    
     public static final String LABEL_PRODUCT = "product";
     
     public static final String LABEL_PRODUCT_NAME = "productName";
+    
+    public static final String LABEL_REGISTER = "register";
+    
+    public static final String LABEL_ROLE = "role";
 
     public static final String LABEL_SELLER = "seller";
     
@@ -40,6 +48,9 @@ public class Constants {
     
     public static final String LABEL_WAREHOUSE_PRODUCT_NAME = "warehouseProductName";
     
+    public static final String MSG_REGISTER_SUCCESS = 
+        "You have registered successfully with username:";
+    
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
     
@@ -51,6 +62,9 @@ public class Constants {
     
     public static final String MSG_LOG_NO_SUCH_ALGORITHM =
         "Problem Hashing Password : No Such Algorithm Found";
+    
+    public static final String MSG_LOGGED_OUT = 
+        "You have been logged out successfully";
     
 
     //Admin Specific Constants
@@ -219,6 +233,9 @@ public class Constants {
     
     //Seller Specific Constants
     
+    public static final String MSG_SELLER_ALREADY_EXIST = 
+        "Another Seller exists with the same mobile number or email ID";
+    
     public static final String MSG_SELLER_DELETE_SUCCESS = 
         "Seller details have been removed successfully from the store";
         
@@ -237,6 +254,9 @@ public class Constants {
     public static final String MSG_EXCEPTION_GET_SELLERS =
         "Something went wrong while retrieving sellers...Try Again Later";
     
+    public static final String MSG_SELLER_REGISTER_SUCCESS =
+        "You have registered successfully as a seller";
+    
     public static final String MSG_ADD_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while adding product...Try Again Later";
     
@@ -251,4 +271,5 @@ public class Constants {
 
     public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while updating product...Try Again Later";
+
 }

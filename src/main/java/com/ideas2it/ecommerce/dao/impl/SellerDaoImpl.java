@@ -170,29 +170,7 @@ public class SellerDaoImpl implements SellerDao {
      * @{inheritDoc}
      */
     @Override
-    public Seller getSeller(Integer userId) throws EcommerceException {
-        try (Session session = SessionManager.getSession()) {
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Seller> criteriaQuery = criteriaBuilder.createQuery(
-                Seller.class);
-            Root<Seller> root = criteriaQuery.from(Seller.class);
-            criteriaQuery.select(root).where(criteriaBuilder.equal(
-                root.get(Constants.LABEL_USER), userId));
-            return session.createQuery(criteriaQuery).uniqueResult();
-        } catch (HibernateException e) {
-            String exceptionMessage = Constants.MSG_SELLER_SEARCH_FAIL
-                    + Constants.SPACE + Constants.LABEL_USER_ID
-                    + Constants.COLON_SYMBOL + userId;
-            EcommerceLogger.error(exceptionMessage, e);
-            throw new EcommerceException(Constants.MSG_SELLER_SEARCH_FAIL);
-        }
-    }
-
-    /**
-     * @{inheritDoc}
-     */
-    @Override
-    public Seller searchSeller(Integer sellerId) throws EcommerceException {
+    public Seller getSeller(Integer sellerId) throws EcommerceException {
         try (Session session = SessionManager.getSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Seller> criteriaQuery = criteriaBuilder.createQuery(
@@ -205,6 +183,28 @@ public class SellerDaoImpl implements SellerDao {
             String exceptionMessage = Constants.MSG_SELLER_SEARCH_FAIL
                     + Constants.SPACE + Constants.LABEL_SELLER_ID
                     + Constants.COLON_SYMBOL + sellerId;
+            EcommerceLogger.error(exceptionMessage, e);
+            throw new EcommerceException(Constants.MSG_SELLER_SEARCH_FAIL);
+        }
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public Seller getSellerByUserId(Integer userId) throws EcommerceException {
+        try (Session session = SessionManager.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Seller> criteriaQuery = criteriaBuilder.createQuery(
+                Seller.class);
+            Root<Seller> root = criteriaQuery.from(Seller.class);
+            criteriaQuery.select(root).where(criteriaBuilder.equal(
+                root.get(Constants.LABEL_USER), userId));
+            return session.createQuery(criteriaQuery).uniqueResult();
+        } catch (HibernateException e) {
+            String exceptionMessage = Constants.MSG_SELLER_SEARCH_FAIL
+                    + Constants.SPACE + Constants.LABEL_USER_ID
+                    + Constants.COLON_SYMBOL + userId;
             EcommerceLogger.error(exceptionMessage, e);
             throw new EcommerceException(Constants.MSG_SELLER_SEARCH_FAIL);
         }

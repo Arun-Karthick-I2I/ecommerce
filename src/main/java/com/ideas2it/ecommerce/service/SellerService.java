@@ -5,6 +5,7 @@ import java.util.List;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Seller;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 
 /**
  * <p>
@@ -102,6 +103,67 @@ public interface SellerService {
      *         false If the details are not updated successfully.
      */
     Boolean updateSeller(Seller seller) throws EcommerceException;
+
+    /**
+     * <p>
+     * Adds a new product that is available for sale from a particular seller.
+     * </p>
+     * 
+     * @param warehouseProduct WarehouseProduct which needs to be stored
+     * @return message Returns true if the new warehouseproduct is added
+     *         successfully else returns false
+     */
+    Boolean addWarehouseProduct(WarehouseProduct warehouseProduct)
+            throws EcommerceException;
+
+    /**
+     * <p>
+     * Removes a product that is no longer available from a seller.
+     * </p>
+     * 
+     * @param warehouseProduct WarehouseProduct which needs to be removed
+     * @return message Returns true if the new warehouseproduct is removed
+     *         successfully else returns false
+     */
+    Boolean deleteWarehouseProduct(WarehouseProduct warehouseProduct)
+            throws EcommerceException;
+
+    /**
+     * <p>
+     * Updates a product that is available from a particular seller.
+     * </p>
+     * 
+     * @param warehouseProduct WarehouseProduct which needs to be updated
+     * @return message Returns true if the new warehouseproduct is updated
+     *         successfully else returns false
+     */
+    Boolean updateWarehouseProduct(WarehouseProduct warehouseProduct)
+            throws EcommerceException;
+
+    /**
+     * <p>
+     * Searches through the list for the specific WarehouseProduct ID.
+     * </p>
+     * 
+     * @param warehouseProductId ID of the WarehouseProduct which has to be
+     *                           searched for in the list.
+     * @return warehouseProduct Returns the WarehouseProduct with the desired ID
+     *         if it exist Returns null if no such WarehouseProduct exist.
+     */
+    WarehouseProduct getWarehouseProduct(Integer warehouseProductId)
+            throws EcommerceException;
+
+    /**
+     * <p>
+     * Searches the warehouse products based on the seller.
+     * </p>
+     *
+     * @param seller Seller whose warehouse products needs to be searched.
+     * @return warehouseProducts Returns the list of warehouse products
+     *         corresponding to the seller.
+     */
+    List<WarehouseProduct> getAllWarehouseProducts(Seller seller)
+            throws EcommerceException;
 
     /**
      * <p>
