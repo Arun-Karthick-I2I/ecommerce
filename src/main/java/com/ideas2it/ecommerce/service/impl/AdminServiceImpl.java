@@ -10,6 +10,7 @@ import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.service.AdminService;
 import com.ideas2it.ecommerce.service.CustomerService;
+import com.ideas2it.ecommerce.service.SellerService;
 
 /**
  * <p>
@@ -25,45 +26,28 @@ public class AdminServiceImpl implements AdminService{
     private SellerService sellerService = new SellerServiceImpl();
 
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @return
+     * {@inheritDoc}
      */
     public List<Order> getOrders() throws EcommerceException {
         return orderDao.getOrders();
     }
 
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param id 
-     * @return 
+     * {@inheritDoc}
      */
     public Order searchByOrderId(Integer id) throws EcommerceException {
         return orderDao.getById(id);
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param status
+     * {@inheritDoc}
      */
     public List<Customer> getCustomers(Boolean status) throws EcommerceException {
         return customerService.getCustomers(status);
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param id
+     * {@inheritDoc}
      */
     public Customer searchByCustomerId(Integer id, Boolean status) 
             throws EcommerceException {
@@ -71,14 +55,7 @@ public class AdminServiceImpl implements AdminService{
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param name
-     * @param status
-     * @return
-     * @throws EcommerceException
+     * {@inheritDoc}
      */
     public List<Customer> searchByCustomerName(String name, Boolean status) 
             throws EcommerceException {
@@ -86,57 +63,35 @@ public class AdminServiceImpl implements AdminService{
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param customer
-     * @return
+     * {@inheritDoc}
      */
     public Boolean deleteCustomer(Customer customer) throws EcommerceException {
         return customerService.deleteCustomer(customer);
     }
     
     /**
-     * <p>
-     * 
-     * </p>
+     * {@inheritDoc}
      */
     public List<Seller> getSellers() throws EcommerceException {
         return sellerService.getAllSellers();
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param id
-     * @return
+     * {@inheritDoc}
      */
     public Seller searchBySellerId(Integer id) throws EcommerceException {
         return sellerService.searchSeller(id);
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param name
-     * @return
+     * {@inheritDoc}
      */
     public List<Seller> searchBySellerName(String name) throws EcommerceException {
         return sellerService.getSellersByName(name);
     }
     
     /**
-     * <p>
-     * 
-     * </p>
-     * 
-     * @param seller
-     * @return
+     * {@inheritDoc}
      */
     public Boolean deleteSeller(Seller seller) throws EcommerceException {
         return sellerService.deleteSeller(seller);

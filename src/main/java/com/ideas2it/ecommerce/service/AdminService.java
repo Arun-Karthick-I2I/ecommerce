@@ -7,104 +7,133 @@ import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.Customer;
 
+/**
+ * <p>
+ * This interface provides the basic functionalities of the Admin such as
+ * get all the Orders placed by the Customer, fetch a specific Order by ID, 
+ * get all the active Customers and Sellers, get a specific Customer or Seller
+ * by their respective ID or by Name. 
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public interface AdminService {
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the Orders placed by several
+     * Customers.
      * </p>
      * 
-     * @return
+     * @return  Returns the list of Orders placed by the Customers.
+     *          Otherwise, returns an empty Object.
      */
     List<Order> getOrders() throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to get the details of the Order placed for the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Order whose details are to retrieved 
+     * @return      Returns the Order for the ID specified. Otherwise, 
+     *              returns an empty Object.
      */
     Order searchByOrderId(Integer id) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to display the details of all the active Customers.
      * </p>
      * 
-     * @param status
-     * @return
+     * @param   status  Status of the Customers checking whether it has been 
+     *                  deleted or not
+     * @return          Returns the list of Customers. Otherwise, returns an empty 
+     *                  Object.
      */
     List<Customer> getCustomers(Boolean status) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Customer for the ID specified.
      * </p>
      * 
-     * @param id
-     * @param status
-     * @return
+     * @param   id      ID of the Customer whose details are to fetched. 
+     * @param   status  Status of the Customer checking whether it has been 
+     *                  deleted or not
+     * @return          Returns the Customer for the ID specified. Otherwise, 
+     *                  returns an empty Object.
      */
     Customer searchByCustomerId(Integer id, Boolean status) 
         throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Customer based on the name specified.
      * </p>
      * 
-     * @param name
-     * @param status
-     * @return
+     * @param   name    Name of the Customer whose details are to fetched.
+     * @param   status  Status of the Customer checking whether it has been 
+     *                  deleted or not
+     * @return          Returns the list of Customers for the name specified. 
+     *                  Otherwise, returns an empty Object.
      */
     List<Customer> searchByCustomerName(String name, Boolean status) 
             throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to delete the Customer Account based on the ID specified.
      * </p>
      * 
-     * @param customer
-     * @return
+     * @param   customer  Customer to be deleted
+     * @return            Returns success message, if the customer Account has 
+     *                    been deactivated successfully. Otherwise, returns an
+     *                    empty object. 
      */
     Boolean deleteCustomer(Customer customer) throws EcommerceException;
     
     /**
+     * <p>
+     * Used to get the details of all the Sellers who would sell products
+     * belonging to various Categories. 
+     * </p>
      * 
-     * @return
+     * @return  Returns the list of Sellers. Otherwise, returns an empty object.
      */
     List<Seller> getSellers() throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to get the details of the Seller for the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Seller whose details are to retrieved.
+     * @return  Returns the Seller for the ID specified. Otherwise, returns
+     *          an empty object.
      */
     Seller searchBySellerId(Integer id) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to retrieve the details of the Seller based on the name specified.
      * </p>
      * 
-     * @param name
-     * @return
+     * @param   name  Name of the Seller whose details are to retrieved.
+     * @return        Returns the list of Sellers for the name specified. 
+     *                Otherwise, returns an empty object.
      */
     List<Seller> searchBySellerName(String name) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to delete the Seller based on the ID specified.
      * </p>
      * 
-     * @param seller
-     * @return
+     * @param   seller  Seller to be deleted. 
+     * @return          Returns success message, if the Seller has been deleted
+     *                  successfully. Otherwise returns an empty object.
      */
     Boolean deleteSeller(Seller seller) throws EcommerceException;
 }

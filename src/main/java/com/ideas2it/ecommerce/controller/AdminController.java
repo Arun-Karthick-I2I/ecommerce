@@ -62,10 +62,10 @@ public class AdminController {
      * Used to retrieve the details of the Order placed for the ID specified.
      * </p>
      * 
-     * @param id  ID of the Order whose details are to retrieved 
-     * @return    Returns the Order for the ID specified. Otherwise, returns
-     *            a failure message indicating that the Order of the specified 
-     *            ID isn't available.
+     * @param   id  ID of the Order whose details are to retrieved 
+     * @return      Returns the Order for the ID specified. Otherwise, returns
+     *              a failure message indicating that the Order of the 
+     *              specified ID isn't available.
      */
     @PostMapping("searchByOrderId") 
     private ModelAndView searchByOrderId(@RequestParam("id")Integer id) {
@@ -115,10 +115,10 @@ public class AdminController {
      * Used to retrieve the details of the Customer for the ID specified.
      * </p>
      * 
-     * @param id  ID of the Customer whose details are to retrieved 
-     * @return    Returns the Customer for the ID specified. Otherwise, returns
-     *            a failure message indicating that the Customer of the specified 
-     *            ID isn't available.
+     * @param   id  ID of the Customer whose details are to retrieved. 
+     * @return      Returns the Customer for the ID specified. Otherwise, 
+     *              returns a failure message indicating that the Customer of 
+     *              the specified ID isn't available.
      */
     @PostMapping("searchByCustomerId") 
     private ModelAndView searchByCustomerId(@RequestParam("id")Integer id) {
@@ -147,10 +147,10 @@ public class AdminController {
      * Used to retrieve the details of the Customer based on the name specified. 
      * </p>
      * 
-     * @param name Name of the Customer whose details are to retrieved 
-     * @return     Returns the list of Customers for the name specified. 
-     *             Otherwise, returns a failure message indicating that no 
-     *             Customer is available for the name specified. 
+     * @param   name Name of the Customer whose details are to retrieved.
+     * @return       Returns the list of Customers for the name specified. 
+     *               Otherwise, returns a failure message indicating that no 
+     *               Customer is available for the name specified. 
      */
     @PostMapping("searchByCustomerName") 
     private ModelAndView searchByCustomerName(@RequestParam("name")String name) {
@@ -176,11 +176,13 @@ public class AdminController {
     
     /**
      * <p>
-     * 
+     * Used to deactivate the Customer Account based on the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Customer to be deleted.
+     * @return      Returns success message, if the customer Account has been
+     *              deactivated successfully. Otherwise returns failure message,
+     *              if the deletion is unsuccessful.
      */
     @PostMapping("deleteCustomer") 
     private ModelAndView deleteCustomer(@RequestParam("id")Integer id) {
@@ -232,10 +234,10 @@ public class AdminController {
      * Used to retrieve the details of the Seller for the ID specified.
      * </p>
      * 
-     * @param id  ID of the Seller whose details are to retrieved 
-     * @return    Returns the Seller for the ID specified. Otherwise, returns
-     *            a failure message indicating that the Seller of the specified 
-     *            ID isn't available.
+     * @param   id  ID of the Seller whose details are to retrieved.
+     * @return      Returns the Seller for the ID specified. Otherwise, returns
+     *              a failure message indicating that the Seller of the 
+     *              specified ID isn't available.
      */
     @PostMapping("searchBySellerId") 
     private ModelAndView searchBySellerId(@RequestParam("id")Integer id) {
@@ -264,10 +266,10 @@ public class AdminController {
      * Used to retrieve the details of the Seller based on the name specified. 
      * </p>
      * 
-     * @param name  Name of the Seller whose details are to retrieved
-     * @return      Returns the list of Sellers for the name specified. 
-     *              Otherwise, returns a failure message indicating that no 
-     *              Seller is available for the name specified. 
+     * @param   name  Name of the Seller whose details are to retrieved.
+     * @return        Returns the list of Sellers for the name specified. 
+     *                Otherwise, returns a failure message indicating that no 
+     *                Seller is available for the name specified. 
      */
     @PostMapping("searchBySellerName") 
     private ModelAndView searchBySellerName(@RequestParam("name")String name) {
@@ -293,11 +295,13 @@ public class AdminController {
     
     /**
      * <p>
-     * 
+     * Used to delete the Seller based on the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Seller to deleted.
+     * @return      Returns success message, if the Seller has been deleted
+     *              successfully. Otherwise returns failure message, if the
+     *              deletion is unsuccessful. 
      */
     @PostMapping("deleteSeller") 
     private ModelAndView deleteSeller(@RequestParam("id")Integer id) {
@@ -324,10 +328,11 @@ public class AdminController {
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the Sellers available.
      * </p>
      * 
-     * @return
+     * @return  Returns the list of Sellers available. Otherwise, returns an 
+     *          empty object.
      */
     private List<Seller> getSellers() {
         List<Seller> sellers = new ArrayList<Seller>();
@@ -341,11 +346,14 @@ public class AdminController {
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the active Customers, if the status is
+     * true. If the status is false, fetches all the deactivated accounts. 
      * </p>
      * 
-     * @param status
-     * @return
+     * @param   status  Status of the Customers checking whether it has been 
+     *                  deleted or not
+     * @return          Returns the list of Customers available. Otherwise, 
+     *                  returns an empty object.
      */
     private List<Customer> getCustomers(Boolean status) {
         List<Customer> customers = new ArrayList<Customer>();
@@ -359,10 +367,11 @@ public class AdminController {
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the Orders placed.
      * </p>
      * 
-     * @return
+     * @return  Returns the list of Orders placed. Otherwise, returns an 
+     *          empty object.
      */
     private List<Order> getOrders() {
         List<Order> orders = new ArrayList<Order>();
