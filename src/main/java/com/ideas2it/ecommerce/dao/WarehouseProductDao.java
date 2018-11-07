@@ -6,6 +6,15 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 
+/**
+ * <p>
+ * The {@code WarehouseProductDao} interface provides warehouse products related
+ * operations that can be performed to a e-commerce Store. It provides the basic
+ * operations such as add, remove and find warehouse products from the store.
+ * </p>
+ *
+ * @author Arun Karthick.J
+ */
 public interface WarehouseProductDao {
     /**
      * <p>
@@ -63,16 +72,15 @@ public interface WarehouseProductDao {
 
     /**
      * <p>
-     * Searches for the list of WarehouseProducts with the specific name
+     * Returns the list of WarehouseProducts available in the store that matches
+     * the product provided.
      * </p>
-     * 
-     * @param name name of the warehouseProduct whose details are being searched
-     *             for.
-     * @return warehouseProducts Returns the list of WarehouseProducts with the
-     *         desired criteria if they exist Returns null if no such
-     *         WarehouseProducts exist.
+     *
+     * @param productId Id of the Product which has to be searched.
+     * @return warehouseProducts Returns the entire WarehouseProduct collection
+     *         from the database based on the product ID.
      */
-    List<WarehouseProduct> getWarehouseProductByName(String name)
+    List<WarehouseProduct> getWarehouseProductsByProductId(Integer productId)
             throws EcommerceException;
 
     /**
@@ -80,35 +88,22 @@ public interface WarehouseProductDao {
      * It fetches the WarehouseProduct List based on the list of ids
      * </p>
      *
-     * @param  warehouseProductIds List of WarehouseProducts to be fetched.
-     * @return warehouseProducts  Returns the list of warehouseProducts
+     * @param warehouseProductIds List of WarehouseProducts to be fetched.
+     * @return warehouseProducts Returns the list of warehouseProducts
      *         corresponding to the ids provided.
      */
-    List<WarehouseProduct> getWarehouseProductsById(
+    List<WarehouseProduct> getWarehouseProductsByIds(
             List<Integer> warehouseProductIds) throws EcommerceException;
 
     /**
      * <p>
-     * It fetches the WarehouseProduct List based on the list of ids and 
+     * It fetches the WarehouseProduct List based on the seller.
      * </p>
      *
-     * @param  seller List of WarehouseProducts to be fetched.
-     * @return warehouseProducts  Returns the list of warehouseProducts
-     *         corresponding to the ids provided.
+     * @param seller List of WarehouseProducts to be fetched.
+     * @return warehouseProducts Returns the list of warehouseProducts
+     *         corresponding to the seller.
      */
-    List<WarehouseProduct> getWarehouseProductsBySeller(Seller seller) 
+    List<WarehouseProduct> getWarehouseProductsBySeller(Seller seller)
             throws EcommerceException;
-
-    /**
-     * <p>
-     * Returns the list of WarehouseProducts available in the store i.e Database
-     * i.e Copies the the WarehouseProducts from database to a list and then
-     * returns it.
-     * </p>
-     *
-     * @return warehouseProducts Returns the entire WarehouseProduct collection
-     *         from the database as a list.
-     */
-    List<WarehouseProduct> getWarehouseProducts() throws EcommerceException;
-
 }

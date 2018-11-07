@@ -5,6 +5,7 @@ import java.util.List;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Seller;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 
 /**
  * <p>
@@ -152,4 +153,19 @@ public interface SellerService {
      *         Returns the list of sellers with their order details. 
      */
     List<Seller> getAllSellers() throws EcommerceException;
+
+    Boolean addWarehouseProduct(WarehouseProduct warehouseProduct)
+            throws EcommerceException;
+
+    Boolean deleteWarehouseProduct(WarehouseProduct warehouseProduct)
+            throws EcommerceException;
+
+    Boolean updateWarehouseProduct(WarehouseProduct warehouseProduct)
+            throws EcommerceException;
+
+    WarehouseProduct getWarehouseProduct(Integer warehouseProductId)
+            throws EcommerceException;
+
+    List<WarehouseProduct> getAllWarehouseProducts(Seller seller)
+            throws EcommerceException;
 }
