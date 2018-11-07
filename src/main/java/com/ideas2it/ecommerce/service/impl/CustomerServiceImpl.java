@@ -4,15 +4,18 @@ import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Customer;
+import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.dao.CustomerDao;
 import com.ideas2it.ecommerce.dao.impl.CustomerDaoImpl;
 import com.ideas2it.ecommerce.service.CustomerService;
+import com.ideas2it.ecommerce.service.OrderService;
 
 /**
  * <p>
  * CustomerServiceImpl class is contains the operations of the customers
  * such as Insert new customer account, soft delete on existing customer
- * in e-commerce website, update existing customer details in database, 
+ * in e-commerce web-site, update existing customer details in database, 
  * searching the customer details...
  *
  * This class have the methods of the DvdStore functions
@@ -50,6 +53,15 @@ public class CustomerServiceImpl implements CustomerService {
     /** 
      * @(inheritDoc)
      */
+    public List<Customer> getCustomerByName(String name, Boolean isActive) 
+            throws EcommerceException  {
+        return customerDao.getCustomerByName(name, isActive);
+    }
+    
+    
+    /** 
+     * @(inheritDoc)
+     */
     public Customer getCustomerByUserId(Integer userId) throws EcommerceException {
         return customerDao.getCustomerByUserId(userId, Boolean.TRUE);
     }
@@ -79,5 +91,39 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getCustomers(Boolean isActive) throws EcommerceException {
         return customerDao.getCustomers(isActive);
     }
-
+    
+    /** 
+     * @(inheritDoc)
+     */
+     public Boolean addOrder(Order order) throws EcommerceException {
+         OrderService orderService = new OrderServiceImpl();
+         return orderService.addOrder(order);
+     }
+    
+     
+     /** 
+      * @(inheritDoc)
+      */
+      public Boolean addOrders(List<Order> orders) throws EcommerceException {
+          OrderService orderService = new OrderServiceImpl();
+          return orderService.addOrders(orders);
+      }
+     
+    /** 
+     * @(inheritDoc)
+     */
+    public WarehouseProduct getWarehouseProduct(Integer id) throws EcommerceException {
+        WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
+        return warehouseProductService.getWarehouseProduct(id);
+    }
+    
+    /** 
+     * @(inheritDoc)
+     */
+    public List<WarehouseProduct> getWarehouseProductsById(List<Integer> warehouseProductIds) 
+            throws EcommerceException {
+        WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
+        return warehouseProductService.getWarehouseProductsById(warehouseProductIds);
+    }
+    
 }

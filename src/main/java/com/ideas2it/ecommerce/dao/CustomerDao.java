@@ -73,7 +73,7 @@ public interface CustomerDao {
      * @param userId
      *        Needed for check customer detail.
      *
-     * @param status
+     * @param isActive
      *        needed for check customer active or inactive.
      *
      * @return Customer
@@ -81,6 +81,23 @@ public interface CustomerDao {
      * </p>
      */
     public Customer getCustomerByUserId(Integer userId, Boolean isActive)
+        throws EcommerceException ;
+
+    /**
+     * <p>
+     * Getting particular customer detail from database based on userId.
+     *
+     * @param name
+     *        Needed for check customer detail.
+     *
+     * @param isActive
+     *        needed for check customer active or inactive.
+     *
+     * @return Customer
+     *        Returns particular customer details form database.
+     * </p>
+     */
+    public List<Customer> getCustomerByName(String name, Boolean isActive)
         throws EcommerceException ;
     
     /** 

@@ -206,8 +206,9 @@ public class Constants {
 
     public static final String MSG_CANCEL_ORDER_FAIL = 
         "Failed to cancel order..";
-        
-        
+   
+    public static final String MSG_ADD_CART_FAIL = 
+        "Failed to add cart... try after sometime..";
         
         
     

@@ -18,6 +18,7 @@ public class Order {
     private Integer quantity;
     private Float price;
     private LocalDate orderDate;
+    private LocalDate returnDate;
     private Address address;
     private String status;
 
@@ -67,6 +68,14 @@ public class Order {
 
     public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
+    }
+    
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
 
     public Address getAddress() {

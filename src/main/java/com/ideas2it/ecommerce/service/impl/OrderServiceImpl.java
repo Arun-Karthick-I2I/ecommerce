@@ -9,7 +9,7 @@ import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
-    private OrderDao orderDao = new OrderDaoImpl();
+private OrderDao orderDao = new OrderDaoImpl();
     
     /**
      * {@inheritDoc}
@@ -24,4 +24,5 @@ public class OrderServiceImpl implements OrderService {
     public Order searchById(Integer id) throws EcommerceException {
         return orderDao.getById(id);
     }
+    
 }

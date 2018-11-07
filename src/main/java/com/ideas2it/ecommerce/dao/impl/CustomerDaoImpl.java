@@ -59,7 +59,6 @@ public class CustomerDaoImpl implements CustomerDao {
      * @(@inheritDoc)
      */
     public Customer getCustomerByMobile(String mobile, Boolean isActive) throws EcommerceException {
-        Transaction transaction = null;
         Session session = null;
         try {
             session = SessionManager.getSession();
@@ -141,6 +140,37 @@ public class CustomerDaoImpl implements CustomerDao {
             throw new EcommerceException(exceptionMessage);
         }
     }
+
+    /**
+     * @{inheritDoc}
+     */
+    public List<Customer> getCustomerByName(String name, Boolean isActive) 
+            throws EcommerceException {
+        List<Customer> customers = null;
+        Session session = null;
+        try {
+            session = SessionManager.getSession();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(
+                Customer.class);
+            Root<Customer> root = criteriaQuery.from(Customer.class);
+            criteriaQuery.select(root).where(criteriaBuilder.and(
+                criteriaBuilder.equal(root.get(Constants.LABEL_NAME),
+                name), criteriaBuilder.equal(root.get(Constants.LABEL_ISACTIVE),
+                isActive)));
+            Query query = session.createQuery(criteriaQuery);
+            customers = query.getResultList();
+            return customers;
+        } catch (HibernateException e) {
+            String exceptionMessage = new StringBuilder(
+                Constants.MESSAGE_EXCEPTION_SEARCH_CUSTOMER).
+                append(Constants.SPACE).append(Constants.LABEL_NAME).
+                append(Constants.COLON_SYMBOL).
+                append(name).toString();
+            EcommerceLogger.error(exceptionMessage, e);
+            throw new EcommerceException(exceptionMessage);
+        }
+    }
     
     /** 
      * @(@inheritDoc)
@@ -198,7 +228,7 @@ public class CustomerDaoImpl implements CustomerDao {
      */
     public List<Customer> getCustomers(Boolean isActive) throws EcommerceException {
         Session session = null;
-        List<Customer> customers;
+        List<Customer> customers = null;
         try {
             session = SessionManager.getSession();
             CriteriaBuilder builder = session.getCriteriaBuilder();
