@@ -9,11 +9,17 @@ import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.WarehouseProductService;
 
-
-
-public class WarehouseProductServiceImpl implements WarehouseProductService{
+/**
+ * <p>
+ * The {@code WarehouseProductServiceImpl} provides seller related functionality
+ * on warehouse products that are sold by a seller.
+ * </p>
+ *
+ * @author Arun Karthick.J
+ */
+public class WarehouseProductServiceImpl implements WarehouseProductService {
     private WarehouseProductDao warehouseProductDao = new WarehouseProductDaoImpl();
-    
+
     /**
      * @{inheritDoc}
      */
@@ -49,7 +55,7 @@ public class WarehouseProductServiceImpl implements WarehouseProductService{
             throws EcommerceException {
         return warehouseProductDao.getWarehouseProductById(warehouseProductId);
     }
-    
+
     /**
      * @{inheritDoc}
      */
@@ -72,9 +78,10 @@ public class WarehouseProductServiceImpl implements WarehouseProductService{
      * @{inheritDoc}
      */
     @Override
-    public List<WarehouseProduct> getWarehouseProductsByIds(List<Integer> warehouseProductIds)
-            throws EcommerceException {
-        return warehouseProductDao.getWarehouseProductsByIds(warehouseProductIds);
+    public List<WarehouseProduct> getWarehouseProductsByIds(
+            List<Integer> warehouseProductIds) throws EcommerceException {
+        return warehouseProductDao
+                .getWarehouseProductsByIds(warehouseProductIds);
     }
 
 }
