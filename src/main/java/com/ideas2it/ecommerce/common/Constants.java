@@ -132,6 +132,27 @@ public class Constants {
     public static final String MSG_ORDER_NOT_AVAILABLE =
         "Order not available";
     
+    public static final String MSG_CUSTOMERS_NOT_AVAILABLE =
+        "No Customers are available";
+    
+    public static final String MSG_CUSTOMER_NOT_AVAILABLE =
+        "Customer not available";
+    
+    public static final String MSG_CUSTOMER_DELETE_SUCCESS =
+        "Customer deleted successfully";    
+        
+    public static final String MSG_CUSTOMER_DELETE_FAILURE =
+        "Unsuccessful deletion of Customer";
+    
+    public static final String MSG_SELLER_NOT_AVAILABLE =
+        "Seller not available";
+    
+    public static final String MSG_SELLERS_NOT_AVAILABLE =
+        "No Sellers are available";
+    
+    public static final String MSG_SELLER_DELETE_FAILURE =
+        "Unsuccessful deletion of Seller";
+    
     //Customer Specific Constants
 
     public static final String ERROR_INSERT_CUSTOMER = 
