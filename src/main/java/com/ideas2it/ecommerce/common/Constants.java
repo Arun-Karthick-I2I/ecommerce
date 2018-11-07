@@ -65,6 +65,8 @@ public class Constants {
     public static final String MSG_CART_PRODUCT_ID = "\tCart Product ID";
     
     public static final String MSG_ORDER_ID = "\tOrder ID";
+    
+    public static final String MSG_CUSTOMER_ID = "\tCustomer ID";
             
     public static final String MSG_CATEGORY_SEARCH_FAILURE =
         "Unsuccessful search of Category";
@@ -131,6 +133,9 @@ public class Constants {
     
     public static final String MSG_ORDER_NOT_AVAILABLE =
         "Order not available";
+    
+    public static final String MSG_ORDER_INSERT_FAILURE =
+        "Unsuccessful insertion of Order";
     
     public static final String MSG_CUSTOMERS_NOT_AVAILABLE =
         "No Customers are available";

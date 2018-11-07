@@ -8,12 +8,15 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.dao.OrderDao;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
+import com.ideas2it.ecommerce.model.Category;
+import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.session.SessionManager;
 
@@ -63,5 +66,30 @@ public static final String QUERY_GET_ORDER = "from Order";
             SessionManager.closeSession(session);
         }
         return order;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean addOrder(Order order) throws EcommerceException {
+        Session session = null;
+        Transaction transaction = null;
+        Customer customer = order.getCustomer();
+        try {
+            session = SessionManager.getSession();
+            transaction = session.beginTransaction();
+            session.save(order);
+            transaction.commit();
+            return Boolean.TRUE;
+        } catch (HibernateException e) {
+            if (null != transaction) {
+                transaction.rollback();
+            }
+            EcommerceLogger.error(Constants.MSG_CUSTOMER_ID + customer.getId()
+                + "\n" + Constants.MSG_ORDER_INSERT_FAILURE, e);
+            throw new EcommerceException(Constants.MSG_ORDER_INSERT_FAILURE);
+        } finally {
+            SessionManager.closeSession(session);
+        }
     }
 }
