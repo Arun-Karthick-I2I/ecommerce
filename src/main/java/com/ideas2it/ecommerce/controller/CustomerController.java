@@ -118,6 +118,70 @@ public class CustomerController {
 
     /**
      * <p>
+     * This method is used to cancel particular customer order details
+     * </p>
+     *
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "OrdersDisplay" is the view name and set
+     *         of orders and customer is the model.
+     */
+    @GetMapping("/cancelOrder")
+    public ModelAndView cancelOrder(HttpServletRequest request,
+            @RequestParam("id") String id) {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Order order = new Order();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            order.setId(Integer.parseInt(id));
+            if (customerService.cancelOrder(order)) {
+                List<Order> orders = customer.getOrders();
+                for (Integer i = 0; i < orders.size(); i++) {
+                    if (orders.get(i).getId() == Integer.parseInt(id)) {
+                        orders.remove(orders.get(i));
+                    }
+                }
+                customer.setOrders(orders);
+                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_CANCEL_ORDER_SUCCESS);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_CANCEL_ORDER_FAIL);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return myOrders(request);
+    }
+
+    /**
+     * <p>
+     * This method is used to display particular customer order details
+     * </p>
+     * 
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "CartDisplay" is the view name and set
+     *         of cartProducts is the model.
+     */
+    @GetMapping("/Cart")
+    public ModelAndView myCart(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
+        List<CartProduct> cartProducts = customer.getCartProducts();
+        if (cartProducts.isEmpty()) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_CART_EMPTY);
+        }
+        modelAndView.addObject("cartProducts", cartProducts);
+        modelAndView.setViewName("CartDisplay");
+        return modelAndView;
+    }
+
+    /**
+     * <p>
      * This method is used to display particular customer order details
      * </p>
      * 
@@ -134,36 +198,126 @@ public class CustomerController {
             Integer quantity = Integer
                     .parseInt((String) request.getParameter("quantity"));
             Integer id = Integer.parseInt(request.getParameter("id"));
-            WarehouseProduct warehouseProduct = customerService
-                    .getWarehouseProduct(id);
             List<CartProduct> cartProducts = customer.getCartProducts();
-            CartProduct cartProduct = new CartProduct();
-            cartProduct.setWarehouseProduct(warehouseProduct);
-            cartProduct.setCustomer(customer);
-            cartProduct.setQuantity(quantity);
-            cartProduct.setPrice(quantity * warehouseProduct.getPrice());
-            cartProducts.add(cartProduct);
+            Boolean result = Boolean.TRUE;
+            for (Integer i = 0; i < cartProducts.size(); i++) {
+                if (id == cartProducts.get(i).getId()) {
+                    cartProducts.get(i)
+                            .setQuantity(cartProducts.get(i).getQuantity() + 1);
+                    result = Boolean.FALSE;
+                    break;
+                }
+            }
+            if (result) {
+                CartProduct cartProduct = new CartProduct();
+                WarehouseProduct warehouseProduct = customerService
+                        .getWarehouseProduct(id);
+                cartProduct.setWarehouseProduct(warehouseProduct);
+                cartProduct.setCustomer(customer);
+                cartProduct.setQuantity(quantity);
+                cartProduct.setPrice(quantity * warehouseProduct.getPrice());
+                cartProducts.add(cartProduct);
+            }
             customer.setCartProducts(cartProducts);
             if (customerService.updateCustomer(customer)) {
-                session.setAttribute("customer", customer);
+                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 modelAndView.addObject("cartProducts",
                         customer.getCartProducts());
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_NO_ORDER_PLACED);
+                        Constants.MSG_ADD_CART_FAIL);
             }
             modelAndView.setViewName("CartDisplay");
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
             modelAndView.setViewName("homepage");
         }
-
         return modelAndView;
     }
 
     /**
      * <p>
-     * This method is used to place order for customer want to purchase...
+     * This method is used to remove particular product from cart
+     * </p>
+     * 
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "OrdersDisplay" is the view name and set
+     *         of orders and customer is the model.
+     */
+    @GetMapping("/removeFromCart")
+    public ModelAndView removeFromCart(@RequestParam("id") String id,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            List<CartProduct> cartProducts = customer.getCartProducts();
+            for (Integer i = 0; i < cartProducts.size(); i++) {
+                if (Integer.parseInt(id) == cartProducts.get(i)
+                        .getWarehouseProduct().getId()) {
+                    cartProducts.remove(cartProducts.get(i));
+                    break;
+                }
+            }
+            customer.setCartProducts(cartProducts);
+            if (customerService.updateCustomer(customer)) {
+                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+                modelAndView.addObject("cartProducts",
+                        customer.getCartProducts());
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ADD_CART_FAIL);
+            }
+            modelAndView.setViewName("CartDisplay");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName("homepage");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * This method is used to remove particular product from cart
+     * </p>
+     * 
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "OrdersDisplay" is the view name and set
+     *         of orders and customer is the model.
+     */
+    @GetMapping("/updateCart")
+    public ModelAndView updateCart(@RequestParam("id") String id,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            List<CartProduct> cartProducts = customer.getCartProducts();
+            Integer quantity = Integer
+                    .parseInt(request.getParameter("quantity"));
+            for (Integer i = 0; i < cartProducts.size(); i++) {
+                if (Integer.parseInt(id) == cartProducts.get(i).getId()) {
+                    cartProducts.get(i).setQuantity(quantity);
+                    break;
+                }
+            }
+            customer.setCartProducts(cartProducts);
+            if (customerService.updateCustomer(customer)) {
+                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+                modelAndView.addObject("cartProducts",
+                        customer.getCartProducts());
+            }
+            modelAndView.setViewName("CartDisplay");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName("homepage");
+        }
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * This method is used to purchase a particular product.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
@@ -204,7 +358,7 @@ public class CustomerController {
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
-            session.setAttribute("customer", customer);
+            session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
             modelAndView.setViewName("CustomerOperations");
@@ -214,7 +368,8 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to place order for customer want to purchase...
+     * This method is used to purchase list of products for a particular
+     * customer.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
@@ -228,45 +383,44 @@ public class CustomerController {
         Order order;
         Customer customer = (Customer) session.getAttribute("customer");
         try {
-            List<Integer> warehouseProductIds = new ArrayList<Integer>();
-            String[] warehouseProductQuantities = request
-                    .getParameterValues("quantity");
-            String[] cartProductIds = request.getParameterValues("cartProductId");
             Address address = new Address();
             address.setId(Integer.parseInt(request.getParameter("addressId")));
-            for (String id : request.getParameterValues("id")) {
+            List<Integer> warehouseProductIds = new ArrayList<Integer>();
+            for (String id : request.getParameterValues("warehouseProductId")) {
                 warehouseProductIds.add(Integer.parseInt(id));
             }
             List<WarehouseProduct> warehouseProducts = customerService
-                    .getWarehouseProductsById(warehouseProductIds);
-            for (Integer i = 0; i < warehouseProductIds.size(); i++) {
-                if (warehouseProductIds.get(i) == Integer
-                        .parseInt(warehouseProductQuantities[i])) {
+                    .getWarehouseProductsByIds(warehouseProductIds);
+            List<CartProduct> cartProducts = customer.getCartProducts();
+            List<Order> orders = customer.getOrders();
+            for (Integer i = 0; i < cartProducts.size(); i++) {
+                if (warehouseProducts.get(i).getId() == cartProducts.get(i)
+                        .getWarehouseProduct().getId()) {
                     order = new Order();
                     order.setCustomer(customer);
                     order.setWarehouseProduct(warehouseProducts.get(i));
-                    order.setPrice(
-                            Integer.parseInt(warehouseProductQuantities[i])
-                                    * (warehouseProducts.get(i)).getPrice());
-                    order.setQuantity(
-                            Integer.parseInt(warehouseProductQuantities[i]));
+                    order.setPrice(cartProducts.get(i).getQuantity()
+                            * (warehouseProducts.get(i)).getPrice());
+                    order.setQuantity(cartProducts.get(i).getQuantity());
                     order.setAddress(address);
                     LocalDate todayDate = LocalDate.now();
                     order.setOrderDate(todayDate);
                     order.setStatus("ORDERED");
-                    List<Order> orders = customer.getOrders();
                     orders.add(order);
-                    customer.setOrders(orders);
                 }
             }
-            if (customerService.(customer)) {
-                session.setAttribute("customer", customer);
+            if (customerService.addOrders(orders)) {
+                customer.setOrders(orders);
+                deleteCartProducts(customer, warehouseProducts);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_FAIL);
             }
+            customer = customerService.getCustomerById(customer.getId(),
+                    Boolean.TRUE);
+            session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
@@ -277,40 +431,65 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to cancel particular customer order details
+     * This method is used to delete cart product details after placing an order
      * </p>
      *
-     * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     * @param customer          needed for remove cart products from customer
+     *                          object
+     * @param warehouseProducts needed for which cart products want to remove
+     *                          from customer object
      */
-    @GetMapping("/cancelOrder")
-    public ModelAndView cancelOrder(HttpServletRequest request,
-            @RequestParam("id") String id) {
-        HttpSession session = request.getSession(false);
+    private void deleteCartProducts(Customer customer,
+            List<WarehouseProduct> warehouseProducts)
+            throws EcommerceException {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            Customer customer = (Customer) session
-                    .getAttribute(Constants.LABEL_CUSTOMER);
-            List<Order> orders = customer.getOrders();
-            for (Order order : orders) {
-                if (order.getId() == Integer.parseInt(id)) {
-                    orders.remove(order);
+            List<CartProduct> cartProducts = customer.getCartProducts();
+            for (Integer i = 0; i < cartProducts.size(); i++) {
+                if (warehouseProducts.get(i).getId() == cartProducts.get(i)
+                        .getWarehouseProduct().getId()) {
+                    cartProducts.remove(cartProducts.get(i));
                 }
             }
-            customer.setOrders(orders);
+            customer.setCartProducts(cartProducts);
             if (customerService.updateCustomer(customer)) {
-                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_CANCEL_ORDER_SUCCESS);
-            } else {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_CANCEL_ORDER_FAIL);
+                        Constants.MSG_ADD_ORDER_SUCCESS);
             }
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-        return myOrders(request);
+    }
+
+    /**
+     * <p>
+     * This method is used to add new delivery address of the customer
+     * </p>
+     *
+     * @param address  needed for add new address
+     */
+    private ModelAndView addAddress(@ModelAttribute("address") Address address,
+            HttpServletRequest request) throws EcommerceException {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            List<Address> addresses = customer.getAddresses();
+            addresses.add(address);
+            customer.setAddresses(addresses);
+            if (customerService.updateCustomer(customer)) {
+                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ADD_ADDRESS_SUCCESS);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ADD_ADDRESS_FAIL);
+            }
+            modelAndView.setViewName("myAccount");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
     }
 
 }

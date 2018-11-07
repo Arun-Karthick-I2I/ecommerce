@@ -10,6 +10,7 @@ import com.ideas2it.ecommerce.dao.CustomerDao;
 import com.ideas2it.ecommerce.dao.impl.CustomerDaoImpl;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.OrderService;
+import com.ideas2it.ecommerce.service.WarehouseProductService;
 
 /**
  * <p>
@@ -27,7 +28,9 @@ import com.ideas2it.ecommerce.service.OrderService;
 public class CustomerServiceImpl implements CustomerService {
         
     private CustomerDao customerDao = new CustomerDaoImpl();
-  
+    private OrderService orderService = new OrderServiceImpl();
+    private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
+    
     /** 
      * @(inheritDoc)
      */
@@ -96,7 +99,6 @@ public class CustomerServiceImpl implements CustomerService {
      * @(inheritDoc)
      */
      public Boolean addOrder(Order order) throws EcommerceException {
-         OrderService orderService = new OrderServiceImpl();
          return orderService.addOrder(order);
      }
     
@@ -105,7 +107,6 @@ public class CustomerServiceImpl implements CustomerService {
       * @(inheritDoc)
       */
       public Boolean addOrders(List<Order> orders) throws EcommerceException {
-          OrderService orderService = new OrderServiceImpl();
           return orderService.addOrders(orders);
       }
      
@@ -113,17 +114,15 @@ public class CustomerServiceImpl implements CustomerService {
      * @(inheritDoc)
      */
     public WarehouseProduct getWarehouseProduct(Integer id) throws EcommerceException {
-        WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
-        return warehouseProductService.getWarehouseProduct(id);
+        return warehouseProductService.searchById(id);
     }
     
     /** 
      * @(inheritDoc)
      */
-    public List<WarehouseProduct> getWarehouseProductsById(List<Integer> warehouseProductIds) 
+    public List<WarehouseProduct> getWarehouseProductsByIds(List<Integer> warehouseProductIds) 
             throws EcommerceException {
-        WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
-        return warehouseProductService.getWarehouseProductsById(warehouseProductIds);
+        return warehouseProductService.getWarehouseProductsByIds(warehouseProductIds);
     }
     
 }

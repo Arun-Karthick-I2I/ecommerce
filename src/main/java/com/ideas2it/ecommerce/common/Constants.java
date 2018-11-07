@@ -215,7 +215,14 @@ public class Constants {
     public static final String MSG_ADD_CART_FAIL = 
         "Failed to add cart... try after sometime..";
         
-        
+    public static final String MSG_CART_EMPTY = 
+        "Your Shopping Cart is empty";
+    public static final String MSG_ADD_ADDRESS_SUCCESS = 
+        "New Address added successfully..";
+    
+
+    public static final String MSG_ADD_ADDRESS_FAIL = 
+        "Something went wrong in inserting new address...";
     
     //Seller Specific Constants
     

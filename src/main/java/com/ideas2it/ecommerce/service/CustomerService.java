@@ -136,6 +136,19 @@ public interface CustomerService {
 
     /**
      * <p>
+     * This method is used to cancel placed order from e-commerce web-site.
+     *
+     * @param order
+     *      Needed for which order wants to delete.
+     *     
+     * @returns Boolean 
+     *      it  returns true, if order delete from e-commerce, otherwise false.
+     * </p>
+     */
+    public Boolean cancelOrder(Order order) throws EcommerceException ; 
+    
+    /**
+     * <p>
      * Getting detail of the warehouse product from e-commerce web-site based on
      * id.
      * </p>
@@ -155,7 +168,7 @@ public interface CustomerService {
      * @param warehouseProductIds needed for list of warehouse products
      * @return List<WarehouseProduct> Return the list of warehouse products.
      */
-    public List<WarehouseProduct> getWarehouseProductsById(
+    public List<WarehouseProduct> getWarehouseProductsByIds(
             List<Integer> warehouseProductIds) throws EcommerceException;
 
 }
