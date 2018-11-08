@@ -84,6 +84,14 @@ public class SellerServiceImpl implements SellerService {
      * @{inheritDoc}
      */
     @Override
+    public Boolean addProduct(Product product) throws EcommerceException {
+        return productService.addProduct(product);
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
     public Boolean addWarehouseProduct(WarehouseProduct warehouseProduct)
             throws EcommerceException {
         return warehouseProductService.addWarehouseProduct(warehouseProduct);

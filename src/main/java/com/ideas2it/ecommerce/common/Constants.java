@@ -321,11 +321,17 @@ public class Constants {
     public static final String MSG_GET_WAREHOUSE_PRODUCTS_FAIL =
         "Something went wrong while fetching products...Try Again Later";
 
+    public static final String MSG_REMOVE_WAREHOUSE_PRODUCT_SUCCESS =
+        "Product removed from warehouse Successfully";
+
     public static final String MSG_REMOVE_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while removing product...Try Again Later";
 
     public static final String MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while searching product...Try Again Later";
+
+    public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_SUCCESS =
+        "Product details updated in Warehouse Successfully";
 
     public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while updating product...Try Again Later";

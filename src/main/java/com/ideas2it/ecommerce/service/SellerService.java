@@ -95,6 +95,17 @@ public interface SellerService {
      * Adds a new product that is available for sale from a particular seller.
      * </p>
      * 
+     * @param product Product which needs to be stored
+     * @return message Returns true if the new product is added
+     *         successfully else returns false
+     */
+    Boolean addProduct(Product product) throws EcommerceException;
+
+    /**
+     * <p>
+     * Adds a new product that is available for sale from a particular seller.
+     * </p>
+     * 
      * @param warehouseProduct WarehouseProduct which needs to be stored
      * @return message Returns true if the new warehouseproduct is added
      *         successfully else returns false
@@ -147,7 +158,7 @@ public interface SellerService {
      * @param productId ID of the Product which has to be searched for in the
      *                  warehouse.
      * @param sellerId  ID of the Seller whose warehouse needs to be searched
-     *                  for the specific product                 
+     *                  for the specific product
      * @return warehouseProduct Returns the WarehouseProduct with the desired ID
      *         if it exist Returns null if no such WarehouseProduct exist.
      */
@@ -171,8 +182,8 @@ public interface SellerService {
      * </p>
      * 
      * @param productId ID of the product which has to be searched for.
-     * @return warehouseProduct Returns the Product with the desired
-     *         ID if it exist Returns null if no such products exist.
+     * @return warehouseProduct Returns the Product with the desired ID if it
+     *         exist Returns null if no such products exist.
      */
     Product searchProduct(Integer productId) throws EcommerceException;
 

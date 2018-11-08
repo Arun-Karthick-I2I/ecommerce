@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Address;
-import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
@@ -69,17 +68,17 @@ public class SellerController {
             seller.setWarehouseProducts(existingSeller.getWarehouseProducts());
             existingSeller = sellerService.checkSellerExistence(seller);
             if (null != existingSeller) {
-                if ((seller.equals(existingSeller)) &&
-                        (sellerService.updateSeller(seller))) {
+                if ((seller.equals(existingSeller))
+                        && (sellerService.updateSeller(seller))) {
                     modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_SELLER_UPDATE_SUCCESS);
+                            Constants.MSG_SELLER_UPDATE_SUCCESS);
                 } else if (!(seller.equals(existingSeller))) {
                     modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_SELLER_ALREADY_EXIST);
+                            Constants.MSG_SELLER_ALREADY_EXIST);
                 }
             } else if (sellerService.updateSeller(seller)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                    Constants.MSG_SELLER_UPDATE_SUCCESS);
+                        Constants.MSG_SELLER_UPDATE_SUCCESS);
             }
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
@@ -96,7 +95,7 @@ public class SellerController {
     }
 
     @PostMapping("addAddress")
-    private ModelAndView addAddress(@ModelAttribute("address") Address address,
+    public ModelAndView addAddress(@ModelAttribute("address") Address address,
             HttpSession session) throws EcommerceException {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
         Seller seller = sellerService.searchSeller(
@@ -126,7 +125,7 @@ public class SellerController {
     }
 
     @PostMapping("updateAddress")
-    private ModelAndView updateAddress(
+    public ModelAndView updateAddress(
             @ModelAttribute("address") Address address, HttpSession session)
             throws EcommerceException {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
@@ -150,7 +149,7 @@ public class SellerController {
     }
 
     @PostMapping("removeAddress")
-    private ModelAndView removeAddress(HttpServletRequest request) {
+    public ModelAndView removeAddress(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
         try {
@@ -173,30 +172,32 @@ public class SellerController {
     }
 
     @GetMapping("newProduct")
-    private String openProductForm() {
+    public String openProductForm() {
         return PRODUCT_FORM;
     }
 
     @PostMapping("createProduct")
-    private ModelAndView createProduct(@ModelAttribute("product") Product product) {
+    public ModelAndView createProduct(
+            @ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
         WarehouseProduct warehouseProduct = new WarehouseProduct();
         try {
-            if(sellerService.addProduct(product)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE, 
+            if (sellerService.addProduct(product)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_WAREHOUSE_PRODUCT_SUCCESS);
                 warehouseProduct.setProduct(product);
-                modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCT, warehouseProduct);
+                modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCT,
+                        warehouseProduct);
             }
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
             modelAndView.setViewName(SELLER_HOME);
         }
-        
+        return modelAndView;
     }
 
     @GetMapping("searchProduct")
-    private ModelAndView searchProduct(HttpServletRequest request) {
+    public ModelAndView searchProduct(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(PRODUCT_FORM);
         Product product = new Product();
         String productName = request.getParameter(Constants.LABEL_PRODUCT_NAME);
@@ -219,7 +220,7 @@ public class SellerController {
     }
 
     @PostMapping("showWarehouseProductForm")
-    private ModelAndView showWarehouseProductForm(HttpServletRequest request) {
+    public ModelAndView showWarehouseProductForm(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
         Product product = new Product();
         HttpSession session = request.getSession(Boolean.FALSE);
@@ -248,7 +249,7 @@ public class SellerController {
     }
 
     @PostMapping("addWarehouseProduct")
-    private ModelAndView addWarehouseProduct(
+    public ModelAndView addWarehouseProduct(
             @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct) {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
         try {
@@ -262,5 +263,58 @@ public class SellerController {
         return modelAndView;
     }
 
-    private ModelAndView
+    @PostMapping("deleteWarehouseProduct")
+    public ModelAndView deleteWarehouseProduct(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        HttpSession session = request.getSession(Boolean.FALSE);
+        try {
+            Seller seller = sellerService.searchSeller(
+                    (Integer) session.getAttribute(Constants.LABEL_SELLER_ID));
+            WarehouseProduct warehouseProduct = new WarehouseProduct();
+            warehouseProduct.setId(Integer.parseInt(request
+                    .getParameter(Constants.LABEL_WAREHOUSE_PRODUCT_ID)));
+            List<WarehouseProduct> warehouseProducts = seller
+                    .getWarehouseProducts();
+            warehouseProducts.remove(warehouseProduct);
+            seller.setWarehouseProducts(warehouseProducts);
+            if (sellerService.updateSeller(seller)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_REMOVE_WAREHOUSE_PRODUCT_SUCCESS);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("editWarehouseProduct")
+    public ModelAndView editWarehouseProduct(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
+
+        try {
+            WarehouseProduct warehouseProduct = sellerService
+                    .getWarehouseProduct(Integer.parseInt(request.getParameter(
+                            Constants.LABEL_WAREHOUSE_PRODUCT_ID)));
+            modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCT,
+                    warehouseProduct);
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("updateWarehouseProduct")
+    public ModelAndView updateWarehouseProduct(
+            @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct) {
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        try {
+            if (sellerService.updateWarehouseProduct(warehouseProduct)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_UPDATE_WAREHOUSE_PRODUCT_SUCCESS);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
 }
