@@ -2,6 +2,8 @@ package com.ideas2it.ecommerce.model;
 
 import java.time.LocalDate;
 
+import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
+
 /**
  * <p>
  * Order contains customer details, product, delivery address, quantity and
@@ -20,7 +22,7 @@ public class Order {
     private LocalDate orderDate;
     private LocalDate returnDate;
     private Address address;
-    private String status;
+    private ORDER_STATUS status;
 
     public Integer getId() {
         return id;
@@ -86,12 +88,15 @@ public class Order {
         this.address = address;
     }
 
-    public String getStatus() {
+    public ORDER_STATUS getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ORDER_STATUS status) {
         this.status = status;
+    }
+
+
     }
 
 }

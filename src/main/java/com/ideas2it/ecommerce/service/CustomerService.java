@@ -124,7 +124,6 @@ public interface CustomerService {
 
     /**
      * <p>
-     * 
      * This method is used to place multiple orders to customer in e-commerce
      * web-site for different products with different order.
      * </p>
@@ -138,14 +137,14 @@ public interface CustomerService {
      * <p>
      * This method is used to cancel placed order from e-commerce web-site.
      *
-     * @param order
-     *      Needed for which order wants to delete.
-     *     
-     * @returns Boolean 
-     *      it  returns true, if order delete from e-commerce, otherwise false.
-     * </p>
+     * @param order Needed for which order wants to delete.
+     * @returns Boolean it returns true, if order delete from e-commerce,
+     *          otherwise false.
+     *          </p>
      */
-    public Boolean cancelOrder(Order order) throws EcommerceException ; 
+    public Boolean cancelOrder(Order order) throws EcommerceException;
+
+    
     
     /**
      * <p>

@@ -65,6 +65,24 @@ public class Constants {
     
     public static final String MSG_LOGGED_OUT = 
         "You have been logged out successfully";
+
+    public static final String MSG_ADD_ADDRESS_SUCCESS = 
+        "New Address added successfully..";
+
+    public static final String MSG_ADD_ADDRESS_FAIL = 
+        "Something went wrong while inserting new address...";
+    
+    public static final String MSG_UPDATE_ADDRESS_SUCCESS = 
+        "Address updated Successfully..";
+
+    public static final String MSG_UPDATE_ADDRESS_FAIL =  
+        "Something went wrong while updating address...";
+    
+    public static final String MSG_DELETE_ADDRESS_SUCCESS = 
+        "Address updated Successfully..";
+    
+    public static final String MSG_DELETE_ADDRESS_FAIL =  
+        "Something went wrong while updating address...";
     
 
     //Admin Specific Constants
@@ -172,6 +190,7 @@ public class Constants {
     public static final String MSG_SELLER_DELETE_FAILURE =
         "Unsuccessful deletion of Seller";
     
+    
     //Customer Specific Constants
 
     public static final String ERROR_INSERT_CUSTOMER = 
@@ -216,7 +235,6 @@ public class Constants {
     public static final String MSG_ADD_ORDER_SUCCESS = 
         "Your order has been successfully placed...";
     
-
     public static final String MSG_ADD_ORDER_FAIL = 
         "Fail to place an order...";
 
@@ -231,12 +249,7 @@ public class Constants {
         
     public static final String MSG_CART_EMPTY = 
         "Your Shopping Cart is empty";
-    public static final String MSG_ADD_ADDRESS_SUCCESS = 
-        "New Address added successfully..";
-    
 
-    public static final String MSG_ADD_ADDRESS_FAIL = 
-        "Something went wrong in inserting new address...";
     
     //Seller Specific Constants
     
