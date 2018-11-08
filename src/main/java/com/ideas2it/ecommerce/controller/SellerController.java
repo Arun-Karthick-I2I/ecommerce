@@ -42,6 +42,12 @@ public class SellerController {
 
     private SellerService sellerService = new SellerServiceImpl();
 
+    /**
+     * <p>
+     * Shows the seller his personal profile and provides option to edit those
+     * details.
+     * </p>
+     */
     @GetMapping("viewProfile")
     public ModelAndView showAccount(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView(EDIT_SELLER);
@@ -56,6 +62,13 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Updates the seller profile if it doesn't conflict with others. It will
+     * show an alert if another seller exists with same mobile number or email
+     * id.
+     * </p>
+     */
     @PostMapping("updateProfile")
     public ModelAndView updateAccount(@ModelAttribute("seller") Seller seller,
             HttpServletRequest request) {
@@ -86,6 +99,12 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Shows the seller new address form that can be used to provide additional
+     * warehouse addresses.
+     * </p>
+     */
     @GetMapping("newAddress")
     public ModelAndView createAddress() {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
@@ -94,6 +113,11 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Adds the new warehouse address to the seller.
+     * </p>
+     */
     @PostMapping("addAddress")
     public ModelAndView addAddress(@ModelAttribute("address") Address address,
             HttpSession session) throws EcommerceException {
@@ -114,6 +138,12 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Shows the seller edit address form that can be used to provide updated
+     * address details for the warehouse address given.
+     * </p>
+     */
     @PostMapping("editAddress")
     public ModelAndView editAddress(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
@@ -124,6 +154,12 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Updates the warehouse address based on the input from edit warehouse
+     * address form.
+     * </p>
+     */
     @PostMapping("updateAddress")
     public ModelAndView updateAddress(
             @ModelAttribute("address") Address address, HttpSession session)
@@ -148,6 +184,12 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Removes the corresponding warehouse address from the seller based on the
+     * seller input.
+     * </p>
+     */
     @PostMapping("removeAddress")
     public ModelAndView removeAddress(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
@@ -171,11 +213,22 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Shows the new Product Form to the seller where they can provide the
+     * product name which they want to add to their warehouse.
+     * </p>
+     */
     @GetMapping("newProduct")
     public String openProductForm() {
         return PRODUCT_FORM;
     }
 
+    /**
+     * <p>
+     * Creates a product if no such product exists.
+     * </p>
+     */
     @PostMapping("createProduct")
     public ModelAndView createProduct(
             @ModelAttribute("product") Product product) {
@@ -196,6 +249,12 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Searches for the product name provided by the seller. Returns a list with
+     * the specified product name.
+     * </p>
+     */
     @GetMapping("searchProduct")
     public ModelAndView searchProduct(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(PRODUCT_FORM);
@@ -219,6 +278,13 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Shows the new Warehouse Product Form to the seller where they can provide
+     * the product quantity they have and the price at which they want to sell
+     * those products.
+     * </p>
+     */
     @PostMapping("showWarehouseProductForm")
     public ModelAndView showWarehouseProductForm(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
@@ -248,6 +314,12 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Adds a product to the warehouse along with the quantity available at
+     * their warehouse and the price at which the seller wishes to sell.
+     * </p>
+     */
     @PostMapping("addWarehouseProduct")
     public ModelAndView addWarehouseProduct(
             @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct) {
@@ -263,6 +335,11 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Deletes a product from the warehouse of the specified seller.
+     * </p>
+     */
     @PostMapping("deleteWarehouseProduct")
     public ModelAndView deleteWarehouseProduct(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
@@ -287,6 +364,13 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Shows the edit Warehouse Product Form to the seller where they can update
+     * the product quantity they have and the price at which they want to sell
+     * those products.
+     * </p>
+     */
     @PostMapping("editWarehouseProduct")
     public ModelAndView editWarehouseProduct(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
@@ -303,13 +387,21 @@ public class SellerController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Updates a product to the warehouse with the new quantity available at
+     * their warehouse and with the new price at which the seller wishes to
+     * sell.
+     * </p>
+     */
     @PostMapping("updateWarehouseProduct")
     public ModelAndView updateWarehouseProduct(
             @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct) {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
         try {
             if (sellerService.updateWarehouseProduct(warehouseProduct)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_UPDATE_WAREHOUSE_PRODUCT_SUCCESS);
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_UPDATE_WAREHOUSE_PRODUCT_SUCCESS);
             }
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
