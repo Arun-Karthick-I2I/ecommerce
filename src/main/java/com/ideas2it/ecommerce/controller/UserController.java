@@ -25,6 +25,8 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
  * management of users. It provides option to create and validate login
  * credentials.
  * </p>
+ * 
+ * @author Arun Karthick.J
  */
 public class UserController {
     private static final String INDEX_PAGE = "index";

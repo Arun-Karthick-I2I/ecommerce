@@ -9,7 +9,13 @@ public class Constants {
     public static final Character SPACE = ' ';
     
     public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;
+    
+    public static final String LABEL_ADDRESS = "address";
+    
+    public static final String LABEL_ADDRESS_ID = "addressId";
 
+    public static final String LABEL_CATEGORIES = "categories";
+    
     public static final String LABEL_EMAIL_ID = "emailId";
 
     public static final String LABEL_MOBILE_NUMBER = "mobileNumber";
@@ -23,6 +29,10 @@ public class Constants {
     public static final String LABEL_PASSWORD = "password";
     
     public static final String LABEL_PRODUCT = "product";
+    
+    public static final String LABEL_PRODUCT_ID = "productId";
+
+    public static final String LABEL_PRODUCTS = "products";
     
     public static final String LABEL_PRODUCT_NAME = "productName";
     
@@ -44,6 +54,9 @@ public class Constants {
     
     public static final String LABEL_USER_ID = "userId";
     
+    public static final String LABEL_WAREHOUSE_PRODUCT = 
+        "warehouseProduct";
+        
     public static final String LABEL_WAREHOUSE_PRODUCT_ID = 
         "warehouseProductId";
     
@@ -293,6 +306,12 @@ public class Constants {
     public static final String MSG_SELLER_REGISTER_SUCCESS =
         "You have registered successfully as a seller";
     
+    public static final String MSG_ADD_PRODUCT_SUCCESS =
+        "Product added to the Store Successfully";
+        
+    public static final String MSG_ADD_WAREHOUSE_PRODUCT_SUCCESS =
+        "Product added to your Warehouse Successfully";
+        
     public static final String MSG_ADD_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while adding product...Try Again Later";
     
@@ -308,4 +327,6 @@ public class Constants {
     public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while updating product...Try Again Later";
 
+    public static final String MSG_WAREHOUSE_PRODUCT_ALREADY_PRESENT = 
+        "The given product is already present in your Warehouse";
 }

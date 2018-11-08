@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
@@ -163,6 +164,34 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
             criteriaQuery.select(root).where(criteriaBuilder
                     .equal(root.get(Constants.LABEL_PRODUCT), productId));
             return session.createQuery(criteriaQuery).getResultList();
+        } catch (HibernateException e) {
+            String exceptionMessage = Constants.MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL
+                    + Constants.SPACE + Constants.LABEL_PRODUCT
+                    + Constants.COLON_SYMBOL + productId;
+            EcommerceLogger.error(exceptionMessage, e);
+            throw new EcommerceException(exceptionMessage);
+        }
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public WarehouseProduct getWarehouseProductByProductId(
+            Integer productId, Integer sellerId) throws EcommerceException {
+        try (Session session = SessionManager.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<WarehouseProduct> criteriaQuery = criteriaBuilder
+                    .createQuery(WarehouseProduct.class);
+            Root<WarehouseProduct> root = criteriaQuery
+                    .from(WarehouseProduct.class);
+            Predicate[] predicates = new Predicate[2];
+            predicates[0] = criteriaBuilder
+                    .equal(root.get(Constants.LABEL_PRODUCT), productId);
+            predicates[1] = criteriaBuilder
+                    .equal(root.get(Constants.LABEL_SELLER), sellerId);
+            criteriaQuery.select(root).where(predicates);
+            return session.createQuery(criteriaQuery).uniqueResult();
         } catch (HibernateException e) {
             String exceptionMessage = Constants.MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL
                     + Constants.SPACE + Constants.LABEL_PRODUCT

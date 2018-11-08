@@ -80,6 +80,21 @@ public interface WarehouseProductService {
 
     /**
      * <p>
+     * Searches the warehouse products based on the Product ID.
+     * </p>
+     *
+     * @param ProductId ID of the product whose corresponding warehouse products
+     *                  needs to be searched
+     * @param sellerId  ID of the Seller whose warehouse products needs to be
+     *                  searched.
+     * @return warehouseProduct Returns the warehouse product corresponding to
+     *         the product Id and seller.
+     */
+    WarehouseProduct searchByProductId(Integer productId, Integer sellerId)
+            throws EcommerceException;
+
+    /**
+     * <p>
      * Searches the warehouse products based on the seller.
      * </p>
      *
