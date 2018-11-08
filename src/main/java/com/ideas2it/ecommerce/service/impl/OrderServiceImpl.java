@@ -38,8 +38,8 @@ private OrderDao orderDao = new OrderDaoImpl();
     /**
      * {@inheritDoc}
      */
-    public Boolean addOrder(Order order) throws EcommerceException {
-        return orderDao.addOrder(order);
+    public Boolean addOrders(List<Order> orders) throws EcommerceException {
+        return orderDao.addOrders(orders);
     }
     
     /**

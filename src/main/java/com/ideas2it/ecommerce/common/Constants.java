@@ -48,6 +48,8 @@ public class Constants {
     
     public static final String LABEL_WAREHOUSE_PRODUCT_NAME = "warehouseProductName";
     
+    public static final String LABEL_CATEGORY = "category";
+    
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
     

@@ -43,12 +43,12 @@ public interface OrderService {
      * Used to add new Order to the list using the inputs obtained from Customer.
      * </p>
      * 
-     * @param   order  New Order to be inserted
-     * @return         Returns true, if the Order has been inserted 
-     *                 successfully. Otherwise returns false, if the 
-     *                 insertion is unsuccessful. 
+     * @param   orders  New Orders to be inserted
+     * @return          Returns true, if the Order has been inserted 
+     *                  successfully. Otherwise returns false, if the 
+     *                  insertion is unsuccessful. 
      */
-    Boolean addOrder(Order order) throws EcommerceException;
+    Boolean addOrders(List<Order> orders) throws EcommerceException;
     
     /**
      * <p>
