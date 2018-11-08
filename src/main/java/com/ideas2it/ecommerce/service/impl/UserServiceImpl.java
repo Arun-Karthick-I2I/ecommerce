@@ -36,9 +36,19 @@ public class UserServiceImpl implements UserService {
     /**
      * @{inheritDoc}
      */
-    public Boolean register(User user) throws EcommerceException {
+    public Boolean registerCustomer(Customer customer) throws EcommerceException {
+        User user = customer.getUser();
         user.setPassword(generatePasswordHash(user.getPassword()));
-        return userDao.addUser(user);
+        return customerService.addCustomer(customer);
+    }
+    
+    /**
+     * @{inheritDoc}
+     */
+    public Boolean registerSeller(Seller seller) throws EcommerceException {
+        User user = seller.getUser();
+        user.setPassword(generatePasswordHash(user.getPassword()));
+        return sellerService.register(seller);
     }
 
     /**

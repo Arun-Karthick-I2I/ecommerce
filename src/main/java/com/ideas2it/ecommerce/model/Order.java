@@ -95,5 +95,8 @@ public class Order {
     public void setStatus(ORDER_STATUS status) {
         this.status = status;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> db2893c63380fc8c6e605f5811f7e9e67a6c482d
 }

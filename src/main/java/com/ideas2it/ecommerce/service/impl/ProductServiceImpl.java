@@ -5,9 +5,19 @@ import java.util.List;
 import com.ideas2it.ecommerce.dao.ProductDao;
 import com.ideas2it.ecommerce.dao.impl.ProductDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.service.ProductService;
 
+/**
+ * <p>
+ * This class provides basic functionalities such as get all the
+ * available Products and fetch Product by using ID or Name specified.
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public class ProductServiceImpl implements ProductService {
     private ProductDao productDao = new ProductDaoImpl();
     
@@ -28,7 +38,28 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public Product searchByName(String name) throws EcommerceException {
+    public List<Product> searchByName(String name) throws EcommerceException {
         return productDao.getByName(name);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean addProduct(Product product) throws EcommerceException { 
+        if ((null != product) 
+                && (null != searchByName(product.getName()))) {
+            return productDao.addProduct(product);
+        }
+        return Boolean.FALSE;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Product> searchByCategory(Integer categoryId, String productName) 
+            throws EcommerceException {
+        return productDao.getByCategory(categoryId, productName);
     }
 }

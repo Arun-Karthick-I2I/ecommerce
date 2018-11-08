@@ -85,6 +85,20 @@ public interface WarehouseProductDao {
 
     /**
      * <p>
+     * Returns the list of WarehouseProducts available in the store that matches
+     * the product provided.
+     * </p>
+     *
+     * @param productId Id of the Product which has to be searched.
+     * @param seller    Seller whose warehouse products need to be searched.
+     * @return warehouseProducts Returns the entire WarehouseProduct collection
+     *         from the database based on the product ID.
+     */
+    WarehouseProduct getWarehouseProductByProductId(Integer productId,
+            Integer sellerId) throws EcommerceException;
+
+    /**
+     * <p>
      * It fetches the WarehouseProduct List based on the list of ids
      * </p>
      *
@@ -100,7 +114,7 @@ public interface WarehouseProductDao {
      * It fetches the WarehouseProduct List based on the seller.
      * </p>
      *
-     * @param seller List of WarehouseProducts to be fetched.
+     * @param seller Seller whose warehouse products need to be searched
      * @return warehouseProducts Returns the list of warehouseProducts
      *         corresponding to the seller.
      */

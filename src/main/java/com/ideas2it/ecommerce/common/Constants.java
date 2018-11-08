@@ -9,7 +9,13 @@ public class Constants {
     public static final Character SPACE = ' ';
     
     public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;
+    
+    public static final String LABEL_ADDRESS = "address";
+    
+    public static final String LABEL_ADDRESS_ID = "addressId";
 
+    public static final String LABEL_CATEGORIES = "categories";
+    
     public static final String LABEL_EMAIL_ID = "emailId";
 
     public static final String LABEL_MOBILE_NUMBER = "mobileNumber";
@@ -23,6 +29,10 @@ public class Constants {
     public static final String LABEL_PASSWORD = "password";
     
     public static final String LABEL_PRODUCT = "product";
+    
+    public static final String LABEL_PRODUCT_ID = "productId";
+
+    public static final String LABEL_PRODUCTS = "products";
     
     public static final String LABEL_PRODUCT_NAME = "productName";
     
@@ -44,9 +54,18 @@ public class Constants {
     
     public static final String LABEL_USER_ID = "userId";
     
-    public static final String LABEL_WAREHOUSE_PRODUCT_ID = "warehouseProductId";
+    public static final String LABEL_WAREHOUSE_PRODUCT = 
+        "warehouseProduct";
+        
+    public static final String LABEL_WAREHOUSE_PRODUCT_ID = 
+        "warehouseProductId";
     
-    public static final String LABEL_WAREHOUSE_PRODUCT_NAME = "warehouseProductName";
+    public static final String LABEL_WAREHOUSE_PRODUCT_NAME = 
+        "warehouseProductName";
+    
+    public static final String MSG_INVALID_CREDENTIALS = "Invalid Credentials";
+    
+    public static final String LABEL_CATEGORY = "category";
     
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
@@ -83,8 +102,9 @@ public class Constants {
     
     public static final String MSG_DELETE_ADDRESS_FAIL =  
         "Something went wrong while updating address...";
-    
-    
+
+    public static final String MSG_NO_SUCH_USER_EXISTS = 
+        "No such user exists...Please Register";
     
 
     //Admin Specific Constants
@@ -158,6 +178,9 @@ public class Constants {
     
     public static final String MSG_PRODUCT_NOT_AVAILABLE = 
         "Product not available";
+    
+    public static final String MSG_PRODUCT_INSERT_FAILURE =
+        "Unsuccessful insertion of Category";
     
     
     public static final String MSG_ORDERS_DISPLAY_FAILURE = 
@@ -296,11 +319,20 @@ public class Constants {
     public static final String MSG_SELLER_REGISTER_SUCCESS =
         "You have registered successfully as a seller";
     
+    public static final String MSG_ADD_PRODUCT_SUCCESS =
+        "Product added to the Store Successfully";
+        
+    public static final String MSG_ADD_WAREHOUSE_PRODUCT_SUCCESS =
+        "Product added to your Warehouse Successfully";
+        
     public static final String MSG_ADD_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while adding product...Try Again Later";
     
     public static final String MSG_GET_WAREHOUSE_PRODUCTS_FAIL =
         "Something went wrong while fetching products...Try Again Later";
+
+    public static final String MSG_REMOVE_WAREHOUSE_PRODUCT_SUCCESS =
+        "Product removed from warehouse Successfully";
 
     public static final String MSG_REMOVE_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while removing product...Try Again Later";
@@ -308,7 +340,12 @@ public class Constants {
     public static final String MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while searching product...Try Again Later";
 
+    public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_SUCCESS =
+        "Product details updated in Warehouse Successfully";
+
     public static final String MSG_UPDATE_WAREHOUSE_PRODUCT_FAIL =
         "Something went wrong while updating product...Try Again Later";
 
+    public static final String MSG_WAREHOUSE_PRODUCT_ALREADY_PRESENT = 
+        "The given product is already present in your Warehouse";
 }

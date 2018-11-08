@@ -1,7 +1,6 @@
 package com.ideas2it.ecommerce.dao.impl;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Root;
@@ -21,7 +20,10 @@ import com.ideas2it.ecommerce.session.SessionManager;
 
 /**
  * <p>
- * 
+ * This class provides basic functionalities such as get all 
+ * Categories, add new Category if the Category doesn't already exist, 
+ * update or delete an existing Category, fetch Category using ID or Name
+ * specified. 
  * </p>
  * 
  * @author Pavithra.S
@@ -33,6 +35,7 @@ public class CategoryDaoImpl implements CategoryDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Category> getCategories() throws EcommerceException {
         Session session = null;
         List<Category> categories;
@@ -53,6 +56,7 @@ public class CategoryDaoImpl implements CategoryDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean insertCategory(Category category) throws EcommerceException {
         Session session = null;
         Transaction transaction = null;
@@ -77,6 +81,7 @@ public class CategoryDaoImpl implements CategoryDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean deleteCategory(Integer id) throws EcommerceException {
         Session session = null;
         Transaction transaction = null;
@@ -102,6 +107,7 @@ public class CategoryDaoImpl implements CategoryDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean updateCategory(Category newCategory)
             throws EcommerceException {
         Session session = null;
@@ -131,6 +137,7 @@ public class CategoryDaoImpl implements CategoryDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Category getById(Integer id) throws EcommerceException {
         Category category;
         Session session = null;
@@ -156,6 +163,7 @@ public class CategoryDaoImpl implements CategoryDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Category getByName(String name) throws EcommerceException {
         Category category;
         Session session = null;

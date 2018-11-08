@@ -14,7 +14,10 @@ import com.ideas2it.ecommerce.service.SellerService;
 
 /**
  * <p>
- * 
+ * This class provides basic functionalities such as get all the Orders
+ * placed by the Customer, fetch a specific Order by ID, viewing all the 
+ * active Customers and Sellers, searching a specific Customer or Seller by 
+ * their respective ID or by Name.
  * </p>
  * 
  * @author Pavithra.S
@@ -28,6 +31,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Order> getOrders() throws EcommerceException {
         return orderDao.getOrders();
     }
@@ -35,6 +39,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public Order searchByOrderId(Integer id) throws EcommerceException {
         return orderDao.getById(id);
     }
@@ -42,6 +47,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Customer> getCustomers(Boolean status) throws EcommerceException {
         return customerService.getCustomers(status);
     }
@@ -49,6 +55,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public Customer searchByCustomerId(Integer id, Boolean status) 
             throws EcommerceException {
         return customerService.getCustomerById(id, status);
@@ -57,6 +64,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Customer> searchByCustomerName(String name, Boolean status) 
             throws EcommerceException {
         return customerService.getCustomerByName(name, status);
@@ -72,6 +80,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Seller> getSellers() throws EcommerceException {
         return sellerService.getAllSellers();
     }
@@ -79,6 +88,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public Seller searchBySellerId(Integer id) throws EcommerceException {
         return sellerService.searchSeller(id);
     }
@@ -86,6 +96,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Seller> searchBySellerName(String name) throws EcommerceException {
         return sellerService.getSellersByName(name);
     }
@@ -93,6 +104,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean deleteSeller(Seller seller) throws EcommerceException {
         return sellerService.deleteSeller(seller);
     }
