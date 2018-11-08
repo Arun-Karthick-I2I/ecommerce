@@ -98,10 +98,10 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         List<Product> products = new ArrayList<Product>();
         try {
-            Product product = productService.searchByName(name);
-            if (null != product) {
-                modelAndView.addObject("product", product);
-                modelAndView.setViewName("displayProduct");
+            products = productService.searchByName(name);
+            if (products.isEmpty()) {
+                modelAndView.addObject("products", products);
+                modelAndView.setViewName("displayProducts");
             } else {
                 products = getProducts();
                 modelAndView.addObject("products", products);
