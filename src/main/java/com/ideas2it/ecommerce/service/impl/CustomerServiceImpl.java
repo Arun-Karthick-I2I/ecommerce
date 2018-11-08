@@ -102,6 +102,12 @@ public class CustomerServiceImpl implements CustomerService {
          return orderService.addOrder(order);
      }
     
+     /** 
+      * @(inheritDoc)
+      */
+      public Boolean cancelOrder(Order order) throws EcommerceException {
+          return orderService.deleteOrder(order);
+      }
      
      /** 
       * @(inheritDoc)
