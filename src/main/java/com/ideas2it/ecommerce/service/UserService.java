@@ -18,23 +18,36 @@ public interface UserService {
 
     /**
      * <p>
-     * Creates an entry for the user and provides a corresponding message.
+     * Creates an entry for the customer and provides a corresponding message.
      * </p>
      *
-     * @param  user     User details which needs to be added to the Database
-     * @return message  Returns true if User details is successfully added to 
-     *                  the database else Returns false.
+     * @param customer Customer details along with login credentials which needs
+     *                 to be added to the Database
+     * @return message Returns true if User details is successfully added to the
+     *         database else Returns false.
      */
-    Boolean register(User user) throws EcommerceException;
+    Boolean registerCustomer(Customer customer) throws EcommerceException;
+
+    /**
+     * <p>
+     * Creates an entry for the seller and provides a corresponding message.
+     * </p>
+     *
+     * @param seller Seller details along with login credentials which needs to
+     *               be added to the Database
+     * @return message Returns true if User details is successfully added to the
+     *         database else Returns false.
+     */
+    Boolean registerSeller(Seller seller) throws EcommerceException;
 
     /**
      * <p>
      * Fetches the customer details based on the userId.
      * </p>
      *
-     * @param  userId    User ID of the Customer who has to be logged in.
-     * @return customer  If the customer details are correct. 
-     *         null      If no such customer exists.
+     * @param userId User ID of the Customer who has to be logged in.
+     * @return customer If the customer details are correct. null If no such
+     *         customer exists.
      */
     Customer searchCustomer(Integer userId) throws EcommerceException;
 
@@ -43,9 +56,9 @@ public interface UserService {
      * Fetches the seller details based on the userId.
      * </p>
      *
-     * @param  userId  User ID of the Seller who has to be logged in.
-     * @return seller  If the seller details are correct. 
-     *         null    If no such seller exists.
+     * @param userId User ID of the Seller who has to be logged in.
+     * @return seller If the seller details are correct. null If no such seller
+     *         exists.
      */
     Seller searchSeller(Integer userId) throws EcommerceException;
 
@@ -60,7 +73,7 @@ public interface UserService {
      *         by another user.
      */
     Boolean checkUserNameAvailability(String userName)
-        throws EcommerceException;
+            throws EcommerceException;
 
     /**
      * <p>

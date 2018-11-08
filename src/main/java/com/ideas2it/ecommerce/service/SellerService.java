@@ -32,7 +32,7 @@ public interface SellerService {
      * @return true  If a new account is created for the seller successfully.
      *         false If there is a problem in creating the account.
      */ 
-    Boolean registerSeller(Seller seller) throws EcommerceException;
+    Boolean register(Seller seller) throws EcommerceException;
 
     /**
      * <p>

@@ -31,7 +31,7 @@ public class SellerServiceImpl implements SellerService {
      * @{inheritDoc}
      */
     @Override
-    public Boolean registerSeller(Seller seller) throws EcommerceException {
+    public Boolean register(Seller seller) throws EcommerceException {
         return sellerDao.addSeller(seller);
     }
 

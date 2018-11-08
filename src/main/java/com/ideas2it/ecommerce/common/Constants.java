@@ -44,9 +44,13 @@ public class Constants {
     
     public static final String LABEL_USER_ID = "userId";
     
-    public static final String LABEL_WAREHOUSE_PRODUCT_ID = "warehouseProductId";
+    public static final String LABEL_WAREHOUSE_PRODUCT_ID = 
+        "warehouseProductId";
     
-    public static final String LABEL_WAREHOUSE_PRODUCT_NAME = "warehouseProductName";
+    public static final String LABEL_WAREHOUSE_PRODUCT_NAME = 
+        "warehouseProductName";
+    
+    public static final String MSG_INVALID_CREDENTIALS = "Invalid Credentials";
     
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
@@ -65,6 +69,9 @@ public class Constants {
     
     public static final String MSG_LOGGED_OUT = 
         "You have been logged out successfully";
+    
+    public static final String MSG_NO_SUCH_USER_EXISTS = 
+        "No such user exists...Please Register";
     
 
     //Admin Specific Constants
