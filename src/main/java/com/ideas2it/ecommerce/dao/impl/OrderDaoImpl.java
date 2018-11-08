@@ -93,7 +93,6 @@ public class OrderDaoImpl implements OrderDao {
             for (Order order : orders) {
                 session.save(order);
             }
-            
             transaction.commit();
             return Boolean.TRUE;
         } catch (HibernateException e) {

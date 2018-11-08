@@ -48,7 +48,7 @@ public interface OrderService {
      *                  successfully. Otherwise returns false, if the 
      *                  insertion is unsuccessful. 
      */
-    Boolean addOrders(List<Order> orders) throws EcommerceException;
+    List<Order> addOrders(List<Order> orders) throws EcommerceException;
     
     /**
      * <p>
