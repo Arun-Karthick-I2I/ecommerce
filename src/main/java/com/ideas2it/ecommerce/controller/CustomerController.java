@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
+import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.CartProduct;
@@ -134,6 +135,7 @@ public class CustomerController {
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             order.setId(Integer.parseInt(id));
+            order.setStatus(ORDER_STATUS.CANCELLED);
             if (customerService.cancelOrder(order)) {
                 List<Order> orders = customer.getOrders();
                 for (Integer i = 0; i < orders.size(); i++) {
@@ -347,7 +349,7 @@ public class CustomerController {
             order.setAddress(address);
             LocalDate todayDate = LocalDate.now();
             order.setOrderDate(todayDate);
-            order.setStatus("ORDERED");
+            order.setStatus(ORDER_STATUS.ORDERED);
             if (customerService.addOrder(order)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
@@ -405,7 +407,7 @@ public class CustomerController {
                     order.setAddress(address);
                     LocalDate todayDate = LocalDate.now();
                     order.setOrderDate(todayDate);
-                    order.setStatus("ORDERED");
+                    order.setStatus(ORDER_STATUS.ORDERED);
                     orders.add(order);
                 }
             }
@@ -466,9 +468,11 @@ public class CustomerController {
      * This method is used to add new delivery address of the customer
      * </p>
      *
-     * @param address  needed for add new address
+     * @param address needed for add new address. It contains street, city,
+     *                state, pin-code of delivery address
      */
-    private ModelAndView addAddress(@ModelAttribute("address") Address address,
+    @PostMapping("addAddress")
+    public ModelAndView addAddress(@ModelAttribute("address") Address address,
             HttpServletRequest request) throws EcommerceException {
         HttpSession session = request.getSession(false);
         ModelAndView modelAndView = new ModelAndView();
@@ -478,18 +482,95 @@ public class CustomerController {
             addresses.add(address);
             customer.setAddresses(addresses);
             if (customerService.updateCustomer(customer)) {
-                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ADDRESS_SUCCESS);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ADDRESS_FAIL);
             }
-            modelAndView.setViewName("myAccount");
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
+        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+        modelAndView.setViewName("myAccount");
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * This method is used to delete delivery address of the customer
+     * </p>
+     *
+     * @param address needed for add new address. It contains street, city,
+     *                state, pin-code of delivery address
+     */
+    @PostMapping("deleteAddress")
+    public ModelAndView deleteAddress(@RequestParam("id") String id,
+            HttpServletRequest request) throws EcommerceException {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            List<Address> addresses = customer.getAddresses();
+            for (Integer i=0; i<addresses.size(); i++) {
+                if (Integer.parseInt(id) == addresses.get(i).getId()) {
+                    addresses.remove(addresses.get(i));
+                    break;
+                }
+            }
+            customer.setAddresses(addresses);
+            if (customerService.updateCustomer(customer)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_DELETE_ADDRESS_SUCCESS);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_DELETE_ADDRESS_FAIL);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_DELETE_ADDRESS_FAIL);
+        }
+        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+        modelAndView.setViewName("myAccount");
+        return modelAndView;
+    }
+    
+    /**
+     * <p>
+     * This method is used to update delivery address of the customer
+     * </p>
+     *
+     * @param address needed for update address. It contains street, city,
+     *                state, pin-code of delivery address
+     */
+    @PostMapping("updateAddress")
+    public ModelAndView updateAddress(@ModelAttribute("address") Address address,
+            HttpServletRequest request) throws EcommerceException {
+        HttpSession session = request.getSession(false);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            List<Address> addresses = customer.getAddresses();
+            for (Integer i=0; i<addresses.size(); i++) {
+                if (address.getId() == addresses.get(i).getId()) {
+                    addresses.remove(addresses.get(i));
+                    addresses.add(address);
+                    break;
+                }
+            }
+            customer.setAddresses(addresses);
+            if (customerService.updateCustomer(customer)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_UPDATE_ADDRESS_SUCCESS);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_UPDATE_ADDRESS_FAIL);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_UPDATE_ADDRESS_FAIL);
+        }
+        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+        modelAndView.setViewName("myAccount");
+        return modelAndView;
+    }
+    
 }
