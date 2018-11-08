@@ -1,7 +1,6 @@
 package com.ideas2it.ecommerce.dao.impl;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Root;

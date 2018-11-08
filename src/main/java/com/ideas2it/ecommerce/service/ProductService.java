@@ -61,4 +61,20 @@ public interface ProductService {
      *                    insertion is unsuccessful. 
      */
     Boolean addProduct(Product product) throws EcommerceException;
+    
+    /**
+     * <p>
+     * Used to fetch the details of the Product based on the Category ID 
+     * and Product name specified.
+     * </p>
+     * 
+     * @param   categoryId   ID of the Category whose Product details are to 
+     *                       be fetched.
+     * @param   productName  Name of the Product whose details are to fetched.
+     * @return               Returns the list of Products for the specified
+     *                       Category ID and Product name. Otherwise, returns 
+     *                       an empty object.
+     */
+    List<Product> searchByCategory(Integer categoryId, String productName) 
+            throws EcommerceException;
 }

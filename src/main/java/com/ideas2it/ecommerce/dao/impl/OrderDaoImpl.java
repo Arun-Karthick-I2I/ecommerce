@@ -84,20 +84,23 @@ public class OrderDaoImpl implements OrderDao {
      * {@inheritDoc}
      */
     @Override
-    public Boolean addOrder(Order order) throws EcommerceException {
+    public Boolean addOrders(List<Order> orders) throws EcommerceException {
         Session session = null;
         Transaction transaction = null;
-        Customer customer = order.getCustomer();
         try {
             session = SessionManager.getSession();
             transaction = session.beginTransaction();
-            session.update(order);
+            for (Order order : orders) {
+                session.save(order);
+            }
+            
             transaction.commit();
             return Boolean.TRUE;
         } catch (HibernateException e) {
             if (null != transaction) {
                 transaction.rollback();
             }
+            Customer customer = orders.get(0).getCustomer();
             EcommerceLogger.error(Constants.MSG_CUSTOMER_ID + customer.getId()
                 + "\n" + Constants.MSG_ORDER_INSERT_FAILURE, e);
             throw new EcommerceException(Constants.MSG_ORDER_INSERT_FAILURE);

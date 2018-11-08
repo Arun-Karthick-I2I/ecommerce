@@ -53,4 +53,13 @@ public class ProductServiceImpl implements ProductService {
         }
         return Boolean.FALSE;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Product> searchByCategory(Integer categoryId, String productName) 
+            throws EcommerceException {
+        return productDao.getByCategory(categoryId, productName);
+    }
 }
