@@ -78,7 +78,7 @@ public static final String QUERY_GET_ORDER = "from Order";
         try {
             session = SessionManager.getSession();
             transaction = session.beginTransaction();
-            session.save(order);
+            session.update(order);
             transaction.commit();
             return Boolean.TRUE;
         } catch (HibernateException e) {
@@ -88,6 +88,30 @@ public static final String QUERY_GET_ORDER = "from Order";
             EcommerceLogger.error(Constants.MSG_CUSTOMER_ID + customer.getId()
                 + "\n" + Constants.MSG_ORDER_INSERT_FAILURE, e);
             throw new EcommerceException(Constants.MSG_ORDER_INSERT_FAILURE);
+        } finally {
+            SessionManager.closeSession(session);
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean deleteOrder(Order order) throws EcommerceException {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = SessionManager.getSession();
+            transaction = session.beginTransaction();
+            session.update(order);
+            transaction.commit();
+            return Boolean.TRUE;
+        } catch (HibernateException e) {
+            if (null != transaction) {
+                transaction.rollback();
+            }
+            EcommerceLogger.error(Constants.MSG_ORDER_ID + order.getId() 
+                + "\n" + Constants.MSG_ORDER_DELETE_FAILURE, e);
+            throw new EcommerceException(Constants.MSG_ORDER_DELETE_FAILURE);
         } finally {
             SessionManager.closeSession(session);
         }

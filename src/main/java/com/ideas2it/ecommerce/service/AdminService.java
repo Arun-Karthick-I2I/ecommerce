@@ -44,7 +44,7 @@ public interface AdminService {
     
     /**
      * <p>
-     * Used to display the details of all the active Customers.
+     * Used to fetch the details of all the active Customers.
      * </p>
      * 
      * @param   status  Status of the Customers checking whether it has been 
@@ -87,10 +87,10 @@ public interface AdminService {
      * Used to delete the Customer Account based on the ID specified.
      * </p>
      * 
-     * @param   customer  Customer to be deleted
-     * @return            Returns success message, if the customer Account has 
-     *                    been deactivated successfully. Otherwise, returns an
-     *                    empty object. 
+     * @param   customer  Customer to be deleted 
+     * @return            Returns true, if the customer Account has been 
+     *                    deactivated successfully. Otherwise, returns false,
+     *                    if deletion is unsuccessful.
      */
     Boolean deleteCustomer(Customer customer) throws EcommerceException;
     
@@ -132,8 +132,9 @@ public interface AdminService {
      * </p>
      * 
      * @param   seller  Seller to be deleted. 
-     * @return          Returns success message, if the Seller has been deleted
-     *                  successfully. Otherwise returns an empty object.
+     * @return          Returns true, if the Seller has been deleted
+     *                  successfully. Otherwise, returns false, if deletion is 
+     *                  unsuccessful.
      */
     Boolean deleteSeller(Seller seller) throws EcommerceException;
 }
