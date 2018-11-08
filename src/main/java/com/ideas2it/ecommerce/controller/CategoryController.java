@@ -156,8 +156,8 @@ public class CategoryController {
      * 
      * @param   category  Updated Category to be inserted
      * @return            Returns success message, if the Category has been 
-     *                    updated successfully. Otherwise returns failure 
-     *                    message, if the update is unsuccessful
+     *                    updated successfully. Otherwise, returns failure 
+     *                    message, if the update is unsuccessful.
      */
     @PostMapping("update")
     private ModelAndView updateCategory(@ModelAttribute("category") 

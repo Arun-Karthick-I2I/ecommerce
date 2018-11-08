@@ -81,6 +81,7 @@ public class Constants {
     public static final String MSG_ORDER_ID = "\tOrder ID";
     
     public static final String MSG_CUSTOMER_ID = "\tCustomer ID";
+    
             
     public static final String MSG_CATEGORY_SEARCH_FAILURE =
         "Unsuccessful search of Category";
@@ -118,11 +119,13 @@ public class Constants {
     public static final String MSG_CATEGORY_PRODUCTS_UNAVAILABLE =
         "Products not available for this Category";
     
+    
     public static final String MSG_CART_PRODUCT_INSERT_FAILURE =
         "Unsuccessful insertion of Cart Product";
     
     public static final String MSG_CART_PRODUCT_DELETE_FAILURE =
         "Unsuccessful deletion of Cart Product";
+    
     
     public static final String MSG_PRODUCTS_DISPLAY_FAILURE = 
         "Unsuccessful display of Products";
@@ -135,6 +138,7 @@ public class Constants {
     
     public static final String MSG_PRODUCT_NOT_AVAILABLE = 
         "Product not available";
+    
     
     public static final String MSG_ORDERS_DISPLAY_FAILURE = 
         "Unsuccessful display of Orders";
@@ -151,6 +155,10 @@ public class Constants {
     public static final String MSG_ORDER_INSERT_FAILURE =
         "Unsuccessful insertion of Order";
     
+    public static final String MSG_ORDER_DELETE_FAILURE =
+        "Unsuccessful deletion of Order";
+    
+    
     public static final String MSG_CUSTOMERS_NOT_AVAILABLE =
         "No Customers are available";
     
@@ -162,6 +170,7 @@ public class Constants {
         
     public static final String MSG_CUSTOMER_DELETE_FAILURE =
         "Unsuccessful deletion of Customer";
+    
     
     public static final String MSG_SELLER_NOT_AVAILABLE =
         "Seller not available";

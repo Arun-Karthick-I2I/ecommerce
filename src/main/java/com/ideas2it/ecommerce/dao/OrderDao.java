@@ -37,4 +37,14 @@ public interface OrderDao {
      * @return
      */
     Boolean addOrder(Order order) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param order
+     * @return
+     */
+    Boolean deleteOrder(Order order) throws EcommerceException;
 }

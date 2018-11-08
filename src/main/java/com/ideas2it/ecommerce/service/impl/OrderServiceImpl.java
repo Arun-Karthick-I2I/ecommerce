@@ -31,4 +31,11 @@ private OrderDao orderDao = new OrderDaoImpl();
     public Boolean addOrder(Order order) throws EcommerceException {
         return orderDao.addOrder(order);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean deleteOrder(Order order) throws EcommerceException {
+        return orderDao.deleteOrder(order);
+    }
 }
