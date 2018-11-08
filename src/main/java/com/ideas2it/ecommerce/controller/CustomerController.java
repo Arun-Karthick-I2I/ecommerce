@@ -21,6 +21,7 @@ import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.CartProduct;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
@@ -83,7 +84,7 @@ public class CustomerController {
      */
     @GetMapping("/myAccount")
     public ModelAndView modifyAccount(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session
                 .getAttribute(Constants.LABEL_CUSTOMER);
@@ -129,7 +130,7 @@ public class CustomerController {
     @GetMapping("/cancelOrder")
     public ModelAndView cancelOrder(HttpServletRequest request,
             @RequestParam("id") String id) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Order order = new Order();
         Customer customer = (Customer) session.getAttribute("customer");
@@ -168,7 +169,7 @@ public class CustomerController {
      */
     @GetMapping("/Cart")
     public ModelAndView myCart(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session
                 .getAttribute(Constants.LABEL_CUSTOMER);
@@ -193,7 +194,7 @@ public class CustomerController {
      */
     @GetMapping("/addCart")
     public ModelAndView addToCart(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
@@ -249,7 +250,7 @@ public class CustomerController {
     @GetMapping("/removeFromCart")
     public ModelAndView removeFromCart(@RequestParam("id") String id,
             HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
@@ -290,7 +291,7 @@ public class CustomerController {
     @GetMapping("/updateCart")
     public ModelAndView updateCart(@RequestParam("id") String id,
             HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
@@ -329,7 +330,7 @@ public class CustomerController {
     @PostMapping("buyProduct")
     public ModelAndView placeOrder(@RequestParam("id") String id,
             HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
@@ -350,19 +351,27 @@ public class CustomerController {
             LocalDate todayDate = LocalDate.now();
             order.setOrderDate(todayDate);
             order.setStatus(ORDER_STATUS.ORDERED);
-            if (customerService.addOrder(order)) {
+            List<Order> orders = new ArrayList<Order>();
+            orders.add(order);
+            List<Order> unplacedOrders = customerService.addOrders(orders);
+            if (unplacedOrders.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
                 modelAndView.setViewName("OrdersDisplay");
-            } else {
+            } else if (unplacedOrders.size() == orders.size()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_FAIL);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ADD_SOME_ORDER_FAIL);
+                modelAndView.addObject("unplacedOrders", unplacedOrders);
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
             session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_ADD_ORDER_FAIL);
             modelAndView.setViewName("CustomerOperations");
         }
         return myOrders(request);
@@ -380,7 +389,7 @@ public class CustomerController {
      */
     @PostMapping("purchaseProducts")
     public ModelAndView PurchaseProducts(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Order order;
         Customer customer = (Customer) session.getAttribute("customer");
@@ -411,14 +420,18 @@ public class CustomerController {
                     orders.add(order);
                 }
             }
-            if (customerService.addOrders(orders)) {
-                customer.setOrders(orders);
-                deleteCartProducts(customer, warehouseProducts);
+            List<Order> unplacedOrders = customerService.addOrders(orders);
+            if (unplacedOrders.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
-            } else {
+                modelAndView.setViewName("OrdersDisplay");
+            } else if (unplacedOrders.size() == orders.size()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_FAIL);
+            } else {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ADD_SOME_ORDER_FAIL);
+                modelAndView.addObject("unplacedOrders", unplacedOrders);
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
@@ -442,8 +455,7 @@ public class CustomerController {
      *                          from customer object
      */
     private void deleteCartProducts(Customer customer,
-            List<WarehouseProduct> warehouseProducts)
-            throws EcommerceException {
+            List<WarehouseProduct> warehouseProducts) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             List<CartProduct> cartProducts = customer.getCartProducts();
@@ -473,8 +485,8 @@ public class CustomerController {
      */
     @PostMapping("addAddress")
     public ModelAndView addAddress(@ModelAttribute("address") Address address,
-            HttpServletRequest request) throws EcommerceException {
-        HttpSession session = request.getSession(false);
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
@@ -506,13 +518,13 @@ public class CustomerController {
      */
     @PostMapping("deleteAddress")
     public ModelAndView deleteAddress(@RequestParam("id") String id,
-            HttpServletRequest request) throws EcommerceException {
-        HttpSession session = request.getSession(false);
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             List<Address> addresses = customer.getAddresses();
-            for (Integer i=0; i<addresses.size(); i++) {
+            for (Integer i = 0; i < addresses.size(); i++) {
                 if (Integer.parseInt(id) == addresses.get(i).getId()) {
                     addresses.remove(addresses.get(i));
                     break;
@@ -527,13 +539,14 @@ public class CustomerController {
                         Constants.MSG_DELETE_ADDRESS_FAIL);
             }
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_DELETE_ADDRESS_FAIL);
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_DELETE_ADDRESS_FAIL);
         }
         session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         modelAndView.setViewName("myAccount");
         return modelAndView;
     }
-    
+
     /**
      * <p>
      * This method is used to update delivery address of the customer
@@ -543,14 +556,15 @@ public class CustomerController {
      *                state, pin-code of delivery address
      */
     @PostMapping("updateAddress")
-    public ModelAndView updateAddress(@ModelAttribute("address") Address address,
-            HttpServletRequest request) throws EcommerceException {
-        HttpSession session = request.getSession(false);
+    public ModelAndView updateAddress(
+            @ModelAttribute("address") Address address,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             List<Address> addresses = customer.getAddresses();
-            for (Integer i=0; i<addresses.size(); i++) {
+            for (Integer i = 0; i < addresses.size(); i++) {
                 if (address.getId() == addresses.get(i).getId()) {
                     addresses.remove(addresses.get(i));
                     addresses.add(address);
@@ -566,11 +580,66 @@ public class CustomerController {
                         Constants.MSG_UPDATE_ADDRESS_FAIL);
             }
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_UPDATE_ADDRESS_FAIL);
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_UPDATE_ADDRESS_FAIL);
         }
         session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         modelAndView.setViewName("myAccount");
         return modelAndView;
     }
-    
+
+    /**
+     * <p>
+     * This method is used to search products from e-commerce web-site based on
+     * category id and product name.
+     * </p>
+     */
+    @PostMapping("searchProduct")
+    public ModelAndView searchProduct(HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            Integer categoryId = Integer.parseInt(request.getParameter("id"));
+            String productName = request.getParameter("name");
+            List<Product> products = new ArrayList<Product>();
+            if (0 == categoryId) {
+                products = customerService.searchProduct(productName);
+            } else {
+                products = customerService.searchProduct(categoryId,
+                        productName);
+            }
+            if (products.isEmpty()) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_PRODUCT_LIST_EMPTY);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_UPDATE_ADDRESS_FAIL);
+        }
+        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+        modelAndView.setViewName("homepage");
+        return modelAndView;
+    }
+
+    @PostMapping("productPage")
+    public ModelAndView getProduct(@RequestParam("id") String id,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            Product product = customerService
+                    .searchProduct(Integer.parseInt("id"));
+            List<WarehouseProduct> warehouseProducts = product
+                    .getWarehouseProducts();
+            modelAndView.addObject("product", product);
+            modelAndView.setViewName("productPage");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_PRODUCT_PAGE_OPEN_FAIL);
+            modelAndView.setViewName("homepage");
+        }
+        return modelAndView;
+    }
+
 }

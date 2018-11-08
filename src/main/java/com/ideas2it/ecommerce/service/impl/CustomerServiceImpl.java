@@ -3,13 +3,16 @@ package com.ideas2it.ecommerce.service.impl;
 import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.dao.CustomerDao;
 import com.ideas2it.ecommerce.dao.impl.CustomerDaoImpl;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.OrderService;
+import com.ideas2it.ecommerce.service.ProductService;
 import com.ideas2it.ecommerce.service.WarehouseProductService;
 
 /**
@@ -30,6 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDao customerDao = new CustomerDaoImpl();
     private OrderService orderService = new OrderServiceImpl();
     private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
+    private ProductService productService = new ProductServiceImpl();
     
     /** 
      * @(inheritDoc)
@@ -94,29 +98,44 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getCustomers(Boolean isActive) throws EcommerceException {
         return customerDao.getCustomers(isActive);
     }
-    
+     
     /** 
      * @(inheritDoc)
      */
-     public Boolean addOrder(Order order) throws EcommerceException {
-         return orderService.addOrder(order);
+     public List<Product> searchProduct(Integer categoryId, String productName) 
+             throws EcommerceException {
+         return productService.searchByCategory(categoryId,productName);
      }
-    
+     
+    /** 
+     * @(inheritDoc)
+     */
+     public List<Product> searchProduct(String productName) throws EcommerceException {
+         return productService.searchByName(productName);
+     }
+     
+    /** 
+     * @(inheritDoc)
+     */
+     public Product searchProduct(Integer productId) throws EcommerceException {
+         return productService.searchById(productId);
+     }
+
+     /**
+      * @(inheritDoc)
+      */
+     public List<Order> addOrders(List<Order> orders) throws EcommerceException {
+         return orderService.addOrders(orders);
+     }
+     
      /** 
       * @(inheritDoc)
       */
       public Boolean cancelOrder(Order order) throws EcommerceException {
           return orderService.deleteOrder(order);
       }
-     
-     /** 
-      * @(inheritDoc)
-      */
-      public Boolean addOrders(List<Order> orders) throws EcommerceException {
-          return orderService.addOrders(orders);
-      }
-     
-    /** 
+
+      /** 
      * @(inheritDoc)
      */
     public WarehouseProduct getWarehouseProduct(Integer id) throws EcommerceException {
@@ -130,5 +149,5 @@ public class CustomerServiceImpl implements CustomerService {
             throws EcommerceException {
         return warehouseProductService.getWarehouseProductsByIds(warehouseProductIds);
     }
-    
+
 }

@@ -84,6 +84,8 @@ public class Constants {
     public static final String MSG_DELETE_ADDRESS_FAIL =  
         "Something went wrong while updating address...";
     
+    
+    
 
     //Admin Specific Constants
     public static final String MSG_CATEGORY_ID = "\tCategory ID";
@@ -259,6 +261,14 @@ public class Constants {
     public static final String MSG_CART_EMPTY = 
         "Your Shopping Cart is empty";
 
+    public static final String MSG_PRODUCT_LIST_EMPTY =
+        "Sorry, no results found!!!";
+    
+    public static final String MSG_PRODUCT_PAGE_OPEN_FAIL = 
+         "Something went wrong while opening product page..";
+    
+    public static final String MSG_ADD_SOME_ORDER_FAIL = 
+        "Order has been plced exclude some follwing orders:";
     
     //Seller Specific Constants
     

@@ -3,6 +3,7 @@ package com.ideas2it.ecommerce.service;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 
 import java.util.List;
@@ -113,15 +114,39 @@ public interface CustomerService {
 
     /**
      * <p>
-     * This method is used to place one order to customer in e-commerce web-site
-     * for a particular product.
+     * Getting list of products from e-commerce web-site based on category id
+     * and product name.
      * </p>
      * 
-     * @param Order Needed for inserting order details
-     * @return Boolean If order added to database returns true, otherwise false
+     * @param categoryId  Needed for which category products wants to search.
+     * @param productName Needed for search product.
+     * @return List<Product> Returns list of products.
      */
-    public Boolean addOrder(Order order) throws EcommerceException;
+    public List<Product> searchProduct(Integer categoryId, String productName)
+            throws EcommerceException;
 
+    /**
+     * <p>
+     * Getting list of products from e-commerce web-site based on category id
+     * and product name.
+     * </p>
+     * 
+     * @param productName Needed for search product.
+     * @return List<Product> Returns list of products.
+     */
+    public List<Product> searchProduct(String productName)throws EcommerceException;
+    
+    /**
+     * <p>
+     * Getting list of products from e-commerce web-site based on category id
+     * and product name.
+     * </p>
+     * 
+     * @param productId Needed for search product.
+     * @return Product Returns list of products.
+     */
+    public Product searchProduct(Integer productId)throws EcommerceException;
+    
     /**
      * <p>
      * This method is used to place multiple orders to customer in e-commerce
@@ -131,7 +156,7 @@ public interface CustomerService {
      * @param List<Order> Needed for inserting order details
      * @return Boolean If orders added to database returns true, otherwise false
      */
-    public Boolean addOrders(List<Order> order) throws EcommerceException;
+    public List<Order> addOrders(List<Order> orders) throws EcommerceException;
 
     /**
      * <p>
@@ -144,8 +169,6 @@ public interface CustomerService {
      */
     public Boolean cancelOrder(Order order) throws EcommerceException;
 
-    
-    
     /**
      * <p>
      * Getting detail of the warehouse product from e-commerce web-site based on

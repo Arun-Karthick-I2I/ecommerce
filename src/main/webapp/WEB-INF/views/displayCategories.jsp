@@ -16,6 +16,7 @@
                 <tr>
                     <th> ID </th>
                     <th> Name </th>
+                    <th></th>
                 </tr>
                 <c:forEach items="${categories}" var="category">
                     <form action="category" method="Post">
@@ -25,9 +26,7 @@
                             <td>${category.name}</td>
                             <td>
                                 <button type = "submit" formaction = "edit"> 
-                                    Update </button>
-                            </td>
-                            <td>
+                                    Update </button> &nbsp;&nbsp;
                                 <button type = "submit" formaction = "delete"> 
                                     Delete </button>
                             </td>
