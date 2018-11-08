@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
@@ -17,12 +18,22 @@ import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.session.SessionManager;
 
+/**
+ * <p>
+ * This class provides basic functionalities such as get all the
+ * available Products and fetch Product by using ID or Name specified.
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public class ProductDaoImpl implements ProductDao {
     public static final String QUERY_GET_PRODUCT = "from Product";
     
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Product> getProducts() throws EcommerceException {
         Session session = null;
         List<Product> products;
@@ -43,6 +54,7 @@ public class ProductDaoImpl implements ProductDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Product getById(Integer id) throws EcommerceException {
         Product product;
         Session session = null;
@@ -68,6 +80,7 @@ public class ProductDaoImpl implements ProductDao {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Product getByName(String name) throws EcommerceException {
         Product product;
         Session session = null;
@@ -77,8 +90,9 @@ public class ProductDaoImpl implements ProductDao {
             CriteriaQuery<Product> criteria = builder
                 .createQuery(Product.class);
             Root<Product> root = criteria.from(Product.class);
-            criteria.select(root).where(builder
-                .equal(root.get(Constants.LABEL_NAME), name));
+            Predicate predicate = builder
+                    .like(root.get(Constants.LABEL_NAME), name);
+            criteria.select(root).where(predicate);
             product = session.createQuery(criteria).uniqueResult();
         } catch (HibernateException e) {
             EcommerceLogger.error(Constants.MSG_PRODUCT_NAME + name + "\n"

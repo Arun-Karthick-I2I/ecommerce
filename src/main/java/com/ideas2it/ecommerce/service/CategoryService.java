@@ -46,7 +46,7 @@ public interface CategoryService {
      * </p>
      * 
      * @param   id  ID of the Category to deleted.
-     * @return      Returns success message, if the Category has been deleted
+     * @return      Returns true, if the Category has been deleted
      *              successfully. Otherwise returns false, if the deletion is
      *              unsuccessful. 
      */

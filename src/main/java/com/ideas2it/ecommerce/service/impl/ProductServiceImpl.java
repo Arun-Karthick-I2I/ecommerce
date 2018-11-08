@@ -8,6 +8,15 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.service.ProductService;
 
+/**
+ * <p>
+ * This class provides basic functionalities such as get all the
+ * available Products and fetch Product by using ID or Name specified.
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public class ProductServiceImpl implements ProductService {
     private ProductDao productDao = new ProductDaoImpl();
     

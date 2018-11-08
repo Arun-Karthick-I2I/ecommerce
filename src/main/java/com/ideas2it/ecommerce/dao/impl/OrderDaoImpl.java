@@ -26,6 +26,7 @@ public static final String QUERY_GET_ORDER = "from Order";
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Order> getOrders() throws EcommerceException {
         Session session = null;
         List<Order> orders;
@@ -46,6 +47,7 @@ public static final String QUERY_GET_ORDER = "from Order";
     /**
      * {@inheritDoc}
      */
+    @Override
     public Order getById(Integer id) throws EcommerceException {
         Order order;
         Session session = null;
@@ -71,6 +73,7 @@ public static final String QUERY_GET_ORDER = "from Order";
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean addOrder(Order order) throws EcommerceException {
         Session session = null;
         Transaction transaction = null;
@@ -96,6 +99,7 @@ public static final String QUERY_GET_ORDER = "from Order";
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean deleteOrder(Order order) throws EcommerceException {
         Session session = null;
         Transaction transaction = null;
