@@ -43,8 +43,8 @@ public interface ProductDao {
      * </p>
      * 
      * @param   name  Name of the Product whose details are to fetched
-     * @return        Returns the Product for the name specified. 
+     * @return        Returns the list of Products for the name specified. 
      *                Otherwise, returns an empty object.
      */
-    Product getByName(String name) throws EcommerceException;
+    List<Product> getByName(String name) throws EcommerceException;
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
@@ -20,16 +19,15 @@ import com.ideas2it.ecommerce.session.SessionManager;
 
 /**
  * <p>
- * This class provides basic functionalities such as get all the
- * available Products and fetch Product by using ID or Name specified.
+ * This class provides basic functionalities such as get all the available
+ * Products and fetch Product by using ID or Name specified.
  * </p>
  * 
  * @author Pavithra.S
- *
  */
 public class ProductDaoImpl implements ProductDao {
     public static final String QUERY_GET_PRODUCT = "from Product";
-    
+
     /**
      * {@inheritDoc}
      */
@@ -44,7 +42,7 @@ public class ProductDaoImpl implements ProductDao {
         } catch (HibernateException e) {
             EcommerceLogger.error(Constants.MSG_PRODUCTS_DISPLAY_FAILURE, e);
             throw new EcommerceException(
-                Constants.MSG_PRODUCTS_DISPLAY_FAILURE);
+                    Constants.MSG_PRODUCTS_DISPLAY_FAILURE);
         } finally {
             SessionManager.closeSession(session);
         }
@@ -62,14 +60,14 @@ public class ProductDaoImpl implements ProductDao {
             session = SessionManager.getSession();
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Product> criteria = builder
-                .createQuery(Product.class);
+                    .createQuery(Product.class);
             Root<Product> root = criteria.from(Product.class);
-            criteria.select(root).where(builder
-                .equal(root.get(Constants.LABEL_ID), id));
+            criteria.select(root)
+                    .where(builder.equal(root.get(Constants.LABEL_ID), id));
             product = session.createQuery(criteria).uniqueResult();
         } catch (HibernateException e) {
             EcommerceLogger.error(Constants.MSG_PRODUCT_ID + id + "\n"
-                + Constants.MSG_PRODUCT_SEARCH_FAILURE, e);
+                    + Constants.MSG_PRODUCT_SEARCH_FAILURE, e);
             throw new EcommerceException(Constants.MSG_PRODUCT_SEARCH_FAILURE);
         } finally {
             SessionManager.closeSession(session);
@@ -81,26 +79,25 @@ public class ProductDaoImpl implements ProductDao {
      * {@inheritDoc}
      */
     @Override
-    public Product getByName(String name) throws EcommerceException {
-        Product product;
+    public List<Product> getByName(String name) throws EcommerceException {
+        List<Product> products;
         Session session = null;
         try {
             session = SessionManager.getSession();
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Product> criteria = builder
-                .createQuery(Product.class);
+                    .createQuery(Product.class);
             Root<Product> root = criteria.from(Product.class);
-            Predicate predicate = builder
-                    .like(root.get(Constants.LABEL_NAME), name);
-            criteria.select(root).where(predicate);
-            product = session.createQuery(criteria).uniqueResult();
+            criteria.select(root)
+                    .where(builder.like(root.get(Constants.LABEL_NAME), name));
+            products = session.createQuery(criteria).getResultList();
         } catch (HibernateException e) {
             EcommerceLogger.error(Constants.MSG_PRODUCT_NAME + name + "\n"
-                + Constants.MSG_PRODUCT_SEARCH_FAILURE, e);
+                    + Constants.MSG_PRODUCT_SEARCH_FAILURE, e);
             throw new EcommerceException(Constants.MSG_PRODUCT_SEARCH_FAILURE);
         } finally {
             SessionManager.closeSession(session);
         }
-        return product;
+        return products;
     }
 }

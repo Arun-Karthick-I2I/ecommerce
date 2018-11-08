@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public Product searchByName(String name) throws EcommerceException {
+    public List<Product> searchByName(String name) throws EcommerceException {
         return productDao.getByName(name);
     }
 }

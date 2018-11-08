@@ -20,8 +20,18 @@ import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.session.SessionManager;
 
+/**
+ * <p>
+ * This class provides basic functionalities such as get all 
+ * available Orders, add new Order, delete an existing Category and
+ * fetch an Order by specified. 
+ * </p>
+ * 
+ * @author Pavithra.S
+ *
+ */
 public class OrderDaoImpl implements OrderDao {
-public static final String QUERY_GET_ORDER = "from Order";
+    public static final String QUERY_GET_ORDER = "from Order";
     
     /**
      * {@inheritDoc}
