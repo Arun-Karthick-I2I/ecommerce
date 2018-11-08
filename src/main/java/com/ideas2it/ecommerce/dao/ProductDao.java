@@ -47,4 +47,18 @@ public interface ProductDao {
      *                Otherwise, returns an empty object.
      */
     List<Product> getByName(String name) throws EcommerceException;
+    
+    /**
+     * <p>
+     * Used to add new Product to the list using the inputs obtained from 
+     * Seller. Before adding the Product, checks whether the Product 
+     * already exists.
+     * </p>
+     * 
+     * @param   product  New Product to be inserted
+     * @return           Returns true, if the Product has been inserted 
+     *                   successfully. Otherwise returns false, if the 
+     *                   insertion is unsuccessful. 
+     */
+    Boolean addProduct(Product product) throws EcommerceException;
 }

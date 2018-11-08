@@ -157,6 +157,9 @@ public class Constants {
     public static final String MSG_PRODUCT_NOT_AVAILABLE = 
         "Product not available";
     
+    public static final String MSG_PRODUCT_INSERT_FAILURE =
+        "Unsuccessful insertion of Category";
+    
     
     public static final String MSG_ORDERS_DISPLAY_FAILURE = 
         "Unsuccessful display of Orders";

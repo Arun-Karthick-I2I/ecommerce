@@ -95,8 +95,4 @@ public class Order {
     public void setStatus(ORDER_STATUS status) {
         this.status = status;
     }
-
-
-    }
-
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ideas2it.ecommerce.dao.ProductDao;
 import com.ideas2it.ecommerce.dao.impl.ProductDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.service.ProductService;
 
@@ -39,5 +40,17 @@ public class ProductServiceImpl implements ProductService {
      */
     public List<Product> searchByName(String name) throws EcommerceException {
         return productDao.getByName(name);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean addProduct(Product product) throws EcommerceException { 
+        if ((null != product) 
+                && (null != searchByName(product.getName()))) {
+            return productDao.addProduct(product);
+        }
+        return Boolean.FALSE;
     }
 }

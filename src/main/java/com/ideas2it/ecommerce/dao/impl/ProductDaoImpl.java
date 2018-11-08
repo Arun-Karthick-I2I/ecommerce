@@ -8,12 +8,14 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.dao.ProductDao;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.session.SessionManager;
 
@@ -99,5 +101,30 @@ public class ProductDaoImpl implements ProductDao {
             SessionManager.closeSession(session);
         }
         return products;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean addProduct(Product product) throws EcommerceException {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = SessionManager.getSession();
+            transaction = session.beginTransaction();
+            session.save(product);
+            transaction.commit();
+            return Boolean.TRUE;
+        } catch (HibernateException e) {
+            if (null != transaction) {
+                transaction.rollback();
+            }
+            EcommerceLogger.error(Constants.MSG_PRODUCT_NAME + product.getName()
+                + "\n" + Constants.MSG_PRODUCT_INSERT_FAILURE, e);
+            throw new EcommerceException(Constants.MSG_PRODUCT_INSERT_FAILURE);
+        } finally {
+            SessionManager.closeSession(session);
+        }
     }
 }
