@@ -10,7 +10,7 @@
 <body>
 	<div class="lowin">
 		<div class="lowin-brand">
-			<img src="<c:url value='/resources/kodinger.jpg' />" alt="logo">
+			<img src="<c:url value='/resources/seller_truck.png' />" alt="logo">
 		</div>
 		<div class="lowin-wrapper">
 			<div class="lowin-box lowin-login">
@@ -22,7 +22,7 @@
 							<input type="text" name="userName" class="lowin-input">
 						</div>
 						<div class="lowin-group password-group">
-							<label>Password</label>
+							<label>Password <a href="#" class="forgot-link">Forgot Password?</a></label>
 							<input type="password" name="password" class="lowin-input">
 						</div>
 						<button class="lowin-btn login-btn">
