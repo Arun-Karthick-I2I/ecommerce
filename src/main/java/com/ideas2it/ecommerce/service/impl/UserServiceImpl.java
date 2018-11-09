@@ -77,9 +77,9 @@ public class UserServiceImpl implements UserService {
      * @{inheritDoc}
      */
     @Override
-    public Boolean checkUserNameAvailability(String userName) throws
+    public Boolean checkUserNameAvailability(User user) throws
             EcommerceException {
-        return (null == userDao.getUser(userName));
+        return (null == userDao.getUser(user));
     }
 
     /**
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean validateUser(User user) throws EcommerceException {
-        User existingUser = userDao.getUser(user.getUserName());
+        User existingUser = userDao.getUser(user);
         Boolean message;
         if (null != existingUser) {
             if (((existingUser.getPassword()).equals(

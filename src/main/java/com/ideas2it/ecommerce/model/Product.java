@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Product {
 	private Integer id;
+	private byte[] image;
 	private String name;
 	private String description;
 	private Category category;
@@ -27,7 +28,15 @@ public class Product {
 		this.id = id;
 	}
 
-	public String getName() {
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getName() {
 		return name;
 	}
 

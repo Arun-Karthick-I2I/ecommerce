@@ -9,6 +9,7 @@
             <generator class="increment"/>
         </id>
       
+      	<property name = "image" column= "IMAGE" type="binary" />
         <property name = "name" column = "NAME" type = "string"/>
         <property name = "description" column = "DESCRIPTION" type = "string"/>
         <property name = "rating" column = "RATING" type = "float"/>

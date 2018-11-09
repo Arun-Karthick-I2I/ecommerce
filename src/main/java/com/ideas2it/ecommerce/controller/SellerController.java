@@ -37,10 +37,16 @@ public class SellerController {
     private static final String INDEX_PAGE = "index";
     private static final String EDIT_SELLER = "EditSeller";
     private static final String SELLER_HOME = "SellerHome";
+    private static final String SELLER_LOGIN = "SellerLogin";
     private static final String PRODUCT_FORM = "ProductForm";
     private static final String WAREHOUSE_PRODUCT_FORM = "WarehouseProductForm";
 
     private SellerService sellerService = new SellerServiceImpl();
+
+    @GetMapping("/")
+    public String showInitialPage() {
+        return SELLER_LOGIN;
+    }
 
     /**
      * <p>
