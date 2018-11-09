@@ -31,8 +31,8 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
  */
 @Controller
 public class UserController {
-    private static final String INDEX_PAGE = "adminLogin";
-    private static final String ADMIN_HOME = "displayCategories";
+    private static final String INDEX_PAGE = "index";
+    private static final String ADMIN_HOME = "AdminHome";
     private static final String SELLER_HOME = "SellerHome";
 
     private UserService userService = new UserServiceImpl();
@@ -119,11 +119,9 @@ public class UserController {
         user.setPassword(request.getParameter(Constants.LABEL_PASSWORD));
         user.setRole(
                 USER_ROLES.valueOf(request.getParameter(Constants.LABEL_ROLE)));
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
         try {
             Boolean isAuthenticated = userService.validateUser(user);
-            System.out.println("in login");
-
             if (null == isAuthenticated) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_NO_SUCH_USER_EXISTS);
@@ -134,17 +132,14 @@ public class UserController {
                 session.setAttribute(Constants.LABEL_USER_ID, user.getId());
                 session.setAttribute(Constants.LABEL_ROLE, user.getRole());
                 if (user.getRole() == USER_ROLES.CUSTOMER) {
-                    System.out.println("customer");
                     Customer customer = userService
                             .searchCustomer(user.getId());
                     session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 } else if (user.getRole() == USER_ROLES.SELLER) {
-                    System.out.println("seller");
                     Seller seller = userService.searchSeller(user.getId());
                     session.setAttribute(Constants.LABEL_SELLER_ID, seller.getId());
                     modelAndView.setViewName(SELLER_HOME);
                 } else {
-                    System.out.println("admin");
                     modelAndView.setViewName(ADMIN_HOME);
                 }
             }

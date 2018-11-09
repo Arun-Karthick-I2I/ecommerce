@@ -603,7 +603,7 @@ public class CustomerController {
             Integer categoryId = Integer.parseInt(request.getParameter("id"));
             String productName = request.getParameter("name");
             List<Product> products = new ArrayList<Product>();
-            if (0 == categoryId) {
+            if (null == categoryId) {
                 products = customerService.searchProduct(productName);
             } else {
                 products = customerService.searchProduct(categoryId,
@@ -622,6 +622,15 @@ public class CustomerController {
         return modelAndView;
     }
 
+
+    /**
+     * <p>
+     * This method is used to display particular product details such as available sellers for this product,
+     * rating of this product, price, image, description about that product etc.
+     * </p>
+     * 
+     * @param id Needed for which product details will display.
+     */
     @PostMapping("productPage")
     public ModelAndView getProduct(@RequestParam("id") String id,
             HttpServletRequest request) {

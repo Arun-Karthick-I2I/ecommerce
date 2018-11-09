@@ -15,7 +15,7 @@
 
         <property name = "quantity" column = "QUANTITY" type = "int"/>
         <property name = "price" column = "PRICE" type = "double"/> 
-        <property name = "status" column = "STATUS" type = "boolean"/>
+        <property name = "status" column = "STATUS" type = "String"/>
         <many-to-one name = "warehouseProduct" column = "WAREHOUSE_PRODUCT" 
             class = "com.ideas2it.ecommerce.model.WarehouseProduct"/>
         
