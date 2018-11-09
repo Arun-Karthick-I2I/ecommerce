@@ -1,0 +1,71 @@
+body
+{
+    background-image: url("adminLogin.jpg");
+    background-size: cover;
+}
+
+.wrap
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 0;
+}
+
+p.form-title
+{
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 5%;
+    margin-left: 4%;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+form
+{
+    width: 250px;
+    margin: 0 auto;
+}
+
+form.login input[type="text"], form.login input[type="password"]
+{
+    width: 100%;
+    margin: 0;
+    padding: 10px 20px;
+    background: 0;
+    border: 0;
+    border-bottom: 1px solid #FFFFFF;
+    outline: 0;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+    outline: 0;
+}
+
+form.login input[type="submit"]
+{
+    width: 50%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 20px;
+    margin-left: 70px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 4px;
+}
+
+form.login input[type="submit"]:hover
+{
+    transition: background-color 3s ease;
+}
+
