@@ -30,14 +30,14 @@ public interface UserDao {
 
     /**
      * <p>
-     * Searches through the database based on userName.
+     * Searches through the database based on userName and Role.
      * </p>
      * 
-     * @param userName
-     *        userName whose presence has to be found.
+     * @param user
+     *        user whose presence has to be found.
      *
      * @return user    If an user with the specified details is found.
      *         null    If no such user exists for that role.
      */
-    User getUser(String userName) throws EcommerceException;
+    User getUser(User user) throws EcommerceException;
 }

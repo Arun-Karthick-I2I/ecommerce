@@ -2,6 +2,7 @@ package com.ideas2it.ecommerce.dao.impl;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
@@ -54,20 +55,26 @@ public class UserDaoImpl implements UserDao {
     /**
      * @{inheritDoc}
      */
-    public User getUser(String userName) throws EcommerceException {
+    public User getUser(User user) throws EcommerceException {
         try (Session session = SessionManager.getSession();) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(
                 User.class);
             Root<User> root = criteriaQuery.from(User.class);
-            criteriaQuery.select(root).where(criteriaBuilder.equal(
-                root.get(Constants.LABEL_USERNAME), userName));
+            Predicate[] predicates = new Predicate[2];
+            predicates[0] = criteriaBuilder.equal(
+                    root.get(Constants.LABEL_USERNAME), user.getUserName());
+            predicates[1] = criteriaBuilder.equal(
+                    root.get(Constants.LABEL_ROLE), user.getRole());
+            criteriaQuery.select(root).where(predicates);
             return session.createQuery(criteriaQuery).uniqueResult();
         } catch (HibernateException e) {
             String exceptionMessage = new StringBuilder(
                 Constants.MSG_EXCEPTION_SEARCH_USER).
                 append(Constants.SPACE).append(Constants.LABEL_USERNAME).
-                append(Constants.COLON_SYMBOL).append(userName).
+                append(Constants.COLON_SYMBOL).append(user.getUserName()).
+                append(Constants.SPACE).append(Constants.LABEL_ROLE).
+                append(Constants.COLON_SYMBOL).append(user.getRole()).
                 toString();
             EcommerceLogger.error(exceptionMessage, e);
             throw new EcommerceException(exceptionMessage);

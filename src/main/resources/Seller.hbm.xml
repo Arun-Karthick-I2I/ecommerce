@@ -12,7 +12,7 @@
 		<property name="emailId" column="EMAIL_ID" type="string" />
 		<property name="rating" column="RATING" type="float" />
 
-        <many-to-one name="user" column="USER_ID" unique="true" 
+        <many-to-one name="user" cascade="save-update" column="USER_ID" unique="true" 
         	class="com.ideas2it.ecommerce.model.User" />
 
 		<bag name="warehouseProducts"> 
