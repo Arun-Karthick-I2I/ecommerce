@@ -68,16 +68,15 @@ public interface UserService {
 
     /**
      * <p>
-     * Searches for the presence of a particular userName and returns message
-     * accordingly.
+     * Searches for the presence of a particular userName along with the role
+     * and returns message accordingly.
      * </p>
      * 
-     * @param customer Customer who presence has to be searched.
+     * @param user User whose presence has to be searched.
      * @return true If userName is available false If userName is already taken
      *         by another user.
      */
-    Boolean checkUserNameAvailability(String userName)
-            throws EcommerceException;
+    Boolean checkUserNameAvailability(User user) throws EcommerceException;
 
     /**
      * <p>
@@ -90,14 +89,14 @@ public interface UserService {
      *         match null If no such user exists for that role.
      */
     Boolean validateUser(User user) throws EcommerceException;
-    
+
     /**
      * <p>
      * Fetches the entire list of products available in the store.
      * </p>
      * 
-     * @return  Returns the list of Products available. Otherwise,
-     *          returns an empty Object.
+     * @return Returns the list of Products available. Otherwise, returns an
+     *         empty Object.
      */
     List<Product> getAllProducts() throws EcommerceException;
 
@@ -106,8 +105,8 @@ public interface UserService {
      * Fetches the list of categories in which products are sold in the store.
      * </p>
      * 
-     * @return  Returns the list of categories available. Otherwise,
-     *          returns an empty Object.
+     * @return Returns the list of categories available. Otherwise, returns an
+     *         empty Object.
      */
     List<Category> getAllCategories() throws EcommerceException;
 

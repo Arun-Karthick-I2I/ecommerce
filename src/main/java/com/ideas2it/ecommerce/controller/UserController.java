@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.Role.USER_ROLES;
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
@@ -93,6 +94,7 @@ public class UserController {
             @ModelAttribute("seller") Seller seller) {
         ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
         try {
+            seller.setMobileNumber(seller.getUser().getUserName());
             if (userService.registerSeller(seller)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_REGISTER_SUCCESS

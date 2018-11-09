@@ -6,14 +6,12 @@ var Auth = {
 		lowin_login: document.querySelector('.lowin-login'),
 		lowin_wrapper_height: 0,
 		login_back_link: document.querySelector('.login-back-link'),
-		forgot_link: document.querySelector('.forgot-link'),
 		login_link: document.querySelector('.login-link'),
 		login_btn: document.querySelector('.login-btn'),
 		register_link: document.querySelector('.register-link'),
 		password_group: document.querySelector('.password-group'),
 		password_group_height: 0,
 		lowin_register: document.querySelector('.lowin-register'),
-		lowin_footer: document.querySelector('.lowin-footer'),
 		box: document.getElementsByClassName('lowin-box'),
 		option: {}
 	},
@@ -25,7 +23,7 @@ var Auth = {
 		Auth.vars.lowin_register.style.display = 'block';
 		Auth.vars.lowin_register.className += ' lowin-animated-flip';
 
-		Auth.setHeight(Auth.vars.lowin_register.offsetHeight + Auth.vars.lowin_footer.offsetHeight);
+		Auth.setHeight(Auth.vars.lowin_register.offsetHeight);
 
 		e.preventDefault();
 	},
@@ -44,7 +42,7 @@ var Auth = {
 			Auth.vars.lowin_login.classList.remove('lowin-animatedback');
 		},1000);
 
-		Auth.setHeight(Auth.vars.lowin_login.offsetHeight + Auth.vars.lowin_footer.offsetHeight);
+		Auth.setHeight(Auth.vars.lowin_login.offsetHeight);
 
 		e.preventDefault();
 	},
@@ -98,7 +96,7 @@ var Auth = {
 		}, 1000);
 	},
 	init(option) {
-		Auth.setHeight(Auth.vars.box[0].offsetHeight + Auth.vars.lowin_footer.offsetHeight);
+		Auth.setHeight(Auth.vars.box[0].offsetHeight);
 
 		Auth.vars.password_group.style.height = Auth.vars.password_group.offsetHeight + 'px';
 		Auth.vars.password_group_height = Auth.vars.password_group.offsetHeight;
@@ -115,10 +113,6 @@ var Auth = {
 			}
 		}
 
-		Auth.vars.forgot_link.addEventListener("click", (e) => {
-			Auth.forgot(e);
-		});
-
 		Auth.vars.register_link.addEventListener("click", (e) => {
 			Auth.brand();
 			Auth.register(e);
@@ -129,8 +123,5 @@ var Auth = {
 			Auth.login(e);
 		});
 
-		Auth.vars.login_back_link.addEventListener("click", (e) => {
-			Auth.loginback(e);
-		});
 	}
 }
