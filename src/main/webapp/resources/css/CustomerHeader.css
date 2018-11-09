@@ -1,0 +1,58 @@
+.navbar-custom {
+    background-color: #47a3da;
+}
+li {
+   vertical-align:center;
+}
+#search {
+    width : 350px;
+}
+
+nav > .container-fluid > .navbar-header > a {
+    color: white;
+}
+
+nav > .container-fluid > ul > li > a {
+    color: white;
+}
+
+nav > .container-fluid > ul > li > a:hover {
+    background-color:#47a3da;
+    color: black;
+}
+
+nav > .container-fluid > .navbar-header > button {
+    color: white;
+}
+
+#btnloginModal:hover {
+    background-color:#47a3da;
+    color: black;
+}
+
+#btnloginModal {
+    border: none;
+    color:white;
+    background-color: inherit;
+    padding: 14px 28px;
+    cursor: pointer;
+    display: inline-block;
+}
+.modal-backdrop {
+   z-index:0;
+}
+
+.fa-search {
+  font-size: 20px;
+}
+
+
+select {
+    width: 50px;
+}
+
+option {
+    overflow: hidden;
+    white-sapce: no-wrap;
+    text-overflow: ellipsis;
+}

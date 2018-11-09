@@ -65,9 +65,10 @@ private WarehouseProductService warehouseProductService
     @Override
     public Boolean deleteOrder(Order order) throws EcommerceException {
         List<Order> orders =  new ArrayList<Order>();
-        if (!orderDao.deleteOrder(order)) {
+        if (orderDao.deleteOrder(order)) {
             orders.add(order);
             warehouseProductService.increaseQuantity(orders);
+            return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
