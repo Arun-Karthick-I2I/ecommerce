@@ -4,7 +4,7 @@
 	http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ideas2it</groupId>
+	<groupId>com.ideas2it.ecommerce</groupId>
 	<artifactId>ecommerce</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
