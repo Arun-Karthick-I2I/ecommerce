@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-5.3.5.dtd"> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd"> 
 
 <hibernate-mapping>
     <class name = "com.ideas2it.ecommerce.model.Product" table = "PRODUCT">
-      
-        <meta attribute = "class-description">
-            This class contains the Product details. 
-        </meta>
       
         <id name = "id" type = "int" column = "ID">
             <generator class="increment"/>
@@ -15,9 +11,15 @@
       
         <property name = "name" column = "NAME" type = "string"/>
         <property name = "description" column = "DESCRIPTION" type = "string"/>
-        <property name = "rating" column = "RATING" type = "double"/>
+        <property name = "rating" column = "RATING" type = "float"/>
 
-        <many-to-one name = "category" column = "CATEGORY" 
+        <many-to-one name = "category" column = "CATEGORY_ID" 
             class = "com.ideas2it.ecommerce.model.Category"/>
+            
+        <bag name="warehouseProducts" >
+            <key column = "PRODUCT_ID"/>
+            <one-to-many class="com.ideas2it.ecommerce.model.WarehouseProduct"/>
+        </bag>
+        
     </class>
 </hibernate-mapping>

@@ -7,8 +7,12 @@
 			<generator class="increment"></generator>
 		</id>
 		
-		<property name="customer" column="CUSTOMER_ID" type="integer" />
-		<property name="seller" column="SELLER_ID" type="integer" />
+		<many-to-one name="customer" column="CUSTOMER_ID" 
+			class= "com.ideas2it.ecommerce.model.Customer" />
+			
+		<many-to-one name="seller" column="SELLER_ID" 
+			class= "com.ideas2it.ecommerce.model.Seller" />
+		
 		<property name="addressLine" column="ADDRESS_LINE" type="string" />
 		<property name="city" column="CITY" type="string" />
 		<property name="state" column="STATE" type="string" />

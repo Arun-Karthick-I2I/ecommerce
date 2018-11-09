@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 5.3//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
      
 <hibernate-mapping>
-	<class name="com.ideas2it.ecommerce.Customer" table="CUSTOMER">
+	<class name="com.ideas2it.ecommerce.model.Customer" table="CUSTOMER">
 		<id name="id" column="ID" type="integer">
 			<generator class="increment" />
 		</id>
@@ -10,22 +10,25 @@
 	<property name="name" column="NAME" type="string" />
 	<property name="mobileNumber" column="MOBILE_NUMBER" type="string" />
 	<property name="emailId" column="EMAIL_ID" type="string" />
-	<property name="user" column="USER_ID" type="integer" />
+    
+    <many-to-one name="user" column="USER_ID" unique="true" 
+    	class="com.ideas2it.ecommerce.model.User" />
+	
 	<property name="isActive" column="IS_ACTIVE" type="boolean" />
 	
 	<bag name="orders">
 		<key column="CUSTOMER_ID" />
-		<one-to-many class="com.ideas2it.ecommerce.Order" />
+		<one-to-many class="com.ideas2it.ecommerce.model.Order" />
 	</bag>
 
 	<bag name="addresses">
 		<key column="CUSTOMER_ID" />
-		<one-to-many class="com.ideas2it.ecommerce.Address" />
+		<one-to-many class="com.ideas2it.ecommerce.model.Address" />
 	</bag>
 	
 	<bag name="cartProducts">
 		<key column="CUSTOMER_ID" />
-		<one-to-many class="com.ideas2it.ecommerce.CartProduct" />
+		<one-to-many class="com.ideas2it.ecommerce.model.CartProduct" />
 	</bag>
 		
 	</class>

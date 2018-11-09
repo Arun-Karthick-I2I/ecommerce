@@ -8,14 +8,19 @@
 			<generator class="increment"></generator>
 		</id>
 
-		<property name="seller" column="SELLER_ID" type="integer" />
-		<property name="product" column="PRODUCT_ID" type="integer" />
+  		<many-to-one name="seller" column="SELLER_ID" 
+  			class= "com.ideas2it.ecommerce.model.Seller"  />
+  			
+		<many-to-one name="product" column="PRODUCT_ID" 
+		    class= "com.ideas2it.ecommerce.model.Product" />
+		
 		<property name="quantity" column="QUANTITY" type="integer" />
 		<property name="price" column="PRICE" type="float" />
 
 		<bag name="orders">
 			<key column="WAREHOUSE_PRODUCT_ID" />
-			<one-to-many class="com.ideas2it.ecommerce.Order" />
+			<one-to-many class="com.ideas2it.ecommerce.model.Order" />
+        </bag>
 	</class>
 
 </hibernate-mapping>

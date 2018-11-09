@@ -20,7 +20,6 @@ public class Order {
     private Integer quantity;
     private Float price;
     private LocalDate orderDate;
-    private LocalDate returnDate;
     private Address address;
     private ORDER_STATUS status;
 
@@ -72,14 +71,6 @@ public class Order {
         this.orderDate = orderDate;
     }
     
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
-    }
-
     public Address getAddress() {
         return address;
     }

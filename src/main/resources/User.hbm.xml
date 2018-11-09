@@ -13,9 +13,7 @@
       </id>
       
       <property name = "password" column = "PASSWORD" type = "string"/>
-	  <properties name="Unqiue_User" unique="true">
-	      <property name = "username" column = "USERNAME" type = "string"/>
-	      <property name = "role" column = "ROLE" type = "string"/>
-	  </properties>
+      <property name = "userName" column = "USER_NAME" type = "string"/>
+      <property name = "role" column = "ROLE" type = "string"/>
    </class>
 </hibernate-mapping>
