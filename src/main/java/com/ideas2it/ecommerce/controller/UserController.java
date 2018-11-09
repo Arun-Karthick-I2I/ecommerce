@@ -31,7 +31,7 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
  */
 @Controller
 public class UserController {
-    private static final String INDEX_PAGE = "index";
+    private static final String INDEX_PAGE = "CustomerHeader";
     private static final String ADMIN_HOME = "AdminHome";
     private static final String SELLER_HOME = "SellerHome";
 

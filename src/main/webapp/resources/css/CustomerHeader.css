@@ -46,6 +46,13 @@ nav > .container-fluid > .navbar-header > button {
   font-size: 20px;
 }
 
+.fa-envelope {
+  font-size: 10px;
+}
+
+.fa-mobile {
+  font-size: 20px;
+}
 
 select {
     width: 50px;
@@ -55,4 +62,24 @@ option {
     overflow: hidden;
     white-sapce: no-wrap;
     text-overflow: ellipsis;
+}
+
+#Customerlogin {
+    width: auto;
+    margin: 0 auto;
+    height:100%;
+    width:100%;
+    top:10%
+}
+
+#CustomerSignUp {
+    top:3	%;	
+}
+
+.regPanda {
+	height:20%;
+}
+
+.logo {
+	text-align: center;
 }
