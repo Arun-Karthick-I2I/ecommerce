@@ -4,6 +4,7 @@ package com.ideas2it.ecommerce.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,19 +29,32 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
  * 
  * @author Arun Karthick.J
  */
+@Controller
 public class UserController {
     private static final String INDEX_PAGE = "index";
     private static final String ADMIN_HOME = "AdminHome";
     private static final String SELLER_HOME = "SellerHome";
 
     private UserService userService = new UserServiceImpl();
+    
+    @GetMapping("/")
+    public ModelAndView showInitialPage() {
+        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
+        try {
+            modelAndView.addObject(Constants.LABEL_PRODUCTS, userService.getAllProducts());
+            modelAndView.addObject(Constants.LABEL_CATEGORIES, userService.getAllCategories());
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
 
     /**
      * <p>
      * Requests the view handler to show the registration form page.
      * </p>
      */
-    @GetMapping(value = "registrationForm")
+    @GetMapping("registrationForm")
     public String registrationForm(ModelMap model) {
         model.addAttribute(Constants.LABEL_REGISTER, Boolean.TRUE);
         return INDEX_PAGE;

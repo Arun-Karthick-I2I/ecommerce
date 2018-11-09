@@ -1,7 +1,11 @@
 package com.ideas2it.ecommerce.service;
 
+import java.util.List;
+
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Customer;
+import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
 
@@ -86,4 +90,25 @@ public interface UserService {
      *         match null If no such user exists for that role.
      */
     Boolean validateUser(User user) throws EcommerceException;
+    
+    /**
+     * <p>
+     * Fetches the entire list of products available in the store.
+     * </p>
+     * 
+     * @return  Returns the list of Products available. Otherwise,
+     *          returns an empty Object.
+     */
+    List<Product> getAllProducts() throws EcommerceException;
+
+    /**
+     * <p>
+     * Fetches the list of categories in which products are sold in the store.
+     * </p>
+     * 
+     * @return  Returns the list of categories available. Otherwise,
+     *          returns an empty Object.
+     */
+    List<Category> getAllCategories() throws EcommerceException;
+
 }

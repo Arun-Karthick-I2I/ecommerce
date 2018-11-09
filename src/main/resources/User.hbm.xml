@@ -12,8 +12,10 @@
          <generator class="increment"/>
       </id>
       
-      <property name = "username" column = "USERNAME" type = "string"/>
       <property name = "password" column = "PASSWORD" type = "string"/>
-      <property name = "role" column = "ROLE" type = "string"/>
+	  <properties name="Unqiue_User" unique="true">
+	      <property name = "username" column = "USERNAME" type = "string"/>
+	      <property name = "role" column = "ROLE" type = "string"/>
+	  </properties>
    </class>
 </hibernate-mapping>
