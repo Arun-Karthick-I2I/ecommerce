@@ -34,6 +34,8 @@ public class UserController {
     private static final String INDEX_PAGE = "CustomerHeader";
     private static final String ADMIN_HOME = "AdminHome";
     private static final String SELLER_HOME = "SellerHome";
+    private static final String SELLER_LOGIN = "SellerLogin";
+    private static final String ADMIN_LOGIN = "adminLogin";
 
     private UserService userService = new UserServiceImpl();
     
@@ -69,7 +71,7 @@ public class UserController {
     @PostMapping("registerCustomer")
     public ModelAndView registerCustomer(
             @ModelAttribute("customer") Customer customer) {
-        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
+        ModelAndView modelAndView = new ModelAndView(ADMIN_HOME);
         try {
             if (userService.registerCustomer(customer)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -77,6 +79,7 @@ public class UserController {
                                 + customer.getMobileNumber());
             }
         } catch (EcommerceException e) {
+            modelAndView.setViewName(ADMIN_LOGIN);
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -91,7 +94,7 @@ public class UserController {
     @PostMapping("registerSeller")
     public ModelAndView registerSeller(
             @ModelAttribute("seller") Seller seller) {
-        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
         try {
             if (userService.registerSeller(seller)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -99,6 +102,7 @@ public class UserController {
                                 + seller.getMobileNumber());
             }
         } catch (EcommerceException e) {
+            modelAndView.setViewName(SELLER_LOGIN);
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -119,7 +123,14 @@ public class UserController {
         user.setPassword(request.getParameter(Constants.LABEL_PASSWORD));
         user.setRole(
                 USER_ROLES.valueOf(request.getParameter(Constants.LABEL_ROLE)));
-        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
+        ModelAndView modelAndView = new ModelAndView();
+        if (USER_ROLES.CUSTOMER == user.getRole()) {
+            modelAndView.setViewName(INDEX_PAGE);
+        } else if (USER_ROLES.SELLER == user.getRole()) {
+            modelAndView.setViewName(SELLER_LOGIN);
+        } else if (USER_ROLES.ADMIN == user.getRole()) {
+            modelAndView.setViewName(ADMIN_LOGIN);
+        }
         try {
             Boolean isAuthenticated = userService.validateUser(user);
             if (null == isAuthenticated) {
@@ -131,11 +142,11 @@ public class UserController {
             } else {
                 session.setAttribute(Constants.LABEL_USER_ID, user.getId());
                 session.setAttribute(Constants.LABEL_ROLE, user.getRole());
-                if (user.getRole() == USER_ROLES.CUSTOMER) {
+                if (USER_ROLES.CUSTOMER == user.getRole()) {
                     Customer customer = userService
                             .searchCustomer(user.getId());
                     session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-                } else if (user.getRole() == USER_ROLES.SELLER) {
+                } else if (USER_ROLES.SELLER == user.getRole()) {
                     Seller seller = userService.searchSeller(user.getId());
                     session.setAttribute(Constants.LABEL_SELLER_ID, seller.getId());
                     modelAndView.setViewName(SELLER_HOME);
