@@ -10,6 +10,8 @@ public class Constants {
     
     public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;
     
+    public static final String REDIRECT = "redirect:";
+    
     public static final String LABEL_ADDRESS = "address";
     
     public static final String LABEL_ADDRESS_ID = "addressId";

@@ -125,7 +125,7 @@ public class UserController {
                 USER_ROLES.valueOf(request.getParameter(Constants.LABEL_ROLE)));
         ModelAndView modelAndView = new ModelAndView();
         if (USER_ROLES.CUSTOMER == user.getRole()) {
-            modelAndView.setViewName(INDEX_PAGE);
+            modelAndView.setViewName(Constants.REDIRECT + INDEX_PAGE);
         } else if (USER_ROLES.SELLER == user.getRole()) {
             modelAndView.setViewName(SELLER_LOGIN);
         } else if (USER_ROLES.ADMIN == user.getRole()) {
