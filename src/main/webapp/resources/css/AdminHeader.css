@@ -1,0 +1,106 @@
+div .navbar-custom {
+    background-color: #3465a4;
+}
+li {
+   vertical-align:center;
+}
+#search {
+    width : 350px;
+}
+
+nav > .container-fluid > .navbar-header > ul > li > a {
+    color: white;
+}
+
+nav > .container-fluid > .navbar-header > ul > li > a:hover {
+	background-color:#3465a4;
+	color: #818181;
+}
+
+nav > .container-fluid > .navbar-header > ul > li > .openbtn > .fa-bars{
+	font-size: 20px;
+    color: white;
+}
+
+nav > .container-fluid > .navbar-header > ul > li > .openbtn > .fa-bars:hover{
+	font-size: 20px;
+    color: #818181;
+}
+
+nav > .container-fluid > ul > li > a {
+    color: white;
+}
+
+div > form > p > .default {
+    border: none;
+    background-color: inherit;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.default {
+	
+	font-size: 22px;
+	color: #818181;
+}
+
+nav > .container-fluid > ul > li > a:hover {
+    background-color:#3465a4;
+    color: #818181;
+}
+
+nav > .container-fluid > .navbar-header > button {
+    color: white;
+}
+
+.fa-search {
+  font-size: 20px;
+}
+
+select {
+    width: 50px;
+}
+
+option {
+    overflow: hidden;
+    white-sapce: no-wrap;
+    text-overflow: ellipsis;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #5c3566;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar > form > p > a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar > p >a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}

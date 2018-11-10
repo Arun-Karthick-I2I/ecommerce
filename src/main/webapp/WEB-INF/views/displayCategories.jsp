@@ -5,36 +5,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>Insert title here</title>
+        <link rel="stylesheet"
+			href="<c:url value='/resources/css/AdminDisplayCategories.css' />">
     </head>
     <body>
-        <div align = "center">
-        	<h2> CATEGORY </h2>
+        <div class="title">
+        	<h2> Category </h2>
         </div>
-        <div align="center">
-            <table cellpadding="10">
-            	<tr>
-            		<td>ID </td>
-            		<td>Name </td>
-                </tr>
-                <c:forEach items="${categories}" var="category">
+        <table class="table table-striped">
+  			<thead>
+    			<tr>
+      				<th class="row-header">ID</th>
+      		    	<th class="row-header">Name</th>
+      		    	<th colspan=2></th>
+    			</tr>
+  			</thead>
+ 			<tbody>
+    			<tr>
+      				<c:forEach items="${categories}" var="category">
                     <form action="category" method="Post">
                         <input type="hidden" name="id" value="${category.id}"/>
                         <tr>
                             <td>${category.id}</td>
                             <td>${category.name}</td>
                             <td>
-                                <button type = "submit" formaction = "edit"> 
-                                    Update </button> &nbsp;&nbsp;
-                                <button type = "submit" formaction = "delete"> 
-                                    Delete </button>
+                                <button type = "submit" formaction = "/ecommerce/category/edit"
+                                	formmethod="post"> edit </button> &nbsp;&nbsp;
+                                <button type = "submit" formaction = "/ecommerce/category/delete"
+                                	formmethod="post"> Delete </button>
                             </td>
                         </tr>
                     </form>
-                </c:forEach>
-            </table>
-        </div> 
+                	</c:forEach>
+  			</tbody>
+		</table>
     </body>
     <c:if test = "${null != message}">
         <script type="text/javascript">

@@ -13,7 +13,7 @@
                         Admin Login</p>
                     <form class="login">
                     <input type="hidden" name="role" value="ADMIN"/>
-                    <input type="text" name="userName" placeholder="Username"
+                    <input type="text" name="userName" placeholder="Mobile Number"
                  	    pattern = "[6-9][0-9]{9}" required/>
                     <input type="password" name="password" placeholder="Password" 
                         required/>
@@ -25,4 +25,9 @@
     </div>
 	</div>
 </body>
+<c:if test = "${null != message}">
+    <script type="text/javascript">
+        alert("${message}");
+    </script>
+</c:if>
 </html>
