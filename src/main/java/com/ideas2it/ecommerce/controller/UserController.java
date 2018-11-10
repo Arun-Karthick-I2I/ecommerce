@@ -40,13 +40,15 @@ public class UserController {
     private static final String ADMIN_LOGIN = "adminLogin";
 
     private UserService userService = new UserServiceImpl();
-    
+
     @GetMapping("/")
     public ModelAndView showInitialPage() {
         ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
         try {
-            modelAndView.addObject(Constants.LABEL_PRODUCTS, userService.getAllProducts());
-            modelAndView.addObject(Constants.LABEL_CATEGORIES, userService.getAllCategories());
+            modelAndView.addObject(Constants.LABEL_PRODUCTS,
+                    userService.getAllProducts());
+            modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                    userService.getAllCategories());
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
@@ -97,6 +99,7 @@ public class UserController {
     public ModelAndView registerSeller(
             @ModelAttribute("seller") Seller seller) {
         ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        seller.setMobileNumber(seller.getUser().getUserName());
         try {
             if (userService.registerSeller(seller)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -152,7 +155,8 @@ public class UserController {
                     session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 } else if (USER_ROLES.SELLER == user.getRole()) {
                     Seller seller = userService.searchSeller(user.getId());
-                    session.setAttribute(Constants.LABEL_SELLER_ID, seller.getId());
+                    session.setAttribute(Constants.LABEL_SELLER_ID,
+                            seller.getId());
                     modelAndView.setViewName(SELLER_HOME);
                 } else {
                     modelAndView.setViewName(ADMIN_HOME);
@@ -169,13 +173,22 @@ public class UserController {
      * Invalidates the session and logs the customer out of the page.
      * </p>
      */
-    @PostMapping("logout")
+    @GetMapping("logout")
     public String logout(HttpSession session, ModelMap model) {
+        String viewName = Constants.REDIRECT + INITIAL_PATH;
+        USER_ROLES role = USER_ROLES.CUSTOMER;
         if (null != session) {
+            role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
             session.invalidate();
         }
+
+        if (USER_ROLES.SELLER == role) {
+            viewName = SELLER_LOGIN;
+        } else if (USER_ROLES.ADMIN == role) {
+            viewName = ADMIN_LOGIN;
+        }
         model.addAttribute(Constants.LABEL_MESSAGE, Constants.MSG_LOGGED_OUT);
-        return INDEX_PAGE;
+        return viewName;
     }
 
 }

@@ -9,8 +9,6 @@ var Auth = {
 		login_link: document.querySelector('.login-link'),
 		login_btn: document.querySelector('.login-btn'),
 		register_link: document.querySelector('.register-link'),
-		password_group: document.querySelector('.password-group'),
-		password_group_height: 0,
 		lowin_register: document.querySelector('.lowin-register'),
 		box: document.getElementsByClassName('lowin-box'),
 		option: {}
@@ -46,46 +44,6 @@ var Auth = {
 
 		e.preventDefault();
 	},
-	forgot(e) {
-		Auth.vars.password_group.classList += ' lowin-animated';
-		Auth.vars.login_back_link.style.display = 'block';
-
-		setTimeout(() => {
-			Auth.vars.login_back_link.style.opacity = 1;
-			Auth.vars.password_group.style.height = 0;
-			Auth.vars.password_group.style.margin = 0;
-		}, 100);
-		
-		Auth.vars.login_btn.innerText = 'Forgot Password';
-
-		Auth.setHeight(Auth.vars.lowin_wrapper_height - Auth.vars.password_group_height);
-		Auth.vars.lowin_login.querySelector('form').setAttribute('action', Auth.vars.option.forgot_url);
-
-		e.preventDefault();
-	},
-	loginback(e) {
-		Auth.vars.password_group.classList.remove('lowin-animated');
-		Auth.vars.password_group.classList += ' lowin-animated-back';
-		Auth.vars.password_group.style.display = 'block';
-
-		setTimeout(() => {
-			Auth.vars.login_back_link.style.opacity = 0;
-			Auth.vars.password_group.style.height = Auth.vars.password_group_height + 'px';
-			Auth.vars.password_group.style.marginBottom = 30 + 'px';
-		}, 100);
-
-		setTimeout(() => {
-			Auth.vars.login_back_link.style.display = 'none';
-			Auth.vars.password_group.classList.remove('lowin-animated-back');
-		}, 1000);
-
-		Auth.vars.login_btn.innerText = 'Sign In';
-		Auth.vars.lowin_login.querySelector('form').setAttribute('action', Auth.vars.option.login_url);
-
-		Auth.setHeight(Auth.vars.lowin_wrapper_height);
-		
-		e.preventDefault();
-	},
 	setHeight(height) {
 		Auth.vars.lowin_wrapper.style.minHeight = height + 'px';
 	},
@@ -98,8 +56,6 @@ var Auth = {
 	init(option) {
 		Auth.setHeight(Auth.vars.box[0].offsetHeight);
 
-		Auth.vars.password_group.style.height = Auth.vars.password_group.offsetHeight + 'px';
-		Auth.vars.password_group_height = Auth.vars.password_group.offsetHeight;
 		Auth.vars.lowin_wrapper_height = Auth.vars.lowin_wrapper.offsetHeight;
 
 		Auth.vars.option = option;
@@ -124,4 +80,15 @@ var Auth = {
 		});
 
 	}
+}
+
+function confirmPassword() {
+    var password = document.getElementById("reg_pass").value;
+    var reEnteredPassword = document.getElementById("reg_confirm_pass").value;
+    if (password == reEnteredPassword) {
+        return true;
+    } else {
+        alert('Passwords do not match!');
+        return false;
+    }
 }
