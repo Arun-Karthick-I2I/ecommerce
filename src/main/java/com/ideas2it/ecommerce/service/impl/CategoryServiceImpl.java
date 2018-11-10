@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
     public Boolean insertCategory(Category category) throws EcommerceException { 
         if ((null != category) 
-                && (null != searchByName(category.getName()))) {
+                && (null == searchByName(category.getName()))) {
             return categoryDao.insertCategory(category);
         }
         return Boolean.FALSE;
