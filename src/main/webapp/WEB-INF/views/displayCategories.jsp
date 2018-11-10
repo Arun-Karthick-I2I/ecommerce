@@ -8,15 +8,14 @@
         <title>Insert title here</title>
     </head>
     <body>
-        <center>
-            <h2> CATEGORY </h2>
-        </center>
+        <div align = "center">
+        	<h2> CATEGORY </h2>
+        </div>
         <div align="center">
             <table cellpadding="10">
-                <tr>
-                    <th> ID </th>
-                    <th> Name </th>
-                    <th></th>
+            	<tr>
+            		<td>ID </td>
+            		<td>Name </td>
                 </tr>
                 <c:forEach items="${categories}" var="category">
                     <form action="category" method="Post">

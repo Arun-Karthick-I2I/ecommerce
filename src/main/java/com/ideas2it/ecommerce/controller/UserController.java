@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.Role.USER_ROLES;
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
@@ -31,8 +32,8 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
  */
 @Controller
 public class UserController {
-    private static final String INDEX_PAGE = "index";
-    private static final String ADMIN_HOME = "AdminHome";
+    private static final String INDEX_PAGE = "CustomerHeader";
+    private static final String ADMIN_HOME = "displayCategories";
     private static final String SELLER_HOME = "SellerHome";
 
     private UserService userService = new UserServiceImpl();
@@ -122,7 +123,9 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
         try {
             Boolean isAuthenticated = userService.validateUser(user);
+            EcommerceLogger.error("validate");
             if (null == isAuthenticated) {
+                EcommerceLogger.error("setvalidate");
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_NO_SUCH_USER_EXISTS);
             } else if (!isAuthenticated) {
