@@ -175,8 +175,7 @@ public class UserController {
         String viewName = Constants.REDIRECT + INITIAL_PATH;
         USER_ROLES role = USER_ROLES.CUSTOMER;
         if (null != session) {
-            role = USER_ROLES.valueOf(
-                    (String) session.getAttribute(Constants.LABEL_ROLE));
+            role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
             session.invalidate();
         }
 
