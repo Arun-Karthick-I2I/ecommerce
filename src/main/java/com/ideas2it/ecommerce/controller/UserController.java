@@ -31,6 +31,7 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
  */
 @Controller
 public class UserController {
+    private static final Character INITIAL_PATH = '/';
     private static final String INDEX_PAGE = "CustomerHeader";
     private static final String ADMIN_HOME = "AdminHome";
     private static final String SELLER_HOME = "SellerHome";
@@ -125,7 +126,7 @@ public class UserController {
                 USER_ROLES.valueOf(request.getParameter(Constants.LABEL_ROLE)));
         ModelAndView modelAndView = new ModelAndView();
         if (USER_ROLES.CUSTOMER == user.getRole()) {
-            modelAndView.setViewName(Constants.REDIRECT + INDEX_PAGE);
+            modelAndView.setViewName(Constants.REDIRECT + INITIAL_PATH);
         } else if (USER_ROLES.SELLER == user.getRole()) {
             modelAndView.setViewName(SELLER_LOGIN);
         } else if (USER_ROLES.ADMIN == user.getRole()) {
