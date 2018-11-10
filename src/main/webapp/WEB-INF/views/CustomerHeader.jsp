@@ -15,37 +15,38 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript"
-	src="<c:url value="/resources/js/CustomerHeader.js"/>">
-	
-</script>
+	src="<c:url value="/resources/js/CustomerHeader.js"/>"></script>
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/CustomerHeader.css' />">
 
 </head>
-<body>
-
-	<div>
+<body onload="alertMessage()">
+	<div id="headerBar">
 		<nav class="navbar navbar-fixed-top navbar-custom">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">pandaZone</a>
 				</div>
+
 				<ul class="nav navbar-nav">
-					<form class="navbar-form navbar-left" action="">
+				<li>	
+					<form class="navbar-form navbar-left form-group"
+						action="/ecommerce/searchProduct" method="POST">
 						<div class="input-group col-lg-12">
 
 							<div class="input-group-btn">
-								<select class="form-control">
-									<option name="id" value=0 selected>All Categories</option>
+								<select name="categoryId" class="form-control">
+									<option value="0" selected>All
+										Categories</option>
 									<c:forEach var="category" items="${categories}">
-										<option name="id" value=${category.id} }>${category.name}</option>
+										<option value=${category.id}>${category.name}</option>
 									</c:forEach>
-									<option name="id" value=2>Opeldssssssss</option>
-									<option name="id" value=3>Audi</option>
 								</select>
 							</div>
-							<input type="text" class="form-control" id="search"
-								placeholder="Search for product, brand and more">
+							<div class="input-group-btn">
+							<input type="text" name="name" class="form-control" id="search"
+								placeholder="Search for product, brand and more" required="required">
+							</div>
 							<div class="input-group-btn">
 								<button class="btn btn-default" type="submit">
 									<i class="fa fa-search"></i>
@@ -53,16 +54,46 @@
 							</div>
 						</div>
 					</form>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="">Anantharaj &nbsp;<span
-							class="glyphicon glyphicon-chevron-down"></span></a></li>
-					<li>
-						<button type="button" class="btn btn-default" id="btnloginModal"
-							onclick="openLoginModal()">
-							<span class="glyphicon glyphicon-user"></span> Login & SignUp
-						</button>
-					</li>
+					<c:if test="${not empty customer}">
+						<li><a class="dropdown">${customer.name} &nbsp;<span
+								class="glyphicon glyphicon-chevron-down"></span>
+								<div class="dropdown-content">
+									<form method="get">
+										<p>
+											<label>
+												<button class="btn btn-default"
+													formaction="/ecommerce/myaccount">
+													<i class="fa fa-user-circle-o"></i> &nbsp; My Profile
+												</button>
+											</label>
+										</p>
+										<p>
+											<button class="btn btn-default"
+												formaction="/ecommerce/myOrders">
+												<i class="fa fa-gift"></i> &nbsp; Orders
+											</button>
+										</p>
+										<p>
+											<button class="btn btn-default"
+												formaction="/ecommerce/logout">
+												<i class="fa fa-power-off"></i> &nbsp; LogOut
+											</button>
+										</p>
+									</form>
+								</div>
+						</a></li>
+					</c:if>
+					<c:if test="${empty customer}">
+						<li>
+							<button type="button" class="btn btn-default" id="btnloginModal"
+								onclick="openLoginModal()">
+								<span class="glyphicon glyphicon-user"></span> Login & SignUp
+							</button>
+						</li>
+					</c:if>
 					<li><a href=""> <span
 							class="glyphicon glyphicon-shopping-cart"></span> Cart
 					</a></li>
@@ -82,10 +113,12 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form action="/ecommerce/login" method="post">
+					<form method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"> <i class="fa fa-user"></i>
+								<input type="hidden" class="form-control" name="role"
+									value="CUSTOMER" /> <span class="input-group-addon"> <i
+									class="fa fa-user"></i>
 								</span> <input type="text" class="form-control" name="userName"
 									placeholder="Mobile Number" required="required">
 							</div>
@@ -93,13 +126,13 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="text" class="form-control" name="password"
+								<input type="password" class="form-control" name="password"
 									placeholder="Password" required="required">
 							</div>
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-block btn-lg">
-								SignIn</button>
+							<button type="submit" formaction="/ecommerce/login"
+								class="btn btn-primary btn-block btn-lg">SignIn</button>
 						</div>
 					</form>
 				</div>
@@ -122,13 +155,12 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form action="" method="post">
+					<form action="/ecommerce/registerCustomer" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="role"
-									value="CUSTOMER" />
-							    <span class="input-group-addon">
-									<i class="fa fa-user"></i>
+								<input type="hidden" class="form-control" name="user.role"
+									value="CUSTOMER" /> <span class="input-group-addon"> <i
+									class="fa fa-user"></i>
 								</span> <input type="text" class="form-control" name="name"
 									placeholder="Name" required="required"> </span>
 							</div>
@@ -136,15 +168,15 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon"> <i class="fa fa-mobile"></i>
-								</span> <input type="text" class="form-control" name="mobileNumber"
+								</span> <input type="text" class="form-control" name="user.userName"
 									placeholder="Mobile Number" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"> <i
-									class="fa fa-envelope"></i>
-								</span> <input type="text" class="form-control" name="emailId"
+								<span class="input-group-addon"> 
+									<i class="fa fa-envelope"></i> </span> 
+							    <input type="text" class="form-control" name="emailId"
 									placeholder="Email" required="required">
 							</div>
 						</div>
@@ -179,6 +211,14 @@
 </body>
 
 <script type="text/javascript">
+	function alertMessage(event) {
+		var message = "${message}";
+		if (0 < message.length) {
+			alert(message);
+			message = "";
+		}
+	}
+
 	function openLoginModal(event) {
 		$("#Customerlogin").modal("show");
 		$("#CustomerSignUp").modal("hide");
@@ -192,4 +232,3 @@
 
 
 </html>
-

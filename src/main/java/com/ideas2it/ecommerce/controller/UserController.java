@@ -32,7 +32,7 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
 @Controller
 public class UserController {
     private static final Character INITIAL_PATH = '/';
-    private static final String INDEX_PAGE = "CustomerHeader";
+    private static final String INDEX_PAGE = "CustomerHome";
     private static final String ADMIN_HOME = "AdminHome";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
@@ -74,7 +74,8 @@ public class UserController {
     @PostMapping("registerCustomer")
     public ModelAndView registerCustomer(
             @ModelAttribute("customer") Customer customer) {
-        ModelAndView modelAndView = new ModelAndView(ADMIN_HOME);
+        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
+        customer.setMobileNumber(customer.getUser().getUserName());
         try {
             if (userService.registerCustomer(customer)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -82,7 +83,7 @@ public class UserController {
                                 + customer.getMobileNumber());
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(ADMIN_LOGIN);
+            modelAndView.setViewName(INDEX_PAGE);
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;

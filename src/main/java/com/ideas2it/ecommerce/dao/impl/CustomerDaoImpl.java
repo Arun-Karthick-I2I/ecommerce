@@ -41,6 +41,7 @@ public class CustomerDaoImpl implements CustomerDao {
             transaction = session.beginTransaction();
             customer.setIsActive(Boolean.TRUE);
             session.save(customer);
+            transaction.commit();
             return Boolean.TRUE;
         } catch (HibernateException e) {
             EcommerceLogger.error
