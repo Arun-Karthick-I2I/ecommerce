@@ -107,7 +107,7 @@ body {
 	text-align: center;
 }
 
-.lowin .lowin-box .lowin-group {
+.lowin .lowin-box .form-group {
 	margin-bottom: 30px;
 }
 
@@ -166,15 +166,6 @@ body {
 	font-weight: 700;
 	margin-top: 20px;
 	color: var(--color-semidark);
-}
-
-.lowin .lowin-footer {
-	text-align: center;
-	margin: 30px 0;
-	font-size: 12px;
-	color: var(--color-semidark);
-	font-weight: 700;
-
 }
 
 .lowin .login-back-link {
@@ -239,40 +230,6 @@ body {
 	        animation-fill-mode: forwards;
 	-webkit-animation-timing-function: ease-in-out;
 	        animation-timing-function: ease-in-out;
-}
-
-.lowin .lowin-group.password-group {
-	-webkit-transition: all 1s;
-	-o-transition: all 1s;
-	transition: all 1s;
-}
-
-.lowin .lowin-group.password-group.lowin-animated {
-	-webkit-animation-name: LowinPasswordAnimated;
-	        animation-name: LowinPasswordAnimated;
-	-webkit-animation-duration: 1s;
-	        animation-duration: 1s;
-	-webkit-animation-fill-mode: forwards;
-	        animation-fill-mode: forwards;
-	-webkit-animation-timing-function: ease-in-out;
-	        animation-timing-function: ease-in-out;
-	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
-	        transform-origin: 0 0;
-}
-
-.lowin .lowin-group.password-group.lowin-animated-back {
-	-webkit-animation-name: LowinPasswordAnimatedBack;
-	        animation-name: LowinPasswordAnimatedBack;
-	-webkit-animation-duration: 1s;
-	        animation-duration: 1s;
-	-webkit-animation-fill-mode: forwards;
-	        animation-fill-mode: forwards;
-	-webkit-animation-timing-function: ease-in-out;
-	        animation-timing-function: ease-in-out;
-	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
-	        transform-origin: 0 0;
 }
 
 /* keyframes */
@@ -428,80 +385,6 @@ body {
 	100% {
 		-webkit-transform: translate(0, 0);
 		        transform: translate(0, 0);
-	}
-}
-
-@-webkit-keyframes LowinPasswordAnimated {
-	0% {
-		-webkit-transform: rotate3d(0, 0, 0, 0);
-		        transform: rotate3d(0, 0, 0, 0);
-	}
-	30% {
-		opacity: 1;
-	}
-	60% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 0;
-		-webkit-transform: rotate3d(1, 0, 0, -180deg);
-		        transform: rotate3d(1, 0, 0, -180deg);
-		z-index: -1;
-	}
-}
-
-@keyframes LowinPasswordAnimated {
-	0% {
-		-webkit-transform: rotate3d(0, 0, 0, 0);
-		        transform: rotate3d(0, 0, 0, 0);
-	}
-	30% {
-		opacity: 1;
-	}
-	60% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 0;
-		-webkit-transform: rotate3d(1, 0, 0, -180deg);
-		        transform: rotate3d(1, 0, 0, -180deg);
-		z-index: -1;
-	}
-}
-
-@-webkit-keyframes LowinPasswordAnimatedBack {
-	0% {
-		opacity: 0;
-		-webkit-transform: rotate3d(1, 0, 0, -180deg);
-		        transform: rotate3d(1, 0, 0, -180deg);
-	}
-	40% {
-		opacity: 0;
-	}
-	60% {
-		opacity: 1;
-	}
-	100% {
-		-webkit-transform: rotate3d(0, 0, 0, 0);
-		        transform: rotate3d(0, 0, 0, 0);
-	}
-}
-
-@keyframes LowinPasswordAnimatedBack {
-	0% {
-		opacity: 0;
-		-webkit-transform: rotate3d(1, 0, 0, -180deg);
-		        transform: rotate3d(1, 0, 0, -180deg);
-	}
-	40% {
-		opacity: 0;
-	}
-	60% {
-		opacity: 1;
-	}
-	100% {
-		-webkit-transform: rotate3d(0, 0, 0, 0);
-		        transform: rotate3d(0, 0, 0, 0);
 	}
 }
 
