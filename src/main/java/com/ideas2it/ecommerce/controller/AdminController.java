@@ -125,8 +125,7 @@ public class AdminController {
     private ModelAndView searchByCustomerId(@RequestParam("id")Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         List<Customer> customers = new ArrayList<Customer>();
-        try {
-            Customer customer = adminService.searchByCustomerId(id, Boolean.TRUE);
+            Customer customer = getCustomer(id);
             if (null != customer) {
                 modelAndView.addObject("customer", customer);
                 modelAndView.setViewName("displayCustomer");
@@ -137,9 +136,6 @@ public class AdminController {
                     Constants.MSG_CUSTOMER_NOT_AVAILABLE);
                 modelAndView.setViewName("displayCustomers");
             }
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
         return modelAndView;
     }
     
@@ -158,7 +154,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         List<Customer> customers = new ArrayList<Customer>();
         try {
-            customers = adminService.searchByCustomerName(name, Boolean.TRUE);
+            customers = adminService.searchByCustomerName("%"+name+"%", Boolean.TRUE);
             if (!customers.isEmpty()) {
                 modelAndView.addObject("customers", customers);
                 modelAndView.setViewName("displayCustomers");
@@ -191,7 +187,7 @@ public class AdminController {
         List<Customer> customers = new ArrayList<Customer>();
         ModelAndView modelAndView = new ModelAndView();
         try {
-            customer.setId(id);
+            customer = getCustomer(id);
             if (adminService.deleteCustomer(customer)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CUSTOMER_DELETE_SUCCESS);
@@ -277,7 +273,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         List<Seller> sellers = new ArrayList<Seller>();
         try {
-            sellers = adminService.searchBySellerName(name);
+            sellers = adminService.searchBySellerName("%"+name+"%");
             if (!sellers.isEmpty()) {
                 modelAndView.addObject("sellers", sellers);
                 modelAndView.setViewName("displaySellers");
@@ -382,6 +378,25 @@ public class AdminController {
             EcommerceLogger.error(e.getMessage());
         }
         return orders;
+    }
+    
+    /**
+     * <p>
+     * Used to fetch the details of the Customer for the ID specified. 
+     * </p>
+     * 
+     * @param   id  ID of the Customer to be fetched.
+     * @return      Returns the Customer for the ID specified. Otherwise,
+     *              returns an empty object.
+     */
+    private Customer getCustomer(Integer id) {
+        Customer customer = new Customer();
+        try {
+            customer = adminService.searchByCustomerId(id, Boolean.TRUE);
+        } catch (EcommerceException e) {
+            EcommerceLogger.error(e.getMessage());
+        }
+        return customer;
     }
     
     @GetMapping("/")

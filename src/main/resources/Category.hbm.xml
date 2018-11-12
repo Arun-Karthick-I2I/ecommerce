@@ -9,7 +9,7 @@
         </id>
       
         <property name = "name" column = "NAME" type = "string"/>
-        <bag name = "products">
+        <bag name = "products" lazy="false">
             <key column = "CATEGORY_ID"/>
             <one-to-many class="com.ideas2it.ecommerce.model.Product"/>
         </bag>

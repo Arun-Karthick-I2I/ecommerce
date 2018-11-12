@@ -1,106 +1,86 @@
-div .navbar-custom {
-    background-color: #3465a4;
-}
-li {
-   vertical-align:center;
-}
-#search {
-    width : 350px;
-}
-
-nav > .container-fluid > .navbar-header > ul > li > a {
-    color: white;
+div > .sidebar > form > p > a {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 40px;
+    margin-left: 50px;
+    color: #f1f1f1;
+    text-decoration: none;
 }
 
-nav > .container-fluid > .navbar-header > ul > li > a:hover {
-	background-color:#3465a4;
+div > .sidebar > form > p > a:hover {
+	background-color: inherit;
 	color: #818181;
 }
 
-nav > .container-fluid > .navbar-header > ul > li > .openbtn > .fa-bars{
-	font-size: 20px;
-    color: white;
-}
-
-nav > .container-fluid > .navbar-header > ul > li > .openbtn > .fa-bars:hover{
-	font-size: 20px;
-    color: #818181;
-}
-
-nav > .container-fluid > ul > li > a {
-    color: white;
-}
-
-div > form > p > .default {
-    border: none;
+div > .sidebar > form > p > .default {
+	border: none;
     background-color: inherit;
     padding: 8px 8px 8px 32px;
-    text-decoration: none;
     font-size: 25px;
     color: #ffffff;
-    display: block;
-    transition: 0.3s;
+    display: inline-block;
+    transition: 0.3s;	
 }
 
-.default {
-	
-	font-size: 22px;
+div > .sidebar > form > p > .default:hover {
+	background-color: inherit;
 	color: #818181;
 }
 
-nav > .container-fluid > ul > li > a:hover {
-    background-color:#3465a4;
-    color: #818181;
+div > .navbar-custom {
+	background-color: #3465a4;
+	height: 25px;
 }
 
-nav > .container-fluid > .navbar-header > button {
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > a {
+	color: white;
+	font-size: 22px;
+}
+
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > a:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+nav > .container-fluid > .navbar-header > ul > li > a > .fa-bars{
+	font-size: 20px;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > a {
+	color: white;
+	font-size: 20px;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > a:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > .logout > .default {
+	border: none;
+    background-color: inherit;
+    padding: 10px 28px;
+    font-size: 20px;
     color: white;
+    cursor: pointer;
+    display: inline-block;
 }
 
-.fa-search {
-  font-size: 20px;
+div > .navbar-custom > .container-fluid > ul > li > .logout > .default:hover {
+	background-color: inherit;
+	color: #818181;
 }
 
-select {
-    width: 50px;
-}
-
-option {
-    overflow: hidden;
-    white-sapce: no-wrap;
-    text-overflow: ellipsis;
-}
-
-.sidebar {
+div > .sidebar {
     height: 100%;
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #5c3566;
+    background-color: #3465a4;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-}
-
-.sidebar > form > p > a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #ffffff;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidebar > p >a:hover {
-    color: #f1f1f1;
-}
-
-.sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
 }
