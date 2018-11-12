@@ -17,8 +17,8 @@
                  	    pattern = "[6-9][0-9]{9}" required/>
                     <input type="password" name="password" placeholder="Password" 
                         required/>
-                <input type="submit" value="Login" formaction = "/ecommerce/login" 
-                    formmethod = "post"/>
+                	<input type="submit" value="Login" formaction = "/ecommerce/login" 
+                    	formmethod = "post"/>
                 </form>
             </div>
         </div>

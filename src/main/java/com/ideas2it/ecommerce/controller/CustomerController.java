@@ -52,7 +52,7 @@ public class CustomerController {
      *         and view. In this method "login" is the view name. After creating
      *         customer return login page.
      */
-    @PostMapping(value = "/AddCustomer")
+    @PostMapping(value = "AddCustomer")
     public ModelAndView addCustomer(
             @ModelAttribute(Constants.LABEL_CUSTOMER) Customer customer,
             HttpServletRequest request) {
@@ -127,7 +127,7 @@ public class CustomerController {
      *         and view. In this method "OrdersDisplay" is the view name and set
      *         of orders and customer is the model.
      */
-    @GetMapping("/cancelOrder")
+    @GetMapping("cancelOrder")
     public ModelAndView cancelOrder(HttpServletRequest request,
             @RequestParam("id") String id) {
         HttpSession session = request.getSession(Boolean.FALSE);
@@ -167,7 +167,7 @@ public class CustomerController {
      *         and view. In this method "CartDisplay" is the view name and set
      *         of cartProducts is the model.
      */
-    @GetMapping("/Cart")
+    @GetMapping("Cart")
     public ModelAndView myCart(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
@@ -192,14 +192,12 @@ public class CustomerController {
      *         and view. In this method "OrdersDisplay" is the view name and set
      *         of orders and customer is the model.
      */
-    @GetMapping("/addCart")
+    @PostMapping("addCart")
     public ModelAndView addToCart(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
-            Integer quantity = Integer
-                    .parseInt((String) request.getParameter("quantity"));
             Integer id = Integer.parseInt(request.getParameter("id"));
             List<CartProduct> cartProducts = customer.getCartProducts();
             Boolean result = Boolean.TRUE;
@@ -217,8 +215,8 @@ public class CustomerController {
                         .getWarehouseProduct(id);
                 cartProduct.setWarehouseProduct(warehouseProduct);
                 cartProduct.setCustomer(customer);
-                cartProduct.setQuantity(quantity);
-                cartProduct.setPrice(quantity * warehouseProduct.getPrice());
+                cartProduct.setQuantity(1);
+                cartProduct.setPrice(warehouseProduct.getPrice());
                 cartProducts.add(cartProduct);
             }
             customer.setCartProducts(cartProducts);
@@ -602,21 +600,20 @@ public class CustomerController {
             Integer categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String productName = request.getParameter("name");
             List<Product> products = new ArrayList<Product>();
-            if (null == categoryId) {
-                products = customerService.searchProduct(productName);
+            if (0 == categoryId) {
+                products = customerService.searchProduct("%" +productName+ "%");
             } else {
                 products = customerService.searchProduct(categoryId,
                         productName);
             }
-            if (products.isEmpty()) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_PRODUCT_LIST_EMPTY);
-            }
+            modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                    customerService.getAllCategories());
+            modelAndView.addObject("products",products);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_UPDATE_ADDRESS_FAIL);
         }
-        modelAndView.setViewName("homepage");
+        modelAndView.setViewName("CustomerHome");
         return modelAndView;
     }
 
@@ -630,17 +627,19 @@ public class CustomerController {
      * @param id Needed for which product details will display.
      */
     @PostMapping("productPage")
-    public ModelAndView getProduct(@RequestParam("id") String id,
+    public ModelAndView getProduct(@RequestParam("id") Integer id,
             HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         try {
             Product product = customerService
-                    .searchProduct(Integer.parseInt("id"));
+                    .searchProduct(id);
             List<WarehouseProduct> warehouseProducts = product
                     .getWarehouseProducts();
             modelAndView.addObject("product", product);
-            modelAndView.setViewName("productPage");
+            modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                    customerService.getAllCategories());
+            modelAndView.setViewName("ProductPage");
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_PAGE_OPEN_FAIL);

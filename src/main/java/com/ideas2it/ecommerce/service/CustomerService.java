@@ -1,6 +1,7 @@
 package com.ideas2it.ecommerce.service;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.Product;
@@ -114,6 +115,16 @@ public interface CustomerService {
 
     /**
      * <p>
+     * Fetches the list of categories in which products are sold in the store.
+     * </p>
+     * 
+     * @return Returns the list of categories available. Otherwise, returns an
+     *         empty Object.
+     */
+    public List<Category> getAllCategories() throws EcommerceException;
+    
+    /**
+     * <p>
      * Getting list of products from e-commerce web-site based on category id
      * and product name.
      * </p>
@@ -135,6 +146,16 @@ public interface CustomerService {
      * @return List<Product> Returns list of products.
      */
     public List<Product> searchProduct(String productName)throws EcommerceException;
+
+    /**
+     * <p>
+     * Fetches the entire list of products available in the store.
+     * </p>
+     * 
+     * @return Returns the list of Products available. Otherwise, returns an
+     *         empty Object.
+     */
+    public List<Product> getAllProducts() throws EcommerceException;
     
     /**
      * <p>

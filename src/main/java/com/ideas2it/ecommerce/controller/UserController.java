@@ -155,6 +155,8 @@ public class UserController {
                     Seller seller = userService.searchSeller(user.getId());
                     session.setAttribute(Constants.LABEL_SELLER_ID,
                             seller.getId());
+                    modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                            userService.getAllCategories());
                     modelAndView.setViewName(SELLER_HOME);
                 } else {
                     modelAndView.setViewName(ADMIN_HOME);

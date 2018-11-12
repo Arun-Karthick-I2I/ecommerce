@@ -9,7 +9,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/AdminHeader.css' />">
-
 </head>
 <body>
 	<div>
@@ -31,7 +30,6 @@
 
 		<nav class="navbar navbar-custom">
 			<div class="container-fluid">
-
 				<div class="navbar-header">
 					<ul class="nav navbar-nav navbar-left">
 					    <li><a class="openbtn" id="main" onclick="openNav()">
@@ -41,31 +39,12 @@
 					
 					</ul>
 				</div>
-				<ul class="nav navbar-nav">
-					<form class="navbar-form navbar-left" action="">
-						<div class="input-group col-lg-12">
-							<div class="input-group-btn">
-								<select name="categoryId" class="form-control">
-									<option value=0 selected>All Categories</option>
-									<c:forEach var="category" items="${categories}">
-										<option value=${category.id} }>${category.name}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<input type="text" class="form-control" id="search" name = "id"
-								placeholder="Search for product for Category specified">
-							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" 
-								formaction="/ecommerce/category/searchById" formmethod="post">
-									<i class="fa fa-search"></i>
-								</button>
-							</div>
-						</div>
-					</form>
-				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href=""><i class="fa fa-user"></i>
 					Admin &nbsp;</a></li>
+					<li><form class = "logout" action="/ecommerce/logout">
+						<button class="btn default"> Logout</button>
+					</form></li>
 				</ul>
 			</div>
 		</nav>
