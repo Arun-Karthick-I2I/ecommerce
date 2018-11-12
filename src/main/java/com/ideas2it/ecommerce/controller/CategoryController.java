@@ -230,8 +230,9 @@ public class CategoryController {
         try {
             Category category = categoryService.searchByName(name);
             if (null != category) {
-                modelAndView.addObject("category", category);
-                modelAndView.setViewName("displayCategory");
+                categories.add(category);
+                modelAndView.addObject("categories", categories);
+                modelAndView.setViewName("displayCategories");
             } else {
                 categories = getCategories();
                 modelAndView.addObject("categories", categories);
@@ -268,7 +269,7 @@ public class CategoryController {
                     modelAndView.addObject(Constants.LABEL_MESSAGE, 
                         Constants.MSG_CATEGORY_PRODUCTS_UNAVAILABLE);
                 }
-                modelAndView.setViewName("displayProducts");
+                modelAndView.setViewName("adminLogin");
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
