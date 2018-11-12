@@ -10,6 +10,7 @@ import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.dao.CustomerDao;
 import com.ideas2it.ecommerce.dao.impl.CustomerDaoImpl;
+import com.ideas2it.ecommerce.service.CategoryService;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.OrderService;
 import com.ideas2it.ecommerce.service.ProductService;
@@ -34,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     private OrderService orderService = new OrderServiceImpl();
     private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
     private ProductService productService = new ProductServiceImpl();
+    private CategoryService categoryService = new CategoryServiceImpl();
     
     /** 
      * @(inheritDoc)
@@ -98,7 +100,23 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getCustomers(Boolean isActive) throws EcommerceException {
         return customerDao.getCustomers(isActive);
     }
-     
+    
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public List<Category> getAllCategories() throws EcommerceException {
+        return categoryService.getCategories();
+    }
+    
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public List<Product> getAllProducts() throws EcommerceException {
+        return productService.getProducts();
+    }
+    
     /** 
      * @(inheritDoc)
      */

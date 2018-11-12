@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html lang="en">
+<html>
 <head>
 <title>PandaZone</title>
 <meta charset="utf-8">
@@ -39,7 +39,7 @@
 									<option value="0" selected>All
 										Categories</option>
 									<c:forEach var="category" items="${categories}">
-										<option value=${category.id}>${category.name}</option>
+										<option value="${category.id}">${category.name}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -161,7 +161,7 @@
 								<input type="hidden" class="form-control" name="user.role"
 									value="CUSTOMER" /> <span class="input-group-addon"> <i
 									class="fa fa-user"></i>
-								</span> <input type="text" class="form-control" name="name"
+								<input type="text" class="form-control" name="name"
 									placeholder="Name" required="required"> </span>
 							</div>
 						</div>
@@ -185,14 +185,6 @@
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 								<input type="password" class="form-control" name="user.password"
 									placeholder="Password" required="required">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" class="form-control"
-									name="confirmPassword" placeholder="Confirm Password"
-									required="required">
 							</div>
 						</div>
 						<div class="form-group">

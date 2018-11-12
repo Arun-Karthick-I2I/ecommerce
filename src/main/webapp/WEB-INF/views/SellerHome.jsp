@@ -14,7 +14,7 @@
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
 				<div class="modal-body">
-					<form action="/ecommerce/seller/createProduct" method="POST">
+					<form action="/ecommerce/seller/createProduct" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="name">Product Name</label> <input type="text"
 								class="form-control" name="name" id="name"

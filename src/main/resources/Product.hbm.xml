@@ -17,7 +17,7 @@
         <many-to-one name = "category" column = "CATEGORY_ID" 
             class = "com.ideas2it.ecommerce.model.Category"/>
             
-        <bag name="warehouseProducts" >
+        <bag name="warehouseProducts" lazy="false">
             <key column = "PRODUCT_ID"/>
             <one-to-many class="com.ideas2it.ecommerce.model.WarehouseProduct"/>
         </bag>
