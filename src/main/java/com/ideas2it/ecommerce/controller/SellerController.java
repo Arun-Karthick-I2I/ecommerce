@@ -1,5 +1,6 @@
 package com.ideas2it.ecommerce.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
@@ -237,10 +241,12 @@ public class SellerController {
      */
     @PostMapping("createProduct")
     public ModelAndView createProduct(
-            @ModelAttribute("product") Product product) {
+            @ModelAttribute("product") Product product, @RequestParam MultipartFile productImage) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
         WarehouseProduct warehouseProduct = new WarehouseProduct();
         try {
+            byte[] product_Image = productImage.getBytes();
+            product.setImage(product_Image);
             if (sellerService.addProduct(product)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_WAREHOUSE_PRODUCT_SUCCESS);
@@ -251,6 +257,9 @@ public class SellerController {
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
             modelAndView.setViewName(SELLER_HOME);
+        } catch (IOException e) {
+            EcommerceLogger.error("Error while storing image", e);
+            modelAndView.setViewName(SELLER_HOME);
         }
         return modelAndView;
     }
@@ -258,7 +267,7 @@ public class SellerController {
     /**
      * <p>
      * Searches for the product name provided by the seller. Returns a list with
-     * the specified product name.
+     * the specified product name.`
      * </p>
      */
     @GetMapping("searchProduct")

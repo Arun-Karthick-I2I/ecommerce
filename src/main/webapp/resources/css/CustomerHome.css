@@ -1,0 +1,25 @@
+.customerHome {
+  margin-top:7%;	
+  padding-left:20px;
+}
+.card-img-top {
+	width:60%;
+	height:50%;
+}
+.container {
+	padding-bottom:20px;
+	display:inline-block;
+	width:300px;
+}
+.card-text {
+	width:250px;
+}
+
+.zoom {
+    transition: transform .2s;
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(1.1); 
+}

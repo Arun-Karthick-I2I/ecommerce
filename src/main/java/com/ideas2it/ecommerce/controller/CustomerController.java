@@ -82,7 +82,7 @@ public class CustomerController {
      *         and view. In this method "CustomerUpdate" is view name and
      *         customer is model.
      */
-    @GetMapping("/myAccount")
+    @GetMapping("myAccount")
     public ModelAndView modifyAccount(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
@@ -102,7 +102,7 @@ public class CustomerController {
      *         and view. In this method "OrdersDisplay" is the view name and set
      *         of orders and customer is the model.
      */
-    @GetMapping("/myOrders")
+    @GetMapping("myOrders")
     public ModelAndView myOrders(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         ModelAndView modelAndView = new ModelAndView();
@@ -598,9 +598,8 @@ public class CustomerController {
     public ModelAndView searchProduct(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute("customer");
         try {
-            Integer categoryId = Integer.parseInt(request.getParameter("id"));
+            Integer categoryId = Integer.parseInt(request.getParameter("categoryId"));
             String productName = request.getParameter("name");
             List<Product> products = new ArrayList<Product>();
             if (null == categoryId) {
@@ -617,7 +616,6 @@ public class CustomerController {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_UPDATE_ADDRESS_FAIL);
         }
-        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         modelAndView.setViewName("homepage");
         return modelAndView;
     }

@@ -1,5 +1,6 @@
 package com.ideas2it.ecommerce.model;
 
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -19,7 +20,8 @@ public class Product {
 	private Category category;
 	private Float rating;
 	private List<WarehouseProduct> warehouseProducts;
-
+	private String base64Image;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -75,4 +77,13 @@ public class Product {
 	public void setWarehouseProducts(List<WarehouseProduct> warehouseProducts) {
 		this.warehouseProducts = warehouseProducts;
 	}
+
+    public String getBase64Image() {
+        base64Image = Base64.getEncoder().encodeToString(this.image);
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
 }
