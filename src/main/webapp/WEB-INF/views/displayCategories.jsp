@@ -19,26 +19,24 @@
 		<h2>Category</h2>
 	</div>
 	<form>
-		<div class="form-group">
-			<div class="input-group">
-				<input type="text" class="form-control" id="search" name="name"
-					placeholder="Search for product for Category specified">
-				<button class="btn btn-default" type="submit"
-					formaction="/ecommerce/category/searchByName" formmethod="post">
-					<i class="fa fa-search"></i>
-				</button>
-				&nbsp; &nbsp;
-				<button type="button" class="btn btn-info btn-sm"
-					data-toggle="modal" data-target="#addForm">Add Category</button>
-			</div>
+		<div class="input-group">
+			<input type="text" class="form-control" id="search" name="name"
+				placeholder="Enter Category Name to be searched">
+		 	<button class="btn btn-default" type="submit"
+				formaction="/ecommerce/category/searchByName" formmethod="post">
+				<i class="fa fa-search"></i>
+			</button>
+			&nbsp; &nbsp;
+			<button type="button" class="btn btn-info btn-sm"
+			data-toggle="modal" data-target="#addForm">Add Category</button>
 		</div>
 	</form>
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th class="row-header">ID</th>
-				<th class="row-header">Name</th>
-				<th colspan=2></th>
+				<th class="row-header"> ID </th>
+				<th class="row-header"> Name </th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,16 +45,16 @@
 					<input type="hidden" name="id" value="${category.id}" />
 					<tr>
 						<td>${category.id}</td>
-						<td><button class="btn default" formmethod="post"
+						<td><button class="btn btn-default" formmethod="post"
 								formaction="/ecommerce/category/displayProducts">
 								${category.name}</button></td>
 						<td>
 							<button type="button" class="btn btn-info btn-sm"
 								data-toggle="modal" data-target="#${category.id}">edit
 							</button> &nbsp;&nbsp;
-							<button type="submit" class="btn danger"
+							<button type="submit" class="btn btn-danger"
 								formaction="/ecommerce/category/delete" formmethod="post">
-								Delete</button>
+								<i class="fa fa-trash"></i></button>
 						</td>
 					</tr>
 					<div id="${category.id}" class="modal fade" role="dialog">
@@ -64,14 +62,14 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Edit Category</h4>
+									<h3 class="modal-title">Edit Category</h3>
 								</div>
 								<div class="modal-body">
 									<form>
-										<input type="text" name="name" value="${category.name}"
+										<input type="text" id="name" name="name" value="${category.name}"
 											placeholder="Enter Category Name" pattern="^[A-Za-z- ]+$"
-											required /><br />
-										<button type="submit" class="btn btn-info"
+											required /> &nbsp; &nbsp;
+										<button type="submit" class="btn btn-warning"
 											formaction="/ecommerce/category/update" formmethod="post">Save</button>
 									</form>
 								</div>
@@ -85,25 +83,23 @@
 	<div class="container">
 		<div id="addForm" class="modal fade" role="dialog">
 			<div class="modal-dialog">
-
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add New Category</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;
+						</button>
+						<h3 class="modal-title">Add New Category</h3>
 					</div>
 					<div class="modal-body">
 						<form>
 							<input type="text" name="name" value="${category.name}"
-								placeholder="Enter Category Name" pattern="^[A-Za-z- ]+$"
-								required /><br />
-
-							<button type="submit" class="btn btn-info"
-								formaction="/ecommerce/category/insert" formmethod="post">Save</button>
+								placeholder="Enter Category Name" id="categoryName" 
+								pattern="^[A-Za-z- ]+$"
+								required /> &nbsp;&nbsp;
+							<button type="submit" class="btn btn-info" formmethod="post"
+								formaction="/ecommerce/category/insert"> Save </button>
 						</form>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 	</div>

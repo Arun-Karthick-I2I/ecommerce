@@ -174,7 +174,7 @@ public class CategoryDaoImpl implements CategoryDao {
                 .createQuery(Category.class);
             Root<Category> root = criteria.from(Category.class);
             criteria.select(root).where(builder
-                .equal(root.get(Constants.LABEL_NAME), name));
+                .like(root.get(Constants.LABEL_NAME), name));
             category = session.createQuery(criteria).uniqueResult();
         } catch (HibernateException e) {
             EcommerceLogger.error(Constants.MSG_CATEGORY_NAME + name + "\n"

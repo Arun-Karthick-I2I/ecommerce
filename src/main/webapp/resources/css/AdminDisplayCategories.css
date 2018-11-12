@@ -8,15 +8,95 @@
 }
 
 .table-striped {
-	margin-left: 20%;
+	margin-left: 25%;
 	align: center;
-	width: 60%;	
+	width: 60%;
 }
 
-.row-header {
-	font-size: 30px;
+.table-striped > thead > tr > .row-header {
+	font-size: 20px;
 	font-weight: 200;
-	padding: 5px;
-	letter-spacing: 4px;
+	padding: 8px;
+	letter-spacing: 3px;
 }
 
+.table-striped > tbody > tr > td > .btn-default {
+	border: none;
+    background-color: inherit;
+}
+
+.table-striped > tbody > tr > td > .btn-default:hover {
+    background-color: inherit;
+	color: #818181;
+}
+
+.table-striped > tbody > tr > td > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: dodgerblue;
+    font-size: 15px;
+}
+
+.table-striped > tbody > tr > td > .btn:hover {
+	background-color: inherit;
+	color: #818181;	
+}
+
+.table-striped > tbody > tr > td > .btn-danger {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 15px;
+}
+
+form > div > #search {
+	width: 297px;
+	margin-left: 400px;
+	margin-right: 0;
+}
+
+form > div > .btn-default {
+	height:35px;
+}
+
+div > #addForm > .modal-dialog > .modal-content > .modal-header > h3 {
+	text-align: center;
+	font-family: 'Open Sans' , sans-serif;
+	letter-spacing: 1px;
+}
+
+div > #addForm > .modal-dialog > .modal-content > .modal-body > form > #categoryName {
+	padding:5px 0 5px 10px;
+	background-color: #d3d7cf;
+	margin-left: 150px;
+	border: none;
+	font-style: italic;
+}
+
+div > #addForm > .modal-dialog > .modal-content > .modal-body > form > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 20px;
+}
+
+.modal > .modal-dialog > .modal-content > .modal-header > h3 {
+	text-align: center;
+	font-family: 'Open Sans' , sans-serif;
+	letter-spacing: 1px;
+}
+
+#name {
+	padding:5px 0 5px 10px;
+	background-color: #d3d7cf;
+	margin-left: 150px;
+	border: none;
+	font-style: italic;
+}
+
+.btn-warning {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 20px;
+}
