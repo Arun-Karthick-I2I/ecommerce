@@ -6,6 +6,8 @@ public class Constants {
     
     public static final Character COLON_SYMBOL = ':';
     
+    public static final Character PERCENT_SYMBOL = '%';
+    
     public static final Character SPACE = ' ';
     
     public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;

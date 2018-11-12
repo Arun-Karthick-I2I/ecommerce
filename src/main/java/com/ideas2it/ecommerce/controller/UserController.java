@@ -99,7 +99,7 @@ public class UserController {
     @PostMapping("registerSeller")
     public ModelAndView registerSeller(
             @ModelAttribute("seller") Seller seller) {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        ModelAndView modelAndView = new ModelAndView(SELLER_LOGIN);
         seller.setMobileNumber(seller.getUser().getUserName());
         try {
             if (userService.registerSeller(seller)) {
@@ -108,7 +108,6 @@ public class UserController {
                                 + seller.getMobileNumber());
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(SELLER_LOGIN);
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -139,9 +138,7 @@ public class UserController {
         }
         try {
             Boolean isAuthenticated = userService.validateUser(user);
-            EcommerceLogger.error("validate");
             if (null == isAuthenticated) {
-                EcommerceLogger.error("setvalidate");
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_NO_SUCH_USER_EXISTS);
             } else if (!isAuthenticated) {

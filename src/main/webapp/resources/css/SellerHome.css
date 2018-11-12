@@ -1,0 +1,15 @@
+.btn.btn-primary.btn-right {
+	float:right;
+}
+
+.modal-content {
+    border-radius: 5px;
+}
+
+.modal-header {
+    border-radius: 5px 5px 0 0;
+}
+
+.form-group-btn {
+	text-align:center;
+}

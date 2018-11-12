@@ -42,7 +42,7 @@ public class SellerController {
     private static final String EDIT_SELLER = "EditSeller";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
-    private static final String PRODUCT_FORM = "ProductForm";
+    private static final String PRODUCT_FORM = "SellerHome";
     private static final String WAREHOUSE_PRODUCT_FORM = "WarehouseProductForm";
 
     private SellerService sellerService = new SellerServiceImpl();
@@ -277,19 +277,19 @@ public class SellerController {
         String productName = request.getParameter(Constants.LABEL_PRODUCT_NAME);
         try {
             List<Product> products = sellerService.searchProduct(productName);
-            if (null != products) {
+            if (!products.isEmpty()) {
                 modelAndView.addObject("selectProduct", Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
             } else {
                 modelAndView.addObject("newProduct", Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES,
                         sellerService.getCategories());
+                modelAndView.addObject(Constants.LABEL_PRODUCT, product);
                 product.setName(productName);
             }
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-        modelAndView.addObject(Constants.LABEL_PRODUCT, product);
         return modelAndView;
     }
 
