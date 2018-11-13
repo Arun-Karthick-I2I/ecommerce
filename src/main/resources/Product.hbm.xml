@@ -14,7 +14,7 @@
         <property name = "description" column = "DESCRIPTION" type = "string"/>
         <property name = "rating" column = "RATING" type = "float"/>
 
-        <many-to-one name = "category" column = "CATEGORY_ID" 
+        <many-to-one name = "category" column = "CATEGORY_ID" lazy="false"
             class = "com.ideas2it.ecommerce.model.Category"/>
             
         <bag name="warehouseProducts" lazy="false">

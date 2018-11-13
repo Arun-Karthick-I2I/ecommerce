@@ -20,11 +20,6 @@
 		<key column="CUSTOMER_ID" />
 		<one-to-many class="com.ideas2it.ecommerce.model.Order" />
 	</bag>
-
-	<bag name="addresses">
-		<key column="CUSTOMER_ID" />
-		<one-to-many class="com.ideas2it.ecommerce.model.Address" />
-	</bag>
 	
 	<bag name="cartProducts">
 		<key column="CUSTOMER_ID" />
