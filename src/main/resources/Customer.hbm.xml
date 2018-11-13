@@ -21,9 +21,9 @@
 		<one-to-many class="com.ideas2it.ecommerce.model.Order" />
 	</bag>
 	
-	<bag name="cartProducts">
+	<bag name="cartItems">
 		<key column="CUSTOMER_ID" />
-		<one-to-many class="com.ideas2it.ecommerce.model.CartProduct" />
+		<one-to-many class="com.ideas2it.ecommerce.model.CartItem" />
 	</bag>
 		
 	</class>
