@@ -14,22 +14,34 @@
 
 </head>
 <body>
+	<form>
+		<div class="input-group">
+			<input type="text" class="form-control" id="search" name="name"
+				placeholder="Enter Product Name to be searched">
+		 	<button class="btn btn-default" type="submit"
+				formaction="/ecommerce/product/searchByName" formmethod="post">
+				<i class="fa fa-search"></i>
+			</button>
+		</div>
+	</form>
 	<div class="card-deck">
 		<c:forEach var="product" items="${products}">
-  			<div class="card">
-    			<img class="card-img-top" src="data:image/jpg;base64,${product.base64Image}"
-    	    		alt="Card image cap">
-    	    	<div class="card-body">
-      				<h5 class="card-title">${product.name}</h5>
-      				<p class="card-text">&#8377;${product.warehouseProducts[0].price}</p>
-      				<p class="card-text"><small class="text-muted">
-      					<button class="btn btn-default" formmethod="post"
-							formaction="/ecommerce/category/display">
-							${product.category.name}
-						</button></small>
-      				</p>
-    			</div>
- 	    	</div>
+			<form>
+  				<div class="card">
+	    			<img class="card-img-top" src="data:image/jpg;base64,${product.base64Image}">
+    		    	<div class="card-body">
+      					<h5 class="card-title">${product.name}</h5>
+      					<p class="card-text">&#8377;${product.warehouseProducts[0].price}</p>
+      					<p class="card-text">
+	      					<input type="hidden" name="id" value="${product.category.id}"/>
+    	  					<button class="btn btn-default" formmethod="post"
+								formaction="/ecommerce/category/displayProducts">
+								${product.category.name}
+							</button>
+      					</p>
+    				</div>
+	 	    	</div>
+ 	    	</form>
  	    </c:forEach>
 	</div>
 </body>

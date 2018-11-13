@@ -98,16 +98,16 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         List<Product> products = new ArrayList<Product>();
         try {
-            products = productService.searchByName(name);
+            products = productService.searchByName("%"+name+"%");
             if (products.isEmpty()) {
                 modelAndView.addObject("products", products);
-                modelAndView.setViewName("displayProducts");
+                modelAndView.setViewName("adminDisplayProducts");
             } else {
                 products = getProducts();
                 modelAndView.addObject("products", products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
-                modelAndView.setViewName("displayProducts");
+                modelAndView.setViewName("displayCategories");
             }
         } catch (EcommerceException e) {
             EcommerceLogger.error(e.getMessage());
