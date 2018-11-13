@@ -47,14 +47,16 @@ private WarehouseProductService warehouseProductService
     public List<OrderItem> addOrder(Order order) throws EcommerceException {
         List<OrderItem> unavailableOrderItems = new ArrayList<OrderItem>();
         unavailableOrderItems = warehouseProductService.reduceQuantity(order);
-        try {
-            if (orderDao.addOrder(order)) {
-                return uavailableOrderItems;
-            }
-        } catch (EcommerceException e) {
+        if (unavailableOrderItems.isEmpty()) {
+            try {
+                if (orderDao.addOrder(order)) {
+                    return unavailableOrderItems;
+                }
+            } catch (EcommerceException e) {
                 warehouseProductService.increaseQuantity(order);
+            }
         }
-        return uavailableOrderItems;
+        return unavailableOrderItems;
     }
     
     /**
