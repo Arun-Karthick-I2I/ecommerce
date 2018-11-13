@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 
 /**
  * <p>
@@ -41,14 +42,20 @@ public interface OrderService {
     /**
      * <p>
      * Used to add new Order to the list using the inputs obtained from Customer.
+     * It returns the Order Items, if the quantity available is less than the 
+     * quantity ordered by the Customer. Otherwise, places the Order after 
+     * deducting the Product quantity. If the Order has been successfully 
+     * placed, returns an empty Object. Or else, increases the deducted Product
+     * Quantity and then returns an empty Object.
      * </p>
      * 
      * @param   order   New Order to be placed.
-     * @return          Returns true, if the Order has been inserted 
-     *                  successfully. Otherwise returns false, if the 
-     *                  insertion is unsuccessful. 
+     * @return          Returns an empty object, if the Order has been inserted 
+     *                  successfully. Otherwise returns the list of Order Items, 
+     *                  whose Quantity is less than the required quantity by the
+     *                  Customer. 
      */
-    Boolean addOrder(Order order) throws EcommerceException;
+    List<OrderItem> addOrder(Order order) throws EcommerceException;
     
     /**
      * <p>

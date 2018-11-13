@@ -27,6 +27,19 @@ public interface UserDao {
      *         false  If user details is not added to the database. 
      */    
      Boolean addUser(User user) throws EcommerceException;
+     
+     /**
+      * <p>
+      * Updates a User into the Database
+      * </p>
+      *
+      * @param user
+      *        User details which needs to be updated in the Database
+      *
+      * @return true   If User details is successfully updated in the database.
+      *         false  If user details is not updated to the database. 
+      */    
+     Boolean updateUser(User user) throws EcommerceException;
 
     /**
      * <p>
@@ -40,4 +53,17 @@ public interface UserDao {
      *         null    If no such user exists for that role.
      */
     User getUser(User user) throws EcommerceException;
+
+    /**
+     * <p>
+     * Searches through the database based on userId.
+     * </p>
+     * 
+     * @param userId
+     *        User whose presence has to be found.
+     *
+     * @return user    If an user with the specified details is found.
+     *         null    If no such user exists for that role.
+     */
+    User getById(Integer userId) throws EcommerceException;
 }

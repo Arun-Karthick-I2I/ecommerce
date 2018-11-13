@@ -23,7 +23,11 @@
       				<h5 class="card-title">${product.name}</h5>
       				<p class="card-text">&#8377;${product.warehouseProducts[0].price}</p>
       				<p class="card-text"><small class="text-muted">
-      				${product.category.name}</small></p>
+      					<button class="btn btn-default" formmethod="post"
+							formaction="/ecommerce/category/display">
+							${product.category.name}
+						</button></small>
+      				</p>
     			</div>
  	    	</div>
  	    </c:forEach>
