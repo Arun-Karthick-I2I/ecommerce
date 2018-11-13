@@ -51,7 +51,7 @@ public class AdminController {
         orders = getOrders();
         if (!orders.isEmpty()) {
             return new ModelAndView("displayOrders",
-                "orders",orders);  
+                    Constants.LABEL_ORDERS,orders);  
         } else {
             return new ModelAndView("displayOrders",
                 Constants.LABEL_MESSAGE,Constants.MSG_ORDERS_UNAVAILABLE);
@@ -75,11 +75,11 @@ public class AdminController {
         try {
             Order order = adminService.searchByOrderId(id);
             if (null != order) {
-                modelAndView.addObject("order", order);
+                modelAndView.addObject(Constants.LABEL_ORDER, order);
                 modelAndView.setViewName("displayOrder");
             } else {
                 orders = getOrders();
-                modelAndView.addObject("orders", orders);
+                modelAndView.addObject(Constants.LABEL_ORDERS, orders);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_ORDER_NOT_AVAILABLE);
                 modelAndView.setViewName("displayProducts");
@@ -399,6 +399,13 @@ public class AdminController {
         return customer;
     }
     
+    /**
+     * <p>
+     * Redirects to the Admin's Login page when invoked.
+     * <p>
+     * 
+     * @return  Direct to the Admin Login page.
+     */
     @GetMapping("/")
     private String loginForm() {
         return "adminLogin";
