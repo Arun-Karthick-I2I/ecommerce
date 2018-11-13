@@ -18,9 +18,10 @@ import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Address;
-import com.ideas2it.ecommerce.model.CartProduct;
+import com.ideas2it.ecommerce.model.CartItem;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.CustomerService;
@@ -127,8 +128,8 @@ public class CustomerController {
      *         and view. In this method "OrdersDisplay" is the view name and set
      *         of orders and customer is the model.
      */
-    @GetMapping("cancelOrder")
-    public ModelAndView cancelOrder(HttpServletRequest request,
+/*    @GetMapping("cancelOrder")
+     public ModelAndView cancelOrder(HttpServletRequest request,
             @RequestParam("id") String id) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
@@ -165,7 +166,7 @@ public class CustomerController {
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
      *         and view. In this method "CartDisplay" is the view name and set
-     *         of cartProducts is the model.
+     *         of cartItems is the model.
      */
     @GetMapping("Cart")
     public ModelAndView myCart(HttpServletRequest request) {
@@ -173,12 +174,12 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session
                 .getAttribute(Constants.LABEL_CUSTOMER);
-        List<CartProduct> cartProducts = customer.getCartProducts();
-        if (cartProducts.isEmpty()) {
+        List<CartItem> cartItems = customer.getCartItems();
+        if (cartItems.isEmpty()) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CART_EMPTY);
         }
-        modelAndView.addObject("cartProducts", cartProducts);
+        modelAndView.addObject("cartItems", cartItems);
         modelAndView.setViewName("CartDisplay");
         return modelAndView;
     }
@@ -200,34 +201,32 @@ public class CustomerController {
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
 System.out.println(id);
-            List<CartProduct> cartProducts = customer.getCartProducts();
+            List<CartItem> cartItems = customer.getCartItems();
             Boolean result = Boolean.TRUE;
-            for (Integer i = 0; i < cartProducts.size(); i++) {
-                if (id == cartProducts.get(i).getId()) {
-                    cartProducts.get(i)
-                            .setQuantity(cartProducts.get(i).getQuantity() + 1);
+            for (Integer i = 0; i < cartItems.size(); i++) {
+                if (id == cartItems.get(i).getId()) {
+                    cartItems.get(i)
+                            .setQuantity(cartItems.get(i).getQuantity() + 1);
                     result = Boolean.FALSE;
                     break;
                 }
             }
             if (result) {
-                CartProduct cartProduct = new CartProduct();
+                CartItem cartItem = new CartItem();
                 WarehouseProduct warehouseProduct = customerService
                         .getWarehouseProduct(id);
-                cartProduct.setWarehouseProduct(warehouseProduct);
-                cartProduct.setCustomer(customer);
-                cartProduct.setQuantity(1);
-                cartProduct.setPrice(warehouseProduct.getPrice());
-                cartProducts.add(cartProduct);
+                cartItem.setWarehouseProduct(warehouseProduct);
+                cartItem.setCustomer(customer);
+                cartItem.setQuantity(1);
+                cartItem.setPrice(warehouseProduct.getPrice());
+                cartItems.add(cartItem);
             }
-            customer.setCartProducts(cartProducts);
+            customer.setCartItems(cartItems);
             if (customerService.updateCustomer(customer)) {
-System.out.println("hihi");
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-                modelAndView.addObject("cartProducts",
-                        customer.getCartProducts());
+                modelAndView.addObject("cartItems",
+                        customer.getCartItems());
             } else {
-System.out.println("helloooooo");
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_CART_FAIL);
             }
@@ -255,19 +254,19 @@ System.out.println("helloooooo");
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
-            List<CartProduct> cartProducts = customer.getCartProducts();
-            for (Integer i = 0; i < cartProducts.size(); i++) {
-                if (Integer.parseInt(id) == cartProducts.get(i)
+            List<CartItem> cartItems = customer.getCartItems();
+            for (Integer i = 0; i < cartItems.size(); i++) {
+                if (Integer.parseInt(id) == cartItems.get(i)
                         .getWarehouseProduct().getId()) {
-                    cartProducts.remove(cartProducts.get(i));
+                    cartItems.remove(cartItems.get(i));
                     break;
                 }
             }
-            customer.setCartProducts(cartProducts);
+            customer.setCartItems(cartItems);
             if (customerService.updateCustomer(customer)) {
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-                modelAndView.addObject("cartProducts",
-                        customer.getCartProducts());
+                modelAndView.addObject("cartItems",
+                        customer.getCartItems());
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_CART_FAIL);
@@ -296,20 +295,20 @@ System.out.println("helloooooo");
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
-            List<CartProduct> cartProducts = customer.getCartProducts();
+            List<CartItem> cartItems = customer.getCartItems();
             Integer quantity = Integer
                     .parseInt(request.getParameter("quantity"));
-            for (Integer i = 0; i < cartProducts.size(); i++) {
-                if (Integer.parseInt(id) == cartProducts.get(i).getId()) {
-                    cartProducts.get(i).setQuantity(quantity);
+            for (Integer i = 0; i < cartItems.size(); i++) {
+                if (Integer.parseInt(id) == cartItems.get(i).getId()) {
+                    cartItems.get(i).setQuantity(quantity);
                     break;
                 }
             }
-            customer.setCartProducts(cartProducts);
+            customer.setCartItems(cartItems);
             if (customerService.updateCustomer(customer)) {
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-                modelAndView.addObject("cartProducts",
-                        customer.getCartProducts());
+                modelAndView.addObject("cartItems",
+                        customer.getCartItems());
             }
             modelAndView.setViewName("CartDisplay");
         } catch (EcommerceException e) {
@@ -335,37 +334,33 @@ System.out.println("helloooooo");
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session.getAttribute("customer");
         try {
-            Integer quantity = Integer
-                    .parseInt((String) request.getParameter("quantity"));
             Integer addressId = Integer
                     .parseInt(request.getParameter("addressId"));
             WarehouseProduct warehouseProduct = customerService
                     .getWarehouseProduct(Integer.parseInt(id));
-            Address address = new Address();
-            address.setId(addressId);
             Order order = new Order();
             order.setCustomer(customer);
-            order.setWarehouseProduct(warehouseProduct);
-            order.setPrice(quantity * warehouseProduct.getPrice());
-            order.setQuantity(quantity);
-            order.setAddress(address);
+            order.setPrice(warehouseProduct.getPrice());
             LocalDate todayDate = LocalDate.now();
             order.setOrderDate(todayDate);
-            order.setStatus(ORDER_STATUS.ORDERED);
-            List<Order> orders = new ArrayList<Order>();
-            orders.add(order);
-            List<Order> unplacedOrders = customerService.addOrders(orders);
-            if (unplacedOrders.isEmpty()) {
+            Address address = new Address();
+            address.setId(addressId);
+            order.setAddress(address);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setQuantity(1);
+            orderItem.setPrice(warehouseProduct.getPrice());
+            orderItem.setStatus(ORDER_STATUS.ORDERED);
+            orderItem.setWarehouseProduct(warehouseProduct);
+            List<OrderItem> orderItems = order.getOrderItems();
+            orderItems.add(orderItem);
+            order.setOrderItems(orderItems);
+            List<OrderItem> unavailableOrderItems = customerService.addOrder(order);
+            if (unavailableOrderItems.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
-                modelAndView.setViewName("OrdersDisplay");
-            } else if (unplacedOrders.size() == orders.size()) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_ORDER_FAIL);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_SOME_ORDER_FAIL);
-                modelAndView.addObject("unplacedOrders", unplacedOrders);
+                        Constants.MSG_ADD_ORDER_FAIL);
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
@@ -393,39 +388,50 @@ System.out.println("helloooooo");
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Order order;
+        OrderItem orderItem;
         Customer customer = (Customer) session.getAttribute("customer");
         try {
+            
             Address address = new Address();
             address.setId(Integer.parseInt(request.getParameter("addressId")));
+            
             List<Integer> warehouseProductIds = new ArrayList<Integer>();
             for (String id : request.getParameterValues("warehouseProductId")) {
                 warehouseProductIds.add(Integer.parseInt(id));
             }
             List<WarehouseProduct> warehouseProducts = customerService
                     .getWarehouseProductsByIds(warehouseProductIds);
-            List<CartProduct> cartProducts = customer.getCartProducts();
+            List<CartItem> cartItems = customer.getCartItems();
             List<Order> orders = customer.getOrders();
-            for (Integer i = 0; i < cartProducts.size(); i++) {
-                if (warehouseProducts.get(i).getId() == cartProducts.get(i)
-                        .getWarehouseProduct().getId()) {
-                    order = new Order();
-                    order.setCustomer(customer);
-                    order.setWarehouseProduct(warehouseProducts.get(i));
-                    order.setPrice(cartProducts.get(i).getQuantity()
-                            * (warehouseProducts.get(i)).getPrice());
-                    order.setQuantity(cartProducts.get(i).getQuantity());
-                    order.setAddress(address);
-                    LocalDate todayDate = LocalDate.now();
-                    order.setOrderDate(todayDate);
-                    order.setStatus(ORDER_STATUS.ORDERED);
-                    orders.add(order);
+            List<OrderItem> orderItems = new ArrayList<OrderItem>();
+            Float totalPrice = (float) 0;
+            for (Integer i = 0; i < cartItems.size(); i++) {
+                for (Integer j=0; j< warehouseProducts.size(); j++) {
+                    if (warehouseProducts.get(j).getId() == cartItems.get(i)
+                            .getWarehouseProduct().getId()) {
+                        orderItem = new OrderItem();
+                        orderItem.setQuantity(cartItems.get(i).getQuantity());
+                        orderItem.setPrice(cartItems.get(i).getQuantity()
+                                * (warehouseProducts.get(j)).getPrice());                    
+                        orderItem.setWarehouseProduct(warehouseProducts.get(j));
+                        orderItem.setStatus(ORDER_STATUS.ORDERED);
+                        orderItems.add(orderItem);
+                        totalPrice = totalPrice + orderItem.getPrice();
+                    }
                 }
             }
-            List<Order> unplacedOrders = customerService.addOrders(orders);
+            order = new Order();
+            order.setAddress(address);
+            order.setOrderItems(orderItems);
+            LocalDate todayDate = LocalDate.now();
+            order.setOrderDate(todayDate);
+            order.setPrice(totalPrice);
+            order.setCustomer(customer);
+            List<OrderItem> unplacedOrders = customerService.addOrder(order);
             if (unplacedOrders.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
-                modelAndView.setViewName("OrdersDisplay");
+                deleteCartProducts(customer,warehouseProducts);
             } else if (unplacedOrders.size() == orders.size()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_FAIL);
@@ -459,14 +465,14 @@ System.out.println("helloooooo");
             List<WarehouseProduct> warehouseProducts) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            List<CartProduct> cartProducts = customer.getCartProducts();
-            for (Integer i = 0; i < cartProducts.size(); i++) {
-                if (warehouseProducts.get(i).getId() == cartProducts.get(i)
+            List<CartItem> cartItems = customer.getCartItems();
+            for (Integer i = 0; i < cartItems.size(); i++) {
+                if (warehouseProducts.get(i).getId() == cartItems.get(i)
                         .getWarehouseProduct().getId()) {
-                    cartProducts.remove(cartProducts.get(i));
+                    cartItems.remove(cartItems.get(i));
                 }
             }
-            customer.setCartProducts(cartProducts);
+            customer.setCartItems(cartItems);
             if (customerService.updateCustomer(customer)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
@@ -474,119 +480,6 @@ System.out.println("helloooooo");
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-    }
-
-    /**
-     * <p>
-     * This method is used to add new delivery address of the customer
-     * </p>
-     *
-     * @param address needed for add new address. It contains street, city,
-     *                state, pin-code of delivery address
-     */
-    @PostMapping("addAddress")
-    public ModelAndView addAddress(@ModelAttribute("address") Address address,
-            HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute("customer");
-        try {
-            List<Address> addresses = customer.getAddresses();
-            addresses.add(address);
-            customer.setAddresses(addresses);
-            if (customerService.updateCustomer(customer)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_ADDRESS_SUCCESS);
-            } else {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_ADDRESS_FAIL);
-            }
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
-        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-        modelAndView.setViewName("myAccount");
-        return modelAndView;
-    }
-
-    /**
-     * <p>
-     * This method is used to delete delivery address of the customer
-     * </p>
-     *
-     * @param address needed for add new address. It contains street, city,
-     *                state, pin-code of delivery address
-     */
-    @PostMapping("deleteAddress")
-    public ModelAndView deleteAddress(@RequestParam("id") String id,
-            HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute("customer");
-        try {
-            List<Address> addresses = customer.getAddresses();
-            for (Integer i = 0; i < addresses.size(); i++) {
-                if (Integer.parseInt(id) == addresses.get(i).getId()) {
-                    addresses.remove(addresses.get(i));
-                    break;
-                }
-            }
-            customer.setAddresses(addresses);
-            if (customerService.updateCustomer(customer)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_DELETE_ADDRESS_SUCCESS);
-            } else {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_DELETE_ADDRESS_FAIL);
-            }
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE,
-                    Constants.MSG_DELETE_ADDRESS_FAIL);
-        }
-        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-        modelAndView.setViewName("myAccount");
-        return modelAndView;
-    }
-
-    /**
-     * <p>
-     * This method is used to update delivery address of the customer
-     * </p>
-     *
-     * @param address needed for update address. It contains street, city,
-     *                state, pin-code of delivery address
-     */
-    @PostMapping("updateAddress")
-    public ModelAndView updateAddress(
-            @ModelAttribute("address") Address address,
-            HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute("customer");
-        try {
-            List<Address> addresses = customer.getAddresses();
-            for (Integer i = 0; i < addresses.size(); i++) {
-                if (address.getId() == addresses.get(i).getId()) {
-                    addresses.remove(addresses.get(i));
-                    addresses.add(address);
-                    break;
-                }
-            }
-            customer.setAddresses(addresses);
-            if (customerService.updateCustomer(customer)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_UPDATE_ADDRESS_SUCCESS);
-            } else {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_UPDATE_ADDRESS_FAIL);
-            }
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE,
-                    Constants.MSG_UPDATE_ADDRESS_FAIL);
-        }
-        session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-        modelAndView.setViewName("myAccount");
-        return modelAndView;
     }
 
     /**

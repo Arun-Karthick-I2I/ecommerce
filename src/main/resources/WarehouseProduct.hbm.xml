@@ -17,9 +17,9 @@
 		<property name="quantity" column="QUANTITY" type="integer" />
 		<property name="price" column="PRICE" type="float" />
 
-		<bag name="orders">
+		<bag name="orderItems">
 			<key column="WAREHOUSE_PRODUCT_ID" />
-			<one-to-many class="com.ideas2it.ecommerce.model.Order" />
+			<one-to-many class="com.ideas2it.ecommerce.model.OrderItem" />
         </bag>
 	</class>
 

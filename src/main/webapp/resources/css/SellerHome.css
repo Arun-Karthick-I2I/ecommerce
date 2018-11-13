@@ -2,6 +2,10 @@
 	float:right;
 }
 
+.btn.btn-primary.btn-sm {
+	float:right;
+}
+
 .modal-content {
     border-radius: 5px;
 }
@@ -13,3 +17,4 @@
 .form-group-btn {
 	text-align:center;
 }
+

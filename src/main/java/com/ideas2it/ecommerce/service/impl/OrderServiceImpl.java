@@ -43,20 +43,15 @@ private WarehouseProductService warehouseProductService
      * {@inheritDoc}
      */
     @Override
-    public List<Order> addOrders(List<Order> orders) throws EcommerceException {
-        List<Order> unavailableOrders = new ArrayList<Order>();
-        unavailableOrders = warehouseProductService.reduceQuantity(orders);
-        if (!unavailableOrders.isEmpty()) {
-            orders.removeAll(unavailableOrders);
-        }
-        try {
-            if (orderDao.addOrders(orders)) {
-                return unavailableOrders;
+    public List<OrderItem> addOrder(Order order) throws EcommerceException {
+        if (warehouseProductService.reduceQuantity(order)) {
+            try {
+                return orderDao.addOrder(order);
+            } catch (EcommerceException e) {
+                warehouseProductService.increaseQuantity(order);
             }
-        } catch (EcommerceException e) {
-            warehouseProductService.increaseQuantity(orders);
         }
-        return unavailableOrders;
+        return Boolean.FALSE;
     }
     
     /**
@@ -64,10 +59,8 @@ private WarehouseProductService warehouseProductService
      */
     @Override
     public Boolean deleteOrder(Order order) throws EcommerceException {
-        List<Order> orders =  new ArrayList<Order>();
         if (orderDao.deleteOrder(order)) {
-            orders.add(order);
-            warehouseProductService.increaseQuantity(orders);
+            warehouseProductService.increaseQuantity(order);
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

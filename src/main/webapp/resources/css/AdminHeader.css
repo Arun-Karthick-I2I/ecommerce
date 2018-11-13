@@ -1,8 +1,8 @@
 div > .sidebar > form > p > a {
     position: absolute;
-    top: 0;
+    top: 10px;
     right: 25px;
-    font-size: 40px;
+    font-size: 30px;
     margin-left: 50px;
     color: #f1f1f1;
     text-decoration: none;
@@ -43,6 +43,21 @@ div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > a:hover {
 	color: #818181;
 }
 
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > form > .navbar-brand {
+	border: none;
+    background-color: inherit;
+    padding: 8px 8px 8px 32px;
+    font-size: 25px;
+    color: #ffffff;
+    display: inline-block;
+    transition: 0.3s;	
+}
+
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > form > .navbar-brand:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
 nav > .container-fluid > .navbar-header > ul > li > a > .fa-bars{
 	font-size: 20px;
 }
@@ -54,7 +69,6 @@ div > .navbar-custom > .container-fluid > ul > li > a {
 
 div > .navbar-custom > .container-fluid > ul > li > a:hover {
 	background-color: inherit;
-	color: #818181;
 }
 
 div > .navbar-custom > .container-fluid > ul > li > .logout > .default {

@@ -6,6 +6,7 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.dao.CustomerDao;
@@ -142,8 +143,8 @@ public class CustomerServiceImpl implements CustomerService {
      /**
       * @(inheritDoc)
       */
-     public List<Order> addOrders(List<Order> orders) throws EcommerceException {
-         return orderService.addOrders(orders);
+     public List<OrderItem> addOrder(Order order) throws EcommerceException {
+         return orderService.addOrder(order);
      }
      
      /** 

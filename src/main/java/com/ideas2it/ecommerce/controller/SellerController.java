@@ -278,8 +278,7 @@ public class SellerController {
         try {
             List<Product> products = sellerService.searchProduct(productName);
             if (!products.isEmpty()) {
-                modelAndView.addObject("selectProduct", Boolean.TRUE);
-                modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
+                modelAndView = showWarehouseProductForm(request, products.get(0));
             } else {
                 modelAndView.addObject("newProduct", Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES,
@@ -300,21 +299,17 @@ public class SellerController {
      * those products.
      * </p>
      */
-    @PostMapping("showWarehouseProductForm")
-    public ModelAndView showWarehouseProductForm(HttpServletRequest request) {
+    private ModelAndView showWarehouseProductForm(HttpServletRequest request, Product product) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
-        Product product = new Product();
         HttpSession session = request.getSession(Boolean.FALSE);
         Integer sellerId = (Integer) session
                 .getAttribute(Constants.LABEL_SELLER_ID);
-        Integer productId = Integer
-                .parseInt(request.getParameter(Constants.LABEL_PRODUCT_ID));
+        Integer productId = product.getId();
         try {
             WarehouseProduct warehouseProduct = sellerService
                     .getWarehouseProductByProductId(productId, sellerId);
             if (null == warehouseProduct) {
                 warehouseProduct = new WarehouseProduct();
-                product = sellerService.searchProduct(productId);
                 warehouseProduct.setProduct(product);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,

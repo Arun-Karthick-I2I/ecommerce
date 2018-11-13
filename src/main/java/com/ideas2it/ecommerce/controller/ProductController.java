@@ -43,10 +43,10 @@ public class ProductController {
         List<Product> products = new ArrayList<Product>();
         products = getProducts();
         if (!products.isEmpty()) {
-            return new ModelAndView("displayProducts",
+            return new ModelAndView("adminDisplayProducts",
                 "products",products);  
         } else {
-            return new ModelAndView("displayProducts",
+            return new ModelAndView("adminDisplayProducts",
                 Constants.LABEL_MESSAGE,Constants.MSG_PRODUCTS_UNAVAILABLE);
         }
     }

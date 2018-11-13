@@ -2,14 +2,14 @@ package com.ideas2it.ecommerce.model;
 
 /**
  * <p>
- * Holds the various Products along with their respective prices and quantity 
+ * Holds the various Products along with their respective price and quantity 
  * required by the Customer who wishes to place the Order
  * </p>
  * 
  * @author Pavithra.S
  *
  */
-public class CartProduct {
+public class CartItem {
 	private Integer id;
 	private Integer quantity;
 	private Float price;
