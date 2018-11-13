@@ -67,6 +67,10 @@ public class Constants {
     public static final String LABEL_WAREHOUSE_PRODUCT_NAME = 
         "warehouseProductName";
     
+    public static final String LABEL_ORDERS = "orders";
+    
+    public static final String LABEL_ORDER = "order";
+    
     public static final String MSG_INVALID_CREDENTIALS = "Invalid Credentials";
     
     public static final String LABEL_CATEGORY = "category";
