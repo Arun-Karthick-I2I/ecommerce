@@ -6,12 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
 	href="<c:url value='/resources/css/AdminDisplayCategories.css' />">
 </head>
 <body>
@@ -51,7 +45,7 @@
 						<td>
 							<button type="button" class="btn btn-info btn-sm"
 								data-toggle="modal" data-target="#${category.id}">
-								<i class="fa fa-pencil"></i></button> &nbsp;&nbsp;
+								<i class="fa  fa-pencil-square-o"></i></button> &nbsp;&nbsp;
 							<button type="submit" class="btn btn-danger"
 								formaction="/ecommerce/category/delete" formmethod="post">
 								<i class="fa fa-trash"></i></button>
@@ -104,6 +98,10 @@
 		</div>
 	</div>
 </body>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <c:if test="${null != message}">
 	<script type="text/javascript">
 		alert("${message}");
