@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="title">
-		<h2>Category</h2>
+		<h2>Categories</h2>
 	</div>
 	<form>
 		<div class="input-group">
@@ -36,7 +36,7 @@
 			<tr>
 				<th class="row-header"> ID </th>
 				<th class="row-header"> Name </th>
-				<th></th>
+				<th class="row-header"> Actions </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,8 +50,8 @@
 								${category.name}</button></td>
 						<td>
 							<button type="button" class="btn btn-info btn-sm"
-								data-toggle="modal" data-target="#${category.id}">edit
-							</button> &nbsp;&nbsp;
+								data-toggle="modal" data-target="#${category.id}">
+								<i class="fa fa-pencil"></i></button> &nbsp;&nbsp;
 							<button type="submit" class="btn btn-danger"
 								formaction="/ecommerce/category/delete" formmethod="post">
 								<i class="fa fa-trash"></i></button>

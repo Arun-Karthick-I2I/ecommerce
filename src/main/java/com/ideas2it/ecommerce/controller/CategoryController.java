@@ -259,17 +259,20 @@ public class CategoryController {
     @PostMapping("displayProducts") 
     private ModelAndView displayProducts(@RequestParam("id")Integer id) {
         ModelAndView modelAndView = new ModelAndView();
+        List<Category> categories = getCategories();
         try {
             Category category = categoryService.searchById(id);
             if (null != category) {
                 List<Product> products = category.getProducts();
                 if (!products.isEmpty()) {
                     modelAndView.addObject("products", products);
+                    modelAndView.setViewName("adminDisplayProducts");
                 } else {
+                    modelAndView.addObject("categories",categories);
                     modelAndView.addObject(Constants.LABEL_MESSAGE, 
                         Constants.MSG_CATEGORY_PRODUCTS_UNAVAILABLE);
+                    modelAndView.setViewName("displayCategories");
                 }
-                modelAndView.setViewName("adminDisplayProducts");
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);

@@ -3,7 +3,7 @@ package com.ideas2it.ecommerce.model;
 import java.util.List;
 
 import com.ideas2it.ecommerce.model.Address;
-import com.ideas2it.ecommerce.model.CartProduct;
+import com.ideas2it.ecommerce.model.CartItem;
 import com.ideas2it.ecommerce.model.Order;
 
 /**
@@ -23,7 +23,7 @@ public class Customer {
 	private String emailId;
 	private List<Order> orders;
 	private List<Address> addresses;
-	private List<CartProduct> cartProducts;
+	private List<CartItem> cartItems;
 	private User user;
 	private Boolean isActive;
 	
@@ -75,12 +75,12 @@ public class Customer {
 		this.addresses = addresses;
 	}
 
-	public List<CartProduct> getCartProducts() {
-		return cartProducts;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
 
-	public void setCartProducts(List<CartProduct> cartProducts) {
-		this.cartProducts = cartProducts;
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 	public User getUser() {

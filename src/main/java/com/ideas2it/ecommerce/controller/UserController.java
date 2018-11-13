@@ -34,7 +34,7 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
 public class UserController {
     private static final Character INITIAL_PATH = '/';
     private static final String INDEX_PAGE = "CustomerHome";
-    private static final String ADMIN_HOME = "AdminHeader";
+    private static final String ADMIN_HOME = "displayCategories";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String ADMIN_LOGIN = "adminLogin";
@@ -159,6 +159,8 @@ public class UserController {
                             userService.getAllCategories());
                     modelAndView.setViewName(SELLER_HOME);
                 } else {
+                    modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                            userService.getAllCategories());
                     modelAndView.setViewName(ADMIN_HOME);
                 }
             }
