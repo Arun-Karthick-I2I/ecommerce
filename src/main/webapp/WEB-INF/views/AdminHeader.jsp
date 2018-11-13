@@ -35,8 +35,13 @@
 					    <li><a class="openbtn" id="main" onclick="openNav()">
 					    <i class="fa fa-bars"></i></a> </li>
  						
- 				        <li><a class="navbar-brand" href="#">Ecommerce</a><li>
-					
+ 				        <li>
+ 				        	<form class = "home" method="post" 
+ 				        		action="/ecommerce/category/display">
+								<button class="navbar-brand"> 
+								Ecommerce </button>
+							</form>
+					    </li>
 					</ul>
 				</div>
 				<ul class="nav navbar-nav navbar-right">

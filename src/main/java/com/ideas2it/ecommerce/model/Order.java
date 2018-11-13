@@ -1,8 +1,7 @@
 package com.ideas2it.ecommerce.model;
 
 import java.time.LocalDate;
-
-import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
+import java.util.List;
 
 /**
  * <p>
@@ -13,15 +12,12 @@ import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
  * @author Anantharaj.S
  */
 public class Order {
-
     private Integer id;
     private Customer customer;
-    private WarehouseProduct warehouseProduct;
-    private Integer quantity;
-    private Float price;
     private LocalDate orderDate;
+    private Float price;
     private Address address;
-    private ORDER_STATUS status;
+    private List<OrderItem> orderItems;
 
     public Integer getId() {
         return id;
@@ -39,20 +35,12 @@ public class Order {
         this.customer = customer;
     }
 
-    public WarehouseProduct getWarehouseProduct() {
-        return warehouseProduct;
+    public LocalDate getOrderDate() {
+        return orderDate;
     }
 
-    public void setWarehouseProduct(WarehouseProduct warehouseProduct) {
-        this.warehouseProduct = warehouseProduct;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
     public Float getPrice() {
@@ -63,14 +51,6 @@ public class Order {
         this.price = price;
     }
 
-    public LocalDate getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
-    }
-    
     public Address getAddress() {
         return address;
     }
@@ -79,11 +59,11 @@ public class Order {
         this.address = address;
     }
 
-    public ORDER_STATUS getStatus() {
-        return status;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setStatus(ORDER_STATUS status) {
-        this.status = status;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }

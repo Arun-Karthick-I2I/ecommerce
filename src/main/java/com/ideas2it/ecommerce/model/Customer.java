@@ -18,7 +18,7 @@ public class Customer {
 	private String mobileNumber;
 	private String emailId;
 	private List<Order> orders;
-	private List<CartProduct> cartProducts;
+	private List<CartItem> cartItems;
 	private User user;
 	private Boolean isActive;
 	
@@ -62,12 +62,12 @@ public class Customer {
 		this.orders = orders;
 	}
 
-	public List<CartProduct> getCartProducts() {
-		return cartProducts;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
 
-	public void setCartProducts(List<CartProduct> cartProducts) {
-		this.cartProducts = cartProducts;
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 	public User getUser() {

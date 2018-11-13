@@ -33,19 +33,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${customers}" var="customer">
+			<c:forEach items="${sellers}" var="seller">
 				<form action="admin" method="Post">
-					<input type="hidden" name="id" value="${customer.id}" />
+					<input type="hidden" name="id" value="${seller.id}" />
 					<tr>
-						<td>${customer.id}</td>
+						<td>${seller.id}</td>
 						<td><button class="btn btn-default" formmethod="post"
-								formaction="/ecommerce/admin/displayOrders">
-								${customer.name}</button></td>
-						<td>${customer.mobileNumber}</td>
-						<td>${customer.emailId}</td>
+								formaction="/ecommerce/admin/displaySellers">
+								${seller.name}</button></td>
+						<td>${seller.mobileNumber}</td>
+						<td>${seller.emailId}</td>
+						<td>${seller.rating}</td>
 						<td>
 							<button type="submit" class="btn btn-danger"
-								formaction="/ecommerce/admin/deleteCustomer" formmethod="post">
+								formaction="/ecommerce/admin/deleteSeller" formmethod="post">
 								<i class="fa fa-trash"></i></button>
 						</td>
 					</tr>
