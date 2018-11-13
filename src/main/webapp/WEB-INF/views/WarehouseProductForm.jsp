@@ -23,6 +23,8 @@
 			</c:if>
 			<div class="w-25 p-3 product">
 				<div class="form-group">
+					<input type="hidden" name="product.id" value="${warehouseProduct.product.id}" />
+					<input type="hidden" name="seller.id" value="${sellerId}" />
 					<label for="name">Product Name</label> <input type="text"
 						class="form-control" id="name" name="product.name"
 						value="${warehouseProduct.product.name}"
