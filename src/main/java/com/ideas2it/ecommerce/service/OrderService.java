@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 
 /**
  * <p>
@@ -48,7 +49,7 @@ public interface OrderService {
      *                  successfully. Otherwise returns false, if the 
      *                  insertion is unsuccessful. 
      */
-    Boolean addOrder(Order order) throws EcommerceException;
+    List<OrderItem> addOrder(Order order) throws EcommerceException;
     
     /**
      * <p>

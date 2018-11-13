@@ -7,6 +7,7 @@ import com.ideas2it.ecommerce.dao.OrderDao;
 import com.ideas2it.ecommerce.dao.impl.OrderDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.service.OrderService;
 import com.ideas2it.ecommerce.service.WarehouseProductService;
 
@@ -43,15 +44,17 @@ private WarehouseProductService warehouseProductService
      * {@inheritDoc}
      */
     @Override
-    public Boolean addOrder(Order order) throws EcommerceException {
-        if (warehouseProductService.reduceQuantity(order)) {
-            try {
-                return orderDao.addOrder(order);
-            } catch (EcommerceException e) {
-                warehouseProductService.increaseQuantity(order);
+    public List<OrderItem> addOrder(Order order) throws EcommerceException {
+        List<OrderItem> unavailableOrderItems = new ArrayList<OrderItem>();
+        unavailableOrderItems = warehouseProductService.reduceQuantity(order);
+        try {
+            if (orderDao.addOrder(order)) {
+                return uavailableOrderItems;
             }
+        } catch (EcommerceException e) {
+                warehouseProductService.increaseQuantity(order);
         }
-        return Boolean.FALSE;
+        return uavailableOrderItems;
     }
     
     /**
