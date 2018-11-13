@@ -11,11 +11,11 @@
 		</id>
 
 		<many-to-one name="order" column="ORDER_ID"
-			class="com.ideas2it.ecommerce.Order" />
+			class="com.ideas2it.ecommerce.model.Order" />
 
 		<many-to-one name="warehouseProduct"
 			column="WAREHOUSE_PRODUCT_ID"
-			class="com.ideas2it.ecommerce.WarehouseProduct" />
+			class="com.ideas2it.ecommerce.model.WarehouseProduct" />
 
 		<property name="quantity" column="QUANTITY" type="int" />
 		<property name="price" column="PRICE" type="float" />

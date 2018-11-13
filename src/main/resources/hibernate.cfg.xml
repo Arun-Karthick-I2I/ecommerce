@@ -11,7 +11,7 @@
 		<property name="connection.password">root@dvd</property>
 		<property name="show-sql">true</property>
 		<mapping resource="Address.hbm.xml" />
-		<mapping resource="CartProduct.hbm.xml" />
+		<mapping resource="CartItem.hbm.xml" />
 		<mapping resource="Category.hbm.xml" />
 		<mapping resource="Customer.hbm.xml" />
 		<mapping resource="Order.hbm.xml" />
