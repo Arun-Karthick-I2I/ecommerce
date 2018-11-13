@@ -52,7 +52,7 @@
 
 			<div id="right">
 				<div class="product-details">
-					<input type="hidden" value=${product.id } name="id" /> <Strong></Strong>
+					<input type="hidden" value=${product.warehouseProducts[0].id} name="id" />
 					<div class="productName">
 						<Strong>${product.name}</Strong>
 						<div>#AvailableOnPandaZone</div>
@@ -81,10 +81,11 @@
 								<div class="modal-dialog modal-md modal-dialog-centered">
 									<div class="modal-content">
 										<div class="modal-body">
+										    <button type="button" class="close" data-dismiss="modal">&times;</button>
 											<table class="sellers">
 												<tr>
 													<th>Seller</th>
-													<th>price</th>
+													<th>Price</th>
 													<th></th>
 												</tr>
 												<c:forEach var="warehouseProduct" items="${product.warehouseProducts}">
@@ -94,7 +95,7 @@
 													<td>${warehouseProduct.price}</td>
 													<td>
 														<div class="product-button">
-															<input type="hidden" name="id" value="${product.id}" />
+															<input type="hidden" name="id" value="${warehouseProduct.id}" />
 															<c:if test="${not empty customer}">
 																<button type="submit" formaction="/ecommerce/addCart"
 																	formmethod="post" class="btn btn-warning">

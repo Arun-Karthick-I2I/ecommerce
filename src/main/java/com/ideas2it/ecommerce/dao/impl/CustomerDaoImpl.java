@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session; 
 import org.hibernate.Transaction;
 
+import com.ideas2it.ecommerce.model.CartItem;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.session.SessionManager;
@@ -208,7 +209,12 @@ public class CustomerDaoImpl implements CustomerDao {
         try {
             session = SessionManager.getSession();
             transaction = session.beginTransaction();
+            List<CartItem> cartItems = customer.getCartItems();
+            for(CartItem cartItem : cartItems) {
+                session.save(cartItem);
+            }  
             session.update(customer);
+
             transaction.commit();
             return true;
         } catch (HibernateException e) {
