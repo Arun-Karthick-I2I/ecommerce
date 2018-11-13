@@ -1,5 +1,5 @@
 .navbar-custom {
-    background-color: #47a3da;
+    background-color: #3465a4;
 }
 li {
    vertical-align:center;
@@ -17,7 +17,7 @@ nav > .container-fluid > ul > li > a {
 }
 
 nav > .container-fluid > ul > li > a:hover {
-    background-color:#47a3da;
+    background-color:#3465a4;
     color: black;
 }
 
@@ -26,7 +26,7 @@ nav > .container-fluid > .navbar-header > button {
 }
 
 #btnloginModal:hover {
-    background-color:#47a3da;
+    background-color:#3465a4;
     color: black;
 }
 

@@ -159,10 +159,10 @@
 						<div class="form-group">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="user.role"
-									value="CUSTOMER" /> <span class="input-group-addon"> <i
-									class="fa fa-user"></i>
+									value="CUSTOMER" /> 
+							    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 								<input type="text" class="form-control" name="name"
-									placeholder="Name" required="required"> </span>
+									placeholder="Name" required="required">
 							</div>
 						</div>
 						<div class="form-group">

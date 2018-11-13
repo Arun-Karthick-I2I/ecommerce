@@ -4,6 +4,7 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 
@@ -122,7 +123,7 @@ public interface CustomerService {
      *         empty Object.
      */
     public List<Category> getAllCategories() throws EcommerceException;
-    
+
     /**
      * <p>
      * Getting list of products from e-commerce web-site based on category id
@@ -145,7 +146,8 @@ public interface CustomerService {
      * @param productName Needed for search product.
      * @return List<Product> Returns list of products.
      */
-    public List<Product> searchProduct(String productName)throws EcommerceException;
+    public List<Product> searchProduct(String productName)
+            throws EcommerceException;
 
     /**
      * <p>
@@ -156,7 +158,7 @@ public interface CustomerService {
      *         empty Object.
      */
     public List<Product> getAllProducts() throws EcommerceException;
-    
+
     /**
      * <p>
      * Getting list of products from e-commerce web-site based on category id
@@ -166,18 +168,19 @@ public interface CustomerService {
      * @param productId Needed for search product.
      * @return Product Returns list of products.
      */
-    public Product searchProduct(Integer productId)throws EcommerceException;
-    
+    public Product searchProduct(Integer productId) throws EcommerceException;
+
     /**
      * <p>
      * This method is used to place multiple orders to customer in e-commerce
      * web-site for different products with different order.
      * </p>
      * 
-     * @param List<Order> Needed for inserting order details
-     * @return Boolean If orders added to database returns true, otherwise false
+     * @param Order Needed for inserting order details
+     * @return List<OrderItem> If orders added to database returns null,
+     *         otherwise returns list of orderItems which ran out of stock.
      */
-    public List<Order> addOrders(List<Order> orders) throws EcommerceException;
+    public List<OrderItem> addOrder(Order order) throws EcommerceException;
 
     /**
      * <p>
