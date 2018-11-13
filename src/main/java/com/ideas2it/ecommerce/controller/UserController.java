@@ -1,6 +1,8 @@
 
 package com.ideas2it.ecommerce.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.Role.USER_ROLES;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
+import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
@@ -35,9 +38,11 @@ public class UserController {
     private static final Character INITIAL_PATH = '/';
     private static final String INDEX_PAGE = "CustomerHome";
     private static final String ADMIN_HOME = "displayCategories";
+    private static final String CUSTOMER_HOME = "CustomerHome";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String ADMIN_LOGIN = "adminLogin";
+    private static final String ADDRESS_FORM = "AddressForm"; 
 
     private UserService userService = new UserServiceImpl();
 
@@ -192,5 +197,125 @@ public class UserController {
         model.addAttribute(Constants.LABEL_MESSAGE, Constants.MSG_LOGGED_OUT);
         return viewName;
     }
+    
+    /**
+     * <p>
+     * Shows the new address form that can be used to provide additional
+     * addresses.
+     * </p>
+     */
+    @GetMapping("newAddress")
+    public ModelAndView createAddress() {
+        ModelAndView modelAndView = new ModelAndView(ADDRESS_FORM);
+        modelAndView.addObject(Constants.LABEL_ADDRESS, new Address());
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * Adds the new address to the user.
+     * </p>
+     */
+    @PostMapping("addAddress")
+    public ModelAndView addAddress(@ModelAttribute("address") Address address,
+            HttpSession session) throws EcommerceException {
+        ModelAndView modelAndView = new ModelAndView();
+        USER_ROLES role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
+        if (USER_ROLES.CUSTOMER == role) {
+            modelAndView.setViewName(CUSTOMER_HOME);
+        } else if (USER_ROLES.SELLER == role) {
+            modelAndView.setViewName(SELLER_HOME);
+        }
+        User user = userService.searchUser(
+                (Integer) session.getAttribute(Constants.LABEL_USER_ID));
+        try {
+            List<Address> addresses = user.getAddresses();
+            addresses.add(address);
+            user.setAddresses(addresses);
+            if (userService.updateUser(user)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ADD_ADDRESS_SUCCESS);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * Shows the seller edit address form that can be used to provide updated
+     * address details for the warehouse address given.
+     * </p>
+     */
+    @PostMapping("editAddress")
+    public ModelAndView editAddress(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView(ADDRESS_FORM);
+        modelAndView.addObject("addressForm", Boolean.TRUE);
+        Address address = new Address();
+        Integer.parseInt(request.getParameter(Constants.LABEL_ADDRESS));
+        modelAndView.addObject(Constants.LABEL_ADDRESS, address);
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * Updates the warehouse address based on the input from edit warehouse
+     * address form.
+     * </p>
+     */
+    @PostMapping("updateAddress")
+    public ModelAndView updateAddress(
+            @ModelAttribute("address") Address address, HttpSession session)
+            throws EcommerceException {
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        User user = userService.searchUser(
+                (Integer) session.getAttribute(Constants.LABEL_USER_ID));
+        try {
+            List<Address> addresses = user.getAddresses();
+            Address existingaddress = new Address();
+            existingaddress.setId(address.getId());
+            addresses.remove(existingaddress);
+            addresses.add(address);
+            user.setAddresses(addresses);
+            if (userService.updateUser(user)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_UPDATE_ADDRESS_SUCCESS);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * Removes the corresponding warehouse address from the seller based on the
+     * seller input.
+     * </p>
+     */
+    @PostMapping("removeAddress")
+    public ModelAndView removeAddress(HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        try {
+            User user = userService.searchUser(
+                    (Integer) session.getAttribute(Constants.LABEL_USER_ID));
+            Address address = new Address();
+            address.setId(Integer.parseInt(
+                    request.getParameter(Constants.LABEL_ADDRESS_ID)));
+            List<Address> addresses = user.getAddresses();
+            addresses.remove(address);
+            user.setAddresses(addresses);
+            if (userService.updateUser(user)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_DELETE_ADDRESS_SUCCESS);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
 
 }

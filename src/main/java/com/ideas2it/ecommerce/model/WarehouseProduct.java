@@ -4,9 +4,12 @@ import java.util.List;
 
 /**
  * <p>
- * Warehouse Product contains the seller details, price, quantity and other
- * details of the particular product. It contains the list of orders in which
- * that particular product is placed.
+ * Warehouse Product represents the product a seller has in his warehouse. Many
+ * sellers can sell the same product on the store but each of them will sell it
+ * at a different price and will have different quantity in their warehouse. It
+ * contains the seller details, price, quantity and other details of the
+ * particular product. It contains the list of order items in which that
+ * particular product is purchased.
  * </p>
  *
  * @author Arun Karthick.J
@@ -17,7 +20,7 @@ public class WarehouseProduct {
     private Product product;
     private Integer quantity;
     private Float price;
-    private List<Order> orders;
+    private List<OrderItem> orderItems;
 
     public Integer getId() {
         return id;
@@ -59,11 +62,11 @@ public class WarehouseProduct {
         this.price = price;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }

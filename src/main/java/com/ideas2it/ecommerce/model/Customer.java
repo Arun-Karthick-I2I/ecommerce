@@ -2,10 +2,6 @@ package com.ideas2it.ecommerce.model;
 
 import java.util.List;
 
-import com.ideas2it.ecommerce.model.Address;
-import com.ideas2it.ecommerce.model.CartItem;
-import com.ideas2it.ecommerce.model.Order;
-
 /**
  * <p>
  * Customer contains personal details, order details, delivery address details, 
@@ -22,7 +18,6 @@ public class Customer {
 	private String mobileNumber;
 	private String emailId;
 	private List<Order> orders;
-	private List<Address> addresses;
 	private List<CartItem> cartItems;
 	private User user;
 	private Boolean isActive;
@@ -65,14 +60,6 @@ public class Customer {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
-	}
-
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
 	}
 
 	public List<CartItem> getCartItems() {

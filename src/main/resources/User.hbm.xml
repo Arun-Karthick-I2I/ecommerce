@@ -10,6 +10,11 @@
       
       <property name = "password" column = "PASSWORD" type = "string"/>
       <property name = "userName" column = "USER_NAME" type = "string"/>
+
+	  <bag name="addresses"> 
+        <key column="USER_ID" />
+        <one-to-many class="com.ideas2it.ecommerce.model.Address" />
+      </bag>
       
       <property name = "role" column = "ROLE">
         <type name="org.hibernate.type.EnumType">
@@ -17,6 +22,7 @@
             <param name="useNamed">true</param>
         </type>
 	  </property>
+	        	
 	        	
    </class>
 </hibernate-mapping>

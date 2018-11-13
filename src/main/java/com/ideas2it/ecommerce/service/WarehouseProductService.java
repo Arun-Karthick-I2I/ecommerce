@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 
@@ -120,25 +121,25 @@ public interface WarehouseProductService {
 
     /**
      * <p>
-     * Reduces the stock from the warehouse based on the order quantity.
+     * Reduces the stock from the warehouse based on the order item quantity.
      * </p>
      * 
-     * @param orders List of Orders whose corresponding product stocks need to
-     *               be reduced from the warehouse
-     * @return orders Returns the list of orders which can't be placed due to
-     *         stock unavailability.
+     * @param orders Order whose corresponding product stocks need to be reduced
+     *               from the warehouse
+     * @return orderItems Returns the list of orderItems which can't be placed
+     *         due to stock unavailability.
      */
-    List<Order> reduceQuantity(List<Order> orders) throws EcommerceException;
+    List<OrderItem> reduceQuantity(Order order) throws EcommerceException;
 
     /**
      * <p>
      * Increases the stock from the warehouse based on the order quantity.
      * </p>
      * 
-     * @param orders List of Orders whose corresponding product stocks need to
+     * @param order Order whose corresponding product stocks need to
      *               be increased in the warehouse
      * @return message Returns true if stock quanitity is increased in the
      *         warehouse
      */
-    Boolean increaseQuantity(List<Order> orders) throws EcommerceException;
+    Boolean increaseQuantity(Order order) throws EcommerceException;
 }

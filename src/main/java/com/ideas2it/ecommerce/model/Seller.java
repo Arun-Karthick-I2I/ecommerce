@@ -4,8 +4,10 @@ import java.util.List;
 
 /**
  * <p>
- * Seller contains the contact details of the seller, list of warehouse
- * addresses, list of products they offer to customers and login credentials.
+ * Seller represents a company who wishes to sell products online. It contains
+ * the list of warehouse products which he sells. The warehouse product model
+ * contains the details of a product in his warehouse. Seller also contains the
+ * contact details and his warehouse addresses.
  * </p>
  *
  * @author Arun Karthick.J
@@ -17,7 +19,6 @@ public class Seller {
     private String emailId;
     private Float rating;
     private List<WarehouseProduct> warehouseProducts;
-    private List<Address> addresses;
     private User user;
 
     public Integer getId() {
@@ -66,14 +67,6 @@ public class Seller {
 
     public void setWarehouseProducts(List<WarehouseProduct> warehouseProducts) {
         this.warehouseProducts = warehouseProducts;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
     }
 
     public User getUser() {

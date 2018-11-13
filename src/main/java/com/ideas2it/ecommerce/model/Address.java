@@ -11,8 +11,7 @@ package com.ideas2it.ecommerce.model;
  */
 public class Address {
     private Integer id;
-    private Customer customer;
-    private Seller seller;
+    private User user;
     private String addressLine;
     private String city;
     private String state;
@@ -27,20 +26,12 @@ public class Address {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getAddressLine() {

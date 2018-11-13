@@ -20,10 +20,6 @@
 	        <one-to-many class="com.ideas2it.ecommerce.model.WarehouseProduct" />
         </bag>
 				
-		<bag name="addresses"> 
-	        <key column="SELLER_ID" />
-	        <one-to-many class="com.ideas2it.ecommerce.model.Address" />
-        </bag>
   	</class>
 
 </hibernate-mapping>  
