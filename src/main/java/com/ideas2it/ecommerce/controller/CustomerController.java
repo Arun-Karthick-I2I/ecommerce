@@ -199,6 +199,7 @@ public class CustomerController {
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
+System.out.println(id);
             List<CartProduct> cartProducts = customer.getCartProducts();
             Boolean result = Boolean.TRUE;
             for (Integer i = 0; i < cartProducts.size(); i++) {
@@ -221,10 +222,12 @@ public class CustomerController {
             }
             customer.setCartProducts(cartProducts);
             if (customerService.updateCustomer(customer)) {
+System.out.println("hihi");
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 modelAndView.addObject("cartProducts",
                         customer.getCartProducts());
             } else {
+System.out.println("helloooooo");
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_CART_FAIL);
             }

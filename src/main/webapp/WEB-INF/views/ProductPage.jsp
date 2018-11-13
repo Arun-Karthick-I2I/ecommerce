@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,42 +22,121 @@
 						src="data:image/jpg;base64,${product.base64Image}" />
 				</div>
 				<div class="product-button">
-					<input type="hidden" name="id" value="" />
+					<input type="hidden" name="id" value="${product.id}" />
 					<c:if test="${not empty customer}">
-					<button type="submit" formaction="/ecommerce/addCart"
-						formmethod="post" class="btn btn-warning btn-block btn-lg">
-						<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
-							TO CART</b>
-					</button>
-					</c:if>
-				    <c:if test="${empty customer}">
-					<button onclick="isLoggedIn()" class="btn btn-warning btn-block btn-lg">
-						<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADDDD
-							TO CART</b>
-					</button>
-					</c:if>
+						<button type="submit" formaction="/ecommerce/addCart"
+							formmethod="post" class="btn btn-warning btn-block btn-lg">
+							<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
+								TO CART</b>
+						</button>
 					&nbsp;&nbsp;
-					<button type="submit" class="btn btn-danger btn-block btn-lg">
-						<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-					</button>
+					<button type="submit" formaction="/ecommerce/buyProduct"
+							formmethod="post" class="btn btn-danger btn-block btn-lg">
+							<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+						</button>
+					</c:if>
+					<c:if test="${empty customer}">
+						<button type="button" onclick="isLoggedIn()"
+							class="btn btn-warning btn-block btn-lg">
+							<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; <b>ADD
+								TO CART</b>
+						</button>
+					&nbsp;&nbsp;
+					<button type="button" onclick="isLoggedIn()"
+							class="btn btn-danger btn-block btn-lg">
+							<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+						</button>
+					</c:if>
 				</div>
 			</div>
 
 			<div id="right">
 				<div class="product-details">
 					<input type="hidden" value=${product.id } name="id" /> <Strong></Strong>
-					<p>${product.name}</p>
-					<c:if test="${null == product.rating}">
-						<p>Be the first to rate it.</p>
-					</c:if>
-					<c:if test="${null ne product.rating}">
-						<Strong>${product.rating}<img class="verified-icon"
-							src="<c:url value='/resources/images/square-grunge-red-verified-stamp-vector-16216568.jpg' />" /></Strong>
-					</c:if>
+					<div class="productName">
+						<Strong>${product.name}</Strong>
+						<div>#AvailableOnPandaZone</div>
 
-					<p>
-						<Strong>${product.description}</Strong>
-					</p>
+					</div>
+					<label>Price :</label>
+					<div class="price">&nbsp;&#8377
+						${product.warehouseProducts[0].price}</div>
+					<div class="productRating">
+						<c:if test="${null == product.rating}">
+
+						</c:if>
+						<c:if test="${null ne product.rating}">
+							<div>${product.rating}</div>
+						</c:if>
+					</div>
+					<label>Specification :</label>
+					<div class="description">${product.description}</div>
+					<label>Seller :</label>
+					<div class="seller">
+						${product.warehouseProducts[0].seller.name}
+						<c:if test="${fn:length(product.warehouseProducts) > 1}">
+			        	and<button type="button" class="btn btn-default" id="sellersModalButton" data-target="#sellers" data-toggle="modal">
+			        		<a> view more sellers</a></button>
+							<div class="modal fade" id="sellers" role="dialog">
+								<div class="modal-dialog modal-md modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-body">
+											<table class="sellers">
+												<tr>
+													<th>Seller</th>
+													<th>price</th>
+													<th></th>
+												</tr>
+												<c:forEach var="warehouseProduct" items="${product.warehouseProducts}">
+												<form method="post">
+												<tr>
+													<td>${warehouseProduct.seller.name}</td>
+													<td>${warehouseProduct.price}</td>
+													<td>
+														<div class="product-button">
+															<input type="hidden" name="id" value="${product.id}" />
+															<c:if test="${not empty customer}">
+																<button type="submit" formaction="/ecommerce/addCart"
+																	formmethod="post" class="btn btn-warning">
+																	<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
+																		TO CART</b>
+																</button>
+															&nbsp;
+															<button type="submit" formaction="/ecommerce/buyProduct"
+																	formmethod="post" class="btn btn-danger">
+																	<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+																</button>
+															</c:if>
+															<c:if test="${empty customer}">
+																<button type="button" onclick="isLogged()" class="btn btn-warning">
+																	<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; <b>ADD
+																		TO CART</b>
+																</button>
+															&nbsp;
+															<button type="button" onclick="isLogged()" class="btn btn-danger">
+																	<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+																</button>
+															</c:if>
+														</div>
+													</td>
+												</tr>
+												</form>
+												</c:forEach>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</div>
+
+					<br /> <label>Service :</label>
+					<div class="service">
+						<i class="fa fa-tag"></i>&nbsp;Cash On Delivery Available.
+					</div>
+					<div class="service">
+						<i class="fa fa-tag"></i>&nbsp;10 days replacement policy.
+					</div>
 				</div>
 			</div>
 		</form>
@@ -64,12 +144,15 @@
 </body>
 
 <script type="text/javascript">
-function isLoggedIn(event) {
-    alert("hihihihihihihihihihihi");
-    event.preventDefault();
-    return;
-    	
-}
+	function isLoggedIn(event) {
+		alert("Login first..");
+		$("#Customerlogin").modal("show");
+	}
+	function isLogged(event) {
+		alert("Login first..");
+		$("#sellers").modal("hide");
+		$("#Customerlogin").modal("show");
+	}
 </script>
 
 

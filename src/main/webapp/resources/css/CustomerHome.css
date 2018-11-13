@@ -5,33 +5,38 @@
 }
 .card-img-top {
 	width:200px;
-	height:200px;
+	height:150px;
 }
 
 .customerHome > .product {
- 	width:250px;
+ 	width:300px;
  	text-align : center;
  	height:250px;
 }
 
 .customerHome > .product >.container > .card {
- 	width:200px;
+ 	width:300px;
  	text-align : center;
 }
  
 .customerHome > form > .container {
 	padding-bottom:20px;
 	display:inline-block;
-	width:200px;
+	width:300px;
 }
 
 .customerHome > .product > .container > .card > .card-body {
 	text-align:center;
 	height:50px;
 }
-
+.customerHome > .product > .container > .card > .card-body > button > h4 {
+	height:40px;
+	width:300px;
+	overflow: hidden;
+}
 .customerHome > .product > .container > .card > .card-body > .card-text {
-	width:200px;
+	height:20px;
+	width:300px;
 }
 
 .zoom {
@@ -66,6 +71,7 @@
 	background-color:white;
 	border:none;
     outline:none;
+    font-style:italic;
 }
 
 .customerHome > .product > .container > .card > .card-body > button:hover {

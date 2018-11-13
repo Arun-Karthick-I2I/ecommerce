@@ -54,7 +54,7 @@
 							</div>
 							<div class="form-group">
 								<label for="description">Product Description</label>
-								<textarea rows="5" cols="50" id="description" required></textarea>
+								<textarea rows="5" cols="50" name="description" id="description" required></textarea>
 							</div>
 							<div class="form-group">
 								<label for="image">Upload Product Image (Supported
