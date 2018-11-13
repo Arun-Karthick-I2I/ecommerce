@@ -7,6 +7,7 @@ import com.ideas2it.ecommerce.dao.WarehouseProductDao;
 import com.ideas2it.ecommerce.dao.impl.WarehouseProductDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.WarehouseProductService;
@@ -100,34 +101,40 @@ public class WarehouseProductServiceImpl implements WarehouseProductService {
      * @{inheritDoc}
      */
     @Override
-    public List<Order> reduceQuantity(List<Order> orders)
+    public List<OrderItem> reduceQuantity(Order order)
             throws EcommerceException {
         WarehouseProduct warehouseProduct = new WarehouseProduct();
-        List<Order> outOfStockOrders = new ArrayList<Order>();
-        for (Order order : orders) {
-            warehouseProduct = order.getWarehouseProduct();
+        List<OrderItem> outOfStockItems = new ArrayList<OrderItem>();
+        List<OrderItem> inStockItems = new ArrayList<OrderItem>();
+        for (OrderItem orderItem : order.getOrderItems()) {
+            warehouseProduct = orderItem.getWarehouseProduct();
             warehouseProduct.setQuantity(
-                    warehouseProduct.getQuantity() - order.getQuantity());
+                    warehouseProduct.getQuantity() - orderItem.getQuantity());
             if (warehouseProduct.getQuantity() >= 0) {
+                inStockItems.add(orderItem);
                 warehouseProductDao.updateWarehouseProduct(warehouseProduct);
             } else {
-                outOfStockOrders.add(order);
+                outOfStockItems.add(orderItem);
             }
         }
-        return outOfStockOrders;
+        if (!outOfStockItems.isEmpty()) {
+           order.setOrderItems(inStockItems);
+           increaseQuantity(order);
+        }
+        return outOfStockItems;
     }
 
     /**
      * @{inheritDoc}
      */
     @Override
-    public Boolean increaseQuantity(List<Order> orders)
+    public Boolean increaseQuantity(Order order)
             throws EcommerceException {
         WarehouseProduct warehouseProduct = new WarehouseProduct();
-        for (Order order : orders) {
-            warehouseProduct = order.getWarehouseProduct();
+        for (OrderItem orderItem : order.getOrderItems()) {
+            warehouseProduct = orderItem.getWarehouseProduct();
             warehouseProduct.setQuantity(
-                    warehouseProduct.getQuantity() + order.getQuantity());
+                    warehouseProduct.getQuantity() + orderItem.getQuantity());
                 warehouseProductDao.updateWarehouseProduct(warehouseProduct);
         }
         return Boolean.TRUE;

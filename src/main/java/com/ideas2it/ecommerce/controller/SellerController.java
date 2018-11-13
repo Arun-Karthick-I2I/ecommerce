@@ -86,7 +86,6 @@ public class SellerController {
         try {
             Seller existingSeller = sellerService.searchSeller(seller.getId());
             seller.setUser(existingSeller.getUser());
-            seller.setAddresses(existingSeller.getAddresses());
             seller.setRating(existingSeller.getRating());
             seller.setWarehouseProducts(existingSeller.getWarehouseProducts());
             existingSeller = sellerService.checkSellerExistence(seller);
@@ -109,119 +108,6 @@ public class SellerController {
         return modelAndView;
     }
 
-    /**
-     * <p>
-     * Shows the seller new address form that can be used to provide additional
-     * warehouse addresses.
-     * </p>
-     */
-    @GetMapping("newAddress")
-    public ModelAndView createAddress() {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
-        modelAndView.addObject("addressForm", Boolean.TRUE);
-        modelAndView.addObject(Constants.LABEL_ADDRESS, new Address());
-        return modelAndView;
-    }
-
-    /**
-     * <p>
-     * Adds the new warehouse address to the seller.
-     * </p>
-     */
-    @PostMapping("addAddress")
-    public ModelAndView addAddress(@ModelAttribute("address") Address address,
-            HttpSession session) throws EcommerceException {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
-        Seller seller = sellerService.searchSeller(
-                (Integer) session.getAttribute(Constants.LABEL_SELLER_ID));
-        try {
-            List<Address> addresses = seller.getAddresses();
-            addresses.add(address);
-            seller.setAddresses(addresses);
-            if (sellerService.updateSeller(seller)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_ADDRESS_SUCCESS);
-            }
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
-        return modelAndView;
-    }
-
-    /**
-     * <p>
-     * Shows the seller edit address form that can be used to provide updated
-     * address details for the warehouse address given.
-     * </p>
-     */
-    @PostMapping("editAddress")
-    public ModelAndView editAddress(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
-        modelAndView.addObject("addressForm", Boolean.TRUE);
-        Address address = new Address();
-        Integer.parseInt(request.getParameter(Constants.LABEL_ADDRESS));
-        modelAndView.addObject(Constants.LABEL_ADDRESS, address);
-        return modelAndView;
-    }
-
-    /**
-     * <p>
-     * Updates the warehouse address based on the input from edit warehouse
-     * address form.
-     * </p>
-     */
-    @PostMapping("updateAddress")
-    public ModelAndView updateAddress(
-            @ModelAttribute("address") Address address, HttpSession session)
-            throws EcommerceException {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
-        Seller seller = sellerService.searchSeller(
-                (Integer) session.getAttribute(Constants.LABEL_SELLER_ID));
-        try {
-            List<Address> addresses = seller.getAddresses();
-            Address existingaddress = new Address();
-            existingaddress.setId(address.getId());
-            addresses.remove(existingaddress);
-            addresses.add(address);
-            seller.setAddresses(addresses);
-            if (sellerService.updateSeller(seller)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_UPDATE_ADDRESS_SUCCESS);
-            }
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
-        return modelAndView;
-    }
-
-    /**
-     * <p>
-     * Removes the corresponding warehouse address from the seller based on the
-     * seller input.
-     * </p>
-     */
-    @PostMapping("removeAddress")
-    public ModelAndView removeAddress(HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
-        try {
-            Seller seller = sellerService.searchSeller(
-                    (Integer) session.getAttribute(Constants.LABEL_SELLER_ID));
-            Address address = new Address();
-            address.setId(Integer.parseInt(
-                    request.getParameter(Constants.LABEL_ADDRESS_ID)));
-            List<Address> addresses = seller.getAddresses();
-            addresses.remove(address);
-            seller.setAddresses(addresses);
-            if (sellerService.updateSeller(seller)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_DELETE_ADDRESS_SUCCESS);
-            }
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
-        return modelAndView;
-    }
 
     /**
      * <p>

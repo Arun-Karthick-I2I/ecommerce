@@ -68,11 +68,30 @@ public class UserServiceImpl implements UserService {
         return customerService.getCustomerByUserId(userId);
     }
 
+    /**
+     * @{inheritDoc}
+     */
     @Override
     public Seller searchSeller(Integer userId) throws EcommerceException {
         return sellerService.searchSellerByUserId(userId);
     }
+    
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public User searchUser(Integer userId) throws EcommerceException {
+        return userDao.getById(userId);
+    }
 
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public Boolean updateUser(User user) throws EcommerceException {
+        return userDao.updateUser(user);
+    }
+    
     /**
      * @{inheritDoc}
      */

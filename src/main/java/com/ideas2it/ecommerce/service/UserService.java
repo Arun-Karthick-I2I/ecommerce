@@ -68,6 +68,30 @@ public interface UserService {
 
     /**
      * <p>
+     * Fetches the user details based on the userId.
+     * </p>
+     *
+     * @param userId User ID of the
+     * @return user If the user details are available. Returns null If no such
+     *         user exists.
+     */
+    User searchUser(Integer userId) throws EcommerceException;
+    
+    /**
+     * <p>
+     * Updates a User details
+     * </p>
+     *
+     * @param user
+     *        User details which needs to be updated
+     *
+     * @return true   If User details is successfully updated.
+     *         false  If user details is not updated. 
+     */    
+    Boolean updateUser(User user) throws EcommerceException;
+
+    /**
+     * <p>
      * Searches for the presence of a particular userName along with the role
      * and returns message accordingly.
      * </p>
