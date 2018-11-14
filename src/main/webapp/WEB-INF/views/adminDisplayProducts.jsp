@@ -28,7 +28,11 @@
 		<c:forEach var="product" items="${products}">
 			<form>
   				<div class="card">
-	    			<img class="card-img-top" src="data:image/jpg;base64,${product.base64Image}">
+  					<button type="button" class="btn btn-info"
+							data-toggle="modal" data-target="#${product.id}">
+	    				<img class="card-img-top" src="data:image/jpg;base64,
+	    					${product.base64Image}">
+    		    	</button>
     		    	<div class="card-body">
     		    		<button type="button" class="btn btn-info"
 							data-toggle="modal" data-target="#${product.id}">
@@ -49,33 +53,46 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<c:if test="${not empty product.warehouseProducts}">
+									<h3 class="modal-title">Sellers</h3>
+								</c:if>
 							</div>
 							<div class="modal-body">
-								<h3 class="modal-title">Sellers</h3>
+								<c:if test="${not empty product.warehouseProducts}">
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th class="row-header"> ID </th>
-											<th class="row-header"> Name </th>
-											<th class="row-header"> Mobile Number </th>
-											<th class="row-header"> Email ID </th>
-											<th class="row-header"> Rating </th>
+											<th> ID </th>
+											<th> Name </th>
+											<th> Mobile Number </th>
+											<th> Email ID </th>
+											<th> Rating </th>
+											<th class="row-header"> Product Price </th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${product.warehouseProducts}" 
 											var="warehouseProduct">
-											<c:set var="seller" value="warehouseProduct.seller"/>
 											<tr>
-												<td>${seller.id}</td>
-												<td>${seller.name}</td>
-												<td>${seller.mobileNumber}</td>
-												<td>${seller.emailId}</td>
-												<td>${seller.rating}</td>
+												<td>${warehouseProduct.seller.id}</td>
+												<td>${warehouseProduct.seller.name}</td>
+												<td>${warehouseProduct.seller.mobileNumber}</td>
+												<td>${warehouseProduct.seller.emailId}</td>
+												<c:if test="${warehouseProduct.seller.rating ne null}">
+													<td>${warehouseProduct.seller.rating}</td>
+												</c:if>
+												<c:if test="${warehouseProduct.seller.rating eq null}">
+													<td> Not yet Rated </td>
+												</c:if>
+												<td>${warehouseProduct.price}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
+								</c:if>
+								<c:if test="${empty product.warehouseProducts}">
+									<h3>  Sorry, No Seller is selling this Product......</h3>
+								</c:if>
 							</div>
 						</div>
 					</div>

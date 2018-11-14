@@ -157,7 +157,7 @@ public class CustomerDaoImpl implements CustomerDao {
                 Customer.class);
             Root<Customer> root = criteriaQuery.from(Customer.class);
             criteriaQuery.select(root).where(criteriaBuilder.and(
-                criteriaBuilder.equal(root.get(Constants.LABEL_NAME),
+                criteriaBuilder.like(root.get(Constants.LABEL_NAME),
                 name), criteriaBuilder.equal(root.get(Constants.LABEL_ISACTIVE),
                 isActive)));
             Query query = session.createQuery(criteriaQuery);

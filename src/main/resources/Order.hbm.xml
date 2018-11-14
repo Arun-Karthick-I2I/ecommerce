@@ -10,7 +10,7 @@
 			<generator class="increment" />
 		</id>
 
-		<bag name="orderItems">
+		<bag name="orderItems" lazy="false">
 			<key column="ORDER_ID" />
 			<one-to-many class="com.ideas2it.ecommerce.model.OrderItem" />
 		</bag>

@@ -3,6 +3,8 @@ package com.ideas2it.ecommerce.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * <p>
  * Order contains customer details, product, delivery address, quantity and
@@ -35,10 +37,12 @@ public class Order {
         this.customer = customer;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getOrderDate() {
         return orderDate;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
