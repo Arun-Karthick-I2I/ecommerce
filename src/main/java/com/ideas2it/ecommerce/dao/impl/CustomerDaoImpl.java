@@ -140,6 +140,8 @@ public class CustomerDaoImpl implements CustomerDao {
                 append(userId).toString();
             EcommerceLogger.error(exceptionMessage, e);
             throw new EcommerceException(exceptionMessage);
+        } finally {
+            SessionManager.closeSession(session);
         }
     }
 
@@ -171,6 +173,8 @@ public class CustomerDaoImpl implements CustomerDao {
                 append(name).toString();
             EcommerceLogger.error(exceptionMessage, e);
             throw new EcommerceException(exceptionMessage);
+        } finally {
+            SessionManager.closeSession(session);
         }
     }
     
@@ -209,12 +213,7 @@ public class CustomerDaoImpl implements CustomerDao {
         try {
             session = SessionManager.getSession();
             transaction = session.beginTransaction();
-            List<CartItem> cartItems = customer.getCartItems();
-            for(CartItem cartItem : cartItems) {
-                session.save(cartItem);
-            }  
             session.update(customer);
-
             transaction.commit();
             return true;
         } catch (HibernateException e) {

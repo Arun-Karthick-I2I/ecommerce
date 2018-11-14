@@ -1,6 +1,6 @@
 package com.ideas2it.ecommerce.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
 public class Order {
     private Integer id;
     private Customer customer;
-    private LocalDate orderDate;
+    private Date orderDate;
     private Float price;
     private Address address;
     private List<OrderItem> orderItems;
@@ -35,11 +35,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
