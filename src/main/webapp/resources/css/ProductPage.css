@@ -139,16 +139,17 @@
 	background-color:inherit;
 	color:blue;
 	border:none;
-	font-style:italic;
 }
 
 th {
-	height:50px;
-	color:lightgray;
+	height:30px;
+	color:#3465a4;
+	border-bottom:1px solid lightgrey;
 }
 
 td {
-	padding: 5px;
+	padding: 10px;
+	height: 40px;
 }
 
  td > .product-button {
