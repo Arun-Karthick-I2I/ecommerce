@@ -137,9 +137,9 @@ public class SellerServiceImpl implements SellerService {
      * @{inheritDoc}
      */
     @Override
-    public List<WarehouseProduct> getAllWarehouseProducts(Seller seller)
+    public List<WarehouseProduct> getAllWarehouseProducts(Integer sellerId)
             throws EcommerceException {
-        return warehouseProductService.searchBySeller(seller);
+        return warehouseProductService.searchBySeller(sellerId);
     }
 
     /**

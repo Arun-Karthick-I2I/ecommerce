@@ -82,9 +82,9 @@ public class WarehouseProductServiceImpl implements WarehouseProductService {
      * @{inheritDoc}
      */
     @Override
-    public List<WarehouseProduct> searchBySeller(Seller seller)
+    public List<WarehouseProduct> searchBySeller(Integer sellerId)
             throws EcommerceException {
-        return warehouseProductDao.getWarehouseProductsBySeller(seller);
+        return warehouseProductDao.getWarehouseProductsBySeller(sellerId);
     }
 
     /**

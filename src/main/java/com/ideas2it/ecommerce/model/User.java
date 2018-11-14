@@ -2,7 +2,7 @@ package com.ideas2it.ecommerce.model;
 
 import java.util.List;
 
-import com.ideas2it.ecommerce.common.enums.Role.USER_ROLES;
+import com.ideas2it.ecommerce.common.enums.USER_ROLES;
 
 /**
  * <p>

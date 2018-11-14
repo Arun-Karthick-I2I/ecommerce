@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
-import com.ideas2it.ecommerce.common.enums.Role.USER_ROLES;
+import com.ideas2it.ecommerce.common.enums.USER_ROLES;
 import com.ideas2it.ecommerce.exception.EcommerceException;
-import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Seller;
@@ -42,7 +41,7 @@ public class UserController {
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String ADMIN_LOGIN = "adminLogin";
-    private static final String ADDRESS_FORM = "AddressForm"; 
+    private static final String ADDRESS_FORM = "AddressForm";
 
     private UserService userService = new UserServiceImpl();
 
@@ -200,6 +199,29 @@ public class UserController {
     
     /**
      * <p>
+     * Shows the list of available warehouse address for that seller.
+     * </p>
+     */
+    @GetMapping("showAddress")
+    public ModelAndView displayAddress(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+        USER_ROLES role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
+        modelAndView.addObject("showAddress", Boolean.TRUE);
+        if (USER_ROLES.CUSTOMER == role) {
+            modelAndView.setViewName(CUSTOMER_HOME);
+        } else if (USER_ROLES.SELLER == role) {
+            modelAndView.setViewName(SELLER_HOME);
+        }
+        try {
+            User user = userService.searchUser((Integer) session.getAttribute(Constants.LABEL_USER_ID));
+            modelAndView.addObject(Constants.LABEL_ADDRESSES, user.getAddresses());
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+    /**
+     * <p>
      * Shows the new address form that can be used to provide additional
      * addresses.
      * </p>
@@ -220,7 +242,8 @@ public class UserController {
     public ModelAndView addAddress(@ModelAttribute("address") Address address,
             HttpSession session) throws EcommerceException {
         ModelAndView modelAndView = new ModelAndView();
-        USER_ROLES role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
+        USER_ROLES role = (USER_ROLES) session
+                .getAttribute(Constants.LABEL_ROLE);
         if (USER_ROLES.CUSTOMER == role) {
             modelAndView.setViewName(CUSTOMER_HOME);
         } else if (USER_ROLES.SELLER == role) {
@@ -252,9 +275,20 @@ public class UserController {
     public ModelAndView editAddress(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(ADDRESS_FORM);
         modelAndView.addObject("addressForm", Boolean.TRUE);
-        Address address = new Address();
-        Integer.parseInt(request.getParameter(Constants.LABEL_ADDRESS));
-        modelAndView.addObject(Constants.LABEL_ADDRESS, address);
+        HttpSession session = request.getSession(Boolean.FALSE);
+        Integer addressId = Integer.parseInt(request.getParameter(Constants.LABEL_ADDRESS_ID));
+        User user;
+        try {
+            user = userService.searchUser((Integer) session.getAttribute(Constants.LABEL_USER_ID));
+            for(Address address : user.getAddresses()) {
+                if (address.getId() == addressId) {
+                    modelAndView.addObject(Constants.LABEL_ADDRESS, address);
+                    break;
+                }
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
         return modelAndView;
     }
 
@@ -316,6 +350,5 @@ public class UserController {
         }
         return modelAndView;
     }
-
 
 }
