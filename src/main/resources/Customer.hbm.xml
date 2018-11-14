@@ -11,7 +11,7 @@
 	<property name="mobileNumber" column="MOBILE_NUMBER" type="string" />
 	<property name="emailId" column="EMAIL_ID" type="string" />
     
-    <many-to-one name="user" cascade="save-update" column="USER_ID" unique="true" 
+    <many-to-one name="user" cascade="save-update" column="USER_ID" unique="true" lazy="false"
     	class="com.ideas2it.ecommerce.model.User" />
 	
 	<property name="isActive" column="IS_ACTIVE" type="boolean" />

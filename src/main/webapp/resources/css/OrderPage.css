@@ -86,14 +86,97 @@ table tr form td {
 .orderProducts > .deliveryAddress {
     margin-left:10%;	
     margin-right:10%;
-    padding-top:2%;
+    padding-top:1%;
 }
 
 .orderProducts > .deliveryAddress > .deliveryAddressTitle {
 	background-color: #3465a4;
-    height : 40px;
+    height : 50px;
     padding-left:5%;
+    padding-right:5%;
     color: white;
-    padding-top:8px;
+    padding-top:14px;
+    padding-bottom:30px;
 }
+
+.orderProducts > .deliveryAddress > .deliveryAddressTitle > button{
+	float:right;
+	color: black;
+	background:lightgrey;
+	text-align:center;
+	border-radius:0px;
+}
+
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .newAddress > button{
+	text-align:left;
+	padding-left:5%;
+	width:100%;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .newAddress > button > i {
+	color:black;
+	border:2px solid black;
+	padding: 2px;
+	height:20px;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .address {
+	text-align:left;
+	padding-left:5%;
+	width:100%;
+	margin-bottom:3%;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .address > button {
+	background:orange;
+	border-radius:0px;
+}
+
+
+.orderProducts > .payment {
+    margin-left:10%;	
+    margin-right:10%;
+    padding-top:1%;
+}
+
+.orderProducts > .payment > .paymentTitle {
+	background-color: #3465a4;
+    height : 50px;
+    padding-left:5%;
+    padding-right:5%;
+    color: white;
+    padding-top:14px;
+    padding-bottom:30px;
+}
+
+
+.orderProducts > .payment > .paymentTitle > button {
+	float:right;
+	color: black;
+	background:lightgrey;
+	text-align:center;
+	border-radius:0px;
+}
+
+.placeOrderButton {
+	text-align:right;
+	margin-top:2%;
+}
+
+.placeOrderButton > #makeOrder {
+	color:white;
+	background:#f57900;
+	text-align:center;
+	border-radius:0px;
+}
+
+.placeOrderButton > #cancelOrder {
+	color:white;
+	background:#cc0000;
+	text-align:center;
+	border-radius:0px;
+}
+
+
 
