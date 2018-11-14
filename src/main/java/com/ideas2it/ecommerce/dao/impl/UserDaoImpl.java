@@ -120,7 +120,7 @@ public class UserDaoImpl implements UserDao {
                     .createQuery(User.class);
             Root<User> root = criteriaQuery.from(User.class);
             criteriaQuery.select(root).where(criteriaBuilder
-                    .equal(root.get(Constants.LABEL_USER), userId));
+                    .equal(root.get(Constants.LABEL_ID), userId));
             return session.createQuery(criteriaQuery).uniqueResult();
         } catch (HibernateException e) {
             String exceptionMessage = new StringBuilder(

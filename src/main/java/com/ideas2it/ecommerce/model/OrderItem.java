@@ -1,6 +1,6 @@
 package com.ideas2it.ecommerce.model;
 
-import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
+import com.ideas2it.ecommerce.common.enums.ORDER_STATUS;
 
 /**
  * <p>

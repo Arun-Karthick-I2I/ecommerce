@@ -8,9 +8,16 @@
 </head>
 <body>
 	<jsp:include page="SellerHeader.jsp"></jsp:include>
-	<div style="margin-top:10px">
-	<button type="button" class="btn btn-info" data-toggle="modal"
-		data-target="#modalBox">Add Product</button>
+	<div class="buttonWrapper">
+		<form id="redirector" method="GET"></form>
+		<button type="button" class="btn btn-info" data-toggle="modal"
+			data-target="#modalBox">Add Product</button>
+		<button type="submit" form="redirector" action="/ecommerce/newAddress" class="btn btn-info">Add
+			Address</button>
+		<button type="submit" form="redirector"
+			formaction="/ecommerce/showAddress" class="btn btn-info">Show Addresses</button>
+		<button type="submit" form="redirector"
+			formaction="/ecommerce/seller/showWarehouse" class="btn btn-info">Show Warehouse</button>
 	</div>
 	<div class="modal fade" id="modalBox">
 		<div class="modal-dialog modal-dialog-centered">
@@ -24,7 +31,7 @@
 					<form action="/ecommerce/seller/searchProduct" method="GET">
 						<div class="form-group">
 							<input type="text" class="form-control" name="productName"
-								id="name" pattern="[a-zA-Z][a-zA-Z0-9 ]{1,150}"
+								id="name" pattern="[a-zA-Z][a-zA-Z0-9 ()-,.']{1,150}"
 								placeholder="Product Name"
 								title="Product Name can contain Alphabets, Numbers and Spaces Eg.Sony Xperia Z3(Pearl White, 64GB)"
 								required>
@@ -51,10 +58,7 @@
 							<div class="form-group">
 								<label for="name">Product Name</label> <input type="text"
 									class="form-control" name="name" id="name"
-									value="${product.name}"
-									pattern="[a-zA-Z][a-zA-Z0-9 ()-,.']{1,150}"
-									title="Product Name can contain Alphabets, Numbers and Spaces Eg.Sony Xperia Z3(Pearl White, 64GB)"
-									readonly required>
+									value="${product.name}" readonly required>
 							</div>
 							<div class="form-group">
 								<label for="description">Product Description</label>
@@ -82,6 +86,34 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</c:if>
+	<c:if test="${showAddress}">
+		<div class="w-75 mx-auto addressWrapper" id="addressWrapper">
+			<table class="table table-hover">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Address</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="address" items="${addresses}">
+						<tr>
+							<form method="POST">
+								<td>${address}</td>
+								<td>
+									<input type="hidden" name="addressId" value="${address.id}" />
+									<button class="btn btn-primary btn-sm" type="submit" formaction="/ecommerce/editAddress">Edit</button>
+									<c:if test="${1 < addresses.size()}">
+									<button class="btn btn-danger btn-sm" type="submit" formaction="/ecommerce/removeAddress"
+										onclick="return confirm('Are you sure want to delete this address')">Delete</button></c:if>
+									</td>
+							</form>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</c:if>
 	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>

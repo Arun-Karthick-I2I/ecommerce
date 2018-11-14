@@ -1,3 +1,5 @@
 function showProductForm() {
-	$('#productModal').modal({show:true});
+	$('#productModal').modal({
+		show : true
+	});
 }

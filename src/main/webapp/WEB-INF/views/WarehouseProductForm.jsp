@@ -11,25 +11,16 @@
 	href="<c:url value='/resources/css/WarehouseProductForm.css' />" />
 </head>
 <body>
-	<div class="w-100 p-3 mx-auto">
+	<jsp:include page="SellerHeader.jsp"></jsp:include>
+	<div class="w-50 p-3 mx-auto wrapper">
 		<form id="warehouseProductForm" method="POST">
-			<c:if test="${null == warehouseProduct.id}">
-				<div class="p-3 font-weight-bold">Add Product to your
-					Warehouse</div>
-			</c:if>
-			<c:if test="${null != warehouseProduct.id}">
-				<div class="p-3 font-weight-bold">Update Product in your
-					Warehouse</div>
-			</c:if>
-			<div class="w-25 p-3 product">
+			<div class="w-50 p-3 product">
 				<div class="form-group">
-					<input type="hidden" name="product.id" value="${warehouseProduct.product.id}" />
-					<input type="hidden" name="seller.id" value="${sellerId}" />
-					<label for="name">Product Name</label> <input type="text"
-						class="form-control" id="name" name="product.name"
-						value="${warehouseProduct.product.name}"
-						pattern="[a-zA-Z][a-zA-Z0-9 ]{1,150}"
-						title="Product Name can contain Alphabets, Numbers and Spaces Eg.Sony Xperia Z3(Pearl White, 64GB)"
+					<input type="hidden" name="product.id"
+						value="${warehouseProduct.product.id}" /> <input type="hidden"
+						name="seller.id" value="${sellerId}" /> <label for="name">Product
+						Name</label> <input type="text" class="form-control" id="name"
+						name="product.name" value="${warehouseProduct.product.name}"
 						readonly>
 				</div>
 				<div class="form-group">
@@ -48,28 +39,42 @@
 						value="${warehouseProduct.product.category.name}" readonly>
 				</div>
 			</div>
-			<div class="w-25 p-3 warehouse">
+			<div class="w-50 p-3 warehouse">
+				<c:if test="${null == warehouseProduct.id}">
+					<div class="p-3 font-weight-bold">Add Product to your
+						Warehouse</div>
+				</c:if>
+				<c:if test="${null != warehouseProduct.id}">
+					<div class="p-3 font-weight-bold">Update Product in your
+						Warehouse</div>
+				</c:if>
 				<div class="form-group">
 					<label for="quantity">Quantity:</label> <input type="number"
-						class="form-control" name="quantity" id="quantity">
+						class="form-control" name="quantity"
+						value="${warehouseProduct.quantity}" id="quantity" min="1"
+						required>
 				</div>
 				<div class="form-group">
 					<label class="price">Price:</label><input type="number"
-						class="form-control" name="price" id="price">
+						class="form-control" name="price"
+						value="${warehouseProduct.price}" id="price" min="10" required>
 				</div>
 				<c:if test="${null != warehouseProduct.id}">
+					<input type="hidden" name="id" value="${warehouseProduct.id}" />
 					<button type="submit" class="btn btn-outline-primary"
-						formaction="/ecommerce/seller/updateWarehouseProduct">Update Warehouse</button>
+						formaction="/ecommerce/seller/updateWarehouseProduct">Update
+						Warehouse</button>
 				</c:if>
 				<c:if test="${null == warehouseProduct.id}">
 					<button type="submit" class="btn btn-outline-primary"
-						formaction="/ecommerce/seller/addWarehouseProduct">Add to Warehouse</button>
-					<button type="reset" class="btn btn-outline-danger">Reset</button>
+						formaction="/ecommerce/seller/addWarehouseProduct">Add to
+						Warehouse</button>
+					<button type="reset" class="btn btn-outline-danger btn-custom">Reset</button>
 				</c:if>
-				<button type="submit" class="btn btn-outline-danger"
+				<button type="submit" class="btn btn-outline-danger btn-custom"
 					form="backtoHome">Cancel</button>
 			</div>
-	</form>
+		</form>
 		<form id="backtoHome" action="/ecommerce/seller/" method="GET"></form>
 	</div>
 	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>

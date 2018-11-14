@@ -19,12 +19,12 @@
 
 		<property name="quantity" column="QUANTITY" type="int" />
 		<property name="price" column="PRICE" type="float" />
-		<property name="status" column="STATUS"  >
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">com.ideas2it.ecommerce.common.enums.Role$USER_ROLES</param>
-                <param name="useNamed">true</param>
-        </type>
-	  </property>
-		
+
+		<property name="status" column="STATUS">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.ideas2it.ecommerce.common.enums.ORDER_STATUS</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
 	</class>
 </hibernate-mapping>

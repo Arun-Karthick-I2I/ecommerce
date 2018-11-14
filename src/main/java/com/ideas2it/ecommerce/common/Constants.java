@@ -10,11 +10,13 @@ public class Constants {
     
     public static final Character SPACE = ' ';
     
-    public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;
+    public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 200000;
     
     public static final String REDIRECT = "redirect:";
     
     public static final String LABEL_ADDRESS = "address";
+    
+    public static final String LABEL_ADDRESSES = "addresses";
     
     public static final String LABEL_ADDRESS_ID = "addressId";
 
@@ -60,6 +62,9 @@ public class Constants {
     
     public static final String LABEL_WAREHOUSE_PRODUCT = 
         "warehouseProduct";
+    
+    public static final String LABEL_WAREHOUSE_PRODUCTS = 
+        "warehouseProducts";
         
     public static final String LABEL_WAREHOUSE_PRODUCT_ID = 
         "warehouseProductId";
