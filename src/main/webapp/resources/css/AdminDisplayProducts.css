@@ -1,10 +1,15 @@
-.card-deck > form > .card > .card-img-top {
+.card-deck > form > .card > .btn-info > .card-img-top {
 	height: 150px;
     width: 200px;
 }
 
-.card-deck > form > .card > .card-img-top:hover {
-	transform: scale(1.05);
+.card-deck > form > .card > .btn-info {
+	border: none;
+    background-color: inherit;
+}
+
+.card-deck > form > .card > .btn-info > .card-img-top:hover {
+	transform: scale(1.1);
 }
 
 .card-deck > form {
@@ -22,14 +27,26 @@
 	width: 200px;
 }
 
-.card-deck > form > .card > .card-body > .card-title {
-	text-align: center;
+.card-deck > form > .card > .card-body > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: #2e3436;
+    white-space: normal;
+}
+
+.card-deck > form > .card > .card-body > .btn-info > .card-title {
+    color: #2e3436;
 	font-size: 18px;
 	font-family: 'Open Sans' , sans-serif;
 	font-weight: bold;
-	letter-spacing: 2px;
-	height: 40px;
+	width: 200px;
+	height: 36px;
 	overflow: hidden;
+}
+
+.card-deck > form > .card > .card-body > .btn-info > .card-title:hover {
+	background-color: inherit;
+	color: #3465a4; 	
 }
 
 .card-deck > form > .card > .card-body > .card-text > .btn-default {
@@ -58,4 +75,9 @@ form > div > #search {
 
 form > div > .btn-default {
 	height:35px;
+}
+
+.modal-title {
+	font-weight: bold;
+	text-align: center;
 }

@@ -13,7 +13,7 @@
 		<many-to-one name="order" column="ORDER_ID"
 			class="com.ideas2it.ecommerce.model.Order" />
 
-		<many-to-one name="warehouseProduct"
+		<many-to-one name="warehouseProduct" lazy="false"
 			column="WAREHOUSE_PRODUCT_ID"
 			class="com.ideas2it.ecommerce.model.WarehouseProduct" />
 

@@ -7,6 +7,7 @@ import com.ideas2it.ecommerce.dao.impl.ProductDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
+import com.ideas2it.ecommerce.service.CategoryService;
 import com.ideas2it.ecommerce.service.ProductService;
 
 /**
@@ -19,6 +20,7 @@ import com.ideas2it.ecommerce.service.ProductService;
  *
  */
 public class ProductServiceImpl implements ProductService {
+    private CategoryService categoryService = new CategoryServiceImpl();
     private ProductDao productDao = new ProductDaoImpl();
     
     /**

@@ -5,7 +5,7 @@
 <head>
 <title>Customers</title>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminDisplayCustomers.css' />">
+	href="<c:url value='/resources/css/AdminDisplaySellers.css' />">
 </head>
 <body>
 	<div class="title">
@@ -39,11 +39,16 @@
 					<tr>
 						<td>${seller.id}</td>
 						<td><button class="btn btn-default" formmethod="post"
-								formaction="/ecommerce/admin/displaySellers">
+								formaction="/ecommerce/admin/displayOrders">
 								${seller.name}</button></td>
 						<td>${seller.mobileNumber}</td>
 						<td>${seller.emailId}</td>
-						<td>${seller.rating}</td>
+						<c:if test="${seller.rating ne null}">
+							<td>${seller.rating}</td>
+						</c:if>
+						<c:if test="${seller.rating eq null}">
+							<td> Not yet Rated </td>
+						</c:if>
 						<td>
 							<button type="submit" class="btn btn-danger"
 								formaction="/ecommerce/admin/deleteSeller" formmethod="post">
