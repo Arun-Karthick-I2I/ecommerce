@@ -18,7 +18,7 @@
       
       <property name = "role" column = "ROLE">
         <type name="org.hibernate.type.EnumType">
-            <param name="enumClass">com.ideas2it.ecommerce.common.enums.Role$USER_ROLES</param>
+            <param name="enumClass">com.ideas2it.ecommerce.common.enums.USER_ROLES</param>
             <param name="useNamed">true</param>
         </type>
 	  </property>

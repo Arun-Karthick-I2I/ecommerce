@@ -21,8 +21,6 @@
 						name="seller.id" value="${sellerId}" /> <label for="name">Product
 						Name</label> <input type="text" class="form-control" id="name"
 						name="product.name" value="${warehouseProduct.product.name}"
-						pattern="[a-zA-Z][a-zA-Z0-9 ]{1,150}"
-						title="Product Name can contain Alphabets, Numbers and Spaces Eg.Sony Xperia Z3(Pearl White, 64GB)"
 						readonly>
 				</div>
 				<div class="form-group">
@@ -52,13 +50,17 @@
 				</c:if>
 				<div class="form-group">
 					<label for="quantity">Quantity:</label> <input type="number"
-						class="form-control" name="quantity" value="${warehouseProduct.quantity}" id="quantity" min="1" required>
+						class="form-control" name="quantity"
+						value="${warehouseProduct.quantity}" id="quantity" min="1"
+						required>
 				</div>
 				<div class="form-group">
 					<label class="price">Price:</label><input type="number"
-						class="form-control" name="price" value="${warehouseProduct.price}" id="price" min="10" required>
+						class="form-control" name="price"
+						value="${warehouseProduct.price}" id="price" min="10" required>
 				</div>
 				<c:if test="${null != warehouseProduct.id}">
+					<input type="hidden" name="id" value="${warehouseProduct.id}" />
 					<button type="submit" class="btn btn-outline-primary"
 						formaction="/ecommerce/seller/updateWarehouseProduct">Update
 						Warehouse</button>

@@ -42,6 +42,7 @@ public class SellerController {
     private static final String EDIT_SELLER = "EditSeller";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
+    private static final String SHOW_WAREHOUSE = "ShowWarehouse";
     private static final String PRODUCT_FORM = "SellerHome";
     private static final String WAREHOUSE_PRODUCT_FORM = "WarehouseProductForm";
 
@@ -108,7 +109,6 @@ public class SellerController {
         return modelAndView;
     }
 
-
     /**
      * <p>
      * Shows the new Product Form to the seller where they can provide the
@@ -127,7 +127,8 @@ public class SellerController {
      */
     @PostMapping("createProduct")
     public ModelAndView createProduct(
-            @ModelAttribute("product") Product product, @RequestParam MultipartFile productImage) {
+            @ModelAttribute("product") Product product,
+            @RequestParam MultipartFile productImage) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
         WarehouseProduct warehouseProduct = new WarehouseProduct();
         try {
@@ -164,7 +165,8 @@ public class SellerController {
         try {
             List<Product> products = sellerService.searchProduct(productName);
             if (!products.isEmpty()) {
-                modelAndView = showWarehouseProductForm(request, products.get(0));
+                modelAndView = showWarehouseProductForm(request,
+                        products.get(0));
             } else {
                 modelAndView.addObject("newProduct", Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES,
@@ -185,7 +187,8 @@ public class SellerController {
      * those products.
      * </p>
      */
-    private ModelAndView showWarehouseProductForm(HttpServletRequest request, Product product) {
+    private ModelAndView showWarehouseProductForm(HttpServletRequest request,
+            Product product) {
         ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
         HttpSession session = request.getSession(Boolean.FALSE);
         Integer sellerId = (Integer) session
@@ -305,4 +308,17 @@ public class SellerController {
         return modelAndView;
     }
 
+    @GetMapping("showWarehouse")
+    public ModelAndView displayAllWarehouseProducts(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView(SHOW_WAREHOUSE);
+        Integer sellerId = (Integer) session
+                .getAttribute(Constants.LABEL_SELLER_ID);
+        try {
+            modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS,
+                    sellerService.getAllWarehouseProducts(sellerId));
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
 }

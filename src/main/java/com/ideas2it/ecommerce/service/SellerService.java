@@ -192,11 +192,11 @@ public interface SellerService {
      * Searches the warehouse products based on the seller.
      * </p>
      *
-     * @param seller Seller whose warehouse products needs to be searched.
+     * @param sellerId Seller whose warehouse products needs to be searched.
      * @return warehouseProducts Returns the list of warehouse products
      *         corresponding to the seller.
      */
-    List<WarehouseProduct> getAllWarehouseProducts(Seller seller)
+    List<WarehouseProduct> getAllWarehouseProducts(Integer sellerId)
             throws EcommerceException;
 
     /**

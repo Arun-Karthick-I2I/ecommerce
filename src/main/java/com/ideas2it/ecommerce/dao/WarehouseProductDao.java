@@ -114,10 +114,10 @@ public interface WarehouseProductDao {
      * It fetches the WarehouseProduct List based on the seller.
      * </p>
      *
-     * @param seller Seller whose warehouse products need to be searched
+     * @param sellerId Seller whose warehouse products need to be searched
      * @return warehouseProducts Returns the list of warehouseProducts
      *         corresponding to the seller.
      */
-    List<WarehouseProduct> getWarehouseProductsBySeller(Seller seller)
+    List<WarehouseProduct> getWarehouseProductsBySeller(Integer sellerId)
             throws EcommerceException;
 }

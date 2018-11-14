@@ -73,4 +73,56 @@ public class Address {
     public void setPincode(String pincode) {
         this.pincode = pincode;
     }
+
+    /** 
+     * <p>
+     * Compares whether two addresses are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar address is present
+     *         false  When addresses are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object address) {
+        if (null == address) {
+            return Boolean.FALSE;
+        }
+
+        if (!(address instanceof Address)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (Address) address) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((Address) address).id));
+    }
+
+    
+    /**
+     * <p>
+     * Overriding the toString Method. When Invoked,it appends the necessary
+     * fields of an Address Entity and then returns it.  
+     * </p>
+     * 
+     * @return display
+     *         Appends the values of fields in a StringBuilder object
+     *         and then returns it as a String.
+     *
+     */
+     @Override
+     public String toString() {
+        StringBuilder display = new StringBuilder();
+            display.append(addressLine).append(", ").append(city).append(", ").
+            append(state).append(", ").append(country).append(" - ").
+            append(pincode);
+
+        return display.toString();                    
+     }
 }

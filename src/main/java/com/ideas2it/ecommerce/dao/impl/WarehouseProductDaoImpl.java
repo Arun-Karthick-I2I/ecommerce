@@ -225,7 +225,7 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
         }
     }
 
-    public List<WarehouseProduct> getWarehouseProductsBySeller(Seller seller)
+    public List<WarehouseProduct> getWarehouseProductsBySeller(Integer sellerId)
             throws EcommerceException {
         try (Session session = SessionManager.getSession()) {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -234,12 +234,12 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
             Root<WarehouseProduct> root = criteriaQuery
                     .from(WarehouseProduct.class);
             criteriaQuery.select(root).where(criteriaBuilder
-                    .equal(root.get(Constants.LABEL_SELLER), seller));
+                    .equal(root.get(Constants.LABEL_SELLER), sellerId));
             return session.createQuery(criteriaQuery).getResultList();
         } catch (HibernateException e) {
             String exceptionMessage = Constants.MSG_GET_WAREHOUSE_PRODUCTS_FAIL
                     + Constants.SPACE + Constants.LABEL_SELLER
-                    + Constants.COLON_SYMBOL + seller.getId();
+                    + Constants.COLON_SYMBOL + sellerId;
             EcommerceLogger.error(exceptionMessage, e);
             throw new EcommerceException(
                     Constants.MSG_GET_WAREHOUSE_PRODUCTS_FAIL);

@@ -2,10 +2,6 @@
 	float:right;
 }
 
-.btn.btn-primary.btn-sm {
-	float:right;
-}
-
 .modal-content {
     border-radius: 5px;
 }
@@ -18,3 +14,14 @@
 	text-align:center;
 }
 
+.buttonWrapper {
+	margin-top:7%;
+}
+
+.addressWrapper {
+	margin-top:3%;
+}
+
+.table td {
+	vertical-align:middle;
+}
