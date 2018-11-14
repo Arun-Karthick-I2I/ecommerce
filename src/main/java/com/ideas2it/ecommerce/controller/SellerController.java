@@ -53,6 +53,11 @@ public class SellerController {
         return SELLER_LOGIN;
     }
 
+    @GetMapping("home")
+    public String showHomePage() {
+        return SELLER_HOME;
+    }
+
     /**
      * <p>
      * Shows the seller his personal profile and provides option to edit those

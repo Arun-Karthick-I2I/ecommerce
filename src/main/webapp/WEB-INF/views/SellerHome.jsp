@@ -12,7 +12,7 @@
 		<form id="redirector" method="GET"></form>
 		<button type="button" class="btn btn-info" data-toggle="modal"
 			data-target="#modalBox">Add Product</button>
-		<button type="submit" form="redirector" action="/ecommerce/newAddress" class="btn btn-info">Add
+		<button type="submit" form="redirector" formaction="/ecommerce/newAddress" class="btn btn-info">Add
 			Address</button>
 		<button type="submit" form="redirector"
 			formaction="/ecommerce/showAddress" class="btn btn-info">Show Addresses</button>

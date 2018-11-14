@@ -55,7 +55,7 @@
 				form="backtoHome">Cancel</button>
 		</div>
 	</form>
-	<form id="backtoHome" action="/ecommerce/seller/" method="GET"></form>
+	<form id="backtoHome" action="/ecommerce/seller/home" method="GET"></form>
 	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
 </body>
