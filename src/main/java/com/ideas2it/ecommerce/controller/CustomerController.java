@@ -1,5 +1,6 @@
 package com.ideas2it.ecommerce.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -321,6 +322,44 @@ public class CustomerController {
 
     /**
      * <p>
+     * This method is used to add the delivery address for place an order.
+     * </p>
+     * 
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "OrdersDisplay" is the view name and set
+     *         of orders and customer is the model.
+     */
+    @PostMapping("orderProduct")
+    public ModelAndView OrderDetails(@RequestParam("id") Integer id,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            WarehouseProduct warehouseProduct = customerService
+                    .getWarehouseProduct(id);
+            List<WarehouseProduct> warehouseProducts = new ArrayList<WarehouseProduct>();
+            warehouseProducts.add(warehouseProduct);
+            List<Integer> quantities = new ArrayList<Integer>();
+            quantities.add(1);
+            modelAndView.addObject("warehouseProducts",warehouseProducts);
+            modelAndView.addObject("quantities",quantities);
+            modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                    customerService.getAllCategories());
+            modelAndView.addObject("totalPrice", warehouseProduct.getPrice());
+            modelAndView.setViewName("OrderPage");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_ADD_ORDER_FAIL);
+            modelAndView.setViewName("homepage");
+        }
+        return modelAndView;
+    }
+
+    
+    
+    /**
+     * <p>
      * This method is used to purchase a particular product.
      * </p>
      * 
@@ -336,14 +375,14 @@ public class CustomerController {
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             Integer addressId = Integer
-                    .parseInt(request.getParameter("5"));
+                    .parseInt(request.getParameter("addressId"));
             WarehouseProduct warehouseProduct = customerService
                     .getWarehouseProduct(Integer.parseInt(id));
             Order order = new Order();
             order.setCustomer(customer);
             order.setPrice(warehouseProduct.getPrice());
             LocalDate todayDate = LocalDate.now();
-            order.setOrderDate(todayDate);
+            order.setOrderDate(Date.valueOf(todayDate));
             Address address = new Address();
             address.setId(addressId);
             order.setAddress(address);
@@ -357,7 +396,6 @@ public class CustomerController {
             order.setOrderItems(orderItems);
             List<OrderItem> unavailableOrderItems = customerService.addOrder(order);
             if (unavailableOrderItems.isEmpty()) {
-System.out.println("hihihihihih");
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {
@@ -426,7 +464,7 @@ System.out.println("hihihihihih");
             order.setAddress(address);
             order.setOrderItems(orderItems);
             LocalDate todayDate = LocalDate.now();
-            order.setOrderDate(todayDate);
+            order.setOrderDate(Date.valueOf(todayDate));
             order.setPrice(totalPrice);
             order.setCustomer(customer);
             List<OrderItem> unplacedOrders = customerService.addOrder(order);

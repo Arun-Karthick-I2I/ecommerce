@@ -5,7 +5,7 @@
 <head>
 <title>Customers</title>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminDisplayCustomers.css' />">
+	href="<c:url value='/resources/css/AdminOrderPage.css' />">
 </head>
 <body>
 	<div class="title">
@@ -41,14 +41,14 @@
 					<form action="admin" method="Post">
 						<tr>
 							<td> ${order.id} </td>
-							<td> ${orderIem.warehouseProduct.product.name} </td>
+							<td> ${orderItem.warehouseProduct.product.name} </td>
 							<td> ${orderItem.quantity} </td>
 							<td> ${orderItem.price} </td>
 							<td> ${order.orderDate} </td>
-							<td> ${orderIem.warehouseProduct.seller.name} </td>
+							<td> ${orderItem.warehouseProduct.seller.name} </td>
 							<td> ${order.customer.name} </td>
 							<td> ${order.address} </td>
-							<td> ${order.orderItem.status} </td>
+							<td> ${orderItem.status} </td>
 						</tr>
 					</form>
 				</c:forEach>

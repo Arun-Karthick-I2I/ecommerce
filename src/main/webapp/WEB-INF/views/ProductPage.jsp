@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PandaZone</title>
+<title>pandaZone</title>
 
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/ProductPage.css' />">
@@ -22,7 +22,9 @@
 						src="data:image/jpg;base64,${product.base64Image}" />
 				</div>
 				<div class="product-button">
-					<input type="hidden" name="id" value="${product.id}" />
+					<input type="hidden" name="id"
+						value="${product.warehouseProducts[0].id}" /> <input
+						type="hidden" name="productId" value="${product.id}" />
 					<c:if test="${not empty customer}">
 						<button type="submit" formaction="/ecommerce/addCart"
 							formmethod="post" class="btn btn-warning btn-block btn-lg">
@@ -30,7 +32,7 @@
 								TO CART</b>
 						</button>
 					&nbsp;&nbsp;
-					<button type="submit" formaction="/ecommerce/buyProduct"
+					<button type="submit" formaction="/ecommerce/orderProduct"
 							formmethod="post" class="btn btn-danger btn-block btn-lg">
 							<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
 						</button>
@@ -52,19 +54,17 @@
 
 			<div id="right">
 				<div class="product-details">
-					<input type="hidden" value=${product.warehouseProducts[0].id} name="id" />
+					<input type="hidden"
+						value=${product.warehouseProducts[0].id
+						} name="id" />
 					<div class="productName">
 						<Strong>${product.name}</Strong>
 						<div>#AvailableOnPandaZone</div>
-
 					</div>
 					<label>Price :</label>
 					<div class="price">&nbsp;&#8377
 						${product.warehouseProducts[0].price}</div>
 					<div class="productRating">
-						<c:if test="${null == product.rating}">
-
-						</c:if>
 						<c:if test="${null ne product.rating}">
 							<div>${product.rating}</div>
 						</c:if>
@@ -75,59 +75,11 @@
 					<div class="seller">
 						${product.warehouseProducts[0].seller.name}
 						<c:if test="${fn:length(product.warehouseProducts) > 1}">
-			        	and<button type="button" class="btn btn-default" id="sellersModalButton" data-target="#sellers" data-toggle="modal">
-			        		<a> view more sellers</a></button>
-							<div class="modal fade" id="sellers" role="dialog">
-								<div class="modal-dialog modal-md modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-body">
-										    <button type="button" class="close" data-dismiss="modal">&times;</button>
-											<table class="sellers">
-												<tr>
-													<th>Seller</th>
-													<th>Price</th>
-													<th></th>
-												</tr>
-												<c:forEach var="warehouseProduct" items="${product.warehouseProducts}">
-												<form method="post">
-												<tr>
-													<td>${warehouseProduct.seller.name}</td>
-													<td>${warehouseProduct.price}</td>
-													<td>
-														<div class="product-button">
-															<input type="hidden" name="id" value="${warehouseProduct.id}" />
-															<c:if test="${not empty customer}">
-																<button type="submit" formaction="/ecommerce/addCart"
-																	formmethod="post" class="btn btn-warning">
-																	<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
-																		TO CART</b>
-																</button>
-															&nbsp;
-															<button type="submit" formaction="/ecommerce/buyProduct"
-																	formmethod="post" class="btn btn-danger">
-																	<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-																</button>
-															</c:if>
-															<c:if test="${empty customer}">
-																<button type="button" onclick="isLogged()" class="btn btn-warning">
-																	<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; <b>ADD
-																		TO CART</b>
-																</button>
-															&nbsp;
-															<button type="button" onclick="isLogged()" class="btn btn-danger">
-																	<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-																</button>
-															</c:if>
-														</div>
-													</td>
-												</tr>
-												</form>
-												</c:forEach>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
+			        	and<button type="button" class="btn btn-default"
+								id="sellersModalButton" data-target="#sellers"
+								data-toggle="modal">
+								<a> view more sellers</a>
+							</button>
 						</c:if>
 					</div>
 
@@ -141,6 +93,62 @@
 				</div>
 			</div>
 		</form>
+	</div>
+
+	<div class="modal fade" id="sellers" role="dialog">
+		<div class="modal-dialog modal-md modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<table class="sellers">
+						<tr>
+							<th>Seller</th>
+							<th>Price</th>
+							<th></th>
+						</tr>
+						<c:forEach var="warehouseProduct"
+							items="${product.warehouseProducts}">
+							<form method="post">
+								<tr>
+									<td>${warehouseProduct.seller.name}</td>
+									<td>${warehouseProduct.price}</td>
+									<td>
+										<div class="product-button">
+											<input type="hidden" name="id" value="${warehouseProduct.id}" />
+											<input type="hidden" name="productId" value="${product.id}" />
+											<c:if test="${not empty customer}">
+												<button type="submit" formaction="/ecommerce/addCart"
+													formmethod="post" class="btn btn-warning">
+													<span class="glyphicon glyphicon-shopping-cart"></span>
+													&nbsp;<b>ADD TO CART</b>
+												</button>
+												&nbsp;
+												<button type="submit" formaction="/ecommerce/orderProduct"
+													formmethod="post" class="btn btn-danger">
+													<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+												</button>
+											</c:if>
+											<c:if test="${empty customer}">
+												<button type="button" onclick="isLogged()"
+													class="btn btn-warning">
+													<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
+													<b>ADD TO CART</b>
+												</button>
+												&nbsp;
+												<button type="button" onclick="isLogged()"
+													class="btn btn-danger">
+													<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+												</button>
+											</c:if>
+										</div>
+									</td>
+								</tr>
+							</form>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

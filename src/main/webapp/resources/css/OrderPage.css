@@ -1,0 +1,99 @@
+.orderProducts {
+	margin-top:7%;
+}
+
+.products {
+	height:300px;
+}
+.image {
+	height : 100px;
+	text-align:center;
+	display:inline-block;
+}
+
+.productImage {
+	display:inline-block;
+	width:30%;
+	height:100px;
+}
+
+.productName {
+	text-align:center;
+	width:30%;
+	height:100px;
+	font-weight:bold;
+	font-size:20px;
+}
+
+.productQuantity {
+	width:10%;
+	text-align:center;
+	height:100px;
+}
+
+.productPrice {
+	width:20%;
+	text-align:center;
+	height:100px;
+}
+
+.headingProduct {
+	text-align:center;
+	width:30%
+}
+
+.headingName {
+	text-align:center;
+	width:30%;
+}
+
+.headingQuantity {
+	width:10%;
+	text-align:center;
+}
+
+.headingPrice {
+	width:20%;
+	text-align:center;
+}
+
+label {
+	padding:2%;
+	text-align:center;
+	font-style:italic;
+	color: #888a85;
+}
+
+table tr th {
+	padding-bottom:5%;
+	border-bottom:1px solid lightgrey;
+	height:50px;
+}
+
+.table {
+	border-bottom: 1px solid lightgrey;
+}
+
+th {
+	height:50px;
+}
+
+table tr form td {
+	padding-bottom :5%;
+	border:none;
+}
+
+.orderProducts > .deliveryAddress {
+    margin-left:10%;	
+    margin-right:10%;
+    padding-top:2%;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddressTitle {
+	background-color: #3465a4;
+    height : 40px;
+    padding-left:5%;
+    color: white;
+    padding-top:8px;
+}
+

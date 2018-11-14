@@ -51,3 +51,7 @@ form > div > #search {
 form > div > .btn-default {
 	height:35px;
 }
+
+.table > tbody > tr > td {
+	vertical-align: middle;
+}
