@@ -10,7 +10,7 @@ public class Constants {
     
     public static final Character SPACE = ' ';
     
-    public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 20000;
+    public static final Integer SESSION_MAX_INACTIVE_INTERVAL = 200000;
     
     public static final String REDIRECT = "redirect:";
     

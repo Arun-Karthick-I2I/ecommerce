@@ -8,9 +8,11 @@
 </head>
 <body>
 	<jsp:include page="SellerHeader.jsp"></jsp:include>
-	<div style="margin-top:10px">
+	<div style="margin-top:60px">
+	<form id="addressForm" action="/ecommerce/newAddress" method="GET"></form>
 	<button type="button" class="btn btn-info" data-toggle="modal"
 		data-target="#modalBox">Add Product</button>
+	<button type="submit" form="addressForm" class="btn btn-info" >Add Address</button>
 	</div>
 	<div class="modal fade" id="modalBox">
 		<div class="modal-dialog modal-dialog-centered">
