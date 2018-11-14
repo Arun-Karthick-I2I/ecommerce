@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd"> 
 
 <hibernate-mapping>
-    <class name = "com.ideas2it.ecommerce.model.CartItem" table = "CART_ITEM">
+    <class name = "com.ideas2it.ecommerce.model.CartItem" table ="CART_ITEM">
       
         <id name = "id" type = "int" column = "ID">
             <generator class="increment"/>

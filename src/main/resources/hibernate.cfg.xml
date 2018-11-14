@@ -15,7 +15,7 @@
 		<mapping resource="Category.hbm.xml" />
 		<mapping resource="Customer.hbm.xml" />
 		<mapping resource="Order.hbm.xml" />
-		<mapping resource="OrderItem.hbm.xml" />
+	    <mapping resource="OrderItem.hbm.xml" />
 		<mapping resource="Product.hbm.xml" />
 		<mapping resource="Seller.hbm.xml" />
 		<mapping resource="User.hbm.xml" />

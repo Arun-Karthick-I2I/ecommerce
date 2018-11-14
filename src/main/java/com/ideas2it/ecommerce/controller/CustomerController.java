@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.Role.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.CartItem;
 import com.ideas2it.ecommerce.model.Customer;
@@ -200,7 +201,6 @@ public class CustomerController {
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-System.out.println(id);
             List<CartItem> cartItems = customer.getCartItems();
             Boolean result = Boolean.TRUE;
             for (Integer i = 0; i < cartItems.size(); i++) {
@@ -223,6 +223,7 @@ System.out.println(id);
             }
             customer.setCartItems(cartItems);
             if (customerService.updateCustomer(customer)) {
+                customer = customerService.getCustomerById(customer.getId(), Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 modelAndView.addObject("cartItems",
                         customer.getCartItems());
@@ -335,7 +336,7 @@ System.out.println(id);
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             Integer addressId = Integer
-                    .parseInt(request.getParameter("addressId"));
+                    .parseInt(request.getParameter("5"));
             WarehouseProduct warehouseProduct = customerService
                     .getWarehouseProduct(Integer.parseInt(id));
             Order order = new Order();
@@ -356,6 +357,7 @@ System.out.println(id);
             order.setOrderItems(orderItems);
             List<OrderItem> unavailableOrderItems = customerService.addOrder(order);
             if (unavailableOrderItems.isEmpty()) {
+System.out.println("hihihihihih");
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {

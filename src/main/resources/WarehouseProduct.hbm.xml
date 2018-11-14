@@ -11,7 +11,7 @@
   		<many-to-one name="seller" column="SELLER_ID" lazy="false"
   			class= "com.ideas2it.ecommerce.model.Seller"  />
   			
-		<many-to-one name="product" column="PRODUCT_ID" 
+		<many-to-one name="product" column="PRODUCT_ID" lazy="false" 
 		    class= "com.ideas2it.ecommerce.model.Product" />
 		
 		<property name="quantity" column="QUANTITY" type="integer" />
