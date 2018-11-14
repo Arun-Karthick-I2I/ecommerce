@@ -38,8 +38,8 @@
 }
 
 .table-striped > tbody > tr > td > .btn:hover {
-	background-color: inherit;
-	color: #818181;	
+	background-color: #eeeeec;
+	color: #3465a4;
 }
 
 .table-striped > tbody > tr > td > .btn-danger {
@@ -99,4 +99,8 @@ div > #addForm > .modal-dialog > .modal-content > .modal-body > form > .btn-info
     background-color: inherit;
     color: #cc0000;
     font-size: 20px;
+}
+
+.table > tbody > tr > td {
+	vertical-align: middle;
 }

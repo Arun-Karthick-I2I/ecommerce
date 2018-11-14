@@ -87,12 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @(inheritDoc)
      */
     public Boolean updateCustomer(Customer customer) throws EcommerceException {
-           Customer completeCustomerdetail = customerDao.getCustomerById
-               (customer.getId(), Boolean.TRUE);
-           completeCustomerdetail.setName(customer.getName());
-           completeCustomerdetail.setMobileNumber(customer.getMobileNumber());
-           completeCustomerdetail.setEmailId(customer.getEmailId());
-        return customerDao.updateCustomer(completeCustomerdetail);
+        return customerDao.updateCustomer(customer);
     }
 
     /** 

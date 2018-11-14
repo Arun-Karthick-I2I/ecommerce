@@ -1,0 +1,182 @@
+.orderProducts {
+	margin-top:7%;
+}
+
+.products {
+	height:300px;
+}
+.image {
+	height : 100px;
+	text-align:center;
+	display:inline-block;
+}
+
+.productImage {
+	display:inline-block;
+	width:30%;
+	height:100px;
+}
+
+.productName {
+	text-align:center;
+	width:30%;
+	height:100px;
+	font-weight:bold;
+	font-size:20px;
+}
+
+.productQuantity {
+	width:10%;
+	text-align:center;
+	height:100px;
+}
+
+.productPrice {
+	width:20%;
+	text-align:center;
+	height:100px;
+}
+
+.headingProduct {
+	text-align:center;
+	width:30%
+}
+
+.headingName {
+	text-align:center;
+	width:30%;
+}
+
+.headingQuantity {
+	width:10%;
+	text-align:center;
+}
+
+.headingPrice {
+	width:20%;
+	text-align:center;
+}
+
+label {
+	padding:2%;
+	text-align:center;
+	font-style:italic;
+	color: #888a85;
+}
+
+table tr th {
+	padding-bottom:5%;
+	border-bottom:1px solid lightgrey;
+	height:50px;
+}
+
+.table {
+	border-bottom: 1px solid lightgrey;
+}
+
+th {
+	height:50px;
+}
+
+table tr form td {
+	padding-bottom :5%;
+	border:none;
+}
+
+.orderProducts > .deliveryAddress {
+    margin-left:10%;	
+    margin-right:10%;
+    padding-top:1%;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddressTitle {
+	background-color: #3465a4;
+    height : 50px;
+    padding-left:5%;
+    padding-right:5%;
+    color: white;
+    padding-top:14px;
+    padding-bottom:30px;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddressTitle > button{
+	float:right;
+	color: black;
+	background:lightgrey;
+	text-align:center;
+	border-radius:0px;
+}
+
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .newAddress > button{
+	text-align:left;
+	padding-left:5%;
+	width:100%;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .newAddress > button > i {
+	color:black;
+	border:2px solid black;
+	padding: 2px;
+	height:20px;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .address {
+	text-align:left;
+	padding-left:5%;
+	width:100%;
+	margin-bottom:3%;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .address > button {
+	background:orange;
+	border-radius:0px;
+}
+
+
+.orderProducts > .payment {
+    margin-left:10%;	
+    margin-right:10%;
+    padding-top:1%;
+}
+
+.orderProducts > .payment > .paymentTitle {
+	background-color: #3465a4;
+    height : 50px;
+    padding-left:5%;
+    padding-right:5%;
+    color: white;
+    padding-top:14px;
+    padding-bottom:30px;
+}
+
+
+.orderProducts > .payment > .paymentTitle > button {
+	float:right;
+	color: black;
+	background:lightgrey;
+	text-align:center;
+	border-radius:0px;
+}
+
+.placeOrderButton {
+	text-align:right;
+	margin-top:2%;
+}
+
+.placeOrderButton > #makeOrder {
+	color:white;
+	background:#f57900;
+	text-align:center;
+	border-radius:0px;
+}
+
+.placeOrderButton > #cancelOrder {
+	color:white;
+	background:#cc0000;
+	text-align:center;
+	border-radius:0px;
+}
+
+
+

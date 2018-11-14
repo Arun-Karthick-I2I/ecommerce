@@ -1,0 +1,27 @@
+.title > h2 {
+	text-align: center;
+	font-size: 40px;
+	font-family: 'Open Sans' , sans-serif;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+}
+
+form > div > #search {
+	width: 297px;
+	margin-left: 480px;
+	margin-right: 0;
+}
+
+form > div > .btn-default {
+	height:35px;
+}
+
+.table-striped {
+	margin-left: 3%;
+	width: 95%;
+}
+
+.table > tbody > tr > td {
+	vertical-align: middle;
+}

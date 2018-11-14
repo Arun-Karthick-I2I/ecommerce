@@ -3,6 +3,7 @@ package com.ideas2it.ecommerce.service;
 import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
 
 /**
