@@ -22,14 +22,26 @@
 	width: 200px;
 }
 
-.card-deck > form > .card > .card-body > .card-title {
-	text-align: center;
+.card-deck > form > .card > .card-body > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: #2e3436;
+    white-space: normal;
+}
+
+.card-deck > form > .card > .card-body > .btn-info > .card-title {
+    color: #2e3436;
 	font-size: 18px;
 	font-family: 'Open Sans' , sans-serif;
 	font-weight: bold;
-	letter-spacing: 2px;
-	height: 40px;
+	width: 200px;
+	height: 36px;
 	overflow: hidden;
+}
+
+.card-deck > form > .card > .card-body > .btn-info > .card-title:hover {
+	background-color: inherit;
+	color: #3465a4; 	
 }
 
 .card-deck > form > .card > .card-body > .card-text > .btn-default {

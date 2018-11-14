@@ -99,7 +99,7 @@ public class ProductController {
         List<Product> products = new ArrayList<Product>();
         try {
             products = productService.searchByName("%"+name+"%");
-            if (products.isEmpty()) {
+            if (!products.isEmpty()) {
                 modelAndView.addObject("products", products);
                 modelAndView.setViewName("adminDisplayProducts");
             } else {
@@ -107,7 +107,7 @@ public class ProductController {
                 modelAndView.addObject("products", products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
-                modelAndView.setViewName("displayCategories");
+                modelAndView.setViewName("adminDisplayProducts");
             }
         } catch (EcommerceException e) {
             EcommerceLogger.error(e.getMessage());
