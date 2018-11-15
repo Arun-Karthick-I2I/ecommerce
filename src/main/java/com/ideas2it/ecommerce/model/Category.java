@@ -5,7 +5,8 @@ import java.util.List;
 /**
  * <p>
  * Category specifies the various types of the Product such as mobile, camera,
- * pendrive, etc..
+ * laptops, etc.. Each Product belongs to one of the Categories enlisted.
+ * Category helps us in searching a Product quickly and easily.
  * </p>
  * 
  * @author Pavithra.S

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * <p>
  * Specifies the various Products to be sold by the Sellers along with their 
- * description and the Category they belong to.
+ * description and the Category they belong to. 
  * </p>
  * 
  * @author Pavithra.S

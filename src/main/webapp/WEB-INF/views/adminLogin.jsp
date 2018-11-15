@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href= "<c:url value='/resources/css/adminLogin.css'/>" rel="stylesheet" type="text/css"/>
+        <link href= "<c:url value='/resources/css/AdminLogin.css'/>" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body class="grid">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

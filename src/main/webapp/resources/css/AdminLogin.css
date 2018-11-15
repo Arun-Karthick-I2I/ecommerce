@@ -1,16 +1,15 @@
-body
-{
+body {
     background-image: url("adminLogin.jpg");
     background-size: cover;
 }
 
 .wrap
 {
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 60%;
     position: absolute;
-    top: 100px;
-    left: 0;
+    top: 20%;
+    left: 20%;
 }
 
 p.form-title
@@ -47,7 +46,6 @@ form.login input[type="text"], form.login input[type="password"]
     letter-spacing: 2px;
     margin-bottom: 5px;
     color: #FFFFFF;
-    outline: 0;
 }
 
 form.login input[type="submit"]
