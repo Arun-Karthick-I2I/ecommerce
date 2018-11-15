@@ -14,7 +14,7 @@
         <many-to-one name = "customer" column = "CUSTOMER_ID" 
             class = "com.ideas2it.ecommerce.model.Customer"/>
         
-        <many-to-one name = "warehouseProduct" column = "WAREHOUSE_PRODUCT_ID" 
+        <many-to-one name = "warehouseProduct" column = "WAREHOUSE_PRODUCT_ID" lazy="false"
             class = "com.ideas2it.ecommerce.model.WarehouseProduct"/>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,6 @@
 .orderProducts {
 	margin-top:7%;
+	margin-bottom:5%;
 }
 
 .products {
@@ -112,27 +113,32 @@ table tr form td {
 	text-align:left;
 	padding-left:5%;
 	width:100%;
+	border-radius:0px;
 }
 
 .orderProducts > .deliveryAddress > .deliveryAddresses > .newAddress > button > i {
-	color:black;
-	border:2px solid black;
+	color:grey;
+	border:1px solid black;
 	padding: 2px;
-	height:20px;
+	height:18px;
+}
+
+.orderProducts > .deliveryAddress > .deliveryAddresses > .address > label {
+		padding : 5px;
 }
 
 .orderProducts > .deliveryAddress > .deliveryAddresses > .address {
 	text-align:left;
 	padding-left:5%;
+    padding-top:5px;
 	width:100%;
-	margin-bottom:3%;
+	border : 0.5px solid grey;
 }
 
 .orderProducts > .deliveryAddress > .deliveryAddresses > .address > button {
 	background:orange;
 	border-radius:0px;
 }
-
 
 .orderProducts > .payment {
     margin-left:10%;	
@@ -150,6 +156,19 @@ table tr form td {
     padding-bottom:30px;
 }
 
+.orderProducts > .payment > .paymentOptions {
+	border : 0.5px solid grey;
+	padding-left:5%;
+	
+}
+
+.orderProducts > .payment > .paymentOptions > .modeOfPayment {
+	padding : 5px;
+}
+
+.orderProducts > .payment > .paymentOptions > .modeOfPayment > label {
+	padding : 5px;
+}
 
 .orderProducts > .payment > .paymentTitle > button {
 	float:right;
@@ -162,6 +181,9 @@ table tr form td {
 .placeOrderButton {
 	text-align:right;
 	margin-top:2%;
+	padding-bottom:2%;
+	padding-right:2%;
+	width:100%;
 }
 
 .placeOrderButton > #makeOrder {
@@ -177,6 +199,5 @@ table tr form td {
 	text-align:center;
 	border-radius:0px;
 }
-
 
 

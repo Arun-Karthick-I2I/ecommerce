@@ -8,6 +8,49 @@ li {
     width : 350px;
 }
 
+.navbar-header > button {
+	background:none;
+	border:none;
+	outline:none;
+}
+
+.navbar-header > button > a:hover {
+	background:none;
+	border:none;
+	outline:none;
+	color:black;
+}
+
+.navbar-header > button > a{
+	color:white;
+}
+
+.cartButton >  button {
+	background:#3465a4;
+	color:white;
+	border:none;
+	height:50px;
+}
+
+
+.cartButton >  button:hover {
+	background-color:#3465a4;
+	color:black;
+	border:none;
+}
+
+.cartButton >  button .focus {
+	background-color:none;
+	color:black;
+	border:none;
+}
+
+.btn-default:focus {
+	outline:none;
+	background-color:#3465a4;
+}
+
+
 nav > .container-fluid > .navbar-header > a {
     color: white;
 }
@@ -21,13 +64,13 @@ nav > .container-fluid > ul > li > a:hover {
     color: black;
 }
 
-nav > .container-fluid > .navbar-header > button {
-    color: white;
+#btnloginModal:hover {
+	background-color:#3465a4;
+    color: black;
 }
 
-#btnloginModal:hover {
-    background-color:#3465a4;
-    color: black;
+.loginCartButtons {
+	padding-top:10px;
 }
 
 #btnloginModal {
