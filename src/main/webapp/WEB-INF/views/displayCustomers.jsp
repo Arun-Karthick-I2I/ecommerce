@@ -5,7 +5,7 @@
 <head>
 <title>Customers</title>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminDisplayCustomers.css' />">
+	href="<c:url value='/resources/css/AdminCustomerPage.css' />">
 </head>
 <body>
 	<div class="title">
@@ -52,6 +52,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="footer">
+		<Strong>**Note:</Strong> Click on the Customer name to view the Orders placed by the Customer
+	</div>
 </body>
 <c:if test="${null != message}">
 	<script type="text/javascript">
