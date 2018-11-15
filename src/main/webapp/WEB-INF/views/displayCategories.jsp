@@ -6,7 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminDisplayCategories.css' />">
+	href="<c:url value='/resources/css/AdminCategoryPage.css' />">
 </head>
 <body>
 	<div class="title">
@@ -74,6 +74,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="footer">
+		<Strong>**Note:</Strong> Click on the Category name to view Products
+	</div>
 	<div class="container">
 		<div id="addForm" class="modal fade" role="dialog">
 			<div class="modal-dialog">

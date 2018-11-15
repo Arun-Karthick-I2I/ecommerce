@@ -16,7 +16,7 @@
 	
 	<property name="isActive" column="IS_ACTIVE" type="boolean" />
 	
-	<bag name="orders">
+	<bag name="orders" lazy="false">
 		<key column="CUSTOMER_ID" />
 		<one-to-many class="com.ideas2it.ecommerce.model.Order" />
 	</bag>

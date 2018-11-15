@@ -15,7 +15,7 @@
 
 .table-striped > thead > tr > .row-header {
 	font-size: 20px;
-	font-weight: 200;
+	font-weight: bold;
 	padding: 8px;
 	letter-spacing: 3px;
 }
@@ -54,4 +54,15 @@ form > div > .btn-default {
 
 .table > tbody > tr > td {
 	vertical-align: middle;
+}
+
+.footer {
+	position: fixed;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	padding: 0.5%;
+  	padding-right: 1%;
+  	background-color: #d9edf7;
+  	text-align: right;
 }

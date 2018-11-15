@@ -5,7 +5,7 @@
 <head>
 <title>Customers</title>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminDisplayCustomers.css' />">
+	href="<c:url value='/resources/css/AdminCustomerPage.css' />">
 </head>
 <body>
 	<div class="title">
@@ -38,7 +38,7 @@
 					<tr>
 						<td>${customer.id}</td>
 						<td><button class="btn btn-default" formmethod="post"
-								formaction="/ecommerce/admin/displayOrders">
+								formaction="/ecommerce/admin/displayCustomerOrders">
 								${customer.name}</button></td>
 						<td>${customer.mobileNumber}</td>
 						<td>${customer.emailId}</td>
@@ -52,6 +52,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="footer">
+		<Strong>**Note:</Strong> Click on the Customer name to view the Orders placed by the Customer
+	</div>
 </body>
 <c:if test="${null != message}">
 	<script type="text/javascript">

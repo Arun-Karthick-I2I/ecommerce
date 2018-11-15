@@ -23,6 +23,6 @@
 
 		<property name="price" column="PRICE" type="float" />
 		<property name="orderDate" column="ORDER_DATE" type="date" />
-
+		<property name="modeOfPayment" column="MODE_OF_PAYMENT" type="string" />
 	</class>
 </hibernate-mapping>
