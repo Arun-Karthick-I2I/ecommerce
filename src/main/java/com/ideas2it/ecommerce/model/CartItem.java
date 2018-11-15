@@ -2,8 +2,11 @@ package com.ideas2it.ecommerce.model;
 
 /**
  * <p>
- * Holds the various Products along with their respective price and quantity 
- * required by the Customer who wishes to place the Order
+ * Cart acts like a wish-list that contains all the Products, the Customer 
+ * is interested and would purchase later. Cart is a collection of CartItems.
+ * CartItem indicates a single Product to be stored in the Cart along with  
+ * their respective price and quantity required by the Customer who wishes to 
+ * place the Order.
  * </p>
  * 
  * @author Pavithra.S

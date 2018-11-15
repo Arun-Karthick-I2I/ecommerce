@@ -8,9 +8,11 @@ import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.Seller;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.AdminService;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.SellerService;
+import com.ideas2it.ecommerce.service.WarehouseProductService;
 
 /**
  * <p>
@@ -27,6 +29,7 @@ public class AdminServiceImpl implements AdminService{
     private OrderDao orderDao = new OrderDaoImpl();
     private CustomerService customerService = new CustomerServiceImpl();
     private SellerService sellerService = new SellerServiceImpl();
+    private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
 
     /**
      * {@inheritDoc}
@@ -107,5 +110,13 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Boolean deleteSeller(Seller seller) throws EcommerceException {
         return sellerService.deleteSeller(seller);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<WarehouseProduct> getProductsBySeller(Integer id) throws EcommerceException {
+        return warehouseProductService.searchBySeller(id);
     }
 }

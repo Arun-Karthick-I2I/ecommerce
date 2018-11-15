@@ -48,24 +48,12 @@ public class CategoryController {
         categories = getCategories();
         if (!categories.isEmpty()) {
             return new ModelAndView("displayCategories",
-                "categories",categories);  
+                Constants.LABEL_CATEGORIES,categories);  
         } else {
             return new ModelAndView("displayCategories",
                 Constants.LABEL_MESSAGE,Constants.MSG_CATEGORIES_UNAVAILABLE);
         }
     }
-    
-    /**
-     * <p>
-     * Displays the form to add a new Category
-     * </p>
-     * 
-     * @return  Returns an empty Category object 
-     */
-    @PostMapping("add")  
-    public ModelAndView addForm(){  
-        return new ModelAndView("addCategory","command", new Category());  
-    } 
     
     /**
      * <p>
@@ -79,7 +67,7 @@ public class CategoryController {
      *                    message, if the insertion is unsuccessful. 
      */
     @PostMapping("insert") 
-    private ModelAndView addCategory(@ModelAttribute("category") 
+    private ModelAndView addCategory(@ModelAttribute(Constants.LABEL_CATEGORY) 
             Category category) {
         ModelAndView modelAndView = new ModelAndView();
         List<Category> categories = new ArrayList<Category>();
@@ -92,7 +80,7 @@ public class CategoryController {
                     Constants.MSG_CATEGORY_EXISTS);  
             }
             categories = getCategories();
-            modelAndView.addObject("categories", categories);
+            modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
             modelAndView.setViewName("displayCategories"); 
         } catch (EcommerceException e) {
             EcommerceLogger.error(e.getMessage());
@@ -111,7 +99,8 @@ public class CategoryController {
      *              deletion is unsuccessful. 
      */
     @PostMapping("delete") 
-    private ModelAndView deleteCategory(@RequestParam("id")Integer id) {
+    private ModelAndView deleteCategory(@RequestParam
+            (Constants.LABEL_ID)Integer id) {
         List<Category> categories = new ArrayList<Category>();
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -123,29 +112,11 @@ public class CategoryController {
                     Constants.MSG_CATEGORY_DELETE_FAILURE);
             }
             categories = getCategories();
-            modelAndView.addObject("categories", categories);
+            modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
             modelAndView.setViewName("displayCategories");
         } catch(EcommerceException e) {
             EcommerceLogger.error(e.getMessage());
         }
-        return modelAndView;
-    }
-    
-    /**
-     * <p>
-     * Displays form to edit the Category.
-     * </p>
-     * 
-     * @param   id  ID of the Category to be updated.
-     * @return      Returns the Category for the ID specified.
-     */
-    @PostMapping("edit")
-    private ModelAndView editForm(@RequestParam("id")Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
-        Category category = getCategory(id);
-        modelAndView.addObject("category", category);
-        modelAndView.addObject("command", new Category());
-        modelAndView.setViewName("addCategory");
         return modelAndView;
     }
     
@@ -160,8 +131,8 @@ public class CategoryController {
      *                    message, if the update is unsuccessful.
      */
     @PostMapping("update")
-    private ModelAndView updateCategory(@ModelAttribute("category") 
-            Category category) {
+    private ModelAndView updateCategory(@ModelAttribute
+            (Constants.LABEL_CATEGORY)Category category) {
         ModelAndView modelAndView = new ModelAndView();
         List<Category> categories = new ArrayList<Category>();
         try {
@@ -173,7 +144,7 @@ public class CategoryController {
                     Constants.MSG_CATEGORY_EXISTS);
             }
             categories = getCategories();
-            modelAndView.addObject("categories", categories);
+            modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
             modelAndView.setViewName("displayCategories");
         } catch (EcommerceException e) {
             EcommerceLogger.error(e.getMessage());
@@ -192,17 +163,18 @@ public class CategoryController {
      *              of the specified ID isn't available.
      */
     @PostMapping("searchById") 
-    private ModelAndView searchById(@RequestParam("id")Integer id) {
+    private ModelAndView searchById(@RequestParam
+            (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         List<Category> categories = new ArrayList<Category>();
         try {
             Category category = categoryService.searchById(id);
             if (null != category) {
-                modelAndView.addObject("category", category);
+                modelAndView.addObject(Constants.LABEL_CATEGORY, category);
                 modelAndView.setViewName("displayCategory");
             } else {
                 categories = getCategories();
-                modelAndView.addObject("categories", categories);
+                modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
                 modelAndView.setViewName("displayCategories");
@@ -224,18 +196,19 @@ public class CategoryController {
      *                Category is not available for the name specified. 
      */
     @PostMapping("searchByName") 
-    private ModelAndView searchByName(@RequestParam("name")String name) {
+    private ModelAndView searchByName(@RequestParam
+            (Constants.LABEL_NAME)String name) {
         ModelAndView modelAndView = new ModelAndView();
         List<Category> categories = new ArrayList<Category>();
         try {
             Category category = categoryService.searchByName("%"+name+"%");
             if (null != category) {
                 categories.add(category);
-                modelAndView.addObject("categories", categories);
+                modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.setViewName("displayCategories");
             } else {
                 categories = getCategories();
-                modelAndView.addObject("categories", categories);
+                modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
                 modelAndView.setViewName("displayCategories");
@@ -257,7 +230,8 @@ public class CategoryController {
      *              no products are available.
      */
     @PostMapping("displayProducts") 
-    private ModelAndView displayProducts(@RequestParam("id")Integer id) {
+    private ModelAndView displayProducts(@RequestParam
+            (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         List<Category> categories = getCategories();
         try {
@@ -265,10 +239,11 @@ public class CategoryController {
             if (null != category) {
                 List<Product> products = category.getProducts();
                 if (!products.isEmpty()) {
-                    modelAndView.addObject("products", products);
+                    modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                     modelAndView.setViewName("adminDisplayProducts");
                 } else {
-                    modelAndView.addObject("categories",categories);
+                    modelAndView.addObject
+                        (Constants.LABEL_CATEGORIES,categories);
                     modelAndView.addObject(Constants.LABEL_MESSAGE, 
                         Constants.MSG_CATEGORY_PRODUCTS_UNAVAILABLE);
                     modelAndView.setViewName("displayCategories");

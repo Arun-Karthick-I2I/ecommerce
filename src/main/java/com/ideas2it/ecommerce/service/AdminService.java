@@ -5,6 +5,7 @@ import java.util.List;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.Seller;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.model.Customer;
 
 /**
@@ -137,4 +138,15 @@ public interface AdminService {
      *                  unsuccessful.
      */
     Boolean deleteSeller(Seller seller) throws EcommerceException;
+    
+    /**
+     * <p>
+     * Used to get the Products sold by the Seller for the ID specified.
+     * </p>
+     * 
+     * @param   id  ID of the Seller whose Products are to retrieved.
+     * @return      Returns the Products sold by the Seller for the ID 
+     *              specified. Otherwise, returns an empty object.
+     */
+    List<WarehouseProduct> getProductsBySeller(Integer id) throws EcommerceException;
 }

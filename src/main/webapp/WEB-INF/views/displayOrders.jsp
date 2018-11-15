@@ -13,10 +13,10 @@
 	</div>
 	<form>
 		<div class="input-group">
-			<input type="text" class="form-control" id="search" name="name"
+			<input type="text" class="form-control" id="search" name="id"
 				placeholder="Enter Order ID to be searched">
 		 	<button class="btn btn-default" type="submit"
-				formaction="/ecommerce/admin/displayOrders" formmethod="post">
+				formaction="/ecommerce/admin/searchByOrderId" formmethod="post">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>
@@ -40,15 +40,15 @@
 				<c:forEach var="orderItem" items="${order.orderItems}"> 
 					<form action="admin" method="Post">
 						<tr>
-							<td> ${order.id} </td>
-							<td> ${orderItem.warehouseProduct.product.name} </td>
-							<td> ${orderItem.quantity} </td>
-							<td> ${orderItem.price} </td>
-							<td> ${order.orderDate} </td>
-							<td> ${orderItem.warehouseProduct.seller.name} </td>
-							<td> ${order.customer.name} </td>
-							<td> ${order.address} </td>
-							<td> ${orderItem.status} </td>
+							<td class="id"> ${order.id} </td>
+							<td class="productName"> ${orderItem.warehouseProduct.product.name} </td>
+							<td class="quantity"> ${orderItem.quantity} </td>
+							<td class="price"> ${orderItem.price} </td>
+							<td class="orderDate"> ${order.orderDate} </td>
+							<td class="sellerName"> ${orderItem.warehouseProduct.seller.name} </td>
+							<td class="customerName"> ${order.customer.name} </td>
+							<td class="address"> ${order.address} </td>
+							<td class="status"> ${orderItem.status} </td>
 						</tr>
 					</form>
 				</c:forEach>

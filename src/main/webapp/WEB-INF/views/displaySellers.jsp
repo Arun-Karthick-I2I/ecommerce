@@ -39,7 +39,7 @@
 					<tr>
 						<td>${seller.id}</td>
 						<td><button class="btn btn-default" formmethod="post"
-								formaction="/ecommerce/admin/displayOrders">
+								formaction="/ecommerce/admin/displaySellerProducts">
 								${seller.name}</button></td>
 						<td>${seller.mobileNumber}</td>
 						<td>${seller.emailId}</td>

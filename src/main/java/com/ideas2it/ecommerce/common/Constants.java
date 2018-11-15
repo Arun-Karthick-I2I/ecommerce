@@ -76,6 +76,10 @@ public class Constants {
     
     public static final String LABEL_ORDER = "order";
     
+    public static final String LABEL_CUSTOMERS = "customers";
+    
+    public static final String LABEL_SELLERS = "sellers";
+    
     public static final String MSG_INVALID_CREDENTIALS = "Invalid Credentials";
     
     public static final String LABEL_CATEGORY = "category";
@@ -187,7 +191,7 @@ public class Constants {
         "Unsuccessful search of Product";
     
     public static final String MSG_PRODUCTS_UNAVAILABLE =
-        "No Products are available";
+        "Sorry, No Products are available";
     
     public static final String MSG_PRODUCT_NOT_AVAILABLE = 
         "Product not available";
@@ -203,7 +207,7 @@ public class Constants {
         "Unsuccessful search of Order";
     
     public static final String MSG_ORDERS_UNAVAILABLE = 
-        "No Orders are available";
+        "No Orders has been placed yet...";
     
     public static final String MSG_ORDER_NOT_AVAILABLE =
         "Order not available";

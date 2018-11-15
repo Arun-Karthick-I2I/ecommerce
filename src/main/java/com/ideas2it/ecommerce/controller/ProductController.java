@@ -44,7 +44,7 @@ public class ProductController {
         products = getProducts();
         if (!products.isEmpty()) {
             return new ModelAndView("adminDisplayProducts",
-                "products",products);  
+                    Constants.LABEL_PRODUCTS,products);  
         } else {
             return new ModelAndView("adminDisplayProducts",
                 Constants.LABEL_MESSAGE,Constants.MSG_PRODUCTS_UNAVAILABLE);
@@ -62,17 +62,18 @@ public class ProductController {
      *              of the specified ID isn't available.
      */
     @PostMapping("searchById") 
-    private ModelAndView searchById(@RequestParam("id")Integer id) {
+    private ModelAndView searchById(@RequestParam
+            (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         List<Product> products = new ArrayList<Product>();
         try {
             Product product = productService.searchById(id);
             if (null != product) {
-                modelAndView.addObject("product", product);
+                modelAndView.addObject(Constants.LABEL_PRODUCT, product);
                 modelAndView.setViewName("displayProduct");
             } else {
                 products = getProducts();
-                modelAndView.addObject("products", products);
+                modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
                 modelAndView.setViewName("displayProducts");
@@ -94,17 +95,18 @@ public class ProductController {
      *                Product is available for the name specified. 
      */
     @PostMapping("searchByName") 
-    private ModelAndView searchByName(@RequestParam("name")String name) {
+    private ModelAndView searchByName(@RequestParam
+            (Constants.LABEL_NAME)String name) {
         ModelAndView modelAndView = new ModelAndView();
         List<Product> products = new ArrayList<Product>();
         try {
             products = productService.searchByName("%"+name+"%");
             if (!products.isEmpty()) {
-                modelAndView.addObject("products", products);
+                modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.setViewName("adminDisplayProducts");
             } else {
                 products = getProducts();
-                modelAndView.addObject("products", products);
+                modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
                 modelAndView.setViewName("adminDisplayProducts");
