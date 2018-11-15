@@ -3,7 +3,6 @@ package com.ideas2it.ecommerce.dao;
 import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
-import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 
 /**
@@ -119,5 +118,17 @@ public interface WarehouseProductDao {
      *         corresponding to the seller.
      */
     List<WarehouseProduct> getWarehouseProductsBySeller(Integer sellerId)
+            throws EcommerceException;
+
+    /**
+     * <p>
+     * It fetches the WarehouseProduct ID List based on the seller.
+     * </p>
+     *
+     * @param sellerId Seller whose warehouse products need to be searched
+     * @return warehouseProducts Returns the list of warehouseProducts
+     *         corresponding to the seller.
+     */
+    List<Integer> getWarehouseProductIdsBySeller(Integer sellerId)
             throws EcommerceException;
 }

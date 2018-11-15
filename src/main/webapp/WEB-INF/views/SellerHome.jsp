@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+<title>Ecommerce</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/bootstrap.min.css' />" />
 <link rel="stylesheet" type="text/css"
@@ -10,6 +11,7 @@
 	<jsp:include page="SellerHeader.jsp"></jsp:include>
 	<div class="buttonWrapper">
 		<form id="redirector" method="GET"></form>
+		<form id="pending" method="GET"><input type="hidden" name="status" value="ORDERED"></form>
 		<button type="button" class="btn btn-info" data-toggle="modal"
 			data-target="#modalBox">Add Product</button>
 		<button type="submit" form="redirector" formaction="/ecommerce/newAddress" class="btn btn-info">Add
@@ -18,6 +20,10 @@
 			formaction="/ecommerce/showAddress" class="btn btn-info">Show Addresses</button>
 		<button type="submit" form="redirector"
 			formaction="/ecommerce/seller/showWarehouse" class="btn btn-info">Show Warehouse</button>
+		<button type="submit" form="redirector"
+			formaction="/ecommerce/seller/getAllOrders" class="btn btn-info">Show All Orders</button>
+		<button type="submit" form="pending"
+			formaction="/ecommerce/seller/getOrders" class="btn btn-info">Show Pending Orders</button>
 	</div>
 	<div class="modal fade" id="modalBox">
 		<div class="modal-dialog modal-dialog-centered">

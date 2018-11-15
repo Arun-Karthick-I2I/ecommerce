@@ -3,7 +3,6 @@ package com.ideas2it.ecommerce.model;
 import java.sql.Date;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -18,6 +17,7 @@ public class Order {
     private Customer customer;
     private Date orderDate;
     private Float price;
+    private String modeOfPayment;
     private Address address;
     private List<OrderItem> orderItems;
 
@@ -51,6 +51,14 @@ public class Order {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getModeOfPayment() {
+        return modeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        this.modeOfPayment = modeOfPayment;
     }
 
     public Address getAddress() {

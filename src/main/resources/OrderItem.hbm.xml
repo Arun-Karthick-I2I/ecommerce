@@ -10,7 +10,7 @@
 			<generator class="increment" />
 		</id>
 
-		<many-to-one name="order" column="ORDER_ID"
+		<many-to-one name="order" column="ORDER_ID" lazy="false"
 			class="com.ideas2it.ecommerce.model.Order" />
 
 		<many-to-one name="warehouseProduct" lazy="false"
