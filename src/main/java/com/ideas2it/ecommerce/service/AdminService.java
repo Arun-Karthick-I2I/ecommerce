@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.model.Customer;
@@ -149,4 +150,25 @@ public interface AdminService {
      *              specified. Otherwise, returns an empty object.
      */
     List<WarehouseProduct> getProductsBySeller(Integer id) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
+    List<Integer> getWarehouseProductIds(Integer id) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param warehouseProductIds
+     * @return
+     */
+    List<OrderItem> searchOrderItemsByWarehouseProductIds(List<Integer> 
+        warehouseProductIds) throws EcommerceException;
 }

@@ -38,8 +38,8 @@
 					<input type="hidden" name="id" value="${seller.id}" />
 					<tr>
 						<td>${seller.id}</td>
-						<td><button class="btn btn-default" formmethod="post"
-								formaction="/ecommerce/admin/displaySellerProducts">
+						<td><button type="button" class="btn btn-default"
+								data-toggle="modal" data-target="#${seller.id}">
 								${seller.name}</button></td>
 						<td>${seller.mobileNumber}</td>
 						<td>${seller.emailId}</td>
@@ -55,6 +55,26 @@
 								<i class="fa fa-trash"></i></button>
 						</td>
 					</tr>
+					<div id="${seller.id}" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+									<form>
+										<p> What do you wish to view ???? </p>
+										<button class="btn btn-default" formmethod="post"
+											formaction="/ecommerce/admin/displaySellerProducts">
+											Products </button> or 
+									    <button class="btn btn-default" formmethod="post"
+											formaction="/ecommerce/admin/displaySellerOrders">
+											Orders </button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</form>
 			</c:forEach>
 		</tbody>
@@ -63,6 +83,8 @@
 		<Strong>**Note:</Strong> Click on the Seller name to view Products sold by the Seller
 	</div>
 </body>
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 <c:if test="${null != message}">
 	<script type="text/javascript">
 		alert("${message}");
