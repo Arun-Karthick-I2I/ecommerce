@@ -66,3 +66,27 @@ form > div > .btn-default {
   	background-color: #d9edf7;
   	text-align: right;
 }
+
+.modal-body > p {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.modal-body > .btn-default {
+	border: none;
+	text-decoration: underline;
+	font-size: 20px;
+}
+
+.modal-body > .btn-default:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+.modal-body {
+	text-align: center;
+}
+
+.modal {
+	margin-top: 16%;
+}

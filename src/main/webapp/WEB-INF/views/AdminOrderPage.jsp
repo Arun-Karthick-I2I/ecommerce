@@ -14,7 +14,7 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="id"
-				placeholder="Enter Order ID to be searched" required>
+				placeholder="Enter Order ID to be searched">
 		 	<button class="btn btn-default" type="submit"
 				formaction="/ecommerce/admin/searchByOrderId" formmethod="post">
 				<i class="fa fa-search"></i>
@@ -36,8 +36,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${orderItems}" var="orderItem">
-				<c:set var="order" value="${orderItem.order}"/> 
+			<c:forEach items="${orders}" var="order">
+				<c:forEach var="orderItem" items="${order.orderItems}"> 
 					<form action="admin" method="Post">
 						<tr>
 							<td class="id"> ${order.id} </td>
@@ -69,6 +69,7 @@
 							<td class="status"> ${orderItem.status} </td>
 						</tr>
 					</form>
+				</c:forEach>
 			</c:forEach>
 		</tbody>
 	</table>
