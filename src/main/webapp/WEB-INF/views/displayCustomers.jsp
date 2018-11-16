@@ -14,7 +14,7 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="name"
-				placeholder="Enter Customer Name to be searched">
+				placeholder="Enter Customer Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
 				formaction="/ecommerce/admin/searchByCustomerName" formmethod="post">
 				<i class="fa fa-search"></i>

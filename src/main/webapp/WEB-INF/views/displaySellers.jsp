@@ -14,7 +14,7 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="name"
-				placeholder="Enter Seller Name to be searched">
+				placeholder="Enter Seller Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
 				formaction="/ecommerce/admin/searchBySellerName" formmethod="post">
 				<i class="fa fa-search"></i>
@@ -58,19 +58,16 @@
 					<div id="${seller.id}" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-								</div>
 								<div class="modal-body">
-									<form>
-										<p> What do you wish to view ???? </p>
-										<button class="btn btn-default" formmethod="post"
-											formaction="/ecommerce/admin/displaySellerProducts">
-											Products </button> or 
-									    <button class="btn btn-default" formmethod="post"
-											formaction="/ecommerce/admin/displaySellerOrders">
-											Orders </button>
-									</form>
+									<button type="button" class="close" data-dismiss="modal">
+										&times;</button>
+									<p> What do you wish to view ???? </p>
+									<button class="btn btn-default" formmethod="post"
+										formaction="/ecommerce/admin/displaySellerProducts">
+										Products </button> or 
+									<button class="btn btn-default" formmethod="post"
+										formaction="/ecommerce/admin/displaySellerOrders">
+										Orders </button>
 								</div>
 							</div>
 						</div>

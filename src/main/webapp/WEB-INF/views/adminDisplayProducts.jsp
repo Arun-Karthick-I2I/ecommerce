@@ -17,7 +17,7 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="name"
-				placeholder="Enter Product Name to be searched">
+				placeholder="Enter Product Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
 				formaction="/ecommerce/product/searchByName" formmethod="post">
 				<i class="fa fa-search"></i>
@@ -27,9 +27,10 @@
 	<div class="card-deck">
 		<c:forEach var="product" items="${products}">
 			<form>
+				<input type="hidden" name="id" value="${product.id}"/>
   				<div class="card">
   					<button type="button" class="btn btn-info"
-							data-toggle="modal" data-target="#${product.id}">
+						data-toggle="modal" data-target="#${product.id}">
 	    				<img class="card-img-top" src="data:image/jpg;base64,
 	    					${product.base64Image}">
     		    	</button>
@@ -97,6 +98,12 @@
 										Sorry, No Seller is selling this Product......
 									</h4>
 								</c:if>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-default" formmethod="post"
+					    			formaction="/ecommerce/admin/displayProductOrders">
+									Click to view the Orders of this Product
+								</button>
 							</div>
 						</div>
 					</div>

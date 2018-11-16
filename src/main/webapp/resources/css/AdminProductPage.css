@@ -84,3 +84,12 @@ form > div > .btn-default {
 	font-weight: bold;
 	text-align: center;
 }
+
+.modal-footer {
+	text-align: center;
+}
+
+.modal-footer > .btn-default {
+	border: none;
+	text-decoration: underline;
+}

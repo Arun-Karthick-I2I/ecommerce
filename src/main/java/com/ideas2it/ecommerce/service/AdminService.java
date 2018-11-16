@@ -5,6 +5,7 @@ import java.util.List;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.OrderItem;
+import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.model.Customer;
@@ -159,7 +160,7 @@ public interface AdminService {
      * @param id
      * @return
      */
-    List<Integer> getWarehouseProductIds(Integer id) throws EcommerceException;
+    List<Integer> getWarehouseProductIdsBySeller(Integer id) throws EcommerceException;
     
     /**
      * <p>
@@ -171,4 +172,23 @@ public interface AdminService {
      */
     List<OrderItem> searchOrderItemsByWarehouseProductIds(List<Integer> 
         warehouseProductIds) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
+    List<Integer> getWarehouseProductIdsByProduct(Integer id) throws EcommerceException;
+    
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @return
+     */
+    List<Product> getProducts() throws EcommerceException;
 }

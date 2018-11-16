@@ -15,7 +15,7 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="name"
-				placeholder="Enter Category Name to be searched">
+				placeholder="Enter Category Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
 				formaction="/ecommerce/category/searchByName" formmethod="post">
 				<i class="fa fa-search"></i>

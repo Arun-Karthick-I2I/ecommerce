@@ -416,6 +416,14 @@ public class AdminController {
         return modelAndView;
     }
     
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
     @PostMapping("displaySellerOrders") 
     private ModelAndView displaySellerOrders(@RequestParam
             (Constants.LABEL_ID)Integer id) {
@@ -423,7 +431,7 @@ public class AdminController {
         List<Seller> sellers = new ArrayList<Seller>();
         try {
             List<Integer> warehouseProductIds = adminService
-                    .getWarehouseProductIds(id);
+                    .getWarehouseProductIdsBySeller(id);
             if (!warehouseProductIds.isEmpty()) {
                 List<OrderItem> orderItems = adminService
                     .searchOrderItemsByWarehouseProductIds(warehouseProductIds);
@@ -449,7 +457,15 @@ public class AdminController {
         }
         return modelAndView;
     }
-    
+
+    /**
+     * <p>
+     * 
+     * </p>
+     * 
+     * @param id
+     * @return
+     */
     @PostMapping("displayProductOrders") 
     private ModelAndView displayProductOrders(@RequestParam
             (Constants.LABEL_ID)Integer id) {
@@ -458,17 +474,25 @@ public class AdminController {
         try {
             List<Integer> warehouseProductIds = adminService
                 .getWarehouseProductIdsByProduct(id);
-            List<OrderItem> orderItems = adminService
-                .searchOrderItemsByWarehouseProductIds(warehouseProductIds);
-            if (!orderItems.isEmpty()) {
-                modelAndView.addObject("orderItems", orderItems);
-                modelAndView.setViewName("displayOrders");
+            if (!warehouseProductIds.isEmpty()) {
+                List<OrderItem> orderItems = adminService
+                    .searchOrderItemsByWarehouseProductIds(warehouseProductIds);
+                if (!orderItems.isEmpty()) {
+                    modelAndView.addObject("orderItems", orderItems);
+                    modelAndView.setViewName("displayOrders");
+                } else {
+                    products = getProducts();
+                    modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
+                    modelAndView.addObject(Constants.LABEL_MESSAGE,
+                            Constants.MSG_ORDERS_UNAVAILABLE);
+                    modelAndView.setViewName("adminDisplayProducts");
+                }
             } else {
                 products = getProducts();
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ORDERS_UNAVAILABLE);
-                modelAndView.setViewName("displayProducts");
+                modelAndView.setViewName("adminDisplayProducts");
             }
         } catch (EcommerceException e) {
             EcommerceLogger.error(e.getMessage());
@@ -550,6 +574,24 @@ public class AdminController {
             EcommerceLogger.error(e.getMessage());
         }
         return customer;
+    }
+    
+    /**
+     * <p>
+     * Used to fetch the details of all the Products available.
+     * </p>
+     * 
+     * @return  Returns the list of Products available. Otherwise, returns an 
+     *          empty object.
+     */
+    private List<Product> getProducts() {
+        List<Product> products = new ArrayList<Product>();
+        try {
+            products = adminService.getProducts();
+        } catch (EcommerceException e) {
+            EcommerceLogger.error(e.getMessage());
+        }
+        return products;
     }
     
     /**
