@@ -2,15 +2,18 @@ package com.ideas2it.ecommerce.service.impl;
 
 import java.util.List;
 
-import com.ideas2it.ecommerce.dao.OrderDao;
-import com.ideas2it.ecommerce.dao.impl.OrderDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
+import com.ideas2it.ecommerce.model.OrderItem;
+import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.AdminService;
 import com.ideas2it.ecommerce.service.CustomerService;
+import com.ideas2it.ecommerce.service.OrderItemService;
+import com.ideas2it.ecommerce.service.OrderService;
+import com.ideas2it.ecommerce.service.ProductService;
 import com.ideas2it.ecommerce.service.SellerService;
 import com.ideas2it.ecommerce.service.WarehouseProductService;
 
@@ -26,8 +29,10 @@ import com.ideas2it.ecommerce.service.WarehouseProductService;
  *
  */
 public class AdminServiceImpl implements AdminService{
-    private OrderDao orderDao = new OrderDaoImpl();
+    private OrderService orderService = new OrderServiceImpl();
+    private OrderItemService orderItemService = new OrderItemServiceImpl();
     private CustomerService customerService = new CustomerServiceImpl();
+    private ProductService productService = new ProductServiceImpl();
     private SellerService sellerService = new SellerServiceImpl();
     private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
 
@@ -36,7 +41,7 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public List<Order> getOrders() throws EcommerceException {
-        return orderDao.getOrders();
+        return orderService.getOrders();
     }
 
     /**
@@ -44,7 +49,7 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public Order searchByOrderId(Integer id) throws EcommerceException {
-        return orderDao.getById(id);
+        return orderService.searchById(id);
     }
     
     /**
@@ -118,5 +123,38 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public List<WarehouseProduct> getProductsBySeller(Integer id) throws EcommerceException {
         return warehouseProductService.searchBySeller(id);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Integer> getWarehouseProductIdsBySeller(Integer id) throws EcommerceException {
+        return warehouseProductService.getIdsBySeller(id);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<OrderItem> searchOrderItemsByWarehouseProductIds(List<Integer> 
+            warehouseProductIds) throws EcommerceException {
+        return orderItemService.searchByWarehouseProductIds(warehouseProductIds);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Integer> getWarehouseProductIdsByProduct(Integer id) throws EcommerceException {
+        return warehouseProductService.getIdsByProduct(id);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Product> getProducts() throws EcommerceException {
+        return productService.getProducts();
     }
 }

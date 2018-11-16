@@ -23,6 +23,7 @@
 .table-striped > tbody > tr > td > .btn-default {
 	border: none;
     background-color: inherit;
+    outline: none;
 }
 
 .table-striped > tbody > tr > td > .btn-default:hover {

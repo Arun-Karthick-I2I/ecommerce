@@ -346,6 +346,9 @@ public class Constants {
     public static final String MSG_SELLER_SEARCH_FAIL = 
         "Something went wrong while finding Seller details..Try Again later";
     
+    public static final String MSG_SELLER_NO_ORDERS_IN_THAT_STATUS = 
+        "There are no Orders with the specified Status";
+
     public static final String MSG_SELLER_ORDER_STATUS_UPDATE_SUCCESS = 
         "Status has been updated successfully for the specified Orders";
             

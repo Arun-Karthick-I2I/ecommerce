@@ -6,10 +6,12 @@
 	href="<c:url value='/resources/css/bootstrap.min.css' />" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/Seller_Orders.css' />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/SellerSnackbar.css' />" />
 </head>
 <body>
 	<jsp:include page="SellerHeader.jsp"></jsp:include>
-	<div class="w-75 table-wrapper mx-auto">
+	<div class="w-100 table-wrapper mx-auto">
 		<form action="/ecommerce/seller/changeStatus" method="POST">
 			<table class="table table-hover">
 				<thead class="thead-light">
@@ -19,6 +21,7 @@
 						<th>Quantity</th>
 						<th>Price</th>
 						<th>Order Date</th>
+						<th>Delivery Address</th>
 						<th>Status</th>
 						<th id="selectAll">Select<input class="selectAllCheckBox"
 							type="checkbox" onchange="checkAllOrderId(this)" /></th>
@@ -33,6 +36,7 @@
 							<td>${orderItem.quantity}</td>
 							<td>${orderItem.price}</td>
 							<td>${orderItem.order.orderDate}</td>
+							<td>${orderItem.order.address}</td>
 							<td>${orderItem.status}</td>
 							<c:if
 								test="${'ORDERED' == orderItem.status || 'DISPATCHED' == orderItem.status}">
@@ -45,10 +49,11 @@
 				</tbody>
 			</table>
 			<div class="form-group status-btn">
-				<button class="btn btn-outline-primary"
+				<button id="changeStatusBtn" class="btn btn-outline-primary"
 					onclick="return checkOrderIds()" type="submit">Change
 					Status</button>
 			</div>
+			<div id="snackbar" style="left:45%;">Please Select atleast one Order to Proceed</div>
 		</form>
 	</div>
 	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>

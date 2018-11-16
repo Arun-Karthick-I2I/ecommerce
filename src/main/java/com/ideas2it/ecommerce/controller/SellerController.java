@@ -49,7 +49,7 @@ public class SellerController {
     private static final String SELLER_ORDERS = "Seller_Orders";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String SHOW_WAREHOUSE = "ShowWarehouse";
-    private static final String PRODUCT_FORM = "SellerHome";
+    private static final String PRODUCT_FORM = "Seller_AddProduct";
     private static final String WAREHOUSE_PRODUCT_FORM = "WarehouseProductForm";
 
     private SellerService sellerService = new SellerServiceImpl();
@@ -378,7 +378,12 @@ public class SellerController {
             ORDER_STATUS status = ORDER_STATUS.valueOf(request.getParameter(Constants.LABEL_STATUS));
             List<OrderItem> orderItems = sellerService
                     .searchOrderItemsByStatus(warehouseProductIds, status);
-            modelAndView.addObject(Constants.LABEL_ORDER_ITEMS, orderItems);
+            if (!orderItems.isEmpty()) {
+                modelAndView.addObject(Constants.LABEL_ORDER_ITEMS, orderItems);
+            } else {
+                modelAndView.setViewName(SELLER_HOME);
+                modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_SELLER_NO_ORDERS_IN_THAT_STATUS);
+            }
         } catch (EcommerceException e) {
             modelAndView.setViewName(SELLER_HOME);
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());

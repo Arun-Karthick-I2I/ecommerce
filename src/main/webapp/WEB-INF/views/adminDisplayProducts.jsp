@@ -17,7 +17,7 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="name"
-				placeholder="Enter Product Name to be searched">
+				placeholder="Enter Product Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
 				formaction="/ecommerce/product/searchByName" formmethod="post">
 				<i class="fa fa-search"></i>
@@ -27,16 +27,19 @@
 	<div class="card-deck">
 		<c:forEach var="product" items="${products}">
 			<form>
+				<input type="hidden" name="id" value="${product.id}"/>
   				<div class="card">
   					<button type="button" class="btn btn-info"
-							data-toggle="modal" data-target="#${product.id}">
+						data-toggle="modal" data-target="#${product.id}">
 	    				<img class="card-img-top" src="data:image/jpg;base64,
 	    					${product.base64Image}">
     		    	</button>
     		    	<div class="card-body">
     		    		<button type="button" class="btn btn-info"
 							data-toggle="modal" data-target="#${product.id}">
-							<h5 class="card-title">${product.name}</h5>
+							<h5 class="card-title" data-toggle="tooltip" 
+								data-placement="bottom" title="${product.name}">
+								${product.name}</h5>
 						</button>
       					<p class="card-text">&#8377;${product.warehouseProducts[0].price}</p>
       					<p class="card-text">
@@ -91,8 +94,16 @@
 								</table>
 								</c:if>
 								<c:if test="${empty product.warehouseProducts}">
-									<h3>  Sorry, No Seller is selling this Product......</h3>
+									<h4 align="center">  
+										Sorry, No Seller is selling this Product......
+									</h4>
 								</c:if>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-default" formmethod="post"
+					    			formaction="/ecommerce/admin/displayProductOrders">
+									Click to view the Orders of this Product
+								</button>
 							</div>
 						</div>
 					</div>
@@ -101,12 +112,12 @@
  	    </c:forEach>
 	</div>
 </body>
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+
 <c:if test="${null != message}">
 	<script type="text/javascript">
 		alert("${message}");
-		
 	</script>
 </c:if>
-	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
 </html>

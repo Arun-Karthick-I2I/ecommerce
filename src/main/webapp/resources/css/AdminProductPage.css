@@ -6,6 +6,7 @@
 .card-deck > form > .card > .btn-info {
 	border: none;
     background-color: inherit;
+    outline: none;
 }
 
 .card-deck > form > .card > .btn-info > .card-img-top:hover {
@@ -21,6 +22,7 @@
 	width: 300px;
 	padding: 15px 15px 15px 15px;
 	margin-left: 10px;
+	border: none;
 }
 
 .card-deck > form > .card > .card-body {
@@ -32,6 +34,7 @@
     background-color: inherit;
     color: #2e3436;
     white-space: normal;
+    outline: none;
 }
 
 .card-deck > form > .card > .card-body > .btn-info > .card-title {
@@ -80,4 +83,13 @@ form > div > .btn-default {
 .modal-title {
 	font-weight: bold;
 	text-align: center;
+}
+
+.modal-footer {
+	text-align: center;
+}
+
+.modal-footer > .btn-default {
+	border: none;
+	text-decoration: underline;
 }

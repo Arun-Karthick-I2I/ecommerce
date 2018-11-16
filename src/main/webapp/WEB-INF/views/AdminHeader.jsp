@@ -4,7 +4,7 @@
 <head>
 <title>Ecommerce</title>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/bootstrap.min.css' />"/>
+	href="<c:url value='/resources/css/bootstrap.css' />"/>
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/font-awesome.min.css' />"/>
 <link rel="stylesheet"
@@ -67,7 +67,6 @@ function closeNav() {
     document.getElementById("main").style.marginLeft= "0";
 }
 </script>
-
 
 </html>
 

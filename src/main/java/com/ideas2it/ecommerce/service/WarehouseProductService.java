@@ -119,6 +119,17 @@ public interface WarehouseProductService {
 
     /**
      * <p>
+     * Fetches the list of warehouse product Ids based on the product id.
+     * </p>
+     *
+     * @param productId Product whose warehouse products needs to be searched.
+     * @return warehouseProducts Returns the list of warehouse products
+     *         corresponding to the product.
+     */
+    List<Integer> getIdsByProduct(Integer productId) throws EcommerceException;
+
+    /**
+     * <p>
      * It fetches the list of warehouse products based on the list of ids
      * </p>
      *

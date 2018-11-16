@@ -131,4 +131,16 @@ public interface WarehouseProductDao {
      */
     List<Integer> getWarehouseProductIdsBySeller(Integer sellerId)
             throws EcommerceException;
+
+    /**
+     * <p>
+     * It fetches the WarehouseProduct ID List based on the Product.
+     * </p>
+     *
+     * @param productId Product whose warehouse products need to be searched
+     * @return warehouseProducts Returns the list of warehouseProducts
+     *         corresponding to the product.
+     */
+    List<Integer> getWarehouseProductIdsByProduct(Integer productId)
+            throws EcommerceException;
 }
