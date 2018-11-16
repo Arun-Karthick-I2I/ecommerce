@@ -12,16 +12,19 @@
 
 		<bag name="orderItems" lazy="false">
 			<key column="ORDER_ID" />
-			<one-to-many class="com.ideas2it.ecommerce.model.OrderItem" />
+			<one-to-many
+				class="com.ideas2it.ecommerce.model.OrderItem" />
 		</bag>
 
-		<many-to-one name="customer" column="CUSTOMER_ID" lazy="false"
-			class="com.ideas2it.ecommerce.model.Customer" />
+		<many-to-one name="customer" column="CUSTOMER_ID"
+			lazy="false" class="com.ideas2it.ecommerce.model.Customer" />
 
-		<many-to-one name="address" column="ADDRESS_ID" lazy="false"
-			class="com.ideas2it.ecommerce.model.Address" />
+		<many-to-one name="address" column="ADDRESS_ID"
+			lazy="false" class="com.ideas2it.ecommerce.model.Address" />
 
 		<property name="price" column="PRICE" type="float" />
+		<property name="modeOfPayment" column="MODE_OF_PAYMENT"
+			type="string" />
 		<property name="orderDate" column="ORDER_DATE" type="date" />
 		<property name="modeOfPayment" column="MODE_OF_PAYMENT" type="string" />
 	</class>

@@ -15,15 +15,14 @@ import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.dao.WarehouseProductDao;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
-import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.session.SessionManager;
 
 /**
  * <p>
- * The {@code WarehouseProductDaoImpl} class implements SellerDao interface. It
- * provides warehouse products related operations that can be performed to a
- * e-commerce Store.
+ * The {@code WarehouseProductDaoImpl} class implements WarehouseProductDao
+ * interface. It provides warehouse products related operations that can be
+ * performed to a e-commerce Store.
  * </p>
  *
  * @author Arun Karthick.J
@@ -145,7 +144,8 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
                     + Constants.SPACE + Constants.LABEL_WAREHOUSE_PRODUCT_ID
                     + Constants.COLON_SYMBOL + warehouseProductId;
             EcommerceLogger.error(exceptionMessage, e);
-            throw new EcommerceException(exceptionMessage);
+            throw new EcommerceException(
+                    Constants.MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL);
         }
     }
 
@@ -169,7 +169,8 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
                     + Constants.SPACE + Constants.LABEL_PRODUCT
                     + Constants.COLON_SYMBOL + productId;
             EcommerceLogger.error(exceptionMessage, e);
-            throw new EcommerceException(exceptionMessage);
+            throw new EcommerceException(
+                    Constants.MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL);
         }
     }
 
@@ -197,7 +198,8 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
                     + Constants.SPACE + Constants.LABEL_PRODUCT
                     + Constants.COLON_SYMBOL + productId;
             EcommerceLogger.error(exceptionMessage, e);
-            throw new EcommerceException(exceptionMessage);
+            throw new EcommerceException(
+                    Constants.MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL);
         }
     }
 
@@ -221,7 +223,8 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
                     + Constants.SPACE + Constants.LABEL_WAREHOUSE_PRODUCT_ID
                     + Constants.COLON_SYMBOL + warehouseProductIds;
             EcommerceLogger.error(exceptionMessage, e);
-            throw new EcommerceException(exceptionMessage);
+            throw new EcommerceException(
+                    Constants.MSG_SEARCH_WAREHOUSE_PRODUCT_FAIL);
         }
     }
 
@@ -234,6 +237,27 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
             Root<WarehouseProduct> root = criteriaQuery
                     .from(WarehouseProduct.class);
             criteriaQuery.select(root).where(criteriaBuilder
+                    .equal(root.get(Constants.LABEL_SELLER), sellerId));
+            return session.createQuery(criteriaQuery).getResultList();
+        } catch (HibernateException e) {
+            String exceptionMessage = Constants.MSG_GET_WAREHOUSE_PRODUCTS_FAIL
+                    + Constants.SPACE + Constants.LABEL_SELLER
+                    + Constants.COLON_SYMBOL + sellerId;
+            EcommerceLogger.error(exceptionMessage, e);
+            throw new EcommerceException(
+                    Constants.MSG_GET_WAREHOUSE_PRODUCTS_FAIL);
+        }
+    }
+
+    public List<Integer> getWarehouseProductIdsBySeller(Integer sellerId)
+            throws EcommerceException {
+        try (Session session = SessionManager.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Integer> criteriaQuery = criteriaBuilder
+                    .createQuery(Integer.class);
+            Root<WarehouseProduct> root = criteriaQuery
+                    .from(WarehouseProduct.class);
+            criteriaQuery.select(root.get(Constants.LABEL_ID)).where(criteriaBuilder
                     .equal(root.get(Constants.LABEL_SELLER), sellerId));
             return session.createQuery(criteriaQuery).getResultList();
         } catch (HibernateException e) {

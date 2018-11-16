@@ -54,6 +54,14 @@ public class Constants {
 
     public static final String LABEL_NAME = "name";
 
+    public static final String LABEL_ORDER_ITEM_ID = 
+        "orderItemId";
+    
+    public static final String LABEL_ORDER_ITEMS = 
+        "orderItems";
+        
+    public static final String LABEL_STATUS = "status";
+            
     public static final String LABEL_USER = "user";
 
     public static final String LABEL_CUSTOMER = "customer";
@@ -86,7 +94,7 @@ public class Constants {
     
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
-    
+
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
     
@@ -310,6 +318,13 @@ public class Constants {
     public static final String MSG_ADD_SOME_ORDER_FAIL = 
         "Order has been plced exclude some follwing orders:";
     
+    public static final String MSG_SEARCH_ORDER_ITEMS_FAIL = 
+        "Something went wrong while fetching Order Item details..Try Again Later";
+
+    public static final String MSG_UPDATE_ORDER_ITEMS_FAIL = 
+            "Something went wrong while Updating Order Item details..Try Again Later";
+            
+    
     //Seller Specific Constants
     
     public static final String MSG_SELLER_ALREADY_EXIST = 
@@ -330,6 +345,9 @@ public class Constants {
     public static final String MSG_SELLER_SEARCH_FAIL = 
         "Something went wrong while finding Seller details..Try Again later";
     
+    public static final String MSG_SELLER_ORDER_STATUS_UPDATE_SUCCESS = 
+        "Status has been updated successfully for the specified Orders";
+            
     public static final String MSG_EXCEPTION_GET_SELLERS =
         "Something went wrong while retrieving sellers...Try Again Later";
     

@@ -24,8 +24,9 @@
 	<div id="headerBar">
 		<nav class="navbar navbar-fixed-top navbar-custom">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">pandaZone</a>
+				<div class="navbar-header"><button type="submit" form="dropdownFunctions" 
+					formmethod="get" formaction="/ecommerce/">
+					<a class="navbar-brand">pandaZone</a></button>
 				</div>
 
 				<ul class="nav navbar-nav">
@@ -61,7 +62,7 @@
 						<li><a class="dropdown">${customer.name} &nbsp;<span
 								class="glyphicon glyphicon-chevron-down"></span>
 								<div class="dropdown-content">
-									<form method="get">
+									<form id="dropdownFunctions" method="get">
 										<p>
 											<label>
 												<button class="btn btn-default"
@@ -85,6 +86,9 @@
 									</form>
 								</div>
 						</a></li>
+						<li  class="cartButton"><button form="dropdownFunctions" type="submit" class="btn btn-default btn-md" formmethod="get" formaction="/ecommerce/Cart"> <span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
+					</li>
 					</c:if>
 					<c:if test="${empty customer}">
 						<li>
@@ -93,10 +97,10 @@
 								<span class="glyphicon glyphicon-user"></span> Login & SignUp
 							</button>
 						</li>
+					<li class="cartButton"><button type="button" onclick="isLoggedIn()" class="btn btn-default"> <span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
+					</li>
 					</c:if>
-					<li><a href=""> <span
-							class="glyphicon glyphicon-shopping-cart"></span> Cart
-					</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -210,7 +214,10 @@
 			message = "";
 		}
 	}
-
+	function isLoggedIn(event) {
+		alert("Login first..");
+		$("#Customerlogin").modal("show");
+	}
 	function openLoginModal(event) {
 		$("#Customerlogin").modal("show");
 		$("#CustomerSignUp").modal("hide");

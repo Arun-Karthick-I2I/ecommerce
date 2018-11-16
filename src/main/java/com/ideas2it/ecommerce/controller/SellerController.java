@@ -1,7 +1,10 @@
 package com.ideas2it.ecommerce.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
+import com.ideas2it.ecommerce.common.enums.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Address;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
@@ -41,6 +46,7 @@ public class SellerController {
     private static final String INDEX_PAGE = "index";
     private static final String EDIT_SELLER = "EditSeller";
     private static final String SELLER_HOME = "SellerHome";
+    private static final String SELLER_ORDERS = "Seller_Orders";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String SHOW_WAREHOUSE = "ShowWarehouse";
     private static final String PRODUCT_FORM = "SellerHome";
@@ -326,4 +332,76 @@ public class SellerController {
         }
         return modelAndView;
     }
+
+    @PostMapping("changeStatus")
+    public ModelAndView changeOrderItemStatus(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView(Constants.REDIRECT + "getAllOrders");
+        List<Integer> orderItemIds = new ArrayList<Integer>();
+        for (String orderItem : request
+                .getParameterValues(Constants.LABEL_ORDER_ITEM_ID)) {
+            orderItemIds.add(Integer.parseInt(orderItem));
+        }
+        try {
+            List<OrderItem> orderItems = sellerService
+                    .searchOrderItems(orderItemIds);
+            for (OrderItem orderItem : orderItems) {
+                switch (orderItem.getStatus()) {
+                    case ORDERED:
+                        orderItem.setStatus(ORDER_STATUS.DISPATCHED);
+                        break;
+                    case DISPATCHED:
+                        orderItem.setStatus(ORDER_STATUS.DELIVERED);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (sellerService.changeOrderItemsStatus(orderItems)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_SELLER_ORDER_STATUS_UPDATE_SUCCESS);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.setViewName(SELLER_HOME);
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("getOrders")
+    public ModelAndView displayOrdersItems(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView(SELLER_ORDERS);
+        HttpSession session = request.getSession(Boolean.FALSE);
+        try {
+            List<Integer> warehouseProductIds = sellerService
+                    .getWarehouseProductIds((Integer) session
+                            .getAttribute(Constants.LABEL_SELLER_ID));
+            ORDER_STATUS status = ORDER_STATUS.valueOf(request.getParameter(Constants.LABEL_STATUS));
+            List<OrderItem> orderItems = sellerService
+                    .searchOrderItemsByStatus(warehouseProductIds, status);
+            modelAndView.addObject(Constants.LABEL_ORDER_ITEMS, orderItems);
+        } catch (EcommerceException e) {
+            modelAndView.setViewName(SELLER_HOME);
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+
+    @GetMapping("getAllOrders")
+    public ModelAndView displayAllOrdersItems(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView(SELLER_ORDERS);
+        try {
+            List<Integer> warehouseProductIds = sellerService
+                    .getWarehouseProductIds((Integer) session
+                            .getAttribute(Constants.LABEL_SELLER_ID));
+            List<OrderItem> orderItems = sellerService
+                    .searchOrderItemsByWarehouseProductIds(warehouseProductIds);
+            modelAndView.addObject(Constants.LABEL_ORDER_ITEMS, orderItems);
+        } catch (EcommerceException e) {
+            modelAndView.setViewName(SELLER_HOME);
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
 }

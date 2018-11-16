@@ -5,7 +5,6 @@ import java.util.List;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.OrderItem;
-import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 
 /**
@@ -109,6 +108,17 @@ public interface WarehouseProductService {
 
     /**
      * <p>
+     * Fetches the list of warehouse product Ids based on the seller id.
+     * </p>
+     *
+     * @param sellerId Seller whose warehouse products needs to be searched.
+     * @return warehouseProducts Returns the list of warehouse products
+     *         corresponding to the seller.
+     */
+    List<Integer> getIdsBySeller(Integer sellerId) throws EcommerceException;
+
+    /**
+     * <p>
      * It fetches the list of warehouse products based on the list of ids
      * </p>
      *
@@ -136,8 +146,8 @@ public interface WarehouseProductService {
      * Increases the stock from the warehouse based on the order quantity.
      * </p>
      * 
-     * @param order Order whose corresponding product stocks need to
-     *               be increased in the warehouse
+     * @param order Order whose corresponding product stocks need to be
+     *              increased in the warehouse
      * @return message Returns true if stock quanitity is increased in the
      *         warehouse
      */

@@ -2,14 +2,17 @@ package com.ideas2it.ecommerce.service.impl;
 
 import java.util.List;
 
+import com.ideas2it.ecommerce.common.enums.ORDER_STATUS;
 import com.ideas2it.ecommerce.dao.SellerDao;
 import com.ideas2it.ecommerce.dao.impl.SellerDaoImpl;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.CategoryService;
+import com.ideas2it.ecommerce.service.OrderItemService;
 import com.ideas2it.ecommerce.service.ProductService;
 import com.ideas2it.ecommerce.service.SellerService;
 import com.ideas2it.ecommerce.service.WarehouseProductService;
@@ -29,6 +32,7 @@ public class SellerServiceImpl implements SellerService {
     private CategoryService categoryService = new CategoryServiceImpl();
     private ProductService productService = new ProductServiceImpl();
     private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
+    private OrderItemService orderItemService = new OrderItemServiceImpl();
 
     /**
      * @{inheritDoc}
@@ -146,6 +150,15 @@ public class SellerServiceImpl implements SellerService {
      * @{inheritDoc}
      */
     @Override
+    public List<Integer> getWarehouseProductIds(Integer sellerId)
+            throws EcommerceException {
+        return warehouseProductService.getIdsBySeller(sellerId);
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
     public List<Product> searchProduct(String productName)
             throws EcommerceException {
         return productService.searchByName(productName);
@@ -174,6 +187,43 @@ public class SellerServiceImpl implements SellerService {
     public Category searchCategory(Integer categoryId)
             throws EcommerceException {
         return categoryService.searchById(categoryId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean changeOrderItemsStatus(List<OrderItem> orderItems)
+            throws EcommerceException {
+        return orderItemService.updateOrderItems(orderItems);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<OrderItem> searchOrderItems(List<Integer> orderItemIds)
+            throws EcommerceException {
+        return orderItemService.searchByIds(orderItemIds);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<OrderItem> searchOrderItemsByWarehouseProductIds(
+            List<Integer> warehouseProductIds) throws EcommerceException {
+        return orderItemService.searchByWarehouseProductIds(warehouseProductIds);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<OrderItem> searchOrderItemsByStatus(
+            List<Integer> warehouseProductIds, ORDER_STATUS status)
+            throws EcommerceException {
+        return orderItemService.searchByStatus(warehouseProductIds, status);
     }
 
     /**

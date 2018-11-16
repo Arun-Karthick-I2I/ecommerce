@@ -2,8 +2,10 @@ package com.ideas2it.ecommerce.service;
 
 import java.util.List;
 
+import com.ideas2it.ecommerce.common.enums.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Category;
+import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
@@ -96,8 +98,8 @@ public interface SellerService {
      * </p>
      * 
      * @param product Product which needs to be stored
-     * @return message Returns true if the new product is added
-     *         successfully else returns false
+     * @return message Returns true if the new product is added successfully
+     *         else returns false
      */
     Boolean addProduct(Product product) throws EcommerceException;
 
@@ -201,6 +203,18 @@ public interface SellerService {
 
     /**
      * <p>
+     * Searches the warehouse products based on the seller.
+     * </p>
+     *
+     * @param sellerId Seller whose warehouse products needs to be searched.
+     * @return warehouseProducts Returns the list of warehouse products
+     *         corresponding to the seller.
+     */
+    List<Integer> getWarehouseProductIds(Integer sellerId)
+            throws EcommerceException;
+
+    /**
+     * <p>
      * It fetches the list of dvdCategories available.
      * </p>
      *
@@ -218,6 +232,19 @@ public interface SellerService {
      *         Returns null if no such category exist.
      */
     Category searchCategory(Integer categoryId) throws EcommerceException;
+
+    Boolean changeOrderItemsStatus(List<OrderItem> orderItems)
+            throws EcommerceException;
+
+    List<OrderItem> searchOrderItems(List<Integer> orderItemIds)
+            throws EcommerceException;
+
+    List<OrderItem> searchOrderItemsByWarehouseProductIds(
+            List<Integer> warehouseProductIds) throws EcommerceException;
+
+    List<OrderItem> searchOrderItemsByStatus(
+            List<Integer> warehouseProductIds, ORDER_STATUS status)
+            throws EcommerceException;
 
     /**
      * <p>
