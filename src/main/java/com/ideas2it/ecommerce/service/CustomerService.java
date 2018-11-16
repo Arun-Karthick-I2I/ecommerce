@@ -184,15 +184,28 @@ public interface CustomerService {
 
     /**
      * <p>
-     * This method is used to cancel placed order from e-commerce web-site.
-     *
-     * @param order Needed for which order wants to delete.
-     * @returns Boolean it returns true, if order delete from e-commerce,
+     * This method is used to cancel placed particular order from e-commerce web-site.
+     * </p>
+     * 
+     * @param orderItems Needed for cancel the particular order.
+     * @returns Boolean it returns true, if order cancelled from e-commerce,
      *          otherwise false.
-     *          </p>
      */
-    public Boolean cancelOrder(Order order) throws EcommerceException;
+    public Boolean cancelOrder(List<OrderItem> orderItems)
+            throws EcommerceException;
 
+    /**
+     * <p>
+     * Getting list of order item detail from e-commerce web-site based on
+     * list of order item id's.
+     * </p>
+     *
+     * @param orderItemIds needed for get list order item id's.
+     * @return List<OrderItem> Return the list of order items.
+     */
+    public List<OrderItem> getOrderItemsByIds(List<Integer> orderItemIds)
+            throws EcommerceException;
+    
     /**
      * <p>
      * Getting detail of the warehouse product from e-commerce web-site based on

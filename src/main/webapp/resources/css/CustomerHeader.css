@@ -1,5 +1,6 @@
 .navbar-custom {
     background-color: #3465a4;
+    padding:none;
 }
 li {
    vertical-align:center;

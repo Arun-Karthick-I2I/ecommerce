@@ -34,8 +34,8 @@
 					<th class="headingPrice">Price</th>
 				</tr>
 				<tbody>
-					<c:forEach var="warehouseProduct" items="${warehouseProducts}"
-						varStatus="loop">
+					<c:forEach var="warehouseProduct" items="${warehouseProducts}" >
+						<input type="hidden" name="id" value="${warehouseProduct.id}">
 						<tr>
 							<form class="products">
 								<td class="productName"><div class="productImage">
@@ -44,8 +44,8 @@
 											alt="image" />
 									</div></td>
 								<td class="productName">${warehouseProduct.product.name}</td>
-								<td class="productQuantity">${quantities[loop.index]}</td>
-								<td class="productPrice">${warehouseProduct.price}</td>
+								<td class="productQuantity">${quantities[warehouseProduct.id]}</td>
+								<td class="productPrice">${warehouseProduct.price * quantities[warehouseProduct.id]}</td>
 							</form>
 						</tr>
 					</c:forEach>
@@ -98,10 +98,10 @@
 							Card</label> <br /> <label><input type="radio"
 							name="modeOfPayment" value="NetBanking">&nbsp;&nbsp;NetBanking</label>
 						<br /> <label><input type="radio" name="modeOfPayment"
-							value="Phonepe / BHIM UPI">&nbsp;&nbsp;Phonepe / BHIM UPI</label>
+							value="BHIM UPI">&nbsp;&nbsp;BHIM UPI</label>
 					</div>
 					<div class="placeOrderButton">
-						<button type="submit" id="makeOrder" formmethod="post" formaction="/ecommerce/purchaseProducts"
+						<button type="submit" id="makeOrder" formmethod="post" formaction="/ecommerce/placeOrder"
 							class="btn btn-default btn-lg">
 							<b>&nbsp;&nbsp;PLACE ORDER</b>
 						</button>

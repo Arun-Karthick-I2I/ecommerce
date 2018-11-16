@@ -9,13 +9,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script type="text/javascript"
-	src="<c:url value="/resources/js/CustomerHeader.js"/>"></script>
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/CustomerHeader.css' />">
 
@@ -27,6 +20,7 @@
 				<div class="navbar-header"><button type="submit" form="dropdownFunctions" 
 					formmethod="get" formaction="/ecommerce/">
 					<a class="navbar-brand">pandaZone</a></button>
+					<form id="dropdownFunctions"></form>
 				</div>
 
 				<ul class="nav navbar-nav">
@@ -62,7 +56,7 @@
 						<li><a class="dropdown">${customer.name} &nbsp;<span
 								class="glyphicon glyphicon-chevron-down"></span>
 								<div class="dropdown-content">
-									<form id="dropdownFunctions" method="get">
+									<form method="get">
 										<p>
 											<label>
 												<button class="btn btn-default"
@@ -91,15 +85,12 @@
 					</li>
 					</c:if>
 					<c:if test="${empty customer}">
-						<li>
+						<li class="loginbutton">
 							<button type="button" class="btn btn-default" id="btnloginModal"
 								onclick="openLoginModal()">
 								<span class="glyphicon glyphicon-user"></span> Login & SignUp
 							</button>
 						</li>
-					<li class="cartButton"><button type="button" onclick="isLoggedIn()" class="btn btn-default"> <span
-							class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
-					</li>
 					</c:if>
 				</ul>
 			</div>
@@ -205,7 +196,12 @@
 	</div>
 
 </body>
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/CustomerHeader.js"/>"></script>
 <script type="text/javascript">
 	function alertMessage(event) {
 		var message = "${message}";

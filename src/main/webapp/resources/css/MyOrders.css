@@ -1,0 +1,112 @@
+.myOrders {
+	margin-top : 7%;
+	margin-left: 5%;
+	margin-right:5%;
+	margin-bottom: 5%;
+	padding-left:2%;
+	padding-right:2%;
+}
+
+.myOrders > .table > tbody > tr >  td {
+	border:none;
+	text-align:center;
+	height:150px;
+}
+
+.myOrders > .table > tbody > tr >  .productImage {
+	width:25%;
+}
+
+.myOrders > .table > tbody > tr > td > .productImage {
+	width:200px;
+	height:150px;
+}
+
+.myOrders > .table > tbody > tr > td > .productImage > .image{
+	width:200px;
+	height:150px;
+}
+
+.myOrders > .table > tbody > tr > .productName {
+	width:25%;
+	text-align:center;
+}
+
+.myOrders > .table > tbody > tr > td > .productName > .seller {
+	color:#babdb6;
+	font-size:15px;
+}
+
+.myOrders > .table > tbody > tr > .productQuantity {
+	width:20%;
+}
+
+.myOrders > .table > tbody > tr > .productPrice {
+	width:10%;
+}
+
+.myOrders > .table > tbody > tr > .orderStatus {
+	width:20%;
+	font-weight:bold;
+	text-align:left;
+}
+
+.myOrders > .table > tbody > tr > .orderCancel {
+	width:10%;
+}
+
+.myOrders > .table {
+	margin-top:3%;
+	width:100%;
+	border:none;
+}
+
+.myOrders > .table > tbody > .table-footer > td {
+	width:100%;
+	height:30px;
+}
+
+.myOrders > .table > tbody {
+	width:100%;
+}
+
+
+.myOrders > .table > tbody {
+	width:100%;
+}
+
+.myOrders > .table > tbody > tr {
+	height:30px;
+}
+
+.myOrders > .table > thead > .header > td[colspan] > div {
+	height:40px;
+	padding-left:10px;
+	padding-top:1%;
+	border:1px solid lightgrey;
+	background-color: lightgrey;
+	font-weight:bold;
+}
+
+
+.myOrders > .table > tbody > .table-footer > tr > td {
+	height:30px;
+}
+
+.myOrders > .table > tbody > .table-footer > .orderDate {
+	text-align:left;
+}
+
+.myOrders > .table > tbody > .table-footer > tr > .orderPrice {
+	float:right;
+}
+
+
+.myOrders > .table > thead >tr > td {
+	width:100%;
+	padding:0px;
+}
+
+
+
+
