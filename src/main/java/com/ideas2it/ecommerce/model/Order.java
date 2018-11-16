@@ -18,7 +18,6 @@ public class Order {
     private Date orderDate;
     private String modeOfPayment;
     private Float price;
-    private String modeOfPayment;
     private Address address;
     private List<OrderItem> orderItems;
 
@@ -76,13 +75,5 @@ public class Order {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
-    }
-
-    public String getModeOfPayment() {
-        return modeOfPayment;
-    }
-
-    public void setModeOfPayment(String modeOfPayment) {
-        this.modeOfPayment = modeOfPayment;
     }
 }

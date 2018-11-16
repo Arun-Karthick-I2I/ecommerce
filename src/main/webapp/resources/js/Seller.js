@@ -24,7 +24,7 @@ for (var i = 0; i < checkboxes.length; i++) {
         	return true;
         }
 }
-alert("Please Select Atleast One Order to Proceed");
+showSnackBar();
 return false;
 }
 
@@ -32,5 +32,12 @@ function showSelectAll() {
 	var checkboxes = document.getElementsByName("orderItemId");
 	if (0 == checkboxes.length) {
 		document.getElementById("selectAll").style.display="none";
+		document.getElementById("changeStatusBtn").style.visibility="hidden";
 	}
+}
+
+function showSnackBar() {
+    var snack = document.getElementById("snackbar");
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
 }

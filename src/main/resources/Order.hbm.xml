@@ -23,8 +23,6 @@
 			lazy="false" class="com.ideas2it.ecommerce.model.Address" />
 
 		<property name="price" column="PRICE" type="float" />
-		<property name="modeOfPayment" column="MODE_OF_PAYMENT"
-			type="string" />
 		<property name="orderDate" column="ORDER_DATE" type="date" />
 		<property name="modeOfPayment" column="MODE_OF_PAYMENT" type="string" />
 	</class>
