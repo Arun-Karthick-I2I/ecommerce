@@ -270,4 +270,25 @@ public class WarehouseProductDaoImpl implements WarehouseProductDao {
         }
     }
 
+    public List<Integer> getWarehouseProductIdsByProduct(Integer productId)
+            throws EcommerceException {
+        try (Session session = SessionManager.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Integer> criteriaQuery = criteriaBuilder
+                    .createQuery(Integer.class);
+            Root<WarehouseProduct> root = criteriaQuery
+                    .from(WarehouseProduct.class);
+            criteriaQuery.select(root.get(Constants.LABEL_ID)).where(criteriaBuilder
+                    .equal(root.get(Constants.LABEL_PRODUCT), productId));
+            return session.createQuery(criteriaQuery).getResultList();
+        } catch (HibernateException e) {
+            String exceptionMessage = Constants.MSG_GET_WAREHOUSE_PRODUCTS_FAIL
+                    + Constants.SPACE + Constants.LABEL_PRODUCT
+                    + Constants.COLON_SYMBOL + productId;
+            EcommerceLogger.error(exceptionMessage, e);
+            throw new EcommerceException(
+                    Constants.MSG_GET_WAREHOUSE_PRODUCTS_FAIL);
+        }
+    }
+
 }
