@@ -6,6 +6,8 @@
 <title>Ecommerce</title>
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/seller_login.css' />">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/css/SellerSnackbar.css' />" />
 </head>
 
 <body>
@@ -49,7 +51,9 @@
 						<p>Let's Create your Seller Account</p>
 						<div class="form-group">
 							<input type="text" name="name" placeholder="Enter Name"
-								pattern="[a-zA-Z]{1,30}" title="Name should contain only Alphabets" maxlength="30" class="lowin-input" required>
+								pattern="[a-zA-Z]{1,30}"
+								title="Name should contain only Alphabets" maxlength="30"
+								class="lowin-input" required>
 						</div>
 						<div class="form-group">
 							<input type="email" name="emailId" placeholder="Enter Email ID"
@@ -87,12 +91,16 @@
 		</div>
 	</div>
 	<c:if test="${null != message}">
+		<div id="snackbar">${message}</div>
+	</c:if>
+	<script src="<c:url value='/resources/js/seller_login.js' />"></script>
+	<script src="<c:url value='/resources/js/Seller.js' />"></script>
+	<c:if test="${null != message}">
 		<script>
-			alert("${message}")
+		showSnackBar();
 		</script>
 		<c:remove var="message" />
 	</c:if>
-	<script src="<c:url value='/resources/js/seller_login.js' />"></script>
 	<script>
 		Auth.init({
 			login_url : '/ecommerce/login',

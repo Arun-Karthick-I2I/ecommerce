@@ -34,3 +34,18 @@
 .dropdown:focus {
 	outline:none;
 }
+
+.btn-logout {
+	border:none;
+	outline:none;
+	background:none;
+	float:right;
+}
+
+.btn-logout:focus {
+	outline:none;
+}
+
+.logout-wrapper {
+	float:right;
+}

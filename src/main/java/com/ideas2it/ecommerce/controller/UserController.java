@@ -40,6 +40,7 @@ public class UserController {
     private static final String INDEX_PAGE = "CustomerHome";
     private static final String ADMIN_HOME = "displayCategories";
     private static final String CUSTOMER_HOME = "CustomerHome";
+    private static final String CUSTOMER_PROFILE = "myAccount";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String ADMIN_LOGIN = "adminLogin";
@@ -200,7 +201,7 @@ public class UserController {
         model.addAttribute(Constants.LABEL_MESSAGE, Constants.MSG_LOGGED_OUT);
         return viewName;
     }
-    
+
     /**
      * <p>
      * Shows the list of available warehouse address for that seller.
@@ -209,7 +210,8 @@ public class UserController {
     @GetMapping("showAddress")
     public ModelAndView displayAddress(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
-        USER_ROLES role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
+        USER_ROLES role = (USER_ROLES) session
+                .getAttribute(Constants.LABEL_ROLE);
         modelAndView.addObject("showAddress", Boolean.TRUE);
         if (USER_ROLES.CUSTOMER == role) {
             modelAndView.setViewName(CUSTOMER_HOME);
@@ -217,13 +219,16 @@ public class UserController {
             modelAndView.setViewName(SELLER_HOME);
         }
         try {
-            User user = userService.searchUser((Integer) session.getAttribute(Constants.LABEL_USER_ID));
-            modelAndView.addObject(Constants.LABEL_ADDRESSES, user.getAddresses());
+            User user = userService.searchUser(
+                    (Integer) session.getAttribute(Constants.LABEL_USER_ID));
+            modelAndView.addObject(Constants.LABEL_ADDRESSES,
+                    user.getAddresses());
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
+
     /**
      * <p>
      * Shows the new address form that can be used to provide additional
@@ -249,7 +254,7 @@ public class UserController {
         USER_ROLES role = (USER_ROLES) session
                 .getAttribute(Constants.LABEL_ROLE);
         if (USER_ROLES.CUSTOMER == role) {
-            modelAndView.setViewName(CUSTOMER_HOME);
+            modelAndView.setViewName(CUSTOMER_PROFILE);
         } else if (USER_ROLES.SELLER == role) {
             modelAndView.setViewName(SELLER_HOME);
         }
@@ -280,11 +285,13 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView(ADDRESS_FORM);
         modelAndView.addObject("addressForm", Boolean.TRUE);
         HttpSession session = request.getSession(Boolean.FALSE);
-        Integer addressId = Integer.parseInt(request.getParameter(Constants.LABEL_ADDRESS_ID));
+        Integer addressId = Integer
+                .parseInt(request.getParameter(Constants.LABEL_ADDRESS_ID));
         User user;
         try {
-            user = userService.searchUser((Integer) session.getAttribute(Constants.LABEL_USER_ID));
-            for(Address address : user.getAddresses()) {
+            user = userService.searchUser(
+                    (Integer) session.getAttribute(Constants.LABEL_USER_ID));
+            for (Address address : user.getAddresses()) {
                 if (address.getId() == addressId) {
                     modelAndView.addObject(Constants.LABEL_ADDRESS, address);
                     break;
@@ -306,7 +313,14 @@ public class UserController {
     public ModelAndView updateAddress(
             @ModelAttribute("address") Address address, HttpSession session)
             throws EcommerceException {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        ModelAndView modelAndView = new ModelAndView();
+        USER_ROLES role = (USER_ROLES) session
+                .getAttribute(Constants.LABEL_ROLE);
+        if (USER_ROLES.CUSTOMER == role) {
+            modelAndView.setViewName(CUSTOMER_PROFILE);
+        } else if (USER_ROLES.SELLER == role) {
+            modelAndView.setViewName(SELLER_HOME);
+        }
         User user = userService.searchUser(
                 (Integer) session.getAttribute(Constants.LABEL_USER_ID));
         try {

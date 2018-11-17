@@ -176,7 +176,15 @@ public class SellerServiceImpl implements SellerService {
      * @{inheritDoc}
      */
     @Override
-    public List<Category> getCategories() throws EcommerceException {
+    public List<Product> getAllProducts() throws EcommerceException {
+        return productService.getProducts();
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public List<Category> getAllCategories() throws EcommerceException {
         return categoryService.getCategories();
     }
 
@@ -213,7 +221,8 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public List<OrderItem> searchOrderItemsByWarehouseProductIds(
             List<Integer> warehouseProductIds) throws EcommerceException {
-        return orderItemService.searchByWarehouseProductIds(warehouseProductIds);
+        return orderItemService
+                .searchByWarehouseProductIds(warehouseProductIds);
     }
 
     /**
