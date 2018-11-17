@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <title>Ecommerce</title>
+<link rel = "icon" type = "image/png" href = "<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/bootstrap.css' />"/>
 <link rel="stylesheet"
@@ -45,10 +46,11 @@
 					</ul>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href=""><i class="fa fa-user"></i>
+					<li><a href="#"><i class="fa fa-user"></i>
 					Admin &nbsp;</a></li>
 					<li><form class = "logout" action="/ecommerce/logout">
-						<button class="btn default"> Logout</button>
+						<button class="btn default"><i class="fa fa-power-off"></i>
+					    Logout</button>
 					</form></li>
 				</ul>
 			</div>

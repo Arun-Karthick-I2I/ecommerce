@@ -191,6 +191,15 @@ public interface SellerService {
 
     /**
      * <p>
+     * Fetches all the products available in the store.
+     * </p>
+     *
+     * @return Products Returns the list of all products available in the store.
+     */
+    List<Product> getAllProducts() throws EcommerceException;
+
+    /**
+     * <p>
      * Searches the warehouse products based on the seller.
      * </p>
      *
@@ -220,7 +229,7 @@ public interface SellerService {
      *
      * @return categories Returns the list of available categories
      */
-    List<Category> getCategories() throws EcommerceException;
+    List<Category> getAllCategories() throws EcommerceException;
 
     /**
      * <p>

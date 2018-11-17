@@ -43,7 +43,7 @@
 						</button>
       					<p class="card-text">&#8377;${product.warehouseProducts[0].price}</p>
       					<p class="card-text">
-	      					<input type="hidden" name="id" value="${product.category.id}"/>
+	      					<input type="hidden" name="categoryId" value="${product.category.id}"/>
     	  					<button class="btn btn-default" formmethod="post"
 								formaction="/ecommerce/category/displayProducts">
 								${product.category.name}

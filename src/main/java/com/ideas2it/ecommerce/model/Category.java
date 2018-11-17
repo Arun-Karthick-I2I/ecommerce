@@ -12,7 +12,7 @@ import java.util.List;
  * @author Pavithra.S
  *
  */
-public class Category {
+public class Category implements Comparable<Category> {
 	private Integer id;
 	private String name;
 	private List<Product> products;
@@ -40,4 +40,8 @@ public class Category {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	
+	public int compareTo(Category category) {
+        return this.id - category.id; 
+    } 
 }

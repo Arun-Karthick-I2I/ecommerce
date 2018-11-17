@@ -418,11 +418,15 @@ public class AdminController {
     
     /**
      * <p>
-     * 
+     * Used to display the various Orders placed by different Customers for 
+     * different from the same Seller for the ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Seller whose Orders are to retrieved.
+     * @return      Returns the Orders of a Seller for the ID 
+     *              specified. Otherwise, returns a failure message 
+     *              indicating that no Orders have been placed by 
+     *              Customers to that Seller.
      */
     @PostMapping("displaySellerOrders") 
     private ModelAndView displaySellerOrders(@RequestParam
@@ -436,20 +440,21 @@ public class AdminController {
                 List<OrderItem> orderItems = adminService
                     .searchOrderItemsByWarehouseProductIds(warehouseProductIds);
                 if (!orderItems.isEmpty()) {
-                    modelAndView.addObject("orderItems", orderItems);
+                    modelAndView.addObject
+                        (Constants.LABEL_ORDER_ITEMS, orderItems);
                     modelAndView.setViewName("displayOrders");
                 } else {
                     sellers = getSellers();
                     modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                     modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        "Seller contains no Orders");
+                        Constants.MSG_SELLER_ORDERS_UNAVAILABLE);
                     modelAndView.setViewName("displaySellers");
                 }
             } else {
                 sellers = getSellers();
                 modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        "Seller contains no Orders");
+                        Constants.MSG_SELLER_ORDERS_UNAVAILABLE);
                 modelAndView.setViewName("displaySellers");
             }
         } catch (EcommerceException e) {
@@ -460,11 +465,15 @@ public class AdminController {
 
     /**
      * <p>
-     * 
+     * Used to display the Orders placed by different Customers for 
+     * the Product ID specified.
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Product whose Orders are to fetched.
+     * @return      Returns the Orders placed by different Customers for 
+     *              Product ID specified. Otherwise, returns a failure
+     *              message indicating that no Orders have been placed for 
+     *              that particular Product.
      */
     @PostMapping("displayProductOrders") 
     private ModelAndView displayProductOrders(@RequestParam
@@ -478,7 +487,8 @@ public class AdminController {
                 List<OrderItem> orderItems = adminService
                     .searchOrderItemsByWarehouseProductIds(warehouseProductIds);
                 if (!orderItems.isEmpty()) {
-                    modelAndView.addObject("orderItems", orderItems);
+                    modelAndView.addObject
+                        (Constants.LABEL_ORDER_ITEMS, orderItems);
                     modelAndView.setViewName("displayOrders");
                 } else {
                     products = getProducts();

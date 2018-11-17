@@ -1,6 +1,14 @@
 body {
-    background-image: url("adminLogin.jpg");
-    background-size: cover;
+  padding: 2.25em 1.6875em;
+  background-image: radial-gradient(ellipse at bottom, #5091DD , #030617 );
+  background-size: 4px 4px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #eeeeec;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #ffffff;
 }
 
 .wrap
@@ -14,15 +22,17 @@ body {
 
 p.form-title
 {
-    font-family: 'Open Sans' , sans-serif;
-    font-size: 30px;
-    font-weight: 600;
+    font-family: Dancing Script; 
+    font-size: 50px; 
+    font-variant: small-caps; 
+    font-weight: 700; 
+    line-height: 32.3px; 
     text-align: center;
     color: #FFFFFF;
     margin-top: 5%;
     margin-left: 4%;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
+    text-shadow: 3px 8px 10px #2e3436;
 }
 
 form

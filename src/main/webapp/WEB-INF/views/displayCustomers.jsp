@@ -31,7 +31,7 @@
 				<th></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="myTable">
 			<c:forEach items="${customers}" var="customer">
 				<form action="admin" method="Post">
 					<input type="hidden" name="id" value="${customer.id}" />
@@ -56,6 +56,18 @@
 		<Strong>**Note:</Strong> Click on the Customer name to view the Orders placed by the Customer
 	</div>
 </body>
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+
+<script>
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 <c:if test="${null != message}">
 	<script type="text/javascript">
 		alert("${message}");

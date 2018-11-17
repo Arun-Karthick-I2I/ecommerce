@@ -16,31 +16,36 @@
 			</c:if>
 			<c:if test="${null != address.id}">
 				<div class="p-3 font-weight-bold">Update Address</div>
+				<input type="hidden" name="id" value="${address.id}" />
 			</c:if>
 			<div class="form-group">
 				<label for="addressLine">Address Line:</label> <input type="text"
-					class="form-control" name="addressLine"
-					value="${address.addressLine}" id="addressLine">
+					class="form-control" name="addressLine" maxlength="150"
+					value="${address.addressLine}" id="addressLine" required>
 			</div>
 			<div class="form-group">
 				<label class="city">City:</label><input type="text"
-					class="form-control" name="city" value="${address.city}" id="city">
+					class="form-control" pattern="[a-zA-Z]{1}[a-zA-Z ]{1,29}"
+					maxlength="30" title="City name should contain only alphabets"
+					name="city" value="${address.city}" id="city" required>
 			</div>
 			<div class="form-group">
 				<label class="state">State:</label><input type="text"
-					class="form-control" name="state" value="${address.state}"
-					id="state">
+					class="form-control" pattern="[a-zA-Z]{1}[a-zA-Z ]{1,29}"
+					maxlength="30" title="State name should contain only alphabets"
+					name="state" value="${address.state}" id="state" required>
 			</div>
 			<div class="form-group">
 				<label class="country">Country:</label><input type="text"
-					class="form-control" name="country" value="${address.country}"
-					id="country">
+					class="form-control" pattern="[a-zA-Z]{1}[a-zA-Z ]{1,29}"
+					maxlength="30" title="Country name should contain only alphabets"
+					name="country" value="${address.country}" id="country" required>
 			</div>
 			<div class="form-group">
 				<label class="pincode">Pincode:</label><input type="text"
-					pattern="[0-9]{6}" title="Pincode should contain 6 digits"
-					class="form-control" name="pincode" value="${address.pincode}"
-					id="pincode">
+					pattern="[0-9]{6}" maxlength="6"
+					title="Pincode should contain 6 digits" class="form-control"
+					name="pincode" value="${address.pincode}" id="pincode" required>
 			</div>
 			<c:if test="${null != address.id}">
 				<button type="submit" class="btn btn-outline-primary"

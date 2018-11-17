@@ -94,6 +94,8 @@ public class Constants {
     
     public static final String LABEL_CATEGORY = "category";
     
+    public static final String LABEL_CATEGORY_ID = "categoryId";
+    
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
 
@@ -252,6 +254,9 @@ public class Constants {
     
     public static final String MSG_SELLER_DELETE_FAILURE =
         "Unsuccessful deletion of Seller";
+    
+    public static final String MSG_SELLER_ORDERS_UNAVAILABLE =
+        "Seller contains no Orders";
     
     
     //Customer Specific Constants
