@@ -2,6 +2,7 @@ package com.ideas2it.ecommerce.controller;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,6 +47,10 @@ public class CategoryController {
     private ModelAndView displayCategories() {
         List<Category> categories = new ArrayList<Category>();
         categories = getCategories();
+        Collections.sort(categories);
+        for (Category category : categories) {
+        System.out.println("Categories" +category.getId());
+        }
         if (!categories.isEmpty()) {
             return new ModelAndView("displayCategories",
                 Constants.LABEL_CATEGORIES,categories);  
@@ -257,25 +262,6 @@ public class CategoryController {
             EcommerceLogger.error(e.getMessage());
         }
         return modelAndView;
-    }
-    
-    /**
-     * <p>
-     * Used to fetch the Category for the ID specified. 
-     * </p>
-     * 
-     * @param   id  ID of the Category to be fetched.
-     * @return      Returns the Category for the ID specified. Otherwise,
-     *              returns an empty object.
-     */
-    private Category getCategory(Integer id) {
-        Category category = new Category();
-        try {
-            category = categoryService.searchById(id);
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
-        return category;
     }
     
     /**

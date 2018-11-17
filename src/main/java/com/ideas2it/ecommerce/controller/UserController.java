@@ -1,6 +1,7 @@
 
 package com.ideas2it.ecommerce.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.USER_ROLES;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.model.Address;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
@@ -163,8 +165,10 @@ public class UserController {
                             userService.getAllCategories());
                     modelAndView.setViewName(SELLER_HOME);
                 } else {
+                    List<Category> categories = userService.getAllCategories();
+                    Collections.sort(categories);
                     modelAndView.addObject(Constants.LABEL_CATEGORIES,
-                            userService.getAllCategories());
+                            categories);
                     modelAndView.setViewName(ADMIN_HOME);
                 }
             }
