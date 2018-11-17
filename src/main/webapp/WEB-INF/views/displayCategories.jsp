@@ -33,10 +33,11 @@
 				<th class="row-header"> Actions </th>
 			</tr>
 		</thead>
-		<tbody id="myTable">
+		<tbody>
 			<c:forEach items="${categories}" var="category">
 				<form action="category" method="Post">
 					<input type="hidden" name="id" value="${category.id}" />
+					<input type="hidden" name="categoryId" value="${category.id}"/>
 					<tr>
 						<td>${category.id}</td>
 						<td><button class="btn btn-default" formmethod="post"

@@ -48,9 +48,6 @@ public class CategoryController {
         List<Category> categories = new ArrayList<Category>();
         categories = getCategories();
         Collections.sort(categories);
-        for (Category category : categories) {
-        System.out.println("Categories" +category.getId());
-        }
         if (!categories.isEmpty()) {
             return new ModelAndView("displayCategories",
                 Constants.LABEL_CATEGORIES,categories);  
@@ -236,7 +233,7 @@ public class CategoryController {
      */
     @PostMapping("displayProducts") 
     private ModelAndView displayProducts(@RequestParam
-            (Constants.LABEL_ID)Integer id) {
+            (Constants.LABEL_CATEGORY_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         List<Category> categories = getCategories();
         try {
@@ -254,6 +251,8 @@ public class CategoryController {
                     modelAndView.setViewName("displayCategories");
                 }
             } else {
+                modelAndView.addObject
+                    (Constants.LABEL_CATEGORIES,categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
                 modelAndView.setViewName("displayCategories");
