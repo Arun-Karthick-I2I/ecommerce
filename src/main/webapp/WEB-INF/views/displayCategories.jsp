@@ -33,7 +33,7 @@
 				<th class="row-header"> Actions </th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="myTable">
 			<c:forEach items="${categories}" var="category">
 				<form action="category" method="Post">
 					<input type="hidden" name="id" value="${category.id}" />
@@ -101,10 +101,8 @@
 		</div>
 	</div>
 </body>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 <c:if test="${null != message}">
 	<script type="text/javascript">
 		alert("${message}");

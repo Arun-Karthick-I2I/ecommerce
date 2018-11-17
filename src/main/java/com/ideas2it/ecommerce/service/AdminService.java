@@ -154,41 +154,53 @@ public interface AdminService {
     
     /**
      * <p>
-     * 
+     * Used to fetch the WarehouseProduct ID's sold by the Seller for the 
+     * Seller ID specified. 
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Seller whose WarehouseProduct ID's are to 
+     *              be fetched. 
+     * @return      Returns the ID's of the WarehouseProducts sold by the Seller 
+     *              for the Seller ID specified.
+     *              specified. Otherwise, returns an empty object.
      */
     List<Integer> getWarehouseProductIdsBySeller(Integer id) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to get the OrderItems for the WarehouseProduct ID's specified.  
      * </p>
      * 
-     * @param warehouseProductIds
-     * @return
+     * @param   warehouseProductIds  ID's of the WarehouseProduct whose Orders
+     *                               are to be fetched. 
+     * @return                       Returns the list of OrderItems for the 
+     *                               WarehouseProduct ID's specified. Otherwise,
+     *                               returns an empty object.
      */
     List<OrderItem> searchOrderItemsByWarehouseProductIds(List<Integer> 
         warehouseProductIds) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to fetch the WarehouseProduct ID's sold by the Seller for the 
+     * Product ID specified. 
      * </p>
      * 
-     * @param id
-     * @return
+     * @param   id  ID of the Product whose WarehouseProduct ID's are to 
+     *              be obtained.
+     * @return      Returns the ID's of the WarehouseProducts sold by the Seller 
+     *              for the Product ID specified. Otherwise, returns an empty 
+     *              object.
      */
     List<Integer> getWarehouseProductIdsByProduct(Integer id) throws EcommerceException;
     
     /**
      * <p>
-     * 
+     * Used to fetch the details of all the Products available.
      * </p>
      * 
-     * @return
+     * @return  Returns the list of Products available. Otherwise, returns an 
+     *          empty object.
      */
     List<Product> getProducts() throws EcommerceException;
 }

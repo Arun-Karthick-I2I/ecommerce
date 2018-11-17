@@ -2,7 +2,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href= "<c:url value='/resources/css/AdminLogin.css'/>" rel="stylesheet" type="text/css"/>
+    	<link rel = "icon" type = "image/png" 
+    		href = "<c:url value='/resources/images/ecommerce-logo-1-dribbble.png'/> ">
+    	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
+        <link rel="stylesheet" type="text/css" 
+        	href= "<c:url value='/resources/css/AdminLogin.css'/>" />
     </head>
     <body class="grid">
     <div class="container">
@@ -10,7 +14,7 @@
             <div class="col-md-12">
                 <div class="wrap">
                     <p class="form-title">
-                        Admin Login</p>
+                        Admin &nbsp;&nbsp; Login</p>
                     <form class="login">
                     <input type="hidden" name="role" value="ADMIN"/>
                     <input type="text" name="userName" placeholder="Mobile Number"

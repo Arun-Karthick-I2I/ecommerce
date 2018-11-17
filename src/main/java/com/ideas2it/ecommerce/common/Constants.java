@@ -249,6 +249,9 @@ public class Constants {
     public static final String MSG_SELLER_DELETE_FAILURE =
         "Unsuccessful deletion of Seller";
     
+    public static final String MSG_SELLER_ORDERS_UNAVAILABLE =
+        "Seller contains no Orders";
+    
     
     //Customer Specific Constants
 
