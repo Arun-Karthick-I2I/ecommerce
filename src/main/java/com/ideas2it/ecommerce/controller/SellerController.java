@@ -3,8 +3,6 @@ package com.ideas2it.ecommerce.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +20,7 @@ import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
 import com.ideas2it.ecommerce.logger.EcommerceLogger;
-import com.ideas2it.ecommerce.model.Address;
+import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
@@ -147,7 +145,8 @@ public class SellerController {
             product.setImage(product_Image);
             if (sellerService.addProduct(product)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_WAREHOUSE_PRODUCT_SUCCESS);
+                        Constants.MSG_ADD_PRODUCT_SUCCESS);
+                EcommerceLogger.debug("Testing ###@ " + product.getCategory().getName());
                 warehouseProduct.setProduct(product);
                 modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCT,
                         warehouseProduct);
@@ -181,7 +180,7 @@ public class SellerController {
             } else {
                 modelAndView.addObject("newProduct", Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES,
-                        sellerService.getCategories());
+                        sellerService.getAllCategories());
                 modelAndView.addObject(Constants.LABEL_PRODUCT, product);
                 product.setName(productName);
             }
@@ -190,7 +189,21 @@ public class SellerController {
         }
         return modelAndView;
     }
-
+    
+    @GetMapping("getAllProducts")
+    public ModelAndView getAllProducts() {
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        try {
+            List<Product> products = sellerService.getAllProducts();
+            List<Category> categories = sellerService.getAllCategories(); 
+            modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
+            modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView; 
+    }
+    
     /**
      * <p>
      * Shows the new Warehouse Product Form to the seller where they can provide

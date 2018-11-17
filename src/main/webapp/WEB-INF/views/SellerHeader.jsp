@@ -60,4 +60,22 @@
 			</div>
 		</li>
 	</ul>
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item">
+			<div class="dropdown">
+				<button class="btn btn-navbar-custom dropdown-toggle" type="button"
+					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">
+					<i class="fas fa-user-tie" style="font-size: 32px; color: white"></i>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a class="dropdown-item" href="/ecommerce/seller/editSeller">My
+						Profile</a>
+				</div>
+			</div>
+		</li>
+		<li class="nav-item"><a class="btn btn-logout"
+			href="/ecommerce/logout"><i class="fas fa-sign-out-alt"
+				style="font-size: 32px; color: white"></i></a></li>
+	</ul>
 </nav>
