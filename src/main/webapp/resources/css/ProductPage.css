@@ -1,6 +1,7 @@
 .product {
 	margin-top:7%;
 	width:100%;
+	margin-bottom:5%;
 }
 
 #left {
@@ -156,4 +157,10 @@ td {
 	text-align:right;
 }
 
+.outOfStock {
+	font-style:italic;
+	font-weight:bold;
+	color:red;
+	font-size:30px;
+}
 

@@ -25,7 +25,9 @@
 							<input type="hidden" name="id" value="${product.id}" />
 							<button type="submit" formmethod="post"
 								formaction="/ecommerce/productPage/">
-								 <img class="card-img-top zoom" src="<c:url value='data:image/jpg;base64,${product.base64Image}'/>" alt="" />
+								<img class="card-img-top zoom"
+									src="<c:url value='data:image/jpg;base64,${product.base64Image}'/>"
+									alt="" />
 							</button>
 							<div class="card-body">
 								<button type="submit" formmethod="post"
@@ -41,7 +43,7 @@
 				</form>
 			</c:forEach>
 		</c:if>
-		
+
 		<c:if test="${fn:length(products) < 1}">
 			<div class="no-result">
 				<img
@@ -56,7 +58,7 @@
 				</div>
 			</div>
 		</c:if>
-		
 	</div>
+	<jsp:include page="CustomerFooter.jsp"></jsp:include>
 </body>
 </html>

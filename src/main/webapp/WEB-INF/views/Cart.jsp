@@ -47,6 +47,7 @@
 								</td>
 								<td class="productQuantity">
 									<div class="productQuantity">
+										<c:if test="${cartItem.quantity <= cartItem.warehouseProduct.quantity}">
 										<button class="btn btn-default" type="submit"
 											formmethod="post" formaction="/ecommerce/updateCart"
 											onclick="return reduceQuantity(form)">-</button>
@@ -56,6 +57,10 @@
 											formmethod="post" formaction="/ecommerce/updateCart"
 											onclick="return increaseQuantity(form)">+</button>
 										<br /> <br /> <label>No of items.</label>
+										</c:if>
+										<c:if test="${cartItem.quantity > cartItem.warehouseProduct.quantity}">
+											Out of Stock
+										</c:if>
 									</div>
 								</td>
 								<td>
@@ -105,6 +110,7 @@
 			</div>
 		</c:if>
 	</div>
+    <jsp:include page="CustomerFooter.jsp"></jsp:include>
 </body>
 
 <script>

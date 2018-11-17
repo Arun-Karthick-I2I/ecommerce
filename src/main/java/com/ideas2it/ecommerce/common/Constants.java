@@ -62,6 +62,8 @@ public class Constants {
         
     public static final String LABEL_STATUS = "status";
             
+    public static final String LABEL_MODE_OF_PAYMENT = "modeOfPayment";
+    
     public static final String LABEL_USER = "user";
 
     public static final String LABEL_CUSTOMER = "customer";
@@ -131,6 +133,8 @@ public class Constants {
     public static final String MSG_NO_SUCH_USER_EXISTS = 
         "No such user exists...Please Register";
     
+    public static final String MSG_SELECT_ATLEAST_ONE_PRODUCT = 
+        "Select atleast one product to purchase..";
 
     //Admin Specific Constants
     public static final String MSG_CATEGORY_ID = "\tCategory ID";
@@ -323,8 +327,10 @@ public class Constants {
         "Something went wrong while fetching Order Item details..Try Again Later";
 
     public static final String MSG_UPDATE_ORDER_ITEMS_FAIL = 
-            "Something went wrong while Updating Order Item details..Try Again Later";
+        "Something went wrong while Updating Order Item details..Try Again Later";
             
+    public static final String MSG_DONT_HAVE_ENOUGH_QUANTITY = 
+        "Some products dont have enough quantity...";
     
     //Seller Specific Constants
     

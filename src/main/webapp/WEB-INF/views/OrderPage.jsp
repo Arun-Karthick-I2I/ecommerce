@@ -34,7 +34,7 @@
 					<th class="headingPrice">Price</th>
 				</tr>
 				<tbody>
-					<c:forEach var="warehouseProduct" items="${warehouseProducts}" >
+					<c:forEach var="warehouseProduct" items="${warehouseProducts}">
 						<input type="hidden" name="id" value="${warehouseProduct.id}">
 						<tr>
 							<form class="products">
@@ -72,7 +72,8 @@
 							<br />
 						</c:forEach>
 						<br />
-						<button type="button"  class="btn btn-warning" onclick="selectDeliveryAddress()">
+						<button type="button" class="btn btn-warning"
+							onclick="selectDeliveryAddress()">
 							<b>DELIVER HERE</b>
 						</button>
 						<br /> <br />
@@ -101,8 +102,8 @@
 							value="BHIM UPI">&nbsp;&nbsp;BHIM UPI</label>
 					</div>
 					<div class="placeOrderButton">
-						<button type="submit" id="makeOrder" formmethod="post" formaction="/ecommerce/placeOrder"
-							class="btn btn-default btn-lg">
+						<button type="submit" id="makeOrder" formmethod="post"
+							formaction="/ecommerce/placeOrder" class="btn btn-default btn-lg">
 							<b>&nbsp;&nbsp;PLACE ORDER</b>
 						</button>
 						<button type="submit" id="cancelOrder" formmethod="get"
@@ -114,6 +115,7 @@
 			</div>
 		</div>
 	</form>
+	<jsp:include page="CustomerFooter.jsp"></jsp:include>
 </body>
 
 <script>

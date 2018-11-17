@@ -98,7 +98,7 @@
 }
 
 .myOrders > .table > tbody > .table-footer > tr > .orderPrice {
-	float:right;
+	text-align:right;
 }
 
 

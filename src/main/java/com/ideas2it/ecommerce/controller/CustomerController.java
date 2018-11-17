@@ -59,7 +59,7 @@ public class CustomerController {
      *         and view. In this method "login" is the view name. After creating
      *         customer return login page.
      */
-    @PostMapping(value = "AddCustomer")
+    @PostMapping("AddCustomer")
     public ModelAndView addCustomer(
             @ModelAttribute(Constants.LABEL_CUSTOMER) Customer customer,
             HttpServletRequest request) {
@@ -82,6 +82,37 @@ public class CustomerController {
 
     /**
      * <p>
+     * This method is used to update customer details to e-commerce web-site.
+     * 
+     * @param request A request message from a client to a server includes,
+     *                within the first line of that message, the method to be
+     *                applied to the resource, the identifier of the resource in
+     *                use.
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "myAccount" is the view name. After updating
+     *         customer return profile page.
+     */
+    @PostMapping("updateCustomer")
+    public ModelAndView updateCustomer( HttpServletRequest request) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
+        try {
+            customer.setName(request.getParameter("name"));
+            customer.setEmailId(request.getParameter("emailId"));
+            customer.setMobileNumber(request.getParameter("mobileNumber"));            
+            if (customerService.updateCustomer(customer)) {
+                session.setAttribute("customer", customer);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject("message", e.getMessage());
+        }
+        return modifyAccount(request);
+    }
+    
+    /**
+     * <p>
      * This method is used to show particular customer details..
      * </p>
      * 
@@ -89,14 +120,20 @@ public class CustomerController {
      *         and view. In this method "CustomerUpdate" is view name and
      *         customer is model.
      */
-    @GetMapping("myAccount")
+    @GetMapping("myaccount")
     public ModelAndView modifyAccount(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         Customer customer = (Customer) session
                 .getAttribute(Constants.LABEL_CUSTOMER);
+        try {
+        modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                customerService.getAllCategories());
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
         modelAndView.addObject(Constants.LABEL_CUSTOMER, customer);
-        modelAndView.setViewName("CustomerUpdate");
+        modelAndView.setViewName("myAccount");
         return modelAndView;
     }
 
@@ -116,7 +153,7 @@ public class CustomerController {
         Customer customer = (Customer) session
                 .getAttribute(Constants.LABEL_CUSTOMER);
         try {
-            List<Order> orders = customer.getOrders();
+            List<Order> orders = new ArrayList<Order>(customer.getOrders());
             Collections.reverse(orders);
             Map<Integer,LocalDate> returnDates = new HashMap<Integer,LocalDate>();
             LocalDate returnDate;
@@ -433,7 +470,13 @@ public class CustomerController {
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             List<Integer> warehouseProductIds = new ArrayList<Integer>();
-            for (String id : request.getParameterValues("warehouseProductId")) {
+            String[] warehouseProductIdss = request.getParameterValues("warehouseProductId");  
+            if ((null == warehouseProductIdss) || (0 > warehouseProductIdss.length)) {
+                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_SELECT_ATLEAST_ONE_PRODUCT);
+                return myCart(request);
+            }
+            for (String id : warehouseProductIdss) {
                 warehouseProductIds.add(Integer.parseInt(id));
             }
             List<WarehouseProduct> warehouseProducts = customerService
@@ -530,12 +573,13 @@ public class CustomerController {
             order.setOrderItems(orderItems);
             List<OrderItem> unavailableOrderItems = customerService
                     .addOrder(order);
+            modelAndView = myOrders(request);
             if (unavailableOrderItems.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_ORDER_FAIL);
+                        Constants.MSG_DONT_HAVE_ENOUGH_QUANTITY);
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
@@ -545,7 +589,7 @@ public class CustomerController {
                     Constants.MSG_ADD_ORDER_FAIL);
             modelAndView.setViewName("CustomerOperations");
         }
-        return myOrders(request);
+        return modelAndView;
     }
 
     /**
@@ -567,7 +611,6 @@ public class CustomerController {
         try {
             Address address = new Address();
             address.setId(Integer.parseInt(request.getParameter("addressId")));
-
             List<Integer> warehouseProductIds = new ArrayList<Integer>();
             for (String id : request.getParameterValues("id")) {
                 warehouseProductIds.add(Integer.parseInt(id));
@@ -600,19 +643,16 @@ public class CustomerController {
             order.setOrderDate(Date.valueOf(todayDate));
             order.setPrice(totalPrice);
             order.setCustomer(customer);
-            order.setModeOfPayment(request.getParameter("modeOfPayment"));
+            order.setModeOfPayment(request.getParameter(Constants.LABEL_MODE_OF_PAYMENT));
             List<OrderItem> unplacedOrders = customerService.addOrder(order);
+            modelAndView = myOrders(request);
             if (unplacedOrders.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
                 deleteCartProducts(request, customer, warehouseProducts);
-            } else if (unplacedOrders.size() == orders.size()) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_ORDER_FAIL);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ADD_SOME_ORDER_FAIL);
-                modelAndView.addObject("unplacedOrders", unplacedOrders);
+                        Constants.MSG_DONT_HAVE_ENOUGH_QUANTITY);
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
@@ -620,9 +660,7 @@ public class CustomerController {
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-        modelAndView.addObject("orders", customer.getOrders());
-        modelAndView.setViewName("OrdersDisplay");
-        return myOrders(request);
+        return modelAndView;
     }
 
     /**
@@ -678,7 +716,7 @@ public class CustomerController {
                         .searchProduct("%" + productName + "%");
             } else {
                 products = customerService.searchProduct(categoryId,
-                        productName);
+                         "%" + productName + "%");
             }
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());

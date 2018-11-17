@@ -22,32 +22,39 @@
 						src="data:image/jpg;base64,${product.base64Image}" />
 				</div>
 				<div class="product-button">
+
 					<input type="hidden" name="id"
 						value="${product.warehouseProducts[0].id}" /> <input
 						type="hidden" name="productId" value="${product.id}" />
-					<c:if test="${not empty customer}">
-						<button type="submit" formaction="/ecommerce/addCart"
-							formmethod="post" class="btn btn-warning btn-block btn-lg">
-							<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
-								TO CART</b>
-						</button>
+					<c:if test="${product.warehouseProducts[0].quantity > 0}">
+						<c:if test="${not empty customer}">
+
+							<button type="submit" formaction="/ecommerce/addCart"
+								formmethod="post" class="btn btn-warning btn-block btn-lg">
+								<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
+									TO CART</b>
+							</button>
 					&nbsp;&nbsp;
 					<button type="submit" formaction="/ecommerce/orderProduct"
-							formmethod="post" class="btn btn-danger btn-block btn-lg">
-							<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-						</button>
-					</c:if>
-					<c:if test="${empty customer}">
-						<button type="button" onclick="isLoggedIn()"
-							class="btn btn-warning btn-block btn-lg">
-							<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; <b>ADD
-								TO CART</b>
-						</button>
+								formmethod="post" class="btn btn-danger btn-block btn-lg">
+								<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+							</button>
+						</c:if>
+						<c:if test="${empty customer}">
+							<button type="button" onclick="isLoggedIn()"
+								class="btn btn-warning btn-block btn-lg">
+								<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; <b>ADD
+									TO CART</b>
+							</button>
 					&nbsp;&nbsp;
 					<button type="button" onclick="isLoggedIn()"
-							class="btn btn-danger btn-block btn-lg">
-							<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-						</button>
+								class="btn btn-danger btn-block btn-lg">
+								<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+							</button>
+						</c:if>
+					</c:if>
+					<c:if test="${product.warehouseProducts[0].quantity == 0}">
+						<div class="outOfStock">OUT OF STOCK</div>
 					</c:if>
 				</div>
 			</div>
@@ -94,7 +101,6 @@
 			</div>
 		</form>
 	</div>
-
 	<div class="modal fade" id="sellers" role="dialog">
 		<div class="modal-dialog modal-md modal-dialog-centered">
 			<div class="modal-content">
@@ -163,6 +169,5 @@
 		$("#Customerlogin").modal("show");
 	}
 </script>
-
 
 </html>

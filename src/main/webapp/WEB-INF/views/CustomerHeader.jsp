@@ -59,7 +59,7 @@
 									<form method="get">
 										<p>
 											<label>
-												<button class="btn btn-default"
+												<button class="btn btn-default" 
 													formaction="/ecommerce/myaccount">
 													<i class="fa fa-user-circle-o"></i> &nbsp; My Profile
 												</button>

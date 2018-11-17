@@ -67,13 +67,12 @@
 											Cancel&nbsp;&nbsp;<i class="fa fa-close"></i>
 										</button>
 									</c:if>
-									<c:if test="${orderItem.status == 'DELIVERED'}">
-										<c:if test="${returnDates[order.id] > today}">
-											<button type="submit" class="btn btn-warning"
-												formmethod="post" formaction="/ecommerce/returnOrder">
-												Return &nbsp;&nbsp;<i class="fa fa-close"></i>
-											</button>
-										</c:if>
+									<c:if
+										test="${orderItem.status == 'DELIVERED' && returnDates[order.id] > today}">
+										<button type="submit" class="btn btn-warning"
+											formmethod="post" formaction="/ecommerce/returnOrder">
+											Return &nbsp;&nbsp;<i class="fa fa-close"></i>
+										</button>
 									</c:if>
 								</form>
 							</td>
@@ -84,14 +83,14 @@
 						<td colspan="3" class="orderDate"><b>Ordered On :</b>
 							&nbsp;${order.orderDate}
 						<td>
-						<td colspan="3" class="orderPrice"><div class="orderPrice">
-								<b>Order total :</b> &nbsp; Rs. ${order.price}
-							</div>
+						<td colspan="3" class="orderPrice"><b>Order total :</b>
+							&nbsp;Rs.${order.price}
 						<td>
 					</tr>
 				</tbody>
 			</table>
 		</c:forEach>
 	</div>
+	<jsp:include page="CustomerFooter.jsp"></jsp:include>
 </body>
 </html>
