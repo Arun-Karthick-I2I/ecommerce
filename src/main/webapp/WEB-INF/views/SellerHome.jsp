@@ -2,6 +2,8 @@
 <html>
 <head>
 <title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png'/> ">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/bootstrap.min.css' />" />
 <link rel="stylesheet" type="text/css"

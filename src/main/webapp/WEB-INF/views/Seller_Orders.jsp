@@ -2,6 +2,8 @@
 <html>
 <head>
 <title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png'/> ">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/css/bootstrap.min.css' />" />
 <link rel="stylesheet" type="text/css"
@@ -53,7 +55,8 @@
 					onclick="return checkOrderIds()" type="submit">Change
 					Status</button>
 			</div>
-			<div id="snackbar" style="left:45%;">Please Select atleast one Order to Proceed</div>
+			<div id="snackbar" style="left: 45%;">Please Select atleast one
+				Order to Proceed</div>
 		</form>
 	</div>
 	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
