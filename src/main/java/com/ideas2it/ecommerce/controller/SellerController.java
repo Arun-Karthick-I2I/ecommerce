@@ -58,8 +58,16 @@ public class SellerController {
     }
 
     @GetMapping("home")
-    public String showHomePage() {
-        return SELLER_HOME;
+    public ModelAndView showHomePage(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        try {
+            Integer sellerId = (Integer) session.getAttribute(Constants.LABEL_SELLER_ID);
+            List<WarehouseProduct> warehouseProducts = sellerService.getAllWarehouseProducts(sellerId);
+            modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS, warehouseProducts);
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView; 
     }
 
     /**
@@ -188,20 +196,6 @@ public class SellerController {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
-    }
-    
-    @GetMapping("getAllProducts")
-    public ModelAndView getAllProducts() {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
-        try {
-            List<Product> products = sellerService.getAllProducts();
-            List<Category> categories = sellerService.getAllCategories(); 
-            modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
-            modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
-        return modelAndView; 
     }
     
     /**

@@ -8,6 +8,7 @@ import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 
 /**
  * <p>
@@ -76,18 +77,16 @@ public interface UserService {
      *         user exists.
      */
     User searchUser(Integer userId) throws EcommerceException;
-    
+
     /**
      * <p>
      * Updates a User details
      * </p>
      *
-     * @param user
-     *        User details which needs to be updated
-     *
-     * @return true   If User details is successfully updated.
-     *         false  If user details is not updated. 
-     */    
+     * @param user User details which needs to be updated
+     * @return true If User details is successfully updated. false If user
+     *         details is not updated.
+     */
     Boolean updateUser(User user) throws EcommerceException;
 
     /**
@@ -133,5 +132,17 @@ public interface UserService {
      *         empty Object.
      */
     List<Category> getAllCategories() throws EcommerceException;
+
+    /**
+     * <p>
+     * Fetches the entire list of warehouse products available from a seller.
+     * </p>
+     * 
+     * @param sellerId Seller whose warehouse needs to be displayed
+     * @return Returns the list of Warehouse Products available. Otherwise,
+     *         returns an empty list.
+     */
+    List<WarehouseProduct> getAllWarehouseProducts(Integer sellerId)
+            throws EcommerceException;
 
 }

@@ -127,10 +127,10 @@ public class Constants {
         "Something went wrong while updating address...";
     
     public static final String MSG_DELETE_ADDRESS_SUCCESS = 
-        "Address updated Successfully..";
+        "Address deleted Successfully..";
     
     public static final String MSG_DELETE_ADDRESS_FAIL =  
-        "Something went wrong while updating address...";
+        "Something went wrong while deleting address...";
 
     public static final String MSG_NO_SUCH_USER_EXISTS = 
         "No such user exists...Please Register";

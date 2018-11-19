@@ -14,11 +14,13 @@ import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.User;
+import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.CategoryService;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.ProductService;
 import com.ideas2it.ecommerce.service.SellerService;
 import com.ideas2it.ecommerce.service.UserService;
+import com.ideas2it.ecommerce.service.WarehouseProductService;
 
 /**
  * <p>
@@ -39,6 +41,7 @@ public class UserServiceImpl implements UserService {
     private SellerService sellerService = new SellerServiceImpl();
     private ProductService productService = new ProductServiceImpl();
     private CategoryService categoryService = new CategoryServiceImpl();
+    private WarehouseProductService warehouseProductService = new WarehouseProductServiceImpl();
     
     /**
      * @{inheritDoc}
@@ -139,6 +142,14 @@ public class UserServiceImpl implements UserService {
         return categoryService.getCategories();
     }
     
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public List<WarehouseProduct> getAllWarehouseProducts(Integer sellerId) throws EcommerceException {
+        return warehouseProductService.searchBySeller(sellerId);
+    }
+
     /**
      * <p>
      * Fetches the input password and generates a hash for that password and 

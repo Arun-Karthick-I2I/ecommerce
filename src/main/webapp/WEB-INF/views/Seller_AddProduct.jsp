@@ -22,16 +22,13 @@
 						<div class="flip-box-back">
 							<div class="card-body">
 								<h5 class="card-title">${product.name}</h5>
-								<p class="card-text">Want to Add it to your Warehouse ?</p>
-								<p class="card-text">&#8377;${warehouseProduct.price}</p>
-								<p class="card-text">Stock Available:</p>
-								<p class="card-text">${warehouseProduct.quantity}</p>
-								<form action="/ecommerce/seller/editWarehouseProduct"
+								<p class="card-text">Want to Sell ?</p>
+								<form action="/ecommerce/seller/addWarehouseProduct"
 									method="POST">
 									<input type="hidden" name="warehouseProductId"
 										value="${warehouseProduct.id}" />
 									<button class="btn btn-sm btn-info" type="submit">
-										Update</button>
+										Add to Warehouse</button>
 								</form>
 							</div>
 						</div>
@@ -40,7 +37,6 @@
 			</div>
 		</c:forEach>
 	</div>
-
 	<c:if test="${null == newProduct}">
 		<div class="modal fade" id="productModal">
 			<div class="modal-dialog modal-dialog-centered">
