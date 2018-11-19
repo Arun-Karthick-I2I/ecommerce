@@ -67,7 +67,7 @@
 						} name="id" />
 					<div class="productName">
 						<Strong>${product.name}</Strong>
-						<div>#AvailableOnPandaZone</div>
+						<div>#AvailableOnEcommerce</div>
 					</div>
 					<label>Price :</label>
 					<div class="price">&nbsp;&#8377
