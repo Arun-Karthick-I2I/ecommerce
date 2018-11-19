@@ -79,7 +79,7 @@
 					Address
 				</button>
 			</div>
-			<div class="createAddress" id="newAddress">
+			<div class="createAddress" id="newAddressInProfile">
 				<form>
 					<div class="cols-sm-10 addressheader">Add New Address</div>
 					<br />
@@ -217,11 +217,11 @@
 
 <script>
 	function openAddAddress(event) {
-		$("#newAddress").show();
+		$("#newAddressInProfile").show();
 		$("#newAddressButton").hide();
 	}
 	function closeAddAddress(event) {
-		$("#newAddress").hide();
+		$("#newAddressInProfile").hide();
 		$("#newAddressButton").show();
 		$("#saveCustomer").hide();
 	}
