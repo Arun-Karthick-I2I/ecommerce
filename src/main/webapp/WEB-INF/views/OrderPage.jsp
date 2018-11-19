@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>pandaZone</title>
+<title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/OrderPage.css' />">
 <link

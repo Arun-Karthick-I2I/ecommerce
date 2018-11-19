@@ -103,7 +103,6 @@ public class Address {
 
         return ((this.id).equals(((Address) address).id));
     }
-
     
     /**
      * <p>

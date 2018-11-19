@@ -38,13 +38,14 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
 public class UserController {
     private static final Character INITIAL_PATH = '/';
     private static final String INDEX_PAGE = "CustomerHome";
-    private static final String ADMIN_HOME = "AdminCategoryPage";
+    private static final String ADMIN_HOME = "displayCategories";
     private static final String CUSTOMER_HOME = "CustomerHome";
     private static final String CUSTOMER_PROFILE = "myAccount";
     private static final String SELLER_HOME = "SellerHome";
+    private static final String SELLER_PROFILE = "SellerProfile";
     private static final String SELLER_LOGIN = "SellerLogin";
     private static final String ADMIN_LOGIN = "AdminLogin";
-    private static final String ADDRESS_FORM = "AddressForm";
+    private static final String ADDRESS_FORM = "SellerProfile";
 
     private UserService userService = new UserServiceImpl();
 
@@ -82,16 +83,20 @@ public class UserController {
     @PostMapping("registerCustomer")
     public ModelAndView registerCustomer(
             @ModelAttribute("customer") Customer customer) {
-        ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
+        ModelAndView modelAndView = new ModelAndView(Constants.REDIRECT + "/");
         customer.setMobileNumber(customer.getUser().getUserName());
         try {
-            if (userService.registerCustomer(customer)) {
+            if (userService.checkUserNameAvailability(customer.getUser())) {
+                if (userService.registerCustomer(customer)) {
+                    modelAndView.addObject(Constants.LABEL_MESSAGE,
+                            Constants.MSG_REGISTER_SUCCESS
+                                    + customer.getMobileNumber());
+                }
+            } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_REGISTER_SUCCESS
-                                + customer.getMobileNumber());
+                        Constants.MSG_ANOTHER_USER_EXISTS);
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(INDEX_PAGE);
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -109,10 +114,15 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView(SELLER_LOGIN);
         seller.setMobileNumber(seller.getUser().getUserName());
         try {
-            if (userService.registerSeller(seller)) {
+            if (userService.checkUserNameAvailability(seller.getUser())) {
+                if (userService.registerSeller(seller)) {
+                    modelAndView.addObject(Constants.LABEL_MESSAGE,
+                            Constants.MSG_REGISTER_SUCCESS
+                                    + seller.getMobileNumber());
+                }
+            } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_REGISTER_SUCCESS
-                                + seller.getMobileNumber());
+                        Constants.MSG_ANOTHER_USER_EXISTS);
             }
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
@@ -200,13 +210,16 @@ public class UserController {
             role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
             if (USER_ROLES.SELLER == role) {
                 viewName = SELLER_LOGIN;
+                model.addAttribute(Constants.LABEL_MESSAGE,
+                        Constants.MSG_LOGGED_OUT);
             } else if (USER_ROLES.ADMIN == role) {
                 viewName = ADMIN_LOGIN;
+                model.addAttribute(Constants.LABEL_MESSAGE,
+                        Constants.MSG_LOGGED_OUT);
             }
             session.invalidate();
         }
 
-        model.addAttribute(Constants.LABEL_MESSAGE, Constants.MSG_LOGGED_OUT);
         return viewName;
     }
 
@@ -224,7 +237,8 @@ public class UserController {
         if (USER_ROLES.CUSTOMER == role) {
             modelAndView.setViewName(CUSTOMER_HOME);
         } else if (USER_ROLES.SELLER == role) {
-            modelAndView.setViewName(SELLER_HOME);
+            modelAndView.addObject("showAddress", Boolean.TRUE);
+            modelAndView.setViewName(SELLER_PROFILE);
         }
         try {
             User user = userService.searchUser(
@@ -246,6 +260,7 @@ public class UserController {
     @GetMapping("newAddress")
     public ModelAndView createAddress() {
         ModelAndView modelAndView = new ModelAndView(ADDRESS_FORM);
+        modelAndView.addObject("addressForm", Boolean.TRUE);
         modelAndView.addObject(Constants.LABEL_ADDRESS, new Address());
         return modelAndView;
     }
@@ -278,7 +293,8 @@ public class UserController {
 
     /**
      * <p>
-     * Show the edit address form to the user where he can change the necessary fields.
+     * Show the edit address form to the user where he can change the necessary
+     * fields.
      * </p>
      */
     @PostMapping("editAddress")

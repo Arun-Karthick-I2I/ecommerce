@@ -59,5 +59,35 @@ public class User {
     public void setRole(USER_ROLES role) {
         this.role = role;
     }
+    
+    /** 
+     * <p>
+     * Compares whether two users are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar user is present
+     *         false  When users are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object user) {
+        if (null == user) {
+            return Boolean.FALSE;
+        }
+
+        if (!(user instanceof User)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (User) user) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((User) user).id));
+    }
 
 }

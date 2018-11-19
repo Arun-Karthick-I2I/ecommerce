@@ -76,4 +76,35 @@ public class Seller {
     public void setUser(User user) {
         this.user = user;
     }
+    
+    /** 
+     * <p>
+     * Compares whether two sellers are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar seller is present
+     *         false  When sellers are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object seller) {
+        if (null == seller) {
+            return Boolean.FALSE;
+        }
+
+        if (!(seller instanceof Seller)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (Seller) seller) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((Seller) seller).id));
+    }
+
 }

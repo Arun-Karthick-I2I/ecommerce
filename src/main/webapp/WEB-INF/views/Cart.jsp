@@ -7,14 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>pandaZone</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/Cart.css' />">
 <style>
 .cartPage> .cartProduct>.table>tbody>tr>td {
 	vertical-align: middle;
 }
 </style>
-
-
 </head>
 <body>
 	<jsp:include page="CustomerHeader.jsp"></jsp:include>

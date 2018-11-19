@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>pandaZone</title>
-
+<title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/CustomerHome.css' />">
 
@@ -16,7 +17,6 @@
 <body>
 	<jsp:include page="CustomerHeader.jsp"></jsp:include>
 	<div class="customerHome">
-
 		<c:if test="${fn:length(products) >= 1}">
 			<c:forEach var="product" items="${products}">
 				<form class="product">
@@ -35,7 +35,10 @@
 									<h4 class="card-title">${product.name}</h4>
 								</button>
 								<p class="card-text">
-									<b>₹&nbsp;${product.warehouseProducts[0].price}</b>
+									<b>₹&nbsp;${product.warehouseProducts[0].price}</b><br/>
+									<input type="hidden" name="categoryId" value="${product.category.id}">
+									<button class="btn btn-default btn-sm"formaction="/ecommerce/products"
+									formmethod="post"><a>View Similar Products</a></button>
 								</p>
 							</div>
 						</div>

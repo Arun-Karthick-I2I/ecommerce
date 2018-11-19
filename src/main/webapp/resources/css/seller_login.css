@@ -24,7 +24,6 @@ body {
 	-webkit-perspective: 1000px;
 	        perspective: 1000px;
 	position: relative;
-	height: 100%;
 	width: 360px;
 	margin: 0 auto;
 }

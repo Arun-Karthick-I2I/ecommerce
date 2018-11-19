@@ -86,4 +86,34 @@ public class Customer {
         this.isActive = isActive;
     }
 
+    /** 
+     * <p>
+     * Compares whether two customers are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar customer is present
+     *         false  When customers are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object customer) {
+        if (null == customer) {
+            return Boolean.FALSE;
+        }
+
+        if (!(customer instanceof Customer)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (Customer) customer) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((Customer) customer).id));
+    }
+
 }

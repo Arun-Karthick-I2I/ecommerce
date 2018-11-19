@@ -6,8 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>pandaZone</title>
-
+<title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/ProductPage.css' />">
 
@@ -43,7 +44,7 @@
 						<c:if test="${empty customer}">
 							<button type="button" onclick="isLoggedIn()"
 								class="btn btn-warning btn-block btn-lg">
-								<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; <b>ADD
+								<i class="fa fa-shopping-cart"></i>&nbsp; <b>ADD
 									TO CART</b>
 							</button>
 					&nbsp;&nbsp;
@@ -66,7 +67,7 @@
 						} name="id" />
 					<div class="productName">
 						<Strong>${product.name}</Strong>
-						<div>#AvailableOnPandaZone</div>
+						<div>#AvailableOnEcommerce</div>
 					</div>
 					<label>Price :</label>
 					<div class="price">&nbsp;&#8377
@@ -91,16 +92,13 @@
 					</div>
 
 					<br /> <label>Service :</label>
-					<div class="service">
-						<i class="fa fa-tag"></i>&nbsp;Cash On Delivery Available.
-					</div>
-					<div class="service">
-						<i class="fa fa-tag"></i>&nbsp;10 days replacement policy.
-					</div>
+					<div class="service">Cash On Delivery Available.</div>
+					<div class="service">10 days replacement policy.</div>
 				</div>
 			</div>
 		</form>
 	</div>
+	<jsp:include page="CustomerFooter.jsp"></jsp:include>
 	<div class="modal fade" id="sellers" role="dialog">
 		<div class="modal-dialog modal-md modal-dialog-centered">
 			<div class="modal-content">
@@ -122,29 +120,34 @@
 										<div class="product-button">
 											<input type="hidden" name="id" value="${warehouseProduct.id}" />
 											<input type="hidden" name="productId" value="${product.id}" />
-											<c:if test="${not empty customer}">
-												<button type="submit" formaction="/ecommerce/addCart"
-													formmethod="post" class="btn btn-warning">
-													<span class="glyphicon glyphicon-shopping-cart"></span>
-													&nbsp;<b>ADD TO CART</b>
-												</button>
+											<c:if test="${warehouseProduct.quantity > 0}">
+												<c:if test="${not empty customer}">
+													<button type="submit" formaction="/ecommerce/addCart"
+														formmethod="post" class="btn btn-warning">
+														<span class="glyphicon glyphicon-shopping-cart"></span>
+														&nbsp;<b>ADD TO CART</b>
+													</button>
 												&nbsp;
 												<button type="submit" formaction="/ecommerce/orderProduct"
-													formmethod="post" class="btn btn-danger">
-													<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-												</button>
-											</c:if>
-											<c:if test="${empty customer}">
-												<button type="button" onclick="isLogged()"
-													class="btn btn-warning">
-													<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
-													<b>ADD TO CART</b>
-												</button>
+														formmethod="post" class="btn btn-danger">
+														<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+													</button>
+												</c:if>
+												<c:if test="${empty customer}">
+													<button type="button" onclick="isLogged()"
+														class="btn btn-warning">
+														<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
+														<b>ADD TO CART</b>
+													</button>
 												&nbsp;
 												<button type="button" onclick="isLogged()"
-													class="btn btn-danger">
-													<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
-												</button>
+														class="btn btn-danger">
+														<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
+													</button>
+												</c:if>
+											</c:if>
+											<c:if test="${warehouseProduct.quantity == 0}">
+												Out of Stock.
 											</c:if>
 										</div>
 									</td>
@@ -156,15 +159,17 @@
 			</div>
 		</div>
 	</div>
+
 </body>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 
 <script type="text/javascript">
 	function isLoggedIn(event) {
-		alert("Login first..");
 		$("#Customerlogin").modal("show");
 	}
 	function isLogged(event) {
-		alert("Login first..");
 		$("#sellers").modal("hide");
 		$("#Customerlogin").modal("show");
 	}

@@ -96,6 +96,21 @@ public class Constants {
     
     public static final String LABEL_CATEGORY_ID = "categoryId";
     
+    public static final String LABEL_TODAY = "today";
+    
+    public static final String LABEL_RETURN_DATES = "returnDates";
+    
+    public static final String LABEL_QUANTITY = "quantity";
+    
+    public static final String LABEL_QUANTITIES = "quantities";
+    
+    public static final String LABEL_PRICE = "price";
+    
+    public static final String LABEL_TOTAL_PRICE = "totalPrice";
+    
+    public static final String  LABEL_BUY_PRODUCT = "buyProduct";
+    
+    
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
 
@@ -120,6 +135,9 @@ public class Constants {
     public static final String MSG_ADD_ADDRESS_FAIL = 
         "Something went wrong while inserting new address...";
     
+    public static final String MSG_ANOTHER_USER_EXISTS = 
+        "Another User exists with the same credentials";
+
     public static final String MSG_UPDATE_ADDRESS_SUCCESS = 
         "Address updated Successfully..";
 
@@ -359,6 +377,9 @@ public class Constants {
     
     public static final String MSG_SELLER_NO_ORDERS_IN_THAT_STATUS = 
         "There are no Orders with the specified Status";
+
+    public static final String MSG_SELLER_NO_ORDERS_YET = 
+            "You have no orders so far";
 
     public static final String MSG_SELLER_ORDER_STATUS_UPDATE_SUCCESS = 
         "Status has been updated successfully for the specified Orders";

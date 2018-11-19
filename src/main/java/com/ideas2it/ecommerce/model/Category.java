@@ -44,4 +44,35 @@ public class Category implements Comparable<Category> {
 	public int compareTo(Category category) {
         return this.id - category.id; 
     } 
+	
+    /** 
+     * <p>
+     * Compares whether two categories are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar category is present
+     *         false  When categories are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object category) {
+        if (null == category) {
+            return Boolean.FALSE;
+        }
+
+        if (!(category instanceof Category)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (Category) category) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((Category) category).id));
+    }
+
 }

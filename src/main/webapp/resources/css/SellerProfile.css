@@ -1,0 +1,30 @@
+div #updateProfile {
+	display: none;
+}
+
+div.w-25.p-3.mx-auto {
+	margin-top: 7%;
+}
+
+div.p-3.font-weight-bold {
+	width: 100%;
+	text-align: center;
+}
+
+.btn.btn-outline-danger {
+	margin-left: 2em;
+}
+
+div.form-group.edit-profile {
+	width: 100%;
+	text-align: center;
+}
+
+div.form-group.update-profile {
+	margin-left: 10%;
+	display: none;
+}
+
+.addressWrapper {
+	margin-top: 6%;
+}
