@@ -76,4 +76,35 @@ public class Order {
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
+    
+    /** 
+     * <p>
+     * Compares whether two orders are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar order is present
+     *         false  When orders are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object order) {
+        if (null == order) {
+            return Boolean.FALSE;
+        }
+
+        if (!(order instanceof Order)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (Order) order) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((Order) order).id));
+    }
+
 }

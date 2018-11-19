@@ -58,4 +58,35 @@ public class CartItem {
 	public void setWarehouseProduct(WarehouseProduct warehouseProduct) {
 		this.warehouseProduct = warehouseProduct;
 	}
+	
+    /** 
+     * <p>
+     * Compares whether two Cart Items are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar cart item is present
+     *         false  When cart items are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object cartItem) {
+        if (null == cartItem) {
+            return Boolean.FALSE;
+        }
+
+        if (!(cartItem instanceof CartItem)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (CartItem) cartItem) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((CartItem) cartItem).id));
+    }
+
 }
