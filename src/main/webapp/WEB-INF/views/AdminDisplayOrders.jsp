@@ -79,8 +79,8 @@
 	<script src="<c:url value='/resources/js/Admin.js' />"></script>
 	<c:if test="${null != message}">
 		<div id="snackbar">${message}</div>
+		<script>
+			showSnackBar();
+		</script>
 	</c:if>
-	<script>
-		showSnackBar();
-	</script>
 </html>
