@@ -29,7 +29,8 @@ p.form-title
     line-height: 32.3px; 
     text-align: center;
     color: #FFFFFF;
-    margin-top: 5%;
+    margin-top: 22%;
+    margin-bottom: 6%;
     margin-left: 4%;
     letter-spacing: 6px;
     text-shadow: 3px 8px 10px #2e3436;
@@ -76,3 +77,10 @@ form.login input[type="submit"]:hover
     transition: background-color 3s ease;
 }
 
+.input-group-addon:last-child {
+	border: none;
+	padding: 2px;
+	font-size: 18px;
+	color: #FFFFFF;
+	background-color: inherit;
+}
