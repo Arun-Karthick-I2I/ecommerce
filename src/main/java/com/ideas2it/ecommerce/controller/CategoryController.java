@@ -49,16 +49,23 @@ public class CategoryController {
      */
     @GetMapping("display")
     private ModelAndView displayCategories() {
-        List<Category> categories = new ArrayList<Category>();
-        categories = getCategories();
-        Collections.sort(categories);
-        if (!categories.isEmpty()) {
-            return new ModelAndView(ADMIN_CATEGORY_PAGE,
-                Constants.LABEL_CATEGORIES,categories);  
-        } else {
-            return new ModelAndView(ADMIN_CATEGORY_PAGE,
-                Constants.LABEL_MESSAGE,Constants.MSG_CATEGORIES_UNAVAILABLE);
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            List<Category> categories = new ArrayList<Category>();
+            categories = getCategories(modelAndView);
+            Collections.sort(categories);
+            if (!categories.isEmpty()) {
+                return new ModelAndView(ADMIN_CATEGORY_PAGE,
+                        Constants.LABEL_CATEGORIES,categories);  
+            } else {
+                return new ModelAndView(ADMIN_CATEGORY_PAGE,
+                        Constants.LABEL_MESSAGE,Constants.MSG_CATEGORIES_UNAVAILABLE);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_LOGIN);
         }
+        return modelAndView;
     }
     
     /**
@@ -85,7 +92,7 @@ public class CategoryController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_EXISTS);  
             }
-            categories = getCategories();
+            categories = getCategories(modelAndView);
             modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
@@ -116,7 +123,7 @@ public class CategoryController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_DELETE_FAILURE);
             }
-            categories = getCategories();
+            categories = getCategories(modelAndView);
             modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
         } catch(EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
@@ -147,7 +154,7 @@ public class CategoryController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_EXISTS);
             }
-            categories = getCategories();
+            categories = getCategories(modelAndView);
             modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
@@ -176,7 +183,7 @@ public class CategoryController {
                 categories.add(category);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
             } else {
-                categories = getCategories();
+                categories = getCategories(modelAndView);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
@@ -208,7 +215,7 @@ public class CategoryController {
                 categories.add(category);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
             } else {
-                categories = getCategories();
+                categories = getCategories(modelAndView);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
@@ -233,8 +240,8 @@ public class CategoryController {
     private ModelAndView displayProducts(@RequestParam
             (Constants.LABEL_CATEGORY_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Category> categories = getCategories();
         try {
+            List<Category> categories = getCategories(modelAndView);
             Category category = categoryService.searchById(id);
             if (null != category) {
                 List<Product> products = category.getProducts();
@@ -270,14 +277,10 @@ public class CategoryController {
      * @return  Returns the list of Categories available. Otherwise, returns 
      *          an empty object.
      */
-    private List<Category> getCategories() {
+    private List<Category> getCategories(ModelAndView modelAndView) 
+            throws EcommerceException {
         List<Category> categories = new ArrayList<Category>();
-        ModelAndView modelAndView = new ModelAndView(ADMIN_LOGIN);
-        try {
-            categories = categoryService.getCategories();
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
+        categories = categoryService.getCategories();
         return categories;
     }
 }

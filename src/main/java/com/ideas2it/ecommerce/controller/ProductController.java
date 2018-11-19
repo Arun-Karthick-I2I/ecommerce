@@ -43,14 +43,21 @@ public class ProductController {
     @GetMapping("display")
     private ModelAndView displayProducts() {
         List<Product> products = new ArrayList<Product>();
-        products = getProducts();
-        if (!products.isEmpty()) {
-            return new ModelAndView(ADMIN_PRODUCT_PAGE,
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            products = getProducts(modelAndView);
+            if (!products.isEmpty()) {
+                return new ModelAndView(ADMIN_PRODUCT_PAGE,
                     Constants.LABEL_PRODUCTS,products);  
-        } else {
-            return new ModelAndView(ADMIN_PRODUCT_PAGE,
-                Constants.LABEL_MESSAGE,Constants.MSG_PRODUCTS_UNAVAILABLE);
+            } else {
+                return new ModelAndView(ADMIN_PRODUCT_PAGE,
+                    Constants.LABEL_MESSAGE,Constants.MSG_PRODUCTS_UNAVAILABLE);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
         }
+        return modelAndView;
     }
 
     /**
@@ -74,7 +81,7 @@ public class ProductController {
                 products.add(product);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
             } else {
-                products = getProducts();
+                products = getProducts(modelAndView);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
@@ -105,7 +112,7 @@ public class ProductController {
             if (!products.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
             } else {
-                products = getProducts();
+                products = getProducts(modelAndView);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
@@ -124,14 +131,10 @@ public class ProductController {
      * @return  Returns the list of Products available. Otherwise, returns 
      *          an empty object.
      */
-    private List<Product> getProducts() {
+    private List<Product> getProducts(ModelAndView modelAndView) 
+            throws EcommerceException {
         List<Product> products = new ArrayList<Product>();
-        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
-        try {
-            products = productService.getProducts();
-        } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-        }
+        products = productService.getProducts();
         return products;
     }
 }

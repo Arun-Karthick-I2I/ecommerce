@@ -58,17 +58,13 @@
 	</div>
 
 </body>
-<script>
-function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-}
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<script>
+		openNav();
+	</script>
 
-function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-}
-</script>
-
+	<script>
+		closeNav();
+	</script>
 </html>
 
