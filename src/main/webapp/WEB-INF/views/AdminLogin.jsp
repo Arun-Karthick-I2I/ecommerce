@@ -7,6 +7,8 @@
     	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
         <link rel="stylesheet" type="text/css" 
         	href= "<c:url value='/resources/css/AdminLogin.css'/>" />
+        <link rel="stylesheet"
+			href="<c:url value='/resources/css/AdminSnackbar.css' />">
     </head>
     <body class="grid">
     <div class="container">
@@ -29,9 +31,11 @@
     </div>
 	</div>
 </body>
-<c:if test = "${null != message}">
-    <script type="text/javascript">
-        alert("${message}");
-    </script>
-</c:if>
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<c:if test="${null != message}">
+		<div id="snackbar">${message}</div>
+	</c:if>
+	<script>
+		showSnackBar();
+	</script>
 </html>

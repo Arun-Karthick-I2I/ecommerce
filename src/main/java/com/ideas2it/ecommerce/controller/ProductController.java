@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.exception.EcommerceException;
-import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.service.ProductService;
 import com.ideas2it.ecommerce.service.impl.ProductServiceImpl;
@@ -28,6 +27,9 @@ import com.ideas2it.ecommerce.service.impl.ProductServiceImpl;
 @Controller
 @RequestMapping("product")
 public class ProductController {
+    private static final String ADMIN_CATEGORY_PAGE = "AdminCategoryPage";
+    private static final String ADMIN_PRODUCT_PAGE = "AdminProductPage";
+    
     private ProductService productService = new ProductServiceImpl();
     
     /**
@@ -38,17 +40,24 @@ public class ProductController {
      * @return  Returns the list of Products. Otherwise, returns a failure 
      *          message indicating that no Products are available. 
      */
-    @PostMapping("display")
+    @GetMapping("display")
     private ModelAndView displayProducts() {
         List<Product> products = new ArrayList<Product>();
-        products = getProducts();
-        if (!products.isEmpty()) {
-            return new ModelAndView("adminDisplayProducts",
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            products = getProducts(modelAndView);
+            if (!products.isEmpty()) {
+                return new ModelAndView(ADMIN_PRODUCT_PAGE,
                     Constants.LABEL_PRODUCTS,products);  
-        } else {
-            return new ModelAndView("adminDisplayProducts",
-                Constants.LABEL_MESSAGE,Constants.MSG_PRODUCTS_UNAVAILABLE);
+            } else {
+                return new ModelAndView(ADMIN_PRODUCT_PAGE,
+                    Constants.LABEL_MESSAGE,Constants.MSG_PRODUCTS_UNAVAILABLE);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
         }
+        return modelAndView;
     }
 
     /**
@@ -61,25 +70,24 @@ public class ProductController {
      *              returns a failure message indicating that the Product 
      *              of the specified ID isn't available.
      */
-    @PostMapping("searchById") 
+    @GetMapping("searchById") 
     private ModelAndView searchById(@RequestParam
             (Constants.LABEL_ID)Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_PRODUCT_PAGE);
         List<Product> products = new ArrayList<Product>();
         try {
             Product product = productService.searchById(id);
             if (null != product) {
-                modelAndView.addObject(Constants.LABEL_PRODUCT, product);
-                modelAndView.setViewName("displayProduct");
+                products.add(product);
+                modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
             } else {
-                products = getProducts();
+                products = getProducts(modelAndView);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
-                modelAndView.setViewName("displayProducts");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -94,25 +102,23 @@ public class ProductController {
      *                Otherwise, returns a failure message indicating that no 
      *                Product is available for the name specified. 
      */
-    @PostMapping("searchByName") 
+    @GetMapping("searchByName") 
     private ModelAndView searchByName(@RequestParam
             (Constants.LABEL_NAME)String name) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_PRODUCT_PAGE);
         List<Product> products = new ArrayList<Product>();
         try {
             products = productService.searchByName("%"+name+"%");
             if (!products.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
-                modelAndView.setViewName("adminDisplayProducts");
             } else {
-                products = getProducts();
+                products = getProducts(modelAndView);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_NOT_AVAILABLE);
-                modelAndView.setViewName("adminDisplayProducts");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -125,13 +131,10 @@ public class ProductController {
      * @return  Returns the list of Products available. Otherwise, returns 
      *          an empty object.
      */
-    private List<Product> getProducts() {
+    private List<Product> getProducts(ModelAndView modelAndView) 
+            throws EcommerceException {
         List<Product> products = new ArrayList<Product>();
-        try {
-            products = productService.getProducts();
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
+        products = productService.getProducts();
         return products;
     }
 }

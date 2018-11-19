@@ -17,15 +17,15 @@
 			<form>
   			<p><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a></p>
   			<p><button class="btn default" formaction="/ecommerce/category/display" 
-  				formmethod="post">Categories</button></p>
+  				formmethod="get">Categories</button></p>
   			<p><button class="btn default" formaction="/ecommerce/product/display"
-  				formmethod="post">Products</button></p>
+  				formmethod="get">Products</button></p>
   			<p><button class="btn default" formaction="/ecommerce/admin/displayCustomers"
-  				formmethod="post">Customers</button></p>
+  				formmethod="get">Customers</button></p>
   			<p><button class="btn default" formaction="/ecommerce/admin/displaySellers"
-  				formmethod="post">Sellers</button></p>
+  				formmethod="get">Sellers</button></p>
   			<p><button class="btn default" formaction="/ecommerce/admin/displayOrders"
-  				formmethod="post">Orders</button></p>
+  				formmethod="get">Orders</button></p>
   			</form>
 		</div>
 
@@ -37,7 +37,7 @@
 					    <i class="fa fa-bars"></i></a> </li>
  						
  				        <li>
- 				        	<form class = "home" method="post" 
+ 				        	<form class = "home" method="get" 
  				        		action="/ecommerce/category/display">
 								<button class="navbar-brand"> 
 								Ecommerce </button>
@@ -58,17 +58,13 @@
 	</div>
 
 </body>
-<script>
-function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-}
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<script>
+		openNav();
+	</script>
 
-function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-}
-</script>
-
+	<script>
+		closeNav();
+	</script>
 </html>
 
