@@ -2,6 +2,7 @@
     background-color: #3465a4;
     padding:none;
 }
+
 li {
    vertical-align:center;
 }
@@ -9,16 +10,7 @@ li {
     width : 350px;
 }
 
-.navbar-header > button {
-	background:none;
-	border:none;
-	outline:none;
-}
-
-.navbar-header > button > a:hover {
-	background:none;
-	border:none;
-	outline:none;
+.navbar-header > .navbar-brand:hover {
 	color:black;
 }
 
@@ -51,7 +43,6 @@ li {
 	background-color:#3465a4;
 }
 
-
 nav > .container-fluid > .navbar-header > a {
     color: white;
 }
@@ -68,17 +59,14 @@ nav > .container-fluid > ul > li > a:hover {
 #btnloginModal:hover {
 	background-color:#3465a4;
     color: black;
-}
-
-.loginCartButtons {
-	padding-top:10px;
+    outline:none;
 }
 
 #btnloginModal {
     border: none;
     color:white;
     background-color: inherit;
-    padding: 14px 28px;
+    padding: 16px 28px;
     cursor: pointer;
     display: inline-block;
 }
@@ -136,7 +124,6 @@ option {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
@@ -151,3 +138,6 @@ option {
 	width: 130px;
 	text-align:left;
 }
+
+
+

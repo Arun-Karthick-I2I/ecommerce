@@ -6,20 +6,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Products</title>
+	<meta charset="UTF-8">
+	<title>Products</title>
 
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminProductPage.css' />">
-
-</head>
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminProductPage.css' />">
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminSnackbar.css' />">
+	</head>
 <body>
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="name"
 				placeholder="Enter Product Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
-				formaction="/ecommerce/product/searchByName" formmethod="post">
+				formaction="/ecommerce/product/searchByName" formmethod="get">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>
@@ -44,7 +45,7 @@
       					<p class="card-text">&#8377;${product.warehouseProducts[0].price}</p>
       					<p class="card-text">
 	      					<input type="hidden" name="categoryId" value="${product.category.id}"/>
-    	  					<button class="btn btn-default" formmethod="post"
+    	  					<button class="btn btn-default" formmethod="get"
 								formaction="/ecommerce/category/displayProducts">
 								${product.category.name}
 							</button>
@@ -100,7 +101,7 @@
 								</c:if>
 							</div>
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-default" formmethod="post"
+								<button type="submit" class="btn btn-default" formmethod="get"
 					    			formaction="/ecommerce/admin/displayProductOrders">
 									Click to view the Orders of this Product
 								</button>
@@ -112,12 +113,13 @@
  	    </c:forEach>
 	</div>
 </body>
-<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
-
-<c:if test="${null != message}">
-	<script type="text/javascript">
-		alert("${message}");
+	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<c:if test="${null != message}">
+		<div id="snackbar">${message}</div>
+	</c:if>
+	<script>
+		showSnackBar();
 	</script>
-</c:if>
 </html>

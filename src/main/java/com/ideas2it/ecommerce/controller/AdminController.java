@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.exception.EcommerceException;
-import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.OrderItem;
@@ -20,9 +19,7 @@ import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.model.Seller;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.AdminService;
-import com.ideas2it.ecommerce.service.OrderItemService;
 import com.ideas2it.ecommerce.service.impl.AdminServiceImpl;
-import com.ideas2it.ecommerce.service.impl.OrderItemServiceImpl;
 
 /**
  * <p>
@@ -38,6 +35,14 @@ import com.ideas2it.ecommerce.service.impl.OrderItemServiceImpl;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
+    private static final String ADMIN_ORDER_PAGE = "AdminOrderPage";
+    private static final String ADMIN_CUSTOMER_PAGE = "AdminCustomerPage";
+    private static final String ADMIN_SELLER_PAGE = "AdminSellerPage";
+    private static final String ADMIN_PRODUCT_PAGE = "AdminProductPage";
+    private static final String ADMIN_CATEGORY_PAGE = "AdminCategoryPage";
+    private static final String ADMIN_DISPLAY_ORDERS = "AdminDisplayOrders";
+    private static final String ADMIN_LOGIN = "AdminLogin";
+    
     private AdminService adminService = new AdminServiceImpl();
     
     /**
@@ -50,17 +55,24 @@ public class AdminController {
      *          Otherwise, returns a failure message indicating that no Orders 
      *          are available.
      */
-    @PostMapping("displayOrders")
+    @GetMapping("displayOrders")
     private ModelAndView displayOrders() {
         List<Order> orders = new ArrayList<Order>();
-        orders = getOrders();
-        if (!orders.isEmpty()) {
-            return new ModelAndView("AdminOrderPage",
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            orders = getOrders(modelAndView);
+            if (!orders.isEmpty()) {
+                return new ModelAndView(ADMIN_ORDER_PAGE,
                     Constants.LABEL_ORDERS,orders);  
-        } else {
-            return new ModelAndView("AdminOrderPage",
-                Constants.LABEL_MESSAGE,Constants.MSG_ORDERS_UNAVAILABLE);
+            } else {
+                return new ModelAndView(ADMIN_ORDER_PAGE,
+                    Constants.LABEL_MESSAGE,Constants.MSG_ORDERS_UNAVAILABLE);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
         }
+        return modelAndView;
     }
 
     /**
@@ -73,26 +85,24 @@ public class AdminController {
      *              a failure message indicating that the Order of the 
      *              specified ID isn't available.
      */
-    @PostMapping("searchByOrderId") 
+    @GetMapping("searchByOrderId") 
     private ModelAndView searchByOrderId(@RequestParam
             (Constants.LABEL_ID) Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_ORDER_PAGE);
         List<Order> orders = new ArrayList<Order>();
         try {
             Order order = adminService.searchByOrderId(id);
             if (null != order) {
                 orders.add(order);
                 modelAndView.addObject(Constants.LABEL_ORDERS, orders);
-                modelAndView.setViewName("AdminOrderPage");
             } else {
-                orders = getOrders();
+                orders = getOrders(modelAndView);
                 modelAndView.addObject(Constants.LABEL_ORDERS, orders);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_ORDER_NOT_AVAILABLE);
-                modelAndView.setViewName("AdminOrderPage");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -105,17 +115,24 @@ public class AdminController {
      * @return  Returns the list of Customers. Otherwise, returns a failure 
      *          message indicating no Customers are available.
      */
-    @PostMapping("displayCustomers")
+    @GetMapping("displayCustomers")
     private ModelAndView displayCustomers() {
         List<Customer> customers = new ArrayList<Customer>();
-        customers = getCustomers(Boolean.TRUE);
-        if (!customers.isEmpty()) {
-            return new ModelAndView("displayCustomers",
-                Constants.LABEL_CUSTOMERS,customers);  
-        } else {
-            return new ModelAndView("displayCustomers",
-                Constants.LABEL_MESSAGE,Constants.MSG_CUSTOMERS_NOT_AVAILABLE);
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            customers = getCustomers(modelAndView, Boolean.TRUE);
+            if (!customers.isEmpty()) {
+                return new ModelAndView(ADMIN_CUSTOMER_PAGE,
+                    Constants.LABEL_CUSTOMERS,customers);  
+            } else {
+                return new ModelAndView(ADMIN_CUSTOMER_PAGE,
+                    Constants.LABEL_MESSAGE,Constants.MSG_CUSTOMERS_NOT_AVAILABLE);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
         }
+        return modelAndView;
     }
     
     /**
@@ -128,22 +145,25 @@ public class AdminController {
      *              returns a failure message indicating that the Customer of 
      *              the specified ID isn't available.
      */
-    @PostMapping("searchByCustomerId") 
+    @GetMapping("searchByCustomerId") 
     private ModelAndView searchByCustomerId(@RequestParam
             (Constants.LABEL_ID)Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CUSTOMER_PAGE);
         List<Customer> customers = new ArrayList<Customer>();
-            Customer customer = getCustomer(id);
+        try {
+            Customer customer = getCustomer(modelAndView, id);
             if (null != customer) {
-                modelAndView.addObject(Constants.LABEL_CUSTOMER, customer);
-                modelAndView.setViewName("displayCustomer");
+                customers.add(customer);
+                modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
             } else {
-                customers = getCustomers(Boolean.TRUE);
+                customers = getCustomers(modelAndView, Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CUSTOMER_NOT_AVAILABLE);
-                modelAndView.setViewName("displayCustomers");
             }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
         return modelAndView;
     }
     
@@ -157,26 +177,24 @@ public class AdminController {
      *               Otherwise, returns a failure message indicating that no 
      *               Customer is available for the name specified. 
      */
-    @PostMapping("searchByCustomerName") 
+    @GetMapping("searchByCustomerName") 
     private ModelAndView searchByCustomerName(@RequestParam
             (Constants.LABEL_NAME)String name) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CUSTOMER_PAGE);
         List<Customer> customers = new ArrayList<Customer>();
         try {
             customers = adminService.searchByCustomerName
                 ("%"+name+"%", Boolean.TRUE);
             if (!customers.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
-                modelAndView.setViewName("displayCustomers");
             } else {
-                customers = getCustomers(Boolean.TRUE);
+                customers = getCustomers(modelAndView, Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CUSTOMER_NOT_AVAILABLE);
-                modelAndView.setViewName("displayCustomers");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -196,9 +214,9 @@ public class AdminController {
             (Constants.LABEL_ID)Integer id) {
         Customer customer = new Customer();
         List<Customer> customers = new ArrayList<Customer>();
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CUSTOMER_PAGE);
         try {
-            customer = getCustomer(id);
+            customer = getCustomer(modelAndView, id);
             if (adminService.deleteCustomer(customer)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CUSTOMER_DELETE_SUCCESS);
@@ -206,11 +224,10 @@ public class AdminController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CUSTOMER_DELETE_FAILURE);
             }
-            customers = getCustomers(Boolean.TRUE);
+            customers = getCustomers(modelAndView, Boolean.TRUE);
             modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
-            modelAndView.setViewName("displayCustomers");
         } catch(EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -224,17 +241,25 @@ public class AdminController {
      * @return  Returns the list of Sellers. Otherwise, returns a failure 
      *          message indicating no Sellers are available.
      */
-    @PostMapping("displaySellers")
+    @GetMapping("displaySellers")
     private ModelAndView displaySellers() {
         List<Seller> sellers = new ArrayList<Seller>();
-        sellers = getSellers();
-        if (!sellers.isEmpty()) {
-            return new ModelAndView("displaySellers",
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
+        try {
+            sellers = getSellers(modelAndView);
+            if (!sellers.isEmpty()) {
+                return new ModelAndView(ADMIN_SELLER_PAGE,
                     Constants.LABEL_SELLERS,sellers);  
-        } else {
-            return new ModelAndView("displaySellers",
-                Constants.LABEL_MESSAGE,Constants.MSG_SELLERS_NOT_AVAILABLE);
+            } else {
+                return new ModelAndView(ADMIN_SELLER_PAGE,
+                    Constants.LABEL_MESSAGE,Constants.MSG_SELLERS_NOT_AVAILABLE);
+            }
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
         }
+        return modelAndView;
+        
     }
     
     /**
@@ -247,25 +272,24 @@ public class AdminController {
      *              a failure message indicating that the Seller of the 
      *              specified ID isn't available.
      */
-    @PostMapping("searchBySellerId") 
+    @GetMapping("searchBySellerId") 
     private ModelAndView searchBySellerId(@RequestParam
             (Constants.LABEL_ID)Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_SELLER_PAGE);
         List<Seller> sellers = new ArrayList<Seller>();
         try {
             Seller seller = adminService.searchBySellerId(id);
             if (null != seller) {
-                modelAndView.addObject(Constants.LABEL_SELLER, seller);
-                modelAndView.setViewName("displaySeller");
+                sellers.add(seller);
+                modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
             } else {
-                sellers = getSellers();
+                sellers = getSellers(modelAndView);
                 modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_SELLER_NOT_AVAILABLE);
-                modelAndView.setViewName("displaySellers");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -280,25 +304,23 @@ public class AdminController {
      *                Otherwise, returns a failure message indicating that no 
      *                Seller is available for the name specified. 
      */
-    @PostMapping("searchBySellerName") 
+    @GetMapping("searchBySellerName") 
     private ModelAndView searchBySellerName(@RequestParam
             (Constants.LABEL_NAME)String name) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_SELLER_PAGE);
         List<Seller> sellers = new ArrayList<Seller>();
         try {
             sellers = adminService.searchBySellerName("%"+name+"%");
             if (!sellers.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
-                modelAndView.setViewName("displaySellers");
             } else {
-                sellers = getSellers();
+                sellers = getSellers(modelAndView);
                 modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_SELLER_NOT_AVAILABLE);
-                modelAndView.setViewName("displaySellers");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -318,7 +340,7 @@ public class AdminController {
             (Constants.LABEL_ID)Integer id) {
         Seller seller = new Seller();
         List<Seller> sellers = new ArrayList<Seller>();
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_SELLER_PAGE);
         try {
             seller.setId(id);
             if (adminService.deleteSeller(seller)) {
@@ -328,11 +350,10 @@ public class AdminController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_SELLER_DELETE_FAILURE);
             }
-            sellers = getSellers();
+            sellers = getSellers(modelAndView);
             modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
-            modelAndView.setViewName("displaySellers");
         } catch(EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -348,7 +369,7 @@ public class AdminController {
      *              indicating that no Products are sold by the Seller
      *              for the specified ID.
      */
-    @PostMapping("displaySellerProducts") 
+    @GetMapping("displaySellerProducts") 
     private ModelAndView displaySellerProducts(@RequestParam
             (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -363,16 +384,17 @@ public class AdminController {
             }
             if (!products.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
-                modelAndView.setViewName("adminDisplayProducts");
+                modelAndView.setViewName(ADMIN_PRODUCT_PAGE);
             } else {
-                sellers = getSellers();
+                sellers = getSellers(modelAndView);
                 modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_PRODUCTS_UNAVAILABLE);
-                modelAndView.setViewName("displaySellers");
+                modelAndView.setViewName(ADMIN_SELLER_PAGE);
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_SELLER_PAGE);
         }
         return modelAndView;
     }
@@ -388,30 +410,35 @@ public class AdminController {
      *              indicating that no Orders have been placed by the
      *              Customer for the specified ID.
      */
-    @PostMapping("displayCustomerOrders") 
+    @GetMapping("displayCustomerOrders") 
     private ModelAndView displayCustomerOrders(@RequestParam
             (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         List<Customer> customers = new ArrayList<Customer>();
-        Customer customer = getCustomer(id);
-        if (null != customer) {
-            if(!(customer.getOrders().isEmpty())) {
-                modelAndView.addObject(Constants.LABEL_ORDERS, 
-                    customer.getOrders());
-                modelAndView.setViewName("AdminOrderPage");
+        try {
+            Customer customer = getCustomer(modelAndView, id);
+            if (null != customer) {
+                if(!(customer.getOrders().isEmpty())) {
+                    modelAndView.addObject(Constants.LABEL_ORDERS, 
+                        customer.getOrders());
+                    modelAndView.setViewName(ADMIN_ORDER_PAGE);
+                } else {
+                    customers = getCustomers(modelAndView, Boolean.TRUE);
+                    modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
+                    modelAndView.addObject(Constants.LABEL_MESSAGE,
+                        Constants.MSG_ORDERS_UNAVAILABLE);
+                    modelAndView.setViewName(ADMIN_CUSTOMER_PAGE);
+                }
             } else {
-                customers = getCustomers(Boolean.TRUE);
+                customers = getCustomers(modelAndView, Boolean.TRUE);
                 modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_ORDERS_UNAVAILABLE);
-                modelAndView.setViewName("displayCustomers");
+                    Constants.MSG_CUSTOMER_NOT_AVAILABLE);
+                modelAndView.setViewName(ADMIN_CUSTOMER_PAGE);
             }
-        } else {
-            customers = getCustomers(Boolean.TRUE);
-            modelAndView.addObject(Constants.LABEL_CUSTOMERS, customers);
-            modelAndView.addObject(Constants.LABEL_MESSAGE,
-                Constants.MSG_CUSTOMER_NOT_AVAILABLE);
-            modelAndView.setViewName("displayCustomers");
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CUSTOMER_PAGE);
         }
         return modelAndView;
     }
@@ -428,7 +455,7 @@ public class AdminController {
      *              indicating that no Orders have been placed by 
      *              Customers to that Seller.
      */
-    @PostMapping("displaySellerOrders") 
+    @GetMapping("displaySellerOrders") 
     private ModelAndView displaySellerOrders(@RequestParam
             (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -442,23 +469,24 @@ public class AdminController {
                 if (!orderItems.isEmpty()) {
                     modelAndView.addObject
                         (Constants.LABEL_ORDER_ITEMS, orderItems);
-                    modelAndView.setViewName("displayOrders");
+                    modelAndView.setViewName(ADMIN_DISPLAY_ORDERS);
                 } else {
-                    sellers = getSellers();
+                    sellers = getSellers(modelAndView);
                     modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                     modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELLER_ORDERS_UNAVAILABLE);
-                    modelAndView.setViewName("displaySellers");
+                    modelAndView.setViewName(ADMIN_SELLER_PAGE);
                 }
             } else {
-                sellers = getSellers();
+                sellers = getSellers(modelAndView);
                 modelAndView.addObject(Constants.LABEL_SELLERS, sellers);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELLER_ORDERS_UNAVAILABLE);
-                modelAndView.setViewName("displaySellers");
+                modelAndView.setViewName(ADMIN_SELLER_PAGE);
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_SELLER_PAGE);
         }
         return modelAndView;
     }
@@ -475,7 +503,7 @@ public class AdminController {
      *              message indicating that no Orders have been placed for 
      *              that particular Product.
      */
-    @PostMapping("displayProductOrders") 
+    @GetMapping("displayProductOrders") 
     private ModelAndView displayProductOrders(@RequestParam
             (Constants.LABEL_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -489,23 +517,24 @@ public class AdminController {
                 if (!orderItems.isEmpty()) {
                     modelAndView.addObject
                         (Constants.LABEL_ORDER_ITEMS, orderItems);
-                    modelAndView.setViewName("displayOrders");
+                    modelAndView.setViewName(ADMIN_DISPLAY_ORDERS);
                 } else {
-                    products = getProducts();
+                    products = getProducts(modelAndView);
                     modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                     modelAndView.addObject(Constants.LABEL_MESSAGE,
                             Constants.MSG_ORDERS_UNAVAILABLE);
-                    modelAndView.setViewName("adminDisplayProducts");
+                    modelAndView.setViewName(ADMIN_PRODUCT_PAGE);
                 }
             } else {
-                products = getProducts();
+                products = getProducts(modelAndView);
                 modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ORDERS_UNAVAILABLE);
-                modelAndView.setViewName("adminDisplayProducts");
+                modelAndView.setViewName(ADMIN_PRODUCT_PAGE);
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_PRODUCT_PAGE);
         }
         return modelAndView;
     }
@@ -518,12 +547,13 @@ public class AdminController {
      * @return  Returns the list of Sellers available. Otherwise, returns an 
      *          empty object.
      */
-    private List<Seller> getSellers() {
+    private List<Seller> getSellers(ModelAndView modelAndView) 
+            throws EcommerceException {
         List<Seller> sellers = new ArrayList<Seller>();
         try {
             sellers = adminService.getSellers();
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return sellers;
     }
@@ -539,13 +569,10 @@ public class AdminController {
      * @return          Returns the list of Customers available. Otherwise, 
      *                  returns an empty object.
      */
-    private List<Customer> getCustomers(Boolean status) {
+    private List<Customer> getCustomers(ModelAndView modelAndView, 
+            Boolean status) throws EcommerceException {
         List<Customer> customers = new ArrayList<Customer>();
-        try {
-            customers = adminService.getCustomers(status);
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
+        customers = adminService.getCustomers(status);
         return customers;
     }
     
@@ -557,13 +584,10 @@ public class AdminController {
      * @return  Returns the list of Orders placed. Otherwise, returns an 
      *          empty object.
      */
-    private List<Order> getOrders() {
+    private List<Order> getOrders(ModelAndView modelAndView) 
+            throws EcommerceException {
         List<Order> orders = new ArrayList<Order>();
-        try {
-            orders = adminService.getOrders();
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
+        orders = adminService.getOrders();
         return orders;
     }
     
@@ -576,13 +600,10 @@ public class AdminController {
      * @return      Returns the Customer for the ID specified. Otherwise,
      *              returns an empty object.
      */
-    private Customer getCustomer(Integer id) {
+    private Customer getCustomer(ModelAndView modelAndView, Integer id) 
+            throws EcommerceException {
         Customer customer = new Customer();
-        try {
-            customer = adminService.searchByCustomerId(id, Boolean.TRUE);
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
+        customer = adminService.searchByCustomerId(id, Boolean.TRUE);
         return customer;
     }
     
@@ -594,13 +615,10 @@ public class AdminController {
      * @return  Returns the list of Products available. Otherwise, returns an 
      *          empty object.
      */
-    private List<Product> getProducts() {
+    private List<Product> getProducts(ModelAndView modelAndView) 
+            throws EcommerceException {
         List<Product> products = new ArrayList<Product>();
-        try {
-            products = adminService.getProducts();
-        } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
-        }
+        products = adminService.getProducts();
         return products;
     }
     
@@ -613,6 +631,6 @@ public class AdminController {
      */
     @GetMapping("/")
     private String loginForm() {
-        return "adminLogin";
+        return ADMIN_LOGIN;
     }
 }

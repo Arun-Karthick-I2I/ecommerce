@@ -43,10 +43,12 @@
     font-size: 20px;
 }
 
+form > .input-group {
+	margin-left: 38%;
+}
+
 form > div > #search {
 	width: 297px;
-	margin-left: 480px;
-	margin-right: 0;
 }
 
 form > div > .btn-default {

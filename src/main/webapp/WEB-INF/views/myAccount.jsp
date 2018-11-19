@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>pandaZone</title>
+<title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/myAccount.css' />">
 <style>
@@ -128,26 +130,31 @@
 		<div class="addressheader">Delivery Addresses</div>
 		<div class="existingAddresses">
 			<c:forEach var="address" items="${customer.user.addresses}">
-				<div class="deliveryAddress">
-					<i class="fa fa-home" aria-hidden="true"></i>
-					&nbsp;&nbsp;${address}
-					<div class="addressModifyButton">
-						<button type="button" class="btn btn-info btn-sm"
-							data-toggle="modal" data-target="#${address.id}"
-							onclick="closeAddAddress()">Edit</button>
-						<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+				<form>
+					<div class="deliveryAddress">
+						<i class="fa fa-home" aria-hidden="true"></i>
+						&nbsp;&nbsp;${address}
+						<div class="addressModifyButton">
+							<input type="hidden" name="addressId" value="${address.id}">
+							<button type="button" class="btn btn-info btn-sm"
+								data-toggle="modal" data-target="#${address.id}"
+								onclick="closeAddAddress()">Edit</button>
+							<button type="submit" class="btn btn-danger btn-sm"
+								formaction="/ecommerce/removeAddress"
+								formmethod="post">Delete</button>
+						</div>
 					</div>
-				</div>
+				</form>
 				<br />
 				<div class="modal fade" id="${address.id}" role="dialog">
 					<div class="modal-dialog modal-md">
 						<div class="modal-content">
-							<div class="modal-header">
-								<h4>Edit Address</h4>
-							</div>
-							<div class="modal-body">
-								<div class="editAddress">
-									<form>
+							<form>
+								<div class="modal-header">
+									<h4>Edit Address</h4>
+								</div>
+								<div class="modal-body">
+									<div class="editAddress">
 										<input type="hidden" name="id" value="${address.id}">
 										<div class="cols-sm-10 addressLine">
 											<div class="input-group">
@@ -190,18 +197,18 @@
 													name="pincode" value="${address.pincode}" required />
 											</div>
 										</div>
+									</div>
 								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary btn-md"
-									formmethod="post" formaction="/ecommerce/updateAddress">Save</button>
-								<button type="button" class="btn btn-danger btn-md"
-									data-dismiss="modal">Cancel</button>
-							</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary btn-md"
+										formmethod="post" formaction="/ecommerce/updateAddress">Save</button>
+									<button type="button" class="btn btn-danger btn-md"
+										data-dismiss="modal">Cancel</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-				</form>
 			</c:forEach>
 		</div>
 	</div>

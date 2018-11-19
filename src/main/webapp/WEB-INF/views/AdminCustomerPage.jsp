@@ -6,6 +6,8 @@
 <title>Customers</title>
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/AdminCustomerPage.css' />">
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminSnackbar.css' />">
 </head>
 <body>
 	<div class="title">
@@ -16,7 +18,7 @@
 			<input type="text" class="form-control" id="search" name="name"
 				placeholder="Enter Customer Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
-				formaction="/ecommerce/admin/searchByCustomerName" formmethod="post">
+				formaction="/ecommerce/admin/searchByCustomerName" formmethod="get">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>
@@ -37,7 +39,7 @@
 					<input type="hidden" name="id" value="${customer.id}" />
 					<tr>
 						<td>${customer.id}</td>
-						<td><button class="btn btn-default" formmethod="post"
+						<td><button class="btn btn-default" formmethod="get"
 								formaction="/ecommerce/admin/displayCustomerOrders">
 								${customer.name}</button></td>
 						<td>${customer.mobileNumber}</td>
@@ -56,21 +58,15 @@
 		<Strong>**Note:</Strong> Click on the Customer name to view the Orders placed by the Customer
 	</div>
 </body>
-<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-
-<script>
-$(document).ready(function(){
-  $("#search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-<c:if test="${null != message}">
-	<script type="text/javascript">
-		alert("${message}");
+	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<script>
+		searchbar();
 	</script>
-</c:if>
+	<c:if test="${null != message}">
+		<div id="snackbar">${message}</div>
+	</c:if>
+	<script>
+		showSnackBar();
+	</script>
 </html>

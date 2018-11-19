@@ -7,7 +7,7 @@
 <title>pandaZone</title>
 <style>
 .footer {
-	position: relative;
+	position: fixed;
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -33,7 +33,7 @@
 .footer > .copright {
 	width:50%;
 	margin-left:20%;
-	color:black;
+	color:black	;
 	font-size:15px;
 	height:100%;
 	text-align:right;

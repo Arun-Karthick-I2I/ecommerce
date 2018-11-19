@@ -70,10 +70,12 @@
 	margin-bottom: 0;
 }
 
+form > .input-group {
+	margin-left: 33%;
+}
+
 form > div > #search {
-	width: 500px;
-	margin-left: 350px;
-	margin-right: 0;
+	width: 297px;
 }
 
 form > div > .btn-default {
