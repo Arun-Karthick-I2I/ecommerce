@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;  
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.exception.EcommerceException;
-import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Category;
 import com.ideas2it.ecommerce.model.Product;
 import com.ideas2it.ecommerce.service.CategoryService;
@@ -33,6 +33,10 @@ import com.ideas2it.ecommerce.service.impl.CategoryServiceImpl;
 @Controller
 @RequestMapping("category")
 public class CategoryController {
+    private static final String ADMIN_CATEGORY_PAGE = "AdminCategoryPage";
+    private static final String ADMIN_PRODUCT_PAGE = "AdminProductPage";
+    private static final String ADMIN_LOGIN = "AdminLogin";
+    
     private CategoryService categoryService = new CategoryServiceImpl(); 
     
     /**
@@ -43,16 +47,16 @@ public class CategoryController {
      * @return  Returns the list of Categories. Otherwise, returns a failure 
      *          message indicating that no Categories are available. 
      */
-    @PostMapping("display")
+    @GetMapping("display")
     private ModelAndView displayCategories() {
         List<Category> categories = new ArrayList<Category>();
         categories = getCategories();
         Collections.sort(categories);
         if (!categories.isEmpty()) {
-            return new ModelAndView("displayCategories",
+            return new ModelAndView(ADMIN_CATEGORY_PAGE,
                 Constants.LABEL_CATEGORIES,categories);  
         } else {
-            return new ModelAndView("displayCategories",
+            return new ModelAndView(ADMIN_CATEGORY_PAGE,
                 Constants.LABEL_MESSAGE,Constants.MSG_CATEGORIES_UNAVAILABLE);
         }
     }
@@ -71,7 +75,7 @@ public class CategoryController {
     @PostMapping("insert") 
     private ModelAndView addCategory(@ModelAttribute(Constants.LABEL_CATEGORY) 
             Category category) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
         List<Category> categories = new ArrayList<Category>();
         try {
             if (categoryService.insertCategory(category)) {
@@ -83,9 +87,8 @@ public class CategoryController {
             }
             categories = getCategories();
             modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
-            modelAndView.setViewName("displayCategories"); 
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -104,7 +107,7 @@ public class CategoryController {
     private ModelAndView deleteCategory(@RequestParam
             (Constants.LABEL_ID)Integer id) {
         List<Category> categories = new ArrayList<Category>();
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
         try {
             if (categoryService.deleteCategory(id)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -115,9 +118,8 @@ public class CategoryController {
             }
             categories = getCategories();
             modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
-            modelAndView.setViewName("displayCategories");
         } catch(EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -135,7 +137,7 @@ public class CategoryController {
     @PostMapping("update")
     private ModelAndView updateCategory(@ModelAttribute
             (Constants.LABEL_CATEGORY)Category category) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
         List<Category> categories = new ArrayList<Category>();
         try {
             if (categoryService.updateCategory(category)) {
@@ -147,9 +149,8 @@ public class CategoryController {
             }
             categories = getCategories();
             modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
-            modelAndView.setViewName("displayCategories");
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         } 
         return modelAndView;
     }
@@ -164,25 +165,24 @@ public class CategoryController {
      *              returns a failure message indicating that the Category 
      *              of the specified ID isn't available.
      */
-    @PostMapping("searchById") 
+    @GetMapping("searchById") 
     private ModelAndView searchById(@RequestParam
             (Constants.LABEL_ID)Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
         List<Category> categories = new ArrayList<Category>();
         try {
             Category category = categoryService.searchById(id);
             if (null != category) {
-                modelAndView.addObject(Constants.LABEL_CATEGORY, category);
-                modelAndView.setViewName("displayCategory");
+                categories.add(category);
+                modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
             } else {
                 categories = getCategories();
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
-                modelAndView.setViewName("displayCategories");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -197,26 +197,24 @@ public class CategoryController {
      *                Otherwise, returns a failure message indicating that the
      *                Category is not available for the name specified. 
      */
-    @PostMapping("searchByName") 
+    @GetMapping("searchByName") 
     private ModelAndView searchByName(@RequestParam
             (Constants.LABEL_NAME)String name) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_CATEGORY_PAGE);
         List<Category> categories = new ArrayList<Category>();
         try {
             Category category = categoryService.searchByName("%"+name+"%");
             if (null != category) {
                 categories.add(category);
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
-                modelAndView.setViewName("displayCategories");
             } else {
                 categories = getCategories();
                 modelAndView.addObject(Constants.LABEL_CATEGORIES, categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
-                modelAndView.setViewName("displayCategories");
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -231,7 +229,7 @@ public class CategoryController {
      *              ID specified. Otherwise, returns failure message indicating
      *              no products are available.
      */
-    @PostMapping("displayProducts") 
+    @GetMapping("displayProducts") 
     private ModelAndView displayProducts(@RequestParam
             (Constants.LABEL_CATEGORY_ID)Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -242,23 +240,24 @@ public class CategoryController {
                 List<Product> products = category.getProducts();
                 if (!products.isEmpty()) {
                     modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
-                    modelAndView.setViewName("adminDisplayProducts");
+                    modelAndView.setViewName(ADMIN_PRODUCT_PAGE);
                 } else {
                     modelAndView.addObject
                         (Constants.LABEL_CATEGORIES,categories);
                     modelAndView.addObject(Constants.LABEL_MESSAGE, 
                         Constants.MSG_CATEGORY_PRODUCTS_UNAVAILABLE);
-                    modelAndView.setViewName("displayCategories");
+                    modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
                 }
             } else {
                 modelAndView.addObject
                     (Constants.LABEL_CATEGORIES,categories);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_CATEGORY_NOT_AVAILABLE);
-                modelAndView.setViewName("displayCategories");
+                modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
             }
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.setViewName(ADMIN_CATEGORY_PAGE);
         }
         return modelAndView;
     }
@@ -273,10 +272,11 @@ public class CategoryController {
      */
     private List<Category> getCategories() {
         List<Category> categories = new ArrayList<Category>();
+        ModelAndView modelAndView = new ModelAndView(ADMIN_LOGIN);
         try {
             categories = categoryService.getCategories();
         } catch (EcommerceException e) {
-            EcommerceLogger.error(e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return categories;
     }

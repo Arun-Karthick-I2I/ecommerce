@@ -38,12 +38,12 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
 public class UserController {
     private static final Character INITIAL_PATH = '/';
     private static final String INDEX_PAGE = "CustomerHome";
-    private static final String ADMIN_HOME = "displayCategories";
+    private static final String ADMIN_HOME = "AdminCategoryPage";
     private static final String CUSTOMER_HOME = "CustomerHome";
     private static final String CUSTOMER_PROFILE = "myAccount";
     private static final String SELLER_HOME = "SellerHome";
     private static final String SELLER_LOGIN = "SellerLogin";
-    private static final String ADMIN_LOGIN = "adminLogin";
+    private static final String ADMIN_LOGIN = "AdminLogin";
     private static final String ADDRESS_FORM = "AddressForm";
 
     private UserService userService = new UserServiceImpl();

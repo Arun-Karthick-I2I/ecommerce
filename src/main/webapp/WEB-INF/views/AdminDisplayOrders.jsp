@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Customers</title>
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminOrderPage.css' />">
+	<title>Ecommerce</title>
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminOrderPage.css' />">
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminSnackbar.css' />">
 </head>
 <body>
 	<div class="title">
@@ -14,9 +16,10 @@
 	<form>
 		<div class="input-group">
 			<input type="text" class="form-control" id="search" name="id"
-				placeholder="Enter Order ID to be searched" required>
+				placeholder="Enter Order ID to be searched" pattern = "^[0-9]*$"
+				required>
 		 	<button class="btn btn-default" type="submit"
-				formaction="/ecommerce/admin/searchByOrderId" formmethod="post">
+				formaction="/ecommerce/admin/searchByOrderId" formmethod="get">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>
@@ -73,9 +76,11 @@
 		</tbody>
 	</table>
 </body>
-<c:if test="${null != message}">
-	<script type="text/javascript">
-		alert("${message}");
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<c:if test="${null != message}">
+		<div id="snackbar">${message}</div>
+	</c:if>
+	<script>
+		showSnackBar();
 	</script>
-</c:if>
 </html>

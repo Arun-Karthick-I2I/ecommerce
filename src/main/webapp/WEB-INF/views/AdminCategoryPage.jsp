@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/AdminCategoryPage.css' />">
-</head>
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminCategoryPage.css' />">
+	<link rel="stylesheet"
+		href="<c:url value='/resources/css/AdminSnackbar.css' />">
+	</head>
 <body>
 	<div class="title">
 		<h2>Categories</h2>
@@ -17,7 +19,7 @@
 			<input type="text" class="form-control" id="search" name="name"
 				placeholder="Enter Category Name to be searched" required>
 		 	<button class="btn btn-default" type="submit"
-				formaction="/ecommerce/category/searchByName" formmethod="post">
+				formaction="/ecommerce/category/searchByName" formmethod="get">
 				<i class="fa fa-search"></i>
 			</button>
 			&nbsp; &nbsp;
@@ -40,7 +42,7 @@
 					<input type="hidden" name="categoryId" value="${category.id}"/>
 					<tr>
 						<td>${category.id}</td>
-						<td><button class="btn btn-default" formmethod="post"
+						<td><button class="btn btn-default" formmethod="get"
 								formaction="/ecommerce/category/displayProducts">
 								${category.name}</button></td>
 						<td>
@@ -102,11 +104,13 @@
 		</div>
 	</div>
 </body>
-<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
-<c:if test="${null != message}">
-	<script type="text/javascript">
-		alert("${message}");
+	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+	<script src="<c:url value='/resources/js/Admin.js' />"></script>
+	<c:if test="${null != message}">
+		<div id="snackbar">${message}</div>
+	</c:if>
+	<script>
+		showSnackBar();
 	</script>
-</c:if>
 </html>
