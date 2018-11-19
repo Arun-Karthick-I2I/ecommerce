@@ -16,7 +16,7 @@
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a class="dropdown-item" href="/ecommerce/seller/newProduct">Add
 						to Warehouse</a> <a class="dropdown-item"
-						href="/ecommerce/seller/showWarehouse">Show Warehouse</a>
+						href="/ecommerce/seller/home">Show Warehouse</a>
 				</div>
 			</div>
 		</li>
@@ -57,6 +57,7 @@
 						Address</a> <a class="dropdown-item" href="/ecommerce/showAddress">Show
 						Address</a>
 				</div>
+				margin-top: 3%;
 			</div>
 		</li>
 	</ul>
@@ -69,7 +70,7 @@
 					<i class="fas fa-user-tie" style="font-size: 32px; color: white"></i>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="/ecommerce/seller/editSeller">My
+					<a class="dropdown-item" href="/ecommerce/seller/viewProfile">My
 						Profile</a>
 				</div>
 			</div>

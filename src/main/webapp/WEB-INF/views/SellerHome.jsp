@@ -11,8 +11,14 @@
 </head>
 <body>
 	<jsp:include page="SellerHeader.jsp"></jsp:include>
-	<div class="buttonWrapper"></div>
+	<div class="buttonWrapper"> </div>
 	<div class="container">
+		<c:if test="${0 == warehouseProducts.size()}" >
+			<div>
+			<img alt="No Product Found" src="<c:url value='/resources/images/noproduct.png' />" height="300px" width="300px"></img><br>
+			<a class="btn btn-outline-warning add-btn" href="/ecommerce/seller/newProduct"> Add New Products to your Warehouse </a>
+			</div>
+		</c:if>
 		<c:forEach var="warehouseProduct" items="${warehouseProducts}">
 			<div class="card">
 				<div class="flip-box">
@@ -43,53 +49,19 @@
 			</div>
 		</c:forEach>
 	</div>
-	<c:if test="${showAddress}">
-		<div class="w-75 mx-auto addressWrapper" id="addressWrapper">
-			<table class="table table-hover">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Address</th>
-						<th scope="col">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="address" items="${addresses}">
-						<tr>
-							<form method="POST">
-								<td>${address}</td>
-								<td><input type="hidden" name="addressId"
-									value="${address.id}" />
-									<button class="btn btn-primary btn-sm" type="submit"
-										formaction="/ecommerce/editAddress">Edit</button> <c:if
-										test="${1 < addresses.size()}">
-										<button class="btn btn-danger btn-sm" type="submit"
-											formaction="/ecommerce/removeAddress"
-											onclick="return confirm('Are you sure want to delete this address')">Delete</button>
-									</c:if></td>
-							</form>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</c:if>
 	<c:if test="${null != message}">
 		<div id="snackbar">${message}</div>
 	</c:if>
-	<c:if test="${null == message}">
+	<c:if test="${null == message && 0 != warehouseProducts.size()}">
 		<div id="snackbar">Hover on the product for more details</div>
 	</c:if>
+	<c:remove var="message" />
 	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
 	<script src="<c:url value='/resources/js/Seller.js' />"></script>
-	<c:if test="${null != message}">
-		<script>
-			showSnackBar();
-		</script>
-		<c:remove var="message" />
-	</c:if>
 	<script>
 		showProductForm();
+		showSnackBar();
 	</script>
 </body>
 </html>

@@ -69,4 +69,35 @@ public class WarehouseProduct {
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
+    
+    /** 
+     * <p>
+     * Compares whether two warehouse products are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar warehouse product is present
+     *         false  When warehouse products are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object warehouseProduct) {
+        if (null == warehouseProduct) {
+            return Boolean.FALSE;
+        }
+
+        if (!(warehouseProduct instanceof WarehouseProduct)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (WarehouseProduct) warehouseProduct) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((WarehouseProduct) warehouseProduct).id));
+    }
+    
 }

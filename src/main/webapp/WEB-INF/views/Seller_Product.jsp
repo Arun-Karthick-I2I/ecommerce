@@ -9,7 +9,23 @@
 </head>
 <body>
 	<jsp:include page="SellerHeader.jsp"></jsp:include>
+	<div class="buttonWrapper">
+		<div class="addbox">
+		<button class="btn btn-warning" type="button" data-toggle="modal"
+			data-target="#modalBox">Add Something New</button>
+		</div>
+		<div class="searchbox">
+		<form action="/ecommerce/seller/searchProduct" method="GET" >
+  			<input class="search" type="text" name="productName" placeholder="Search.." required>
+		</form>
+		</div>
+	</div>
 	<div class="container">
+		<c:if test="${0 == products.size()}" >
+			<div>
+			<img alt="No Product Found" src="<c:url value='/resources/images/noproduct.png' />" height="300px" width="300px"></img>
+			</div>
+		</c:if>
 		<c:forEach var="product" items="${products}">
 			<div class="card">
 				<div class="flip-box">
@@ -23,12 +39,10 @@
 							<div class="card-body">
 								<h5 class="card-title">${product.name}</h5>
 								<p class="card-text">Want to Sell ?</p>
-								<form action="/ecommerce/seller/addWarehouseProduct"
-									method="POST">
-									<input type="hidden" name="warehouseProductId"
-										value="${warehouseProduct.id}" />
-									<button class="btn btn-sm btn-info" type="submit">
-										Add to Warehouse</button>
+								<form action="/ecommerce/seller/searchProduct" method="GET">
+									<input type="hidden" name="productName" value="${product.name}" />
+									<button class="btn btn-sm btn-info" type="submit">Add
+										to Warehouse</button>
 								</form>
 							</div>
 						</div>
@@ -37,32 +51,29 @@
 			</div>
 		</c:forEach>
 	</div>
-	<c:if test="${null == newProduct}">
-		<div class="modal fade" id="productModal">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header bg-warning text-center">
-						<h4 class="modal-title text-white w-100 font-weight-bold">Enter
-							Product Name</h4>
-						<button type="button" class="close text-white"
-							data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<form action="/ecommerce/seller/searchProduct" method="GET">
-							<div class="form-group">
-								<input type="text" class="form-control" name="productName"
-									id="name" pattern="[a-zA-Z][a-zA-Z0-9 ()-,.']{1,150}"
-									placeholder="Product Name"
-									title="Product Name can contain Alphabets, Numbers and Spaces Eg.Sony Xperia Z3(Pearl White, 64GB)"
-									required>
-							</div>
-							<button type="submit" class="btn btn-primary btn-right">Proceed</button>
-						</form>
-					</div>
+	<div class="modal fade" id="modalBox">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header bg-warning text-center">
+					<h4 class="modal-title text-white w-100 font-weight-bold">Enter
+						Product Name</h4>
+					<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form action="/ecommerce/seller/searchProduct" method="GET">
+						<div class="form-group">
+							<input type="text" class="form-control" name="productName"
+								id="name" pattern="[a-zA-Z][a-zA-Z0-9 ()-,.':]{1,150}"
+								placeholder="Product Name"
+								title="Product Name can contain Alphabets, Numbers and Spaces Eg.Sony Xperia Z3(Pearl White, 64GB)"
+								required>
+						</div>
+						<button type="submit" class="btn btn-primary btn-right">Proceed</button>
+					</form>
 				</div>
 			</div>
 		</div>
-	</c:if>
+	</div>
 	<c:if test="${newProduct}">
 		<div class="modal fade" id="productModal">
 			<div class="modal-dialog modal-dialog-centered">

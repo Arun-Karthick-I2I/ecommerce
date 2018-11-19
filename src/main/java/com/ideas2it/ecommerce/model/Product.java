@@ -86,4 +86,35 @@ public class Product {
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
     }
+
+    /** 
+     * <p>
+     * Compares whether two products are similar. It checks for similarity in 
+     * id.
+     * </p>
+     *
+     * @param address
+     *        An Object which has to be compared for checking it's similarity
+     *
+     * @return true   When a similar product is present
+     *         false  When products are not similar
+     *
+     */
+    @Override
+    public boolean equals(Object product) {
+        if (null == product) {
+            return Boolean.FALSE;
+        }
+
+        if (!(product instanceof Product)) {
+            return Boolean.FALSE;
+        }
+
+        if (this == (Product) product) {
+            return Boolean.TRUE;
+        }
+
+        return ((this.id).equals(((Product) product).id));
+    }
+    
 }

@@ -41,3 +41,13 @@ function showSnackBar() {
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
 }
+
+function editProfile() {
+	document.getElementById('name').removeAttribute('readonly');
+	document.getElementById('mobileNumber').removeAttribute('readonly');
+	document.getElementById('emailId').removeAttribute('readonly');
+	document.getElementById('editProfile-btn').style.display='none';
+	document.getElementById('updateProfile-btn').style.display='block';
+	document.getElementById('updateProfile').style.display='block';
+	document.getElementById('viewProfile').style.display='none';
+}
