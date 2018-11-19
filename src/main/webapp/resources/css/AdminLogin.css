@@ -1,0 +1,78 @@
+body {
+  padding: 2.25em 1.6875em;
+  background-image: radial-gradient(ellipse at bottom, #5091DD , #030617 );
+  background-size: 4px 4px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #eeeeec;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #eeeeec;
+}
+
+.wrap
+{
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+}
+
+p.form-title
+{
+    font-family: Dancing Script; 
+    font-size: 50px; 
+    font-variant: small-caps; 
+    font-weight: 700; 
+    line-height: 32.3px; 
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 5%;
+    margin-left: 4%;
+    letter-spacing: 6px;
+    text-shadow: 3px 8px 10px #2e3436;
+}
+
+form
+{
+    width: 250px;
+    margin: 0 auto;
+}
+
+form.login input[type="text"], form.login input[type="password"]
+{
+    width: 100%;
+    margin: 0;
+    padding: 10px 20px;
+    background: 0;
+    border: 0;
+    border-bottom: 1px solid #FFFFFF;
+    outline: 0;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+form.login input[type="submit"]
+{
+    width: 50%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 20px;
+    margin-left: 70px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 4px;
+}
+
+form.login input[type="submit"]:hover
+{
+    transition: background-color 3s ease;
+}
+

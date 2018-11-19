@@ -1,0 +1,51 @@
+.navbar-custom {
+	background-color: #260c46;	
+	padding: 0.2rem .5rem;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}
+
+.btn-navbar-custom {
+	background:none;
+	outline:none;
+	color:white;
+}
+
+.dropdown-item:focus {
+	background-color: #260c46;
+	color:white;
+}
+
+.dropdown-item:hover {
+	background-color: #3a0673;
+	color:white;
+}
+
+.nav-item {
+	margin-left:3em;
+}
+
+.dropdown:focus {
+	outline:none;
+}
+
+.btn-logout {
+	border:none;
+	outline:none;
+	background:none;
+	float:right;
+}
+
+.btn-logout:focus {
+	outline:none;
+}
+
+.logout-wrapper {
+	float:right;
+}

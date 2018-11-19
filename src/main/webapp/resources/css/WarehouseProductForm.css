@@ -1,0 +1,20 @@
+
+.p-3.font-weight-bold {
+	text-align:center
+}
+
+.product {
+	float:left;
+}
+
+.warehouse {
+	float:left;
+}
+
+.wrapper {
+	margin-top:40px;
+}
+
+.btn-custom {
+	margin-left:.6em;
+}

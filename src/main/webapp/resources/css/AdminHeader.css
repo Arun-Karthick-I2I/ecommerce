@@ -1,0 +1,100 @@
+div > .sidebar > form > p > a {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    margin-left: 50px;
+    color: #f1f1f1;
+    text-decoration: none;
+}
+
+div > .sidebar > form > p > a:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+div > .sidebar > form > p > .default {
+	border: none;
+    background-color: inherit;
+    padding: 8px 8px 8px 32px;
+    font-size: 25px;
+    color: #ffffff;
+    display: inline-block;
+    transition: 0.3s;	
+}
+
+div > .sidebar > form > p > .default:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+div > .navbar-custom {
+	background-color: #3465a4;
+	height: 25px;
+}
+
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > a {
+	color: white;
+	font-size: 18px;
+}
+
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > a:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > form > .navbar-brand {
+	border: none;
+    background-color: inherit;
+    padding: 8px 8px 8px 32px;
+    font-size: 20px;
+    color: #ffffff;
+    display: inline-block;
+    transition: 0.3s;	
+}
+
+div > .navbar-custom > .container-fluid > .navbar-Header > ul > li > form > .navbar-brand:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+nav > .container-fluid > .navbar-header > ul > li > a > .fa-bars{
+	font-size: 20px;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > a {
+	color: white;
+	font-size: 18px;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > a:hover {
+	background-color: inherit;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > .logout > .default {
+	border: none;
+    background-color: inherit;
+    padding: 12px 28px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+}
+
+div > .navbar-custom > .container-fluid > ul > li > .logout > .default:hover {
+	background-color: inherit;
+	color: #818181;
+}
+
+div > .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #3465a4;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}

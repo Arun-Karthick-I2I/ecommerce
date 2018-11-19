@@ -1,0 +1,97 @@
+.card-deck > form > .card > .btn-info > .card-img-top {
+	height: 150px;
+    width: 200px;
+}
+
+.card-deck > form > .card > .btn-info {
+	border: none;
+    background-color: inherit;
+    outline: none;
+}
+
+.card-deck > form > .card > .btn-info > .card-img-top:hover {
+	transform: scale(1.1);
+}
+
+.card-deck > form {
+	display: inline-block;
+}
+
+.card-deck > form > .card {
+	display: inline-block;
+	width: 300px;
+	padding: 15px 15px 15px 15px;
+	margin-left: 10px;
+	border: none;
+}
+
+.card-deck > form > .card > .card-body {
+	width: 200px;
+}
+
+.card-deck > form > .card > .card-body > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: #2e3436;
+    white-space: normal;
+    outline: none;
+}
+
+.card-deck > form > .card > .card-body > .btn-info > .card-title {
+    color: #2e3436;
+	font-size: 18px;
+	font-family: 'Open Sans' , sans-serif;
+	font-weight: bold;
+	width: 200px;
+	height: 36px;
+	overflow: hidden;
+}
+
+.card-deck > form > .card > .card-body > .btn-info > .card-title:hover {
+	background-color: inherit;
+	color: #3465a4; 	
+}
+
+.card-deck > form > .card > .card-body > .card-text > .btn-default {
+	border: none;
+    background-color: inherit;
+    color: #888a85;
+}
+
+.card-deck > form > .card > .card-body > .card-text > .btn-default:hover {
+    background-color: inherit;
+    color: #3465a4;
+}
+
+.card-deck > form > .card > .card-body > .card-text {
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+
+form > .input-group {
+	margin-left: 33%;
+}
+
+form > div > #search {
+	width: 297px;
+}
+
+form > div > .btn-default {
+	height:35px;
+}
+
+.modal-title {
+	font-weight: bold;
+	text-align: center;
+}
+
+.modal-footer {
+	text-align: center;
+}
+
+.modal-footer > .btn-default {
+	border: none;
+	text-decoration: underline;
+}

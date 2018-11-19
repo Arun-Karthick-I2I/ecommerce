@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd"> 
+
+<hibernate-mapping>
+    <class name = "com.ideas2it.ecommerce.model.Category" table = "CATEGORY">
+      
+        <id name = "id" type = "int" column = "ID">
+            <generator class="increment"/>
+        </id>
+      
+        <property name = "name" column = "NAME" type = "string"/>
+        <bag name = "products" lazy="false">
+            <key column = "CATEGORY_ID"/>
+            <one-to-many class="com.ideas2it.ecommerce.model.Product"/>
+        </bag>
+    </class>
+</hibernate-mapping>

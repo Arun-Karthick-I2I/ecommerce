@@ -1,0 +1,121 @@
+.title > h2 {
+	text-align: center;
+	font-size: 40px;
+	font-family: initial;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	padding: 1% 0 1% 0;
+}
+
+.table-striped {
+	margin-left: 25%;
+	align: center;
+	width: 60%;
+}
+
+.table-striped > thead > tr > .row-header {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 8px;
+	letter-spacing: 3px;
+}
+
+.table-striped > tbody > tr > td > .btn-default {
+	border: none;
+    background-color: inherit;
+    outline: none;
+}
+
+.table-striped > tbody > tr > td > .btn-default:hover {
+    background-color: inherit;
+	color: #818181;
+}
+
+.table-striped > tbody > tr > td > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: dodgerblue;
+    font-size: 20px;
+}
+
+.table-striped > tbody > tr > td > .btn:hover {
+	background-color: #eeeeec;
+	color: #3465a4;
+}
+
+.table-striped > tbody > tr > td > .btn-danger {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 20px;
+}
+
+form > .input-group {
+	margin-left: 33%;
+}
+
+form > div > #search {
+	width: 297px;
+}
+
+form > div > .btn-default {
+	height:35px;
+}
+
+div > #addForm > .modal-dialog > .modal-content > .modal-header > h3 {
+	text-align: center;
+	font-family: 'Open Sans' , sans-serif;
+	letter-spacing: 1px;
+}
+
+div > #addForm > .modal-dialog > .modal-content > .modal-body > form > #categoryName {
+	padding:5px 0 5px 10px;
+	background-color: #d3d7cf;
+	margin-left: 150px;
+	border: none;
+	font-style: italic;
+}
+
+div > #addForm > .modal-dialog > .modal-content > .modal-body > form > .btn-info {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 20px;
+}
+
+.modal > .modal-dialog > .modal-content > .modal-header > h3 {
+	text-align: center;
+	font-family: 'Open Sans' , sans-serif;
+	letter-spacing: 1px;
+}
+
+#name {
+	padding:5px 0 5px 10px;
+	background-color: #d3d7cf;
+	margin-left: 150px;
+	border: none;
+	font-style: italic;
+}
+
+.btn-warning {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 20px;
+}
+
+.table > tbody > tr > td {
+	vertical-align: middle;
+}
+
+.footer {
+	position: fixed;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	padding: 0.5%;
+  	padding-right: 1%;
+  	background-color: #d9edf7;
+  	text-align: right;
+}

@@ -1,0 +1,76 @@
+.title > h2 {
+	text-align: center;
+	font-size: 40px;
+	font-family: initial;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	padding: 1% 0 1% 0;
+}
+
+.table-striped {
+	margin-left: 25%;
+	align: center;
+	width: 60%;
+}
+
+.table-striped > thead > tr > .row-header {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 8px;
+	letter-spacing: 3px;
+}
+
+.table-striped > tbody > tr > td > .btn-default {
+	border: none;
+    background-color: inherit;
+}
+
+.table-striped > tbody > tr > td > .btn-default:hover {
+    background-color: inherit;
+	color: #818181;
+}
+
+.table-striped > tbody > tr > td > .btn:hover {
+	background-color: #eeeeec; 
+	color: #3465a4;
+}
+
+.table-striped > tbody > tr > td > .btn-danger {
+	border: none;
+    background-color: inherit;
+    color: #cc0000;
+    font-size: 20px;
+}
+
+form > .input-group {
+	margin-left: 38%;
+}
+
+form > div > #search {
+	width: 297px;
+}
+
+form > div > .btn-default {
+	height:35px;
+}
+
+.table > tbody {
+	max-height: 60%;
+	overflow-y:auto;
+}
+
+.table > tbody > tr > td {
+	vertical-align: middle;
+}
+
+.footer {
+	position: fixed;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	padding: 0.5%;
+  	padding-right: 1%;
+  	background-color: #d9edf7;
+  	text-align: right;
+}

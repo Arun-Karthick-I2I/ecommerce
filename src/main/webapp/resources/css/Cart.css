@@ -1,0 +1,156 @@
+.cartPage {
+	margin-top:7%;
+}
+
+.cartPage > .cartTitle {
+	margin-left:5%;
+	margin-right:5%;
+	background-color: lightgrey;
+	color:white;
+	height:50px;
+	font-size:23px;
+	font-weight:bold;
+	font-style:italic;
+	padding-left:5%;
+	padding-top:0.6%;
+}
+
+.cartPage > .emptyCart {
+	text-align:center;
+	vertical-align:middle;
+	padding-top:5%;
+}
+
+.cartPage > .emptyCart > p {
+	padding:1%;
+	font-size:20px;
+	font-style:italic;	
+}
+
+.cartPage > .emptyCart > .emptyCartimage {
+	width:20%;
+	height:20%;	
+}
+
+.cartPage > .cartProduct {
+	margin-left:5%;
+	margin-right:5%;
+	
+}
+
+.cartPage >.cartProduct > .table > tbody > tr > td {
+	text-align:center;
+	height:150px;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .productImage {
+	width:25%;
+	text-align:center;
+	height:150px;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td > .productImage {
+	width:200px;
+	height:150px;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td > .productImage > .image{
+	width:200px;
+	height:150px;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .productName {
+	font-size:20px;
+	width:20%;
+	
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td > .productName > .seller {
+	color:#babdb6;
+	font-size:15px;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .productQuantity {
+	width:15%;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .productQuantity > .productQuantity > button {
+	border-radius:50%;
+}
+
+
+.cartPage > .cartProduct > .table > tbody > tr > .productPrice {
+	width:10%;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .removeCart > button {
+	background:none;
+	color:black;
+	font-weight:bold;
+	border:none;
+	outline:none;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td[colspan] {
+	text-align:right;
+	height:100%;
+	width:50px;
+	padding-right:5%;
+	border-top: 1px solid lightgrey;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td[colspan] > form > button {
+	left:1%;
+	background-color:orange;
+	color:white;
+	border-radius:0px;
+	outline:none;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td[colspan] > form > #continueShopping {
+	background-color:white;
+	color:black;
+	border:1px solid lightgrey;
+}
+
+.cartPage > .cartProduct > .table {
+	border:1px solid lightgrey;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > td {
+	border:none;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .removeCheckout {
+	width:10%;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .removeCart {
+	width:15%;
+}
+
+.cartPage > .cartProduct > .table > tbody > tr > .removeCart > button:hover {
+	background:none;
+	color:red;
+	font-weight:bold;
+	border:none;
+	outline:none;
+}
+
+.productQuantity > input[type="text"] {
+	border:none;
+	border-bottom:1px solid black;
+	width:30px;
+	text-align:center;
+}
+
+.productPrice > input[type="text"] {
+	width:100px;;
+	text-align:left;
+	border:none;	
+}
+
+.fa .fa-angle-right {
+	font-weight:bold;
+}
+

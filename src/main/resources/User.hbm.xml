@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-5.3.5.dtd"> 
+<hibernate-mapping>
+    <class name = "com.ideas2it.ecommerce.model.User" table="USER">
+      
+      <id name = "id" type = "int" column = "ID">
+         <generator class="increment"/>
+      </id>
+      
+      <property name = "password" column = "PASSWORD" type = "string"/>
+      <property name = "userName" column = "USER_NAME" type = "string"/>
+
+	  <bag name="addresses" cascade="save-update" lazy="false"> 
+        <key column="USER_ID" />
+        <one-to-many class="com.ideas2it.ecommerce.model.Address" />
+      </bag>
+      
+      <property name = "role" column = "ROLE">
+        <type name="org.hibernate.type.EnumType">
+            <param name="enumClass">com.ideas2it.ecommerce.common.enums.USER_ROLES</param>
+            <param name="useNamed">true</param>
+        </type>
+	  </property>
+	        	
+	        	
+   </class>
+</hibernate-mapping>

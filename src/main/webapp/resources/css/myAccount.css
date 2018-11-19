@@ -1,0 +1,154 @@
+.myAccount {
+	margin-top:7%;
+	margin-left:5%;
+	margin-right:5%;
+	margin-bottom:5%;
+}
+
+.myAccount > .personalInformation {
+	text-align:center;
+	width:60%;
+	margin-right:30%;
+	margin-left:35%;
+}
+
+.myAccount > .personalInformation > .personalInformation {
+	text-align:left;
+}
+
+.myAccount > .personalInformation > .personalInformation > div > div > button {
+	background:none;
+	color:blue;
+	border-radius:0px;
+	width:49%;
+	display:inline-block;
+	text-align:center;
+}
+
+.myAccount > .personalInformation > .personalInformation > div > div > .btn-default {
+	color:black;
+}
+
+.myAccount > .personalInformation > .personalInformation > div > div > div input[type=text]{
+	text-align:left;
+	background-color:white;
+	height:40px;
+	border-radius:0px;
+}
+
+.myAccount > .address > .newAddressButton {
+	margin-left:5%;
+	margin-right:5%;
+}
+
+.myAccount > .address > .newAddressButton > .btn-block {
+	width:100%;
+	border-radius:0px;
+	background-color: white;
+	font-weight:bold;
+}
+
+.myAccount > .address > .createAddress > form > .txtSize {
+	width:40%;
+	display:inline-block;
+	margin-left:5%;
+}
+
+.myAccount > .address > .createAddress > form > .txtSize .right {
+	margin-left:10%;
+}
+
+.myAccount > .address > .createAddress > form > .addressheader {
+	width:90%;
+	margin-left:5%;
+	background-color:#3465a4;
+	border:1px solid lightgrey;
+	text-align:center;
+	padding-top:0.5%;
+	padding-bottom:0.5%;
+	font-weight:bold;
+	color:white
+}
+
+.myAccount > .address > .createAddress > form > .addressLine.button {
+	text-align:right;
+}
+
+.myAccount > .address > .createAddress > form > .addressLine {
+	width:90%;
+	display:inline-block;
+	margin-left:5%;
+}
+
+.myAccount > .address > .createAddress > form > .addressLine > button {
+	border-radius:0px;
+	width:20%;
+	margin-top:2%;
+}
+
+.myAccount > .existingAddresses {
+	margin-left:5%;
+	margin-right:5%;
+	padding-top:2%;
+	padding-left:2%;
+	padding-right:2%;
+	padding-bottom:1%;
+	font-size:20px;
+	font-style:italic;
+	border:1px solid lightgrey;
+}
+
+
+.myAccount > .existingAddresses > .deliveryAddress > i {
+	font-size:20px;
+	color:#204a87;
+}
+
+.myAccount > .existingAddresses > form > .deliveryAddress >  .addressModifyButton {
+	display:inline-block;
+	float:right;
+}
+
+.myAccount > .existingAddresses > form > .deliveryAddress > .addressModifyButton > .btn-info {
+	background:none;
+	color:lightblue;
+}
+
+.myAccount > .existingAddresses > form > .deliveryAddress > .addressModifyButton > .btn-danger {
+	background:none;
+	color:red;
+}
+
+.myAccount > .addressheader {
+	background-color:#3465a4;
+	margin-left:5%;
+	margin-right:5%;
+	height:40px;
+	color:white;
+	padding-left:2%;
+	padding-top:1%;
+}
+
+.modal {
+	border-radious:0px;
+}
+
+.modal-header {
+	background-color:#3465a4;
+	vertical-align:center;
+	color:white;
+	font-weight:bold;
+}
+.modal-footer > button {
+	background:none;
+}
+
+
+.modal-footer > .btn-primary {
+	color:blue;
+}
+
+.modal-footer > .btn-danger  {
+	color:red;
+}
+

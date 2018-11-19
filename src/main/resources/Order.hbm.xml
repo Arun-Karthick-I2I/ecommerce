@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+
+<hibernate-mapping>
+	<class name="com.ideas2it.ecommerce.model.Order"
+		table="PURCHASE_ORDER">
+
+		<id name="id" type="int" column="ID">
+			<generator class="increment" />
+		</id>
+
+		<bag name="orderItems" cascade="save-update" lazy="false">
+			<key column="ORDER_ID" />
+			<one-to-many
+				class="com.ideas2it.ecommerce.model.OrderItem" />
+		</bag>
+
+		<many-to-one name="customer" column="CUSTOMER_ID"
+			lazy="false" class="com.ideas2it.ecommerce.model.Customer" />
+
+		<many-to-one name="address" column="ADDRESS_ID"
+			lazy="false" class="com.ideas2it.ecommerce.model.Address" />
+
+		<property name="price" column="PRICE" type="float" />
+		<property name="orderDate" column="ORDER_DATE" type="date" />
+		<property name="modeOfPayment" column="MODE_OF_PAYMENT" type="string" />
+	</class>
+</hibernate-mapping>

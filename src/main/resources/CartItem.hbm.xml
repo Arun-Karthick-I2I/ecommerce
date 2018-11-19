@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd"> 
+
+<hibernate-mapping>
+    <class name = "com.ideas2it.ecommerce.model.CartItem" table ="CART_ITEM">
+      
+        <id name = "id" type = "int" column = "ID">
+            <generator class="increment"/>
+        </id>
+      
+        <property name = "quantity" column = "QUANTITY" type = "int"/>
+        <property name = "price" column = "PRICE" type = "float"/>
+        
+        <many-to-one name = "customer" column = "CUSTOMER_ID" 
+            class = "com.ideas2it.ecommerce.model.Customer"/>
+        
+        <many-to-one name = "warehouseProduct" column = "WAREHOUSE_PRODUCT_ID" lazy="false"
+            class = "com.ideas2it.ecommerce.model.WarehouseProduct"/>
+    </class>
+</hibernate-mapping>
