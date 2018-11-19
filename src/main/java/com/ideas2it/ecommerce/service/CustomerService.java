@@ -230,4 +230,15 @@ public interface CustomerService {
     public List<WarehouseProduct> getWarehouseProductsByIds(
             List<Integer> warehouseProductIds) throws EcommerceException;
 
+
+    /**
+     * <p>
+     * This method id used to get the category detail based on category id.
+     * 
+     * @param categoryId Needed for getting category
+     * @return Category return category details
+     *         </p>
+     */
+    public Category getCategory(Integer categoryId) throws EcommerceException;
+    
 }

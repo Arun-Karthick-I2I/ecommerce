@@ -122,17 +122,13 @@ public class UserController {
 
     /**
      * <p>
-     * Checks the username and password and logins the user if the credentials
+     * Checks the user name and password and logins the user if the credentials
      * are correct. Redirects to the corresponding page based on their role.
      * </p>
      */
     @PostMapping("login")
     public ModelAndView login(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.TRUE);
-        if (!session.isNew()) {
-            session.invalidate();
-            session = request.getSession(Boolean.TRUE);
-        }
         session.setMaxInactiveInterval(Constants.SESSION_MAX_INACTIVE_INTERVAL);
         User user = new User();
         user.setUserName(request.getParameter(Constants.LABEL_USERNAME));
@@ -163,7 +159,12 @@ public class UserController {
                             .searchCustomer(user.getId());
                     session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 } else if (USER_ROLES.SELLER == user.getRole()) {
-                    loginSeller(modelAndView, user, session);
+                    Seller seller = userService.searchSeller(user.getId());
+                    session.setAttribute(Constants.LABEL_SELLER_ID,
+                            seller.getId());
+                    modelAndView.addObject(Constants.LABEL_CATEGORIES,
+                            userService.getAllCategories());
+                    modelAndView.setViewName(SELLER_HOME);
                 } else {
                     List<Category> categories = userService.getAllCategories();
                     Collections.sort(categories);
@@ -178,15 +179,6 @@ public class UserController {
         return modelAndView;
     }
 
-    private void loginSeller(ModelAndView modelAndView, User user,
-            HttpSession session) throws EcommerceException {
-        Seller seller = userService.searchSeller(user.getId());
-        session.setAttribute(Constants.LABEL_SELLER_ID, seller.getId());
-        modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS,
-                userService.getAllWarehouseProducts(seller.getId()));
-        modelAndView.setViewName(SELLER_HOME);
-    }
-
     /**
      * <p>
      * Invalidates the session and logs the customer out of the page.
@@ -198,21 +190,21 @@ public class UserController {
         USER_ROLES role = USER_ROLES.CUSTOMER;
         if (null != session) {
             role = (USER_ROLES) session.getAttribute(Constants.LABEL_ROLE);
-            if (USER_ROLES.SELLER == role) {
-                viewName = SELLER_LOGIN;
-            } else if (USER_ROLES.ADMIN == role) {
-                viewName = ADMIN_LOGIN;
-            }
             session.invalidate();
         }
 
+        if (USER_ROLES.SELLER == role) {
+            viewName = SELLER_LOGIN;
+        } else if (USER_ROLES.ADMIN == role) {
+            viewName = ADMIN_LOGIN;
+        }
         model.addAttribute(Constants.LABEL_MESSAGE, Constants.MSG_LOGGED_OUT);
         return viewName;
     }
 
     /**
      * <p>
-     * Shows the list of available address for that user.
+     * Shows the list of available warehouse address for that seller.
      * </p>
      */
     @GetMapping("showAddress")
@@ -257,11 +249,18 @@ public class UserController {
      */
     @PostMapping("addAddress")
     public ModelAndView addAddress(@ModelAttribute("address") Address address,
-            HttpSession session) {
+            HttpSession session) throws EcommerceException {
         ModelAndView modelAndView = new ModelAndView();
+        USER_ROLES role = (USER_ROLES) session
+                .getAttribute(Constants.LABEL_ROLE);
+        if (USER_ROLES.CUSTOMER == role) {
+            modelAndView.setViewName(CUSTOMER_PROFILE);
+        } else if (USER_ROLES.SELLER == role) {
+            modelAndView.setViewName(SELLER_HOME);
+        }
+        User user = userService.searchUser(
+                (Integer) session.getAttribute(Constants.LABEL_USER_ID));
         try {
-            User user = userService.searchUser(
-                    (Integer) session.getAttribute(Constants.LABEL_USER_ID));
             List<Address> addresses = user.getAddresses();
             addresses.add(address);
             user.setAddresses(addresses);
@@ -269,7 +268,6 @@ public class UserController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ADDRESS_SUCCESS);
             }
-            backtoHome(modelAndView, session, user);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
@@ -278,7 +276,8 @@ public class UserController {
 
     /**
      * <p>
-     * Show the edit address form to the user where he can change the necessary fields.
+     * Shows the seller edit address form that can be used to provide updated
+     * address details for the warehouse address given.
      * </p>
      */
     @PostMapping("editAddress")
@@ -306,16 +305,25 @@ public class UserController {
 
     /**
      * <p>
-     * Updates the address based on the new input from user.
+     * Updates the warehouse address based on the input from edit warehouse
+     * address form.
      * </p>
      */
     @PostMapping("updateAddress")
     public ModelAndView updateAddress(
-            @ModelAttribute("address") Address address, HttpSession session) {
+            @ModelAttribute("address") Address address, HttpSession session)
+            throws EcommerceException {
         ModelAndView modelAndView = new ModelAndView();
+        USER_ROLES role = (USER_ROLES) session
+                .getAttribute(Constants.LABEL_ROLE);
+        if (USER_ROLES.CUSTOMER == role) {
+            modelAndView.setViewName(CUSTOMER_PROFILE);
+        } else if (USER_ROLES.SELLER == role) {
+            modelAndView.setViewName(SELLER_HOME);
+        }
+        User user = userService.searchUser(
+                (Integer) session.getAttribute(Constants.LABEL_USER_ID));
         try {
-            User user = userService.searchUser(
-                    (Integer) session.getAttribute(Constants.LABEL_USER_ID));
             List<Address> addresses = user.getAddresses();
             Address existingaddress = new Address();
             existingaddress.setId(address.getId());
@@ -326,7 +334,6 @@ public class UserController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_UPDATE_ADDRESS_SUCCESS);
             }
-            backtoHome(modelAndView, session, user);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
@@ -335,13 +342,14 @@ public class UserController {
 
     /**
      * <p>
-     * Removes the corresponding address from the user.
+     * Removes the corresponding warehouse address from the seller based on the
+     * seller input.
      * </p>
      */
     @PostMapping("removeAddress")
     public ModelAndView removeAddress(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
         try {
             User user = userService.searchUser(
                     (Integer) session.getAttribute(Constants.LABEL_USER_ID));
@@ -355,30 +363,10 @@ public class UserController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_DELETE_ADDRESS_SUCCESS);
             }
-            backtoHome(modelAndView, session, user);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
-    }
-
-    /**
-     * <p>
-     * Transfers the control to the corresponding page based on the user role.
-     * </p>
-     */
-    private void backtoHome(ModelAndView modelAndView, HttpSession session,
-            User user) {
-        USER_ROLES role = (USER_ROLES) session
-                .getAttribute(Constants.LABEL_ROLE);
-        if (USER_ROLES.CUSTOMER == role) {
-            modelAndView.setViewName(CUSTOMER_PROFILE);
-            Customer customer = (Customer) session
-                    .getAttribute(Constants.LABEL_CUSTOMER);
-            customer.setUser(user);
-        } else if (USER_ROLES.SELLER == role) {
-            modelAndView.setViewName(SELLER_HOME);
-        }
     }
 
 }

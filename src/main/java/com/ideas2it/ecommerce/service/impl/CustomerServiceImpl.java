@@ -177,4 +177,11 @@ public class CustomerServiceImpl implements CustomerService {
                 .getWarehouseProductsByIds(warehouseProductIds);
     }
 
+    /**
+     * @(inheritDoc)
+     */
+    public Category getCategory(Integer categoryId) throws EcommerceException {
+        return categoryService.searchById(categoryId);
+    }
+    
 }

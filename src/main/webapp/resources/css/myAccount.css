@@ -104,17 +104,17 @@
 	color:#204a87;
 }
 
-.myAccount > .existingAddresses > .deliveryAddress > .addressModifyButton {
+.myAccount > .existingAddresses > form > .deliveryAddress >  .addressModifyButton {
 	display:inline-block;
 	float:right;
 }
 
-.myAccount > .existingAddresses > .deliveryAddress > .addressModifyButton > .btn-info {
+.myAccount > .existingAddresses > form > .deliveryAddress > .addressModifyButton > .btn-info {
 	background:none;
 	color:lightblue;
 }
 
-.myAccount > .existingAddresses > .deliveryAddress > .addressModifyButton > .btn-danger {
+.myAccount > .existingAddresses > form > .deliveryAddress > .addressModifyButton > .btn-danger {
 	background:none;
 	color:red;
 }

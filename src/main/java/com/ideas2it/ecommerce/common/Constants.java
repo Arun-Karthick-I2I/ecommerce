@@ -96,6 +96,21 @@ public class Constants {
     
     public static final String LABEL_CATEGORY_ID = "categoryId";
     
+    public static final String LABEL_TODAY = "today";
+    
+    public static final String LABEL_RETURN_DATES = "returnDates";
+    
+    public static final String LABEL_QUANTITY = "quantity";
+    
+    public static final String LABEL_QUANTITIES = "quantities";
+    
+    public static final String LABEL_PRICE = "price";
+    
+    public static final String LABEL_TOTAL_PRICE = "totalPrice";
+    
+    public static final String  LABEL_BUY_PRODUCT = "buyProduct";
+    
+    
     public static final String MSG_REGISTER_SUCCESS = 
         "You have registered successfully with username:";
 
