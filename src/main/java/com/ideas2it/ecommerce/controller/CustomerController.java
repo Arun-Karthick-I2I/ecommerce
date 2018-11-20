@@ -177,10 +177,10 @@ public class CustomerController {
                 }
             }
             if (customerService.cancelOrder(orderItems)) {
-                modelAndView = myOrders(request);
                 customer = customerService.getCustomerById(customer.getId(),
                         Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+                modelAndView = myOrders(request);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_CANCEL_ORDER_SUCCESS);
             } else {
