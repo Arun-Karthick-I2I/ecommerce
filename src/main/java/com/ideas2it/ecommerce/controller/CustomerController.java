@@ -454,9 +454,10 @@ public class CustomerController {
                     .getParameterValues(Constants.LABEL_WAREHOUSE_PRODUCT_ID);
             if ((null == warehouseProductIdsExists)
                     || (0 > warehouseProductIdsExists.length)) {
+                modelAndView = myCart(request);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELECT_ATLEAST_ONE_PRODUCT);
-                return myCart(request);
+                return modelAndView;
             }
             for (String id : warehouseProductIdsExists) {
                 warehouseProductIds.add(Integer.parseInt(id));
@@ -527,7 +528,7 @@ public class CustomerController {
      */
     private ModelAndView PurchaseProductDirect(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(Constants.REDIRECT + "myOrders");
         Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
         try {
             Integer warehouseProductId = Integer
@@ -555,7 +556,6 @@ public class CustomerController {
             order.setOrderItems(orderItems);
             List<OrderItem> unavailableOrderItems = customerService
                     .addOrder(order);
-            modelAndView = myOrders(request);
             if (unavailableOrderItems.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
@@ -586,7 +586,7 @@ public class CustomerController {
      */
     public ModelAndView PurchaseProductFromCart(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView(Constants.REDIRECT + "myOrders");
         Order order;
         OrderItem orderItem;
         Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
@@ -633,11 +633,9 @@ public class CustomerController {
                 customer = customerService.getCustomerById(customer.getId(),
                         Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-                modelAndView = myOrders(request);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {
-                modelAndView = myOrders(request);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_DONT_HAVE_ENOUGH_QUANTITY);
             }
