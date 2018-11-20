@@ -4,12 +4,10 @@
     <head>
     	<link rel = "icon" type = "image/png" 
     		href = "<c:url value='/resources/images/ecommerce-logo-1-dribbble.png'/> ">
-    	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js">
-	</script>
-    	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
+    	<link rel="stylesheet" 
+			href="<c:url value='/resources/css/bootstrap.css' />"/>
+    	<link rel="stylesheet" 
+    		href = "<c:url value='/resources/css/dancing-script.css'/> ">
         <link rel="stylesheet" type="text/css" 
         	href= "<c:url value='/resources/css/AdminLogin.css'/>" />
         <link rel="stylesheet"
@@ -37,6 +35,9 @@
     </div>
 	</div>
 </body>
+	<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
+	<script src="<c:url value='/resources/js/bootstrap-show-password.min.js' />"></script>
 	<script src="<c:url value='/resources/js/Admin.js' />"></script>
 	<script type="text/javascript">
 		$("#password").password('data-toggle');
