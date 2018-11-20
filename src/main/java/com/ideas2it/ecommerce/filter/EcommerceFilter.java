@@ -87,7 +87,7 @@ public class EcommerceFilter implements Filter {
                             .forward(httpRequest, httpResponse);
                 }
             }
-        } else if (uri.endsWith(Constants.LABEL_LOGIN)
+        } else if (uri.endsWith(Constants.LABEL_LOGOUT)
                 || uri.endsWith(REGISTER_CUSTOMER)
                 || uri.endsWith(REGISTER_SELLER)
                 || uri.matches(ADDITIONAL_FILES_PATTERN)) {
