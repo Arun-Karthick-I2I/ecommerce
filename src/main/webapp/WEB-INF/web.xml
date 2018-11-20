@@ -31,5 +31,15 @@
         <url-pattern>*.png</url-pattern>
         <url-pattern>*.woff2</url-pattern>
     </servlet-mapping>
+    
+    <filter>
+        <filter-name>EcommerceFilter</filter-name>
+        <filter-class>com.ideas2it.ecommerce.filter.EcommerceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EcommerceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+   </filter-mapping>    
 
 </web-app>

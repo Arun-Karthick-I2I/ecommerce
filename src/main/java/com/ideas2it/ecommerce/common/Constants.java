@@ -29,6 +29,10 @@ public class Constants {
     public static final String LABEL_ISACTIVE = "isActive";
     
     public static final String LABEL_ID = "id";
+    
+    public static final String LABEL_LOGIN = "login";
+    
+    public static final String LABEL_LOGOUT = "logout";
 
     public static final String LABEL_MESSAGE = "message";
     
