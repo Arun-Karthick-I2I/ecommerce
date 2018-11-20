@@ -30,13 +30,13 @@
 					<c:if test="${product.warehouseProducts[0].quantity > 0}">
 						<c:if test="${not empty customer}">
 
-							<button type="submit" formaction="/ecommerce/addCart"
+							<button type="submit" formaction="/ecommerce/customer/addCart"
 								formmethod="post" class="btn btn-warning btn-block btn-lg">
-								<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
+								<i class="fa fa-shopping-cart"></i>&nbsp;<b>ADD
 									TO CART</b>
 							</button>
 					&nbsp;&nbsp;
-					<button type="submit" formaction="/ecommerce/orderProduct"
+					<button type="submit" formaction="/ecommerce/customer/orderProduct"
 								formmethod="post" class="btn btn-danger btn-block btn-lg">
 								<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
 							</button>
@@ -59,7 +59,6 @@
 					</c:if>
 				</div>
 			</div>
-
 			<div id="right">
 				<div class="product-details">
 					<input type="hidden"
@@ -122,13 +121,13 @@
 											<input type="hidden" name="productId" value="${product.id}" />
 											<c:if test="${warehouseProduct.quantity > 0}">
 												<c:if test="${not empty customer}">
-													<button type="submit" formaction="/ecommerce/addCart"
+													<button type="submit" formaction="/ecommerce/customer/addCart"
 														formmethod="post" class="btn btn-warning">
-														<span class="glyphicon glyphicon-shopping-cart"></span>
+														<i class="fa fa-shopping-cart"></i>
 														&nbsp;<b>ADD TO CART</b>
 													</button>
 												&nbsp;
-												<button type="submit" formaction="/ecommerce/orderProduct"
+												<button type="submit" formaction="/ecommerce/customer/orderProduct"
 														formmethod="post" class="btn btn-danger">
 														<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
 													</button>
@@ -136,7 +135,7 @@
 												<c:if test="${empty customer}">
 													<button type="button" onclick="isLogged()"
 														class="btn btn-warning">
-														<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
+														<i class="fa fa-shopping-cart"></i>&nbsp;
 														<b>ADD TO CART</b>
 													</button>
 												&nbsp;
@@ -159,11 +158,7 @@
 			</div>
 		</div>
 	</div>
-
 </body>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 
 <script type="text/javascript">
 	function isLoggedIn(event) {

@@ -13,15 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ideas2it.ecommerce.common.Constants;
 import com.ideas2it.ecommerce.common.enums.ORDER_STATUS;
 import com.ideas2it.ecommerce.exception.EcommerceException;
-import com.ideas2it.ecommerce.logger.EcommerceLogger;
 import com.ideas2it.ecommerce.model.Address;
 import com.ideas2it.ecommerce.model.CartItem;
 import com.ideas2it.ecommerce.model.Category;
@@ -29,7 +28,6 @@ import com.ideas2it.ecommerce.model.Customer;
 import com.ideas2it.ecommerce.model.Order;
 import com.ideas2it.ecommerce.model.OrderItem;
 import com.ideas2it.ecommerce.model.Product;
-import com.ideas2it.ecommerce.model.User;
 import com.ideas2it.ecommerce.model.WarehouseProduct;
 import com.ideas2it.ecommerce.service.CustomerService;
 import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
@@ -45,6 +43,7 @@ import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
  * @author Anantharaj.S
  */
 @Controller
+@RequestMapping("customer")
 public class CustomerController {
     
     private static final String JSP_CART = "Cart";
@@ -177,8 +176,8 @@ public class CustomerController {
                     break;
                 }
             }
-            modelAndView = myOrders(request);
             if (customerService.cancelOrder(orderItems)) {
+                modelAndView = myOrders(request);
                 customer = customerService.getCustomerById(customer.getId(),
                         Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
@@ -222,19 +221,20 @@ public class CustomerController {
                 }
             }
             if (customerService.cancelOrder(orderItems)) {
+                modelAndView = myOrders(request);
                 customer = customerService.getCustomerById(customer.getId(),
                         Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_CANCEL_ORDER_SUCCESS);
+                        Constants.MSG_RETURN_ORDER_SUCCESS);
             } else {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
-                        Constants.MSG_CANCEL_ORDER_FAIL);
+                        Constants.MSG_RETURN_ORDER_FAIL);
             }
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_RETURN_ORDER_FAIL);
         }
-        return myOrders(request);
+        return modelAndView;
     }
 
     /**
@@ -353,7 +353,7 @@ public class CustomerController {
             }
             modelAndView.setViewName(JSP_CART);
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_ADD_CART_FAIL);
             modelAndView.setViewName(JSP_CART);
         }
         return modelAndView;
@@ -450,15 +450,15 @@ public class CustomerController {
         Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
         try {
             List<Integer> warehouseProductIds = new ArrayList<Integer>();
-            String[] warehouseProductIdss = request
+            String[] warehouseProductIdsExists = request
                     .getParameterValues(Constants.LABEL_WAREHOUSE_PRODUCT_ID);
-            if ((null == warehouseProductIdss)
-                    || (0 > warehouseProductIdss.length)) {
+            if ((null == warehouseProductIdsExists)
+                    || (0 > warehouseProductIdsExists.length)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELECT_ATLEAST_ONE_PRODUCT);
                 return myCart(request);
             }
-            for (String id : warehouseProductIdss) {
+            for (String id : warehouseProductIdsExists) {
                 warehouseProductIds.add(Integer.parseInt(id));
             }
             List<WarehouseProduct> warehouseProducts = customerService
@@ -628,18 +628,19 @@ public class CustomerController {
             order.setModeOfPayment(
                     request.getParameter(Constants.LABEL_MODE_OF_PAYMENT));
             List<OrderItem> unplacedOrders = customerService.addOrder(order);
-            modelAndView = myOrders(request);
             if (unplacedOrders.isEmpty()) {
+                deleteCartProducts(request, customer, warehouseProducts);
+                customer = customerService.getCustomerById(customer.getId(),
+                        Boolean.TRUE);
+                session.setAttribute(Constants.LABEL_CUSTOMER, customer);
+                modelAndView = myOrders(request);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
-                deleteCartProducts(request, customer, warehouseProducts);
             } else {
+                modelAndView = myOrders(request);
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_DONT_HAVE_ENOUGH_QUANTITY);
             }
-            customer = customerService.getCustomerById(customer.getId(),
-                    Boolean.TRUE);
-            session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }

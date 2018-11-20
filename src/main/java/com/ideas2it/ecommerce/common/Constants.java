@@ -29,6 +29,10 @@ public class Constants {
     public static final String LABEL_ISACTIVE = "isActive";
     
     public static final String LABEL_ID = "id";
+    
+    public static final String LABEL_LOGIN = "login";
+    
+    public static final String LABEL_LOGOUT = "logout";
 
     public static final String LABEL_MESSAGE = "message";
     
@@ -155,6 +159,12 @@ public class Constants {
     
     public static final String MSG_SELECT_ATLEAST_ONE_PRODUCT = 
         "Select atleast one product to purchase..";
+    
+    public static final String MSG_SESSION_EXPIRED =
+        "Your Session has expired! Please Login again";
+    
+    public static final String MSG_UNAUTHORISED_ACCESS = 
+        "You are not authorised to access that page";
 
     //Admin Specific Constants
     public static final String MSG_CATEGORY_ID = "\tCategory ID";
@@ -329,8 +339,16 @@ public class Constants {
 
     public static final String MSG_CANCEL_ORDER_FAIL = 
         "Failed to cancel order..";
+
+    public static final String MSG_RETURN_ORDER_SUCCESS = 
+        "Your product has been returned successfully..";
+    
+    public static final String MSG_RETURN_ORDER_FAIL =
+        "Something went wrong in return a product..";
+            
     public static final String MSG_ADD_CART_SUCCESS =
         "Added to Cart Success..";
+    
     public static final String MSG_ADD_CART_FAIL = 
         "Failed to add cart... try after sometime..";
         

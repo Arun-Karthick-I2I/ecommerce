@@ -1,3 +1,4 @@
+
 function showSnackBar() {
     var snack = document.getElementById("snackbar");
     snack.className = "show";

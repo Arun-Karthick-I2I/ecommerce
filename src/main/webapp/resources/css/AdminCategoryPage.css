@@ -52,7 +52,7 @@
 }
 
 form > .input-group {
-	margin-left: 33%;
+	margin: auto;
 }
 
 form > div > #search {

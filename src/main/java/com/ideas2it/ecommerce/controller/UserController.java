@@ -38,7 +38,7 @@ import com.ideas2it.ecommerce.service.impl.UserServiceImpl;
 public class UserController {
     private static final Character INITIAL_PATH = '/';
     private static final String INDEX_PAGE = "CustomerHome";
-    private static final String ADMIN_HOME = "displayCategories";
+    private static final String ADMIN_HOME = "AdminCategoryPage";
     private static final String CUSTOMER_HOME = "CustomerHome";
     private static final String CUSTOMER_PROFILE = "myAccount";
     private static final String SELLER_HOME = "SellerHome";
@@ -61,17 +61,6 @@ public class UserController {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
-    }
-
-    /**
-     * <p>
-     * Requests the view handler to show the registration form page.
-     * </p>
-     */
-    @GetMapping("registrationForm")
-    public String registrationForm(ModelMap model) {
-        model.addAttribute(Constants.LABEL_REGISTER, Boolean.TRUE);
-        return INDEX_PAGE;
     }
 
     /**
@@ -233,7 +222,6 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         USER_ROLES role = (USER_ROLES) session
                 .getAttribute(Constants.LABEL_ROLE);
-        modelAndView.addObject("showAddress", Boolean.TRUE);
         if (USER_ROLES.CUSTOMER == role) {
             modelAndView.setViewName(CUSTOMER_HOME);
         } else if (USER_ROLES.SELLER == role) {
