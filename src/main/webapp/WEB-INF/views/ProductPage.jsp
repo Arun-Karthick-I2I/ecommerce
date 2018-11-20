@@ -32,7 +32,7 @@
 
 							<button type="submit" formaction="/ecommerce/addCart"
 								formmethod="post" class="btn btn-warning btn-block btn-lg">
-								<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;<b>ADD
+								<i class="fa fa-shopping-cart"></i>&nbsp;<b>ADD
 									TO CART</b>
 							</button>
 					&nbsp;&nbsp;
@@ -136,7 +136,7 @@
 												<c:if test="${empty customer}">
 													<button type="button" onclick="isLogged()"
 														class="btn btn-warning">
-														<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;
+														<i class="fa fa-shopping-cart"></i>&nbsp;
 														<b>ADD TO CART</b>
 													</button>
 												&nbsp;
@@ -159,7 +159,6 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

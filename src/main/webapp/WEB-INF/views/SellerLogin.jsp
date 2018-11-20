@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ecommerce</title>
+<link rel="icon" type="image/png"
+	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png'/> ">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/seller_login.css' />">
 <link rel="stylesheet" type="text/css"
