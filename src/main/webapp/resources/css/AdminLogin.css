@@ -70,6 +70,8 @@ form.login input[type="submit"]
     outline: 0;
     cursor: pointer;
     letter-spacing: 4px;
+    height: 30px;
+    border-radius: 20px;
 }
 
 form.login input[type="submit"]:hover
