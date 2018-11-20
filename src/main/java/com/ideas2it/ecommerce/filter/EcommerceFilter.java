@@ -27,13 +27,14 @@ import com.ideas2it.ecommerce.common.enums.USER_ROLES;
  */
 public class EcommerceFilter implements Filter {
 
-    private static final String ADDITIONAL_FILES_PATTERN = ".*(js|css|jpg|png|gif|woff2)";
+    private static final String ADDITIONAL_FILES_PATTERN = ".*(js|css|jpg|jpeg|png|gif|woff2)";
     private static final String ADDRESS_PATH = "Address";
     private static final String ADMIN_HOME_PATH = "/category/display";
     private static final String ADMIN_PATH = "/admin/";
     private static final String CATEGORY_PATH = "/category/";
     private static final String CUSTOMER_PATH = "/customer/";
     private static final String INITIAL_PATH = "/ecommerce";
+    private static final String PRODUCT_PAGE = "/customer/productPage/";
     private static final String PRODUCT_PATH = "/product/";
     private static final String PROJECT_PATH = "/ecommerce/";
     private static final String REGISTER_CUSTOMER = "registerCustomer";
@@ -90,6 +91,7 @@ public class EcommerceFilter implements Filter {
         } else if (uri.endsWith(Constants.LABEL_LOGOUT)
                 || uri.endsWith(REGISTER_CUSTOMER)
                 || uri.endsWith(REGISTER_SELLER)
+                || uri.endsWith(PRODUCT_PAGE)
                 || uri.matches(ADDITIONAL_FILES_PATTERN)) {
 
             /*
