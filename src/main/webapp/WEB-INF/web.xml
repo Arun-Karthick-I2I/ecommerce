@@ -28,7 +28,6 @@
         <url-pattern>*.js</url-pattern>
         <url-pattern>*.gif</url-pattern>
         <url-pattern>*.jpg</url-pattern>
-        <url-pattern>*.jpeg</url-pattern>
         <url-pattern>*.png</url-pattern>
         <url-pattern>*.woff2</url-pattern>
     </servlet-mapping>
