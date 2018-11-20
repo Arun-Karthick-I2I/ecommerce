@@ -105,11 +105,11 @@ option {
 }
 
 #CustomerSignUp {
-    top:3	%;	
+    top:5%;	
 }
 
 .logo > .regPanda {
-	height:100px;;
+	height:130px;;
 }
 
 .logo {
@@ -138,6 +138,5 @@ option {
 	width: 130px;
 	text-align:left;
 }
-
 
 

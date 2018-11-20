@@ -19,8 +19,9 @@
 		<form>
 			<div id="left">
 				<div class="image">
-					<img class="product-image"
-						src="data:image/jpg;base64,${product.base64Image}" />
+					<img class="product-image" id="product-image"
+						src="data:image/jpg;base64,${product.base64Image}"
+						data-zoom-image="data:image/jpg;base64,${product.base64Image}" />
 				</div>
 				<div class="product-button">
 					<input type="hidden" name="id"
@@ -31,8 +32,7 @@
 
 							<button type="submit" formaction="/ecommerce/customer/addCart"
 								formmethod="post" class="btn btn-warning btn-block btn-lg">
-								<i class="fa fa-shopping-cart"></i>&nbsp;<b>ADD
-									TO CART</b>
+								<i class="fa fa-shopping-cart"></i>&nbsp;<b>ADD TO CART</b>
 							</button>
 					&nbsp;&nbsp;
 					<button type="submit" formaction="/ecommerce/customer/orderProduct"
@@ -43,8 +43,7 @@
 						<c:if test="${empty customer}">
 							<button type="button" onclick="isLoggedIn()"
 								class="btn btn-warning btn-block btn-lg">
-								<i class="fa fa-shopping-cart"></i>&nbsp; <b>ADD
-									TO CART</b>
+								<i class="fa fa-shopping-cart"></i>&nbsp; <b>ADD TO CART</b>
 							</button>
 					&nbsp;&nbsp;
 					<button type="button" onclick="isLoggedIn()"
@@ -119,13 +118,15 @@
 											<input type="hidden" name="productId" value="${product.id}" />
 											<c:if test="${warehouseProduct.quantity > 0}">
 												<c:if test="${not empty customer}">
-													<button type="submit" formaction="/ecommerce/customer/addCart"
-														formmethod="post" class="btn btn-warning">
-														<i class="fa fa-shopping-cart"></i>
-														&nbsp;<b>ADD TO CART</b>
+													<button type="submit"
+														formaction="/ecommerce/customer/addCart" formmethod="post"
+														class="btn btn-warning">
+														<i class="fa fa-shopping-cart"></i> &nbsp;<b>ADD TO
+															CART</b>
 													</button>
 												&nbsp;
-												<button type="submit" formaction="/ecommerce/customer/orderProduct"
+												<button type="submit"
+														formaction="/ecommerce/customer/orderProduct"
 														formmethod="post" class="btn btn-danger">
 														<i class="fa fa-bolt"></i>&nbsp; <b>BUY NOW</b>
 													</button>
@@ -133,8 +134,8 @@
 												<c:if test="${empty customer}">
 													<button type="button" onclick="isLogged()"
 														class="btn btn-warning">
-														<i class="fa fa-shopping-cart"></i>&nbsp;
-														<b>ADD TO CART</b>
+														<i class="fa fa-shopping-cart"></i>&nbsp; <b>ADD TO
+															CART</b>
 													</button>
 												&nbsp;
 												<button type="button" onclick="isLogged()"
@@ -158,7 +159,11 @@
 	</div>
 </body>
 
+<script src="<c:url value='/resources/js/jquery.elevatezoom.js'/>"></script>
+
 <script type="text/javascript">
+	$("#product-image").elevateZoom();
+
 	function isLoggedIn(event) {
 		$("#Customerlogin").modal("show");
 	}
