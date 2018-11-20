@@ -27,7 +27,7 @@
 				<ul class="nav navbar-nav">
 					<li>
 						<form class="navbar-form navbar-left form-group"
-							action="/ecommerce/searchProduct" method="POST">
+							action="/ecommerce/customer/searchProduct" method="POST">
 							<div class="input-group col-lg-12">
 
 								<div class="input-group-btn">
@@ -61,14 +61,14 @@
 										<p>
 											<label>
 												<button class="btn btn-default"
-													formaction="/ecommerce/myaccount">
+													formaction="/ecommerce/customer/myaccount">
 													<i class="fa fa-user-circle-o"></i> &nbsp; My Profile
 												</button>
 											</label>
 										</p>
 										<p>
 											<button class="btn btn-default"
-												formaction="/ecommerce/myOrders">
+												formaction="/ecommerce/customer/myOrders">
 												<i class="fa fa-gift"></i> &nbsp; Orders
 											</button>
 										</p>
@@ -81,7 +81,7 @@
 									</form>
 								</div>
 						</a></li>
-						<li class="cartButton"><a href="/ecommerce/Cart"><i
+						<li class="cartButton"><a href="/ecommerce/customer/Cart"><i
 								class="fa fa-shopping-cart"></i>&nbsp; Cart</a>
 					</c:if>
 					<c:if test="${empty customer}">
@@ -96,7 +96,6 @@
 			</div>
 		</nav>
 	</div>
-
 	<div class="modal fade" id="Customerlogin" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -141,7 +140,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="modal fade" id="CustomerSignUp" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -154,7 +152,7 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form action="/ecommerce/registerCustomer" method="post">
+					<form action="/ecommerce/registerCustomer" method="post" novalidate>
 						<div class="personalDetails" id="personelDetails">
 							<div class="form-group">
 								<div class="input-group">
@@ -163,7 +161,7 @@
 										class="fa fa-user"></i></span> <input type="text"
 										class="form-control" pattern="[a-zA-Z]{1,30}" maxlength="30"
 										title="Name should contain only Alphabets" name="name"
-										id="nameModal" placeholder="Name" required />
+										id="nameModal" placeholder="Name" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -172,7 +170,7 @@
 									</span> <input type="text" class="form-control" name="user.userName"
 										pattern="[6-9]{1}[0-9]{9}" maxlength="10" id="mobileModal"
 										title="Mobile Number should contain 10 digits and should start with any of the following numbers 6,7,8,9"
-										placeholder="Mobile Number" required />
+										placeholder="Mobile Number" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -180,7 +178,7 @@
 									<span class="input-group-addon"> <i
 										class="fa fa-envelope"></i>
 									</span> <input type="text" class="form-control" name="emailId"
-										id="emailModal" maxlength="50" placeholder="Email" required />
+										id="emailModal" maxlength="50" placeholder="Email" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -190,7 +188,7 @@
 										name="user.password" id="passwordModal"
 										pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
 										title="Password should contain atleast 8 characters (1 Uppercase,1 LowerCase, 1 Number/Special Character)"
-										placeholder="Password" required />
+										placeholder="Password" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -203,37 +201,37 @@
 						<div class="address" id="addressDetails">
 							<div class="form-group cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"></span> <input
-										type="text" class="form-control" id="addressLineModal"
-										name="user.addresses[0].addressLine" placeholder="AddressLine" required/>
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" id="addressLineModal"
+										name="user.addresses[0].addressLine" placeholder="AddressLine" />
 								</div>
 							</div>
 							<div class="form-group cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"></span>
-									<input type="text" class="form-control" id="cityModal"
-										name="user.addresses[0].city" placeholder="City" required />
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" id="cityModal"
+										name="user.addresses[0].city" placeholder="City" />
 								</div>
 							</div>
 							<div class="form-group cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"></span>
-									<input type="text" class="form-control" id="stateModal"
-										name="user.addresses[0].state" placeholder="State" required />
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" id="stateModal"
+										name="user.addresses[0].state" placeholder="State" />
 								</div>
 							</div>
 							<div class="form-group cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"></span>
-									<input type="text" class="form-control" id="countryModal"
-										name="user.addresses[0].country" placeholder="Country" required />
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" id="countryModal"
+										name="user.addresses[0].country" placeholder="Country" />
 								</div>
 							</div>
 							<div class="form-group cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"></span>
-									<input type="text" class="form-control" maxlength="6"
-										id="pincodeModal" name="user.addresses[0].pincode" placeholder="Pincode" required />
+									<span class="input-group-addon"></span> <input type="text"
+										class="form-control" maxlength="6" id="pincodeModal"
+										name="user.addresses[0].pincode" placeholder="Pincode" />
 								</div>
 							</div>
 							<div class="form-group cols-sm-10 ">
@@ -250,13 +248,12 @@
 		</div>
 	</div>
 </body>
-
-
 <script src="<c:url value='/resources/js/jquery.min.js'/> "></script>
 <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/CustomerHeader.js"/>"></script>
-<script src="<c:url value='/resources/js/Customer.js' />"></script>
+<script type="text/javascript"
+	src="<c:url value='/resources/js/Customer.js' />"></script>
 
 <c:if test="${null != message}">
 	<div id="snackbar">${message}</div>
@@ -300,7 +297,6 @@
 				|| $("#countryModal").val() == ''
 				|| $("#pincodeModal").val() == '') {
 			alert("Fill all the fields");
-			event.preventDefault();
 			return false;
 		}
 		return true;

@@ -83,4 +83,5 @@ form.login input[type="submit"]:hover
 	font-size: 18px;
 	color: #FFFFFF;
 	background-color: inherit;
+	outlin: none;
 }
