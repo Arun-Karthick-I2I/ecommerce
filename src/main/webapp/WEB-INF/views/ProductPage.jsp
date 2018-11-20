@@ -23,7 +23,6 @@
 						src="data:image/jpg;base64,${product.base64Image}" />
 				</div>
 				<div class="product-button">
-
 					<input type="hidden" name="id"
 						value="${product.warehouseProducts[0].id}" /> <input
 						type="hidden" name="productId" value="${product.id}" />
@@ -89,7 +88,6 @@
 							</button>
 						</c:if>
 					</div>
-
 					<br /> <label>Service :</label>
 					<div class="service">Cash On Delivery Available.</div>
 					<div class="service">10 days replacement policy.</div>
