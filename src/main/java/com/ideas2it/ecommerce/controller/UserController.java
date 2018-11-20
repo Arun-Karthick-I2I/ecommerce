@@ -65,17 +65,6 @@ public class UserController {
 
     /**
      * <p>
-     * Requests the view handler to show the registration form page.
-     * </p>
-     */
-    @GetMapping("registrationForm")
-    public String registrationForm(ModelMap model) {
-        model.addAttribute(Constants.LABEL_REGISTER, Boolean.TRUE);
-        return INDEX_PAGE;
-    }
-
-    /**
-     * <p>
      * Creates an entry for the user if no such user exists else returns a
      * message accordingly.
      * </p>
@@ -233,7 +222,6 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         USER_ROLES role = (USER_ROLES) session
                 .getAttribute(Constants.LABEL_ROLE);
-        modelAndView.addObject("showAddress", Boolean.TRUE);
         if (USER_ROLES.CUSTOMER == role) {
             modelAndView.setViewName(CUSTOMER_HOME);
         } else if (USER_ROLES.SELLER == role) {
