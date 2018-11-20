@@ -103,6 +103,7 @@ public class SellerController {
             HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(
                 Constants.REDIRECT + "home");
+        HttpSession session = request.getSession(Boolean.FALSE);
         try {
             Seller existingSeller = sellerService.searchSeller(seller.getId());
             seller.setUser(existingSeller.getUser());
@@ -112,14 +113,14 @@ public class SellerController {
             if (null != existingSeller) {
                 if ((seller.equals(existingSeller))
                         && (sellerService.updateSeller(seller))) {
-                    modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    session.setAttribute(Constants.LABEL_MESSAGE,
                             Constants.MSG_SELLER_UPDATE_SUCCESS);
                 } else if (!(seller.equals(existingSeller))) {
-                    modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    session.setAttribute(Constants.LABEL_MESSAGE,
                             Constants.MSG_SELLER_ALREADY_EXIST);
                 }
             } else if (sellerService.updateSeller(seller)) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELLER_UPDATE_SUCCESS);
             }
         } catch (EcommerceException e) {

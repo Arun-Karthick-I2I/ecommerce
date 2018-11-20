@@ -45,7 +45,7 @@
 				</div>
 				<div id="updateProfile-btn" class="form-group update-profile">
 					<button type="submit" class="btn btn-outline-primary"
-						formaction="/ecommerce/updateAccount">Update Profile</button>
+						formaction="/ecommerce/seller/updateProfile">Update Profile</button>
 					<button type="submit" class="btn btn-outline-danger"
 						form="backtoHome">Cancel</button>
 				</div>
