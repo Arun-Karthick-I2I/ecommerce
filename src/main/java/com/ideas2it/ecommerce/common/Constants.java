@@ -329,8 +329,16 @@ public class Constants {
 
     public static final String MSG_CANCEL_ORDER_FAIL = 
         "Failed to cancel order..";
+
+    public static final String MSG_RETURN_ORDER_SUCCESS = 
+        "Your product has been returned successfully..";
+    
+    public static final String MSG_RETURN_ORDER_FAIL =
+        "Something went wrong in return a product..";
+            
     public static final String MSG_ADD_CART_SUCCESS =
         "Added to Cart Success..";
+    
     public static final String MSG_ADD_CART_FAIL = 
         "Failed to add cart... try after sometime..";
         

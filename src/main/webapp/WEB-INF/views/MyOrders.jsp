@@ -65,14 +65,14 @@
 											type=hidden name="orderItemId" value="${orderItem.id}" />
 										<c:if test="${orderItem.status == 'ORDERED'}">
 											<button type="submit" class="btn btn-default"
-												formmethod="post" formaction="/ecommerce/cancelOrder">
+												formmethod="post" formaction="/ecommerce/customer/cancelOrder">
 												Cancel&nbsp;&nbsp;<i class="fa fa-close"></i>
 											</button>
 										</c:if>
 										<c:if
 											test="${orderItem.status == 'DELIVERED' && returnDates[order.id] > today}">
 											<button type="submit" class="btn btn-warning"
-												formmethod="post" formaction="/ecommerce/returnOrder">
+												formmethod="post" formaction="/ecommerce/customer/returnOrder">
 												Return &nbsp;&nbsp;<i class="fa fa-close"></i>
 											</button>
 										</c:if>

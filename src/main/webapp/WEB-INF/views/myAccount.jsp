@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,7 @@
 				<div class="form-group" id="saveCustomer">
 					<div class="cols-sm-10">
 						<button type="submit" class="btn btn-primary btn-block"
-							formaction="/ecommerce/updateCustomer" formmethod="post">Save</button>
+							formaction="/ecommerce/customer/updateCustomer" formmethod="post">Save</button>
 						<button type="button" onclick="history.go(0)"
 							class="btn btn-default btn-block">Cancel</button>
 					</div>
@@ -139,9 +140,10 @@
 							<button type="button" class="btn btn-info btn-sm"
 								data-toggle="modal" data-target="#${address.id}"
 								onclick="closeAddAddress()">Edit</button>
-							<button type="submit" class="btn btn-danger btn-sm"
-								formaction="/ecommerce/removeAddress"
-								formmethod="post">Delete</button>
+							<c:if test="${fn:length(customer.user.addresses) > 1}">
+								<button type="submit" class="btn btn-danger btn-sm"
+									formaction="/ecommerce/removeAddress" formmethod="post">Delete</button>
+							</c:if>
 						</div>
 					</div>
 				</form>

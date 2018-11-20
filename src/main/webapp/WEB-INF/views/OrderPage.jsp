@@ -105,7 +105,7 @@
 					</div>
 					<div class="placeOrderButton">
 						<button type="submit" id="makeOrder" formmethod="post"
-							formaction="/ecommerce/placeOrder" class="btn btn-default btn-lg">
+							formaction="/ecommerce/customer/placeOrder" class="btn btn-default btn-lg">
 							<b>&nbsp;&nbsp;PLACE ORDER</b>
 						</button>
 						<button type="submit" id="cancelOrder" formmethod="get"

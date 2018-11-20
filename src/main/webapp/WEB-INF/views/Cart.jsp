@@ -11,7 +11,7 @@
 	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/Cart.css' />">
 <style>
-.cartPage> .cartProduct>.table>tbody>tr>td {
+.cartPage>.cartProduct>.table>tbody>tr>td {
 	vertical-align: middle;
 }
 </style>
@@ -30,54 +30,72 @@
 						<c:forEach var="cartItem" items="${customer.cartItems}">
 							<form>
 								<input type="hidden" name="id" value="${cartItem.id}">
-							<tr>
-								<td class="productImage">
-									<div class="productImage">
-										<img class="image"
-											src="<c:url value='data:image/jpg;base64,${cartItem.warehouseProduct.product.base64Image}'/>"
-											alt="image" />
-									</div>
-								</td>
-								<td class="productName">
-									<div class="productName">
-										<b>${cartItem.warehouseProduct.product.name}</b><br /> <br />
-										<div class="seller">Seller :
-											${cartItem.warehouseProduct.seller.name}</div>
-									</div>
-								</td>
-								<td class="productQuantity">
-									<div class="productQuantity">
-										<c:if test="${cartItem.quantity <= cartItem.warehouseProduct.quantity}">
-										<button class="btn btn-default" type="submit"
-											formmethod="post" formaction="/ecommerce/updateCart"
-											onclick="return reduceQuantity(form)">-</button>
-										<input type="text" name="quantity"
-											value="${cartItem.quantity}" readonly>
-										<button class="btn btn-default" type="submit"
-											formmethod="post" formaction="/ecommerce/updateCart"
-											onclick="return increaseQuantity(form)">+</button>
-										<br /> <br /> <label>No of items.</label>
-										</c:if>
-										<c:if test="${cartItem.quantity > cartItem.warehouseProduct.quantity}">
+								<tr>
+									<td class="productImage">
+										<div class="productImage">
+											<img class="image"
+												src="<c:url value='data:image/jpg;base64,${cartItem.warehouseProduct.product.base64Image}'/>"
+												alt="image" />
+										</div>
+									</td>
+									<td class="productName">
+										<div class="productName">
+											<b>${cartItem.warehouseProduct.product.name}</b><br /> <br />
+											<div class="seller">Seller :
+												${cartItem.warehouseProduct.seller.name}</div>
+										</div>
+									</td>
+									<td class="productQuantity">
+										<div class="productQuantity">
+											<c:if
+												test="${cartItem.quantity <= cartItem.warehouseProduct.quantity}">
+												<button class="btn btn-default" type="submit"
+													formmethod="post"
+													formaction="/ecommerce/customer/updateCart"
+													onclick="return reduceQuantity(form)">-</button>
+												<input type="text" name="quantity"
+													value="${cartItem.quantity}" readonly>
+												<button class="btn btn-default" type="submit"
+													formmethod="post"
+													formaction="/ecommerce/customer/updateCart"
+													onclick="return increaseQuantity(form)">+</button>
+												<br />
+												<br />
+												<label>No of items.</label>
+											</c:if>
+											<c:if
+												test="${cartItem.quantity > cartItem.warehouseProduct.quantity}">
 											Out of Stock
 										</c:if>
-									</div>
-								</td>
-								<td>
-									<div class="productPrice">
-										<b>Rs.</b>&nbsp;<input type="text" name="price"
-											value="${cartItem.price}" readonly /><br />
-									</div>
-								</td>
-								<td class="removeCart">
-									<button type="submit" class="btn btn-danger" formmethod="post"
-										formaction="/ecommerce/removeFromCart">REMOVE</button>
-								</td>
-								<td class="removeCheckout"><input type="checkbox"
-									form="allProducts" name="warehouseProductId" checked
-									value="${cartItem.warehouseProduct.id}" /><p>Uncheck <br>to<br> Order later</p>
-								</td>
-							</tr>
+										</div>
+									</td>
+									<td>
+										<div class="productPrice">
+											<b>Rs.</b>&nbsp;<input type="text" name="price"
+												value="${cartItem.price}" readonly /><br />
+										</div>
+									</td>
+									<td class="removeCart">
+										<button type="submit" class="btn btn-danger" formmethod="post"
+											formaction="/ecommerce/customer/removeFromCart">REMOVE</button>
+									</td>
+									<td class="removeCheckout"><c:if
+											test="${cartItem.quantity <= cartItem.warehouseProduct.quantity}">
+											<input type="checkbox" form="allProducts"
+												name="warehouseProductId" checked
+												value="${cartItem.warehouseProduct.id}" />
+											<p>
+												Uncheck <br>to<br> Order later
+											</p>
+										</c:if> <c:if
+											test="${cartItem.quantity > cartItem.warehouseProduct.quantity}">
+											<input type="checkbox" form="allProducts"
+												name="warehouseProductId" disabled
+												value="${cartItem.warehouseProduct.id}" />
+											<p>
+												Uncheck <br>to<br> Order later
+										</c:if></td>
+								</tr>
 							</form>
 						</c:forEach>
 						<tr>
@@ -86,11 +104,13 @@
 									<button class="btn btn-warning btn-lg" id="continueShopping"
 										type="submit" class="btn btn-default" formmethod="get"
 										formaction="/ecommerce/">
-										<span><b><i class="fa fa-angle-left"></i> &nbsp;&nbsp;CONTINUE SHOPPING</b></span>
-									</button> &nbsp;&nbsp;
+										<span><b><i class="fa fa-angle-left"></i>
+												&nbsp;&nbsp;CONTINUE SHOPPING</b></span>
+									</button>
+									&nbsp;&nbsp;
 									<button class="btn btn-warning btn-lg" id="checkout"
 										type="submit" class="btn btn-default" formmethod="post"
-										formaction="/ecommerce/buyProducts">
+										formaction="/ecommerce/customer/buyProducts">
 										<span><b>CHECKOUT&nbsp;&nbsp;<i
 												class="fa fa-angle-right"></i></b></span>
 									</button>
@@ -110,7 +130,7 @@
 			</div>
 		</c:if>
 	</div>
-    <jsp:include page="CustomerFooter.jsp"></jsp:include>
+	<jsp:include page="CustomerFooter.jsp"></jsp:include>
 </body>
 
 <script>
@@ -140,6 +160,5 @@
 			return true;
 		}
 	}
-	
 </script>
 </html>
