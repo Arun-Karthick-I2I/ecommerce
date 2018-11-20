@@ -117,3 +117,26 @@
 	padding-top:5%;
 }
 
+
+.myOrders > .table > tbody > .tr-rating > td[colspan] > div {
+	dislay:inline-block;
+}
+	
+fieldset {
+	display:inline:block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
