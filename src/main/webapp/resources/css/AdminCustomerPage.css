@@ -56,7 +56,6 @@ form > div > .btn-default {
 }
 
 .table > tbody {
-	max-height: 60%;
 	overflow-y:auto;
 }
 
@@ -73,4 +72,10 @@ form > div > .btn-default {
   	padding-right: 1%;
   	background-color: #d9edf7;
   	text-align: right;
+}
+
+.table-wrapper {
+	display: block;
+	max-height: 60%;
+	overflow-y: auto;
 }
