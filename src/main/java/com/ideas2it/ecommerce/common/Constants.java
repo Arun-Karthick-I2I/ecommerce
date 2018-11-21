@@ -469,10 +469,15 @@ public class Constants {
     public static final String WAREHOUSE_PRODUCT_FORM="WarehouseProductForm";
     
     public static final String JSP_CART = "Cart";
+    
     public static final String JSP_CUSTOMER_HOME = "CustomerHome";
+    
     public static final String JSP_MY_ACCOUNT = "myAccount";
+    
     public static final String JSP_MY_ORDERS = "MyOrders";
+    
     public static final String JSP_ORDER_PAGE = "OrderPage";
+    
     public static final String JSP_PRODUCT_PAGE = "ProductPage";
     
 }
