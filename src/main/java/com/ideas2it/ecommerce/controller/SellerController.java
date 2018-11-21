@@ -40,23 +40,17 @@ import com.ideas2it.ecommerce.service.impl.SellerServiceImpl;
 @Controller
 @RequestMapping("seller")
 public class SellerController {
-    private static final String SELLER_PROFILE = "SellerProfile";
-    private static final String SELLER_HOME = "SellerHome";
-    private static final String SELLER_ORDERS = "Seller_Orders";
-    private static final String SELLER_LOGIN = "SellerLogin";
-    private static final String PRODUCT_FORM = "Seller_Product";
-    private static final String WAREHOUSE_PRODUCT_FORM = "WarehouseProductForm";
 
     private SellerService sellerService = new SellerServiceImpl();
 
     @GetMapping("/")
     public String showInitialPage() {
-        return SELLER_LOGIN;
+        return Constants.SELLER_LOGIN;
     }
 
-    @GetMapping("home")
+    @GetMapping(Constants.LABEL_HOME)
     public ModelAndView showHomePage(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView(SELLER_HOME);
+        ModelAndView modelAndView = new ModelAndView(Constants.SELLER_HOME);
         try {
             Integer sellerId = (Integer) session
                     .getAttribute(Constants.LABEL_SELLER_ID);
@@ -78,14 +72,14 @@ public class SellerController {
      */
     @GetMapping("viewProfile")
     public ModelAndView showAccount(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView(SELLER_PROFILE);
+        ModelAndView modelAndView = new ModelAndView(Constants.SELLER_PROFILE);
         modelAndView.addObject("viewProfile", Boolean.TRUE);
         try {
             Seller seller = sellerService.searchSeller(
                     (Integer) session.getAttribute(Constants.LABEL_SELLER_ID));
             modelAndView.addObject(Constants.LABEL_SELLER, seller);
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -102,7 +96,7 @@ public class SellerController {
     public ModelAndView updateAccount(@ModelAttribute("seller") Seller seller,
             HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(
-                Constants.REDIRECT + "home");
+                Constants.REDIRECT + Constants.LABEL_HOME);
         HttpSession session = request.getSession(Boolean.FALSE);
         try {
             Seller existingSeller = sellerService.searchSeller(seller.getId());
@@ -137,7 +131,7 @@ public class SellerController {
      */
     @GetMapping("newProduct")
     public ModelAndView openProductForm(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView(PRODUCT_FORM);
+        ModelAndView modelAndView = new ModelAndView(Constants.SELLER_PRODUCT);
         Integer sellerId = (Integer) session
                 .getAttribute(Constants.LABEL_SELLER_ID);
         try {
@@ -153,7 +147,7 @@ public class SellerController {
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     sellerService.getAllCategories());
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -168,7 +162,8 @@ public class SellerController {
     public ModelAndView createProduct(
             @ModelAttribute("product") Product product,
             @RequestParam MultipartFile productImage, HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
+        ModelAndView modelAndView = new ModelAndView(
+                Constants.WAREHOUSE_PRODUCT_FORM);
         WarehouseProduct warehouseProduct = new WarehouseProduct();
         try {
             byte[] product_Image = productImage.getBytes();
@@ -182,10 +177,10 @@ public class SellerController {
             }
         } catch (EcommerceException e) {
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
         } catch (IOException e) {
-            EcommerceLogger.error("Error while storing image", e);
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            EcommerceLogger.error(Constants.MSG_ERROR_STORING_IMAGE, e);
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
         }
         return modelAndView;
     }
@@ -198,7 +193,7 @@ public class SellerController {
      */
     @GetMapping("searchProduct")
     public ModelAndView searchProduct(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView(PRODUCT_FORM);
+        ModelAndView modelAndView = new ModelAndView(Constants.SELLER_PRODUCT);
         HttpSession session = request.getSession(Boolean.FALSE);
         Product product = new Product();
         String productName = request.getParameter(Constants.LABEL_PRODUCT_NAME);
@@ -215,7 +210,7 @@ public class SellerController {
                 product.setName(productName);
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -230,7 +225,8 @@ public class SellerController {
      */
     private ModelAndView showWarehouseProductForm(HttpServletRequest request,
             Product product) {
-        ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
+        ModelAndView modelAndView = new ModelAndView(
+                Constants.WAREHOUSE_PRODUCT_FORM);
         HttpSession session = request.getSession(Boolean.FALSE);
         Integer sellerId = (Integer) session
                 .getAttribute(Constants.LABEL_SELLER_ID);
@@ -249,7 +245,7 @@ public class SellerController {
                     warehouseProduct);
         } catch (EcommerceException e) {
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
         }
         return modelAndView;
     }
@@ -262,16 +258,16 @@ public class SellerController {
      */
     @PostMapping("addWarehouseProduct")
     public ModelAndView addWarehouseProduct(
-            @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct) {
+            @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView(
-                Constants.REDIRECT + "home");
+                Constants.REDIRECT + Constants.LABEL_HOME);
         try {
             if (sellerService.addWarehouseProduct(warehouseProduct)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_WAREHOUSE_PRODUCT_SUCCESS);
             }
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -284,7 +280,7 @@ public class SellerController {
     @PostMapping("deleteWarehouseProduct")
     public ModelAndView deleteWarehouseProduct(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView(
-                Constants.REDIRECT + "home");
+                Constants.REDIRECT + Constants.LABEL_HOME);
         HttpSession session = request.getSession(Boolean.FALSE);
         try {
             Seller seller = sellerService.searchSeller(
@@ -301,7 +297,7 @@ public class SellerController {
                         Constants.MSG_REMOVE_WAREHOUSE_PRODUCT_SUCCESS);
             }
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+            session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
     }
@@ -315,7 +311,8 @@ public class SellerController {
      */
     @PostMapping("editWarehouseProduct")
     public ModelAndView editWarehouseProduct(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView(WAREHOUSE_PRODUCT_FORM);
+        ModelAndView modelAndView = new ModelAndView(
+                Constants.WAREHOUSE_PRODUCT_FORM);
         HttpSession session = request.getSession(Boolean.FALSE);
         try {
             WarehouseProduct warehouseProduct = sellerService
@@ -324,7 +321,7 @@ public class SellerController {
             modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCT,
                     warehouseProduct);
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -341,7 +338,7 @@ public class SellerController {
     public ModelAndView updateWarehouseProduct(
             @ModelAttribute("warehouseProduct") WarehouseProduct warehouseProduct) {
         ModelAndView modelAndView = new ModelAndView(
-                Constants.REDIRECT + "home");
+                Constants.REDIRECT + Constants.LABEL_HOME);
         try {
             if (sellerService.updateWarehouseProduct(warehouseProduct)) {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -383,7 +380,7 @@ public class SellerController {
                         Constants.MSG_SELLER_ORDER_STATUS_UPDATE_SUCCESS);
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -391,7 +388,7 @@ public class SellerController {
 
     @GetMapping("getOrders")
     public ModelAndView displayOrdersItems(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView(SELLER_ORDERS);
+        ModelAndView modelAndView = new ModelAndView(Constants.SELLER_ORDERS);
         HttpSession session = request.getSession(Boolean.FALSE);
         try {
             List<Integer> warehouseProductIds = sellerService
@@ -404,12 +401,12 @@ public class SellerController {
             if (!orderItems.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_ORDER_ITEMS, orderItems);
             } else {
-                modelAndView.setViewName(Constants.REDIRECT + "home");
+                modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
                 session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELLER_NO_ORDERS_IN_THAT_STATUS);
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;
@@ -417,7 +414,7 @@ public class SellerController {
 
     @GetMapping("getAllOrders")
     public ModelAndView displayAllOrdersItems(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView(SELLER_ORDERS);
+        ModelAndView modelAndView = new ModelAndView(Constants.SELLER_ORDERS);
         try {
             List<Integer> warehouseProductIds = sellerService
                     .getWarehouseProductIds((Integer) session
@@ -427,12 +424,12 @@ public class SellerController {
             if (!orderItems.isEmpty()) {
                 modelAndView.addObject(Constants.LABEL_ORDER_ITEMS, orderItems);
             } else {
-                modelAndView.setViewName(Constants.REDIRECT + "home");
+                modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
                 session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_SELLER_NO_ORDERS_YET);
             }
         } catch (EcommerceException e) {
-            modelAndView.setViewName(Constants.REDIRECT + "home");
+            modelAndView.setViewName(Constants.REDIRECT + Constants.LABEL_HOME);
             session.setAttribute(Constants.LABEL_MESSAGE, e.getMessage());
         }
         return modelAndView;

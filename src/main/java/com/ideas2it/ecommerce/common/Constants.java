@@ -26,6 +26,8 @@ public class Constants {
 
     public static final String LABEL_MOBILE_NUMBER = "mobileNumber";
     
+    public static final String LABEL_HOME = "home";
+    
     public static final String LABEL_ISACTIVE = "isActive";
     
     public static final String LABEL_ID = "id";
@@ -120,6 +122,9 @@ public class Constants {
 
     public static final String MSG_SESSION_FACTORY_FAIL =
         "Something went wrong with our system.. Please Try Again Later";
+    
+    public static final String MSG_ERROR_STORING_IMAGE = 
+        "Error while storing image";
     
     public static final String MSG_EXCEPTION_REGISTER = 
         "Something went wrong while registering : "; 
@@ -437,4 +442,29 @@ public class Constants {
 
     public static final String MSG_WAREHOUSE_PRODUCT_ALREADY_PRESENT = 
         "The given product is already present in your Warehouse";
+    
+    
+    // Pages are listed below
+    
+    public static final Character INITIAL_PATH = '/';
+
+    public static final String ADMIN_HOME = "AdminCategoryPage";
+    
+    public static final String ADMIN_LOGIN = "AdminLogin";
+    
+    public static final String CUSTOMER_HOME = "CustomerHome";
+    
+    public static final String CUSTOMER_PROFILE = "myAccount";
+    
+    public static final String SELLER_HOME="SellerHome";
+    
+    public static final String SELLER_LOGIN="SellerLogin";
+    
+    public static final String SELLER_ORDERS="Seller_Orders";
+    
+    public static final String SELLER_PRODUCT="Seller_Product";
+    
+    public static final String SELLER_PROFILE="SellerProfile";
+    
+    public static final String WAREHOUSE_PRODUCT_FORM="WarehouseProductForm";
 }

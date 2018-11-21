@@ -24,14 +24,14 @@
 						<div class="card">
 							<input type="hidden" name="id" value="${product.id}" />
 							<button type="submit" formmethod="post"
-								formaction="/ecommerce/customer/productPage/">
+								formaction="/ecommerce/customer/productPage">
 								<img class="card-img-top zoom"
 									src="<c:url value='data:image/jpg;base64,${product.base64Image}'/>"
 									alt="product image" />
 							</button>
 							<div class="card-body">
 								<button type="submit" formmethod="post"
-									formaction="/ecommerce/customer/productPage/">
+									formaction="/ecommerce/customer/productPage">
 									<h4 class="card-title">${product.name}</h4>
 								</button>
 								<p class="card-text">
