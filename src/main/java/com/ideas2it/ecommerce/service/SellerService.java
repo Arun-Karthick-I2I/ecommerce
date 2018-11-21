@@ -242,15 +242,58 @@ public interface SellerService {
      */
     Category searchCategory(Integer categoryId) throws EcommerceException;
 
+    /**
+     * <p>
+     * Modifies the status of the list of Order Items (i.e Dispatched or
+     * Delivered or Cancelled or...)
+     * </p>
+     *
+     * @param orderItems List of order items whose status needs to be updated.
+     * @return true If the status is successfully modified. Returns false If the status
+     *         of the order items is not modified.
+     */
     Boolean changeOrderItemsStatus(List<OrderItem> orderItems)
             throws EcommerceException;
 
+    /**
+     * <p>
+     * Returns the list of order items for the ids specified.
+     * </p>
+     *
+     * @param orderItemIds List of ids whose corresponding order items needs to
+     *                     be fetched
+     * @return orderItems Returns the list of order items corresponding to the
+     *         order item ids.
+     */
     List<OrderItem> searchOrderItems(List<Integer> orderItemIds)
             throws EcommerceException;
 
+    /**
+     * <p>
+     * Returns the list of order items for the warehouse product ids specified.
+     * </p>
+     *
+     * @param warehouseProductIds List of warehouse product ids whose
+     *                            corresponding order items needs to be fetched
+     * @return orderItems Returns the list of order items corresponding to the
+     *         warehouse product ids.
+     */
     List<OrderItem> searchOrderItemsByWarehouseProductIds(
             List<Integer> warehouseProductIds) throws EcommerceException;
 
+    /**
+     * <p>
+     * Returns the list of order items for the warehouse product ids and status
+     * specified
+     * </p>
+     *
+     * @param warehouseProductIds List of warehouse product ids whose
+     *                            corresponding order items needs to be fetched
+     * @param status              Status of the Order Item (i.e Dispatched or
+     *                            Delivered or Cancelled or...)
+     * @return orderItems Returns the list of order items corresponding to the
+     *         warehouse product id status.
+     */
     List<OrderItem> searchOrderItemsByStatus(
             List<Integer> warehouseProductIds, ORDER_STATUS status)
             throws EcommerceException;
@@ -261,7 +304,7 @@ public interface SellerService {
      * DVDStore along with their order details.
      * </p>
      * 
-     * @param sellerName name of the sellers whose details have to be found.
+     * @param sellerName Name of the sellers whose details have to be found.
      * @return sellers Returns the list of sellers with their order details.
      */
     List<Seller> getSellersByName(String sellerName) throws EcommerceException;
