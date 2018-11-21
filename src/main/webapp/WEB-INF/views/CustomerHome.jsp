@@ -24,21 +24,23 @@
 						<div class="card">
 							<input type="hidden" name="id" value="${product.id}" />
 							<button type="submit" formmethod="post"
-								formaction="/ecommerce/customer/productPage/">
+								formaction="/ecommerce/customer/productPage">
 								<img class="card-img-top zoom"
 									src="<c:url value='data:image/jpg;base64,${product.base64Image}'/>"
-									alt="" />
+									alt="product image" />
 							</button>
 							<div class="card-body">
 								<button type="submit" formmethod="post"
-									formaction="/ecommerce/customer/productPage/">
+									formaction="/ecommerce/customer/productPage">
 									<h4 class="card-title">${product.name}</h4>
 								</button>
 								<p class="card-text">
-									<b>₹&nbsp;${product.warehouseProducts[0].price}</b><br/>
-									<input type="hidden" name="categoryId" value="${product.category.id}">
-									<button class="btn btn-default btn-sm" formaction="/ecommerce/customer/products"
-									formmethod="post"><a>View Similar Products</a></button>
+									<b>₹&nbsp;${product.warehouseProducts[0].price}</b><br /> <input
+										type="hidden" name="categoryId" value="${product.category.id}">
+									<button class="btn btn-default btn-sm"
+										formaction="/ecommerce/customer/products" formmethod="post">
+										<a>View Similar Products</a>
+									</button>
 								</p>
 							</div>
 						</div>
@@ -64,4 +66,28 @@
 	</div>
 	<jsp:include page="CustomerFooter.jsp"></jsp:include>
 </body>
+
+<script>
+	showSlides();
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementsByClassName("mySlides");
+		var dots = document.getElementsByClassName("dot");
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		slideIndex++;
+		if (slideIndex > slides.length) {
+			slideIndex = 1
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " active";
+		setTimeout(showSlides, 2000); // Change image every 2 seconds
+	}
+</script>
+
 </html>

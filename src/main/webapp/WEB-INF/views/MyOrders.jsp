@@ -13,7 +13,6 @@
 	href="<c:url value='/resources/images/ecommerce-logo-1-dribbble.png' />">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/MyOrders.css' />">
-
 <style>
 .myOrders>.table>tbody>tr>td {
 	vertical-align: middle;
@@ -65,14 +64,16 @@
 											type=hidden name="orderItemId" value="${orderItem.id}" />
 										<c:if test="${orderItem.status == 'ORDERED'}">
 											<button type="submit" class="btn btn-default"
-												formmethod="post" formaction="/ecommerce/customer/cancelOrder">
+												formmethod="post"
+												formaction="/ecommerce/customer/cancelOrder">
 												Cancel&nbsp;&nbsp;<i class="fa fa-close"></i>
 											</button>
 										</c:if>
 										<c:if
 											test="${orderItem.status == 'DELIVERED' && returnDates[order.id] > today}">
 											<button type="submit" class="btn btn-warning"
-												formmethod="post" formaction="/ecommerce/customer/returnOrder">
+												formmethod="post"
+												formaction="/ecommerce/customer/returnOrder">
 												Return &nbsp;&nbsp;<i class="fa fa-close"></i>
 											</button>
 										</c:if>

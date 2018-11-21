@@ -40,7 +40,7 @@
 	<script src="<c:url value='/resources/js/bootstrap-show-password.min.js' />"></script>
 	<script src="<c:url value='/resources/js/Admin.js' />"></script>
 	<script type="text/javascript">
-		$("#password").password('data-toggle');
+		$("#password").password('toggle');
 	</script>
 	<c:if test="${null != message}">
 		<div id="snackbar">${message}</div>

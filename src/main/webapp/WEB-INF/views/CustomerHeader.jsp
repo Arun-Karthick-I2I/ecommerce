@@ -101,7 +101,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<div class="logo">
-						<img src="<c:url value='/resources/images/panda_logo.jpeg' />"
+						<img src="<c:url value='/resources/images/panda_logo.jpg' />"
 							alt="Ecommerce" />
 						<h4>Welcome to Ecommerce</h4>
 					</div>
@@ -122,10 +122,10 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" class="form-control" name="password"
+								<input type="password" class="form-control" name="password" 
 									pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
 									title="Password should contain atleast 8 characters (1 Uppercase,1 LowerCase, 1 Number/Special Character)"
-									placeholder="Password" required="required">
+									placeholder="Password" required="required" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -146,7 +146,7 @@
 				<div class="modal-header">
 					<div class="logo">
 						<img class="regPanda"
-							src="<c:url value='/resources/images/panda_logo.jpeg' />"
+							src="<c:url value='/resources/images/panda_logo.jpg' />"
 							alt="Ecommerce" />
 						<h4>Welcome to Ecommerce</h4>
 					</div>
@@ -185,10 +185,10 @@
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 									<input type="password" class="form-control"
-										name="user.password" id="passwordModal"
+										name="user.password" id="passwordModal" 
 										pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
 										title="Password should contain atleast 8 characters (1 Uppercase,1 LowerCase, 1 Number/Special Character)"
-										placeholder="Password" />
+										placeholder="Password"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -254,7 +254,7 @@
 	src="<c:url value="/resources/js/CustomerHeader.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value='/resources/js/Customer.js' />"></script>
-
+	
 <c:if test="${null != message}">
 	<div id="snackbar">${message}</div>
 	<script>
@@ -267,18 +267,19 @@
 	function isLoggedIn(event) {
 		$("#Customerlogin").modal("show");
 	}
+	
 	function openLoginModal(event) {
-		$("#Customerlogin").modal("show");
 		$("#CustomerSignUp").modal("hide");
+		$("#Customerlogin").modal("show");
 	}
 
 	function openSignUpModal(event) {
-		$("#Customerlogin").modal("hide");
-		$("#CustomerSignUp").modal("show");
-		$("#personelDetails").show();
 		$("#addressDetails").hide();
+		$("#Customerlogin").modal("hide");
+		$("#personelDetails").show();
+		$("#CustomerSignUp").modal("show");
 	}
-
+	
 	function validatePersonalDetails(event) {
 		if ($("#nameModal").val() == '' || $("#mobileModal").val() == ''
 				|| $("#emailModal").val() == ''

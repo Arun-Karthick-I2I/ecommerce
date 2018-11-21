@@ -184,7 +184,8 @@ public interface CustomerService {
 
     /**
      * <p>
-     * This method is used to cancel placed particular order from e-commerce web-site.
+     * This method is used to cancel placed particular order from e-commerce
+     * web-site.
      * </p>
      * 
      * @param orderItems Needed for cancel the particular order.
@@ -192,6 +193,19 @@ public interface CustomerService {
      *          otherwise false.
      */
     public Boolean cancelOrder(List<OrderItem> orderItems)
+            throws EcommerceException;
+
+    /**
+     * <p>
+     * This method is used to increase the quantity of warehouse product after
+     * cancelled an order.
+     * </p>
+     * 
+     * @param order Needed for increase the quantity of warehouse product.
+     * @returns Boolean it returns true, if quantity increased successfully
+     *          otherwise false.
+     */
+    public Boolean IncreaseQuantityAftercancelOrder(Order order)
             throws EcommerceException;
 
     /**
@@ -205,7 +219,7 @@ public interface CustomerService {
      */
     public List<OrderItem> getOrderItemsByIds(List<Integer> orderItemIds)
             throws EcommerceException;
-    
+
     /**
      * <p>
      * Getting detail of the warehouse product from e-commerce web-site based on
@@ -230,7 +244,6 @@ public interface CustomerService {
     public List<WarehouseProduct> getWarehouseProductsByIds(
             List<Integer> warehouseProductIds) throws EcommerceException;
 
-
     /**
      * <p>
      * This method id used to get the category detail based on category id.
@@ -240,5 +253,5 @@ public interface CustomerService {
      *         </p>
      */
     public Category getCategory(Integer categoryId) throws EcommerceException;
-    
+
 }

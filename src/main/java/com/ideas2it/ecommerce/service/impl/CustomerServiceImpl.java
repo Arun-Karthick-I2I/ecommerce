@@ -155,6 +155,16 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * @(inheritDoc)
      */
+    public Boolean IncreaseQuantityAftercancelOrder(Order order)
+            throws EcommerceException {
+        return warehouseProductService.increaseQuantity(order);
+    }
+    
+    
+    
+    /**
+     * @(inheritDoc)
+     */
     public List<OrderItem> getOrderItemsByIds(List<Integer> orderItemIds)
             throws EcommerceException {
         return orderItemService.searchByIds(orderItemIds);

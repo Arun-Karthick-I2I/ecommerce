@@ -30,7 +30,6 @@
 				<th class="row-header"> Name </th>
 				<th class="row-header"> Mobile Number </th>
 				<th class="row-header"> Email ID </th>
-				<th class="row-header"> Rating </th>
 				<th></th>
 			</tr>
 		</thead>
@@ -45,12 +44,6 @@
 								${seller.name}</button></td>
 						<td>${seller.mobileNumber}</td>
 						<td>${seller.emailId}</td>
-						<c:if test="${seller.rating ne null}">
-							<td>${seller.rating}</td>
-						</c:if>
-						<c:if test="${seller.rating eq null}">
-							<td> Not yet Rated </td>
-						</c:if>
 						<td>
 							<button type="submit" class="btn btn-danger"
 								formaction="/ecommerce/admin/deleteSeller" formmethod="post">

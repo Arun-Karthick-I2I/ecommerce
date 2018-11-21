@@ -34,7 +34,8 @@ public class EcommerceFilter implements Filter {
     private static final String CATEGORY_PATH = "/category/";
     private static final String CUSTOMER_PATH = "/customer/";
     private static final String INITIAL_PATH = "/ecommerce";
-    private static final String PRODUCT_PAGE = "/customer/productPage/";
+    private static final String PRODUCT_PAGE = "/customer/productPage";
+    private static final String CUSTOMER_PAGE = "/customer/products";
     private static final String PRODUCT_PATH = "/product/";
     private static final String PROJECT_PATH = "/ecommerce/";
     private static final String REGISTER_CUSTOMER = "registerCustomer";
@@ -92,6 +93,7 @@ public class EcommerceFilter implements Filter {
                 || uri.endsWith(REGISTER_CUSTOMER)
                 || uri.endsWith(REGISTER_SELLER)
                 || uri.endsWith(PRODUCT_PAGE)
+                || uri.endsWith(CUSTOMER_PAGE)
                 || uri.matches(ADDITIONAL_FILES_PATTERN)) {
 
             /*
