@@ -24,7 +24,7 @@
 			</button>
 		</div>
 	</form>
-	<div class="table-wrapper" id="orders">
+	<div class="table-wrapper">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -78,41 +78,7 @@
 			</tbody>
 		</table>
 	</div>
-		<button onclick="javascript:demoFromHTML()">PDF</button>
-	
 </body>
-<script src="<c:url value='/resources/js/jquery.min.js' />"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/jspdf.debug.js'/>"></script>
-<script>
-function demoFromHTML() {
-    var pdf = new jsPDF('landscape', 'pt', 'a2');
-    source = $('#orders')[0];
-
-    specialElementHandlers = {
-        '#bypassme': function (element, renderer) {
-            return true
-        }
-    };
-    margins = {
-        top: 80,
-        bottom: 60,
-        left: 40,
-        width: 522
-    };
-    pdf.fromHTML(
-    source, 
-    margins.left, 
-    margins.top, {
-        'width': margins.width, 
-        'elementHandlers': specialElementHandlers
-    },
-
-    function (dispose) {
-        pdf.save('Orders.pdf');
-    }, margins);
-}
-</script>
-
 <script src="<c:url value='/resources/js/Admin.js' />"></script>
 <c:if test="${null != message}">
 	<div id="snackbar">${message}</div>
