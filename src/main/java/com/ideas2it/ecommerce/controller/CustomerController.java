@@ -46,13 +46,6 @@ import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
 @RequestMapping("customer")
 public class CustomerController {
 
-    private static final String JSP_CART = "Cart";
-    private static final String JSP_CUSTOMER_HOME = "CustomerHome";
-    private static final String JSP_MY_ACCOUNT = "myAccount";
-    private static final String JSP_MY_ORDERS = "MyOrders";
-    private static final String JSP_ORDER_PAGE = "OrderPage";
-    private static final String JSP_PRODUCT_PAGE = "ProductPage";
-
     private CustomerService customerService = new CustomerServiceImpl();
 
     /**
@@ -110,7 +103,7 @@ public class CustomerController {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
         modelAndView.addObject(Constants.LABEL_CUSTOMER, customer);
-        modelAndView.setViewName(JSP_MY_ACCOUNT);
+        modelAndView.setViewName(Constants.JSP_MY_ACCOUNT);
         return modelAndView;
     }
 
@@ -146,7 +139,7 @@ public class CustomerController {
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-        modelAndView.setViewName(JSP_MY_ORDERS);
+        modelAndView.setViewName(Constants.JSP_MY_ORDERS);
         return modelAndView;
     }
 
@@ -290,7 +283,7 @@ public class CustomerController {
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-        modelAndView.setViewName(JSP_CART);
+        modelAndView.setViewName(Constants.JSP_CART);
         return modelAndView;
     }
 
@@ -349,10 +342,10 @@ public class CustomerController {
             modelAndView.addObject(Constants.LABEL_PRODUCT, product);
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
-            modelAndView.setViewName(JSP_PRODUCT_PAGE);
+            modelAndView.setViewName(Constants.JSP_PRODUCT_PAGE);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         }
         return modelAndView;
     }
@@ -388,11 +381,11 @@ public class CustomerController {
                 modelAndView.addObject(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_CART_FAIL);
             }
-            modelAndView.setViewName(JSP_CART);
+            modelAndView.setViewName(Constants.JSP_CART);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_ADD_CART_FAIL);
-            modelAndView.setViewName(JSP_CART);
+            modelAndView.setViewName(Constants.JSP_CART);
         }
         return modelAndView;
     }
@@ -433,7 +426,7 @@ public class CustomerController {
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
         }
-        modelAndView.setViewName(JSP_CART);
+        modelAndView.setViewName(Constants.JSP_CART);
         return modelAndView;
     }
 
@@ -468,11 +461,11 @@ public class CustomerController {
                     customerService.getAllCategories());
             modelAndView.addObject(Constants.LABEL_TOTAL_PRICE,
                     warehouseProduct.getPrice());
-            modelAndView.setViewName(JSP_ORDER_PAGE);
+            modelAndView.setViewName(Constants.JSP_ORDER_PAGE);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_ADD_ORDER_FAIL);
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         }
         return modelAndView;
     }
@@ -512,7 +505,7 @@ public class CustomerController {
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_ADD_ORDER_FAIL);
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         }
         return modelAndView;
     }
@@ -550,7 +543,7 @@ public class CustomerController {
                 warehouseProducts);
         modelAndView.addObject(Constants.LABEL_QUANTITIES, quantities);
         modelAndView.addObject(Constants.LABEL_TOTAL_PRICE, totalPrice);
-        modelAndView.setViewName(JSP_ORDER_PAGE);
+        modelAndView.setViewName(Constants.JSP_ORDER_PAGE);
         return modelAndView;
     }
 
@@ -772,7 +765,7 @@ public class CustomerController {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_UPDATE_ADDRESS_FAIL);
         }
-        modelAndView.setViewName(JSP_CUSTOMER_HOME);
+        modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         return modelAndView;
     }
 
@@ -794,11 +787,11 @@ public class CustomerController {
             modelAndView.addObject(Constants.LABEL_PRODUCT, product);
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
-            modelAndView.setViewName(JSP_PRODUCT_PAGE);
+            modelAndView.setViewName(Constants.JSP_PRODUCT_PAGE);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_PAGE_OPEN_FAIL);
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         }
         return modelAndView;
     }
@@ -819,11 +812,11 @@ public class CustomerController {
             modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_PRODUCT_PAGE_OPEN_FAIL);
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.JSP_CUSTOMER_HOME);
         }
         return modelAndView;
     }

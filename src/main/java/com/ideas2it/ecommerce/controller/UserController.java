@@ -118,7 +118,7 @@ public class UserController {
 
     /**
      * <p>
-     * Checks the username and password and logins the user if the credentials
+     * Checks the user name and password and logins the user if the credentials
      * are correct. Redirects to the corresponding page based on their role.
      * </p>
      */
