@@ -170,13 +170,20 @@ public class CustomerController {
             orderItemIds.add(orderItemId);
             List<OrderItem> orderItems = customerService
                     .getOrderItemsByIds(orderItemIds);
+            OrderItem cancelledOrderItem = new OrderItem();
             for (OrderItem orderItem : orderItems) {
                 if (orderItemId == orderItem.getId()) {
+                    cancelledOrderItem = orderItem;
                     orderItem.setStatus(ORDER_STATUS.CANCELLED);
                     break;
                 }
             }
             if (customerService.cancelOrder(orderItems)) {
+                Order order = new Order();
+                List<OrderItem> cancelOrder = new ArrayList<OrderItem>();
+                cancelOrder.add(cancelledOrderItem);
+                order.setOrderItems(cancelOrder);
+                customerService.IncreaseQuantityAftercancelOrder(order);
                 customer = customerService.getCustomerById(customer.getId(),
                         Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
@@ -557,19 +564,19 @@ public class CustomerController {
             List<OrderItem> unavailableOrderItems = customerService
                     .addOrder(order);
             if (unavailableOrderItems.isEmpty()) {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_DONT_HAVE_ENOUGH_QUANTITY);
             }
             customer = customerService.getCustomerById(customer.getId(),
                     Boolean.TRUE);
             session.setAttribute(Constants.LABEL_CUSTOMER, customer);
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE,
+            session.setAttribute(Constants.LABEL_MESSAGE,
                     Constants.MSG_ADD_ORDER_FAIL);
-            modelAndView.setViewName(JSP_CUSTOMER_HOME);
+            modelAndView.setViewName(Constants.REDIRECT + "myOrders");
         }
         return modelAndView;
     }
@@ -633,10 +640,10 @@ public class CustomerController {
                 customer = customerService.getCustomerById(customer.getId(),
                         Boolean.TRUE);
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_ADD_ORDER_SUCCESS);
             } else {
-                modelAndView.addObject(Constants.LABEL_MESSAGE,
+                session.setAttribute(Constants.LABEL_MESSAGE,
                         Constants.MSG_DONT_HAVE_ENOUGH_QUANTITY);
             }
         } catch (EcommerceException e) {
