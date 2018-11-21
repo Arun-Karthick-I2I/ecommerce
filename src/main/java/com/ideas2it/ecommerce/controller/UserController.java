@@ -49,6 +49,12 @@ public class UserController {
 
     private UserService userService = new UserServiceImpl();
 
+    /**
+     * <p>
+     * Redirects the user to the welcome page of the ecommerce along with
+     * necessary data.
+     * </p>
+     */
     @GetMapping("/")
     public ModelAndView showInitialPage() {
         ModelAndView modelAndView = new ModelAndView(INDEX_PAGE);
@@ -177,6 +183,11 @@ public class UserController {
         return modelAndView;
     }
 
+    /**
+     * <p>
+     * Fetches the details required to be displayed on the seller home.
+     * </p>
+     */
     private void loginSeller(ModelAndView modelAndView, User user,
             HttpSession session) throws EcommerceException {
         Seller seller = userService.searchSeller(user.getId());
