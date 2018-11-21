@@ -36,8 +36,8 @@ import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
  * <p>
  * CustomerController class to perform operations such as add new customer,
  * update customer details, purchase products, cancel placed orders, add
- * products to cart, remove from cart, place an order from cart,
- * return the delivered products.
+ * products to cart, remove from cart, place an order from cart, return the
+ * delivered products.
  * </p>
  *
  * @author Anantharaj.S
@@ -45,7 +45,7 @@ import com.ideas2it.ecommerce.service.impl.CustomerServiceImpl;
 @Controller
 @RequestMapping("customer")
 public class CustomerController {
-    
+
     private static final String JSP_CART = "Cart";
     private static final String JSP_CUSTOMER_HOME = "CustomerHome";
     private static final String JSP_MY_ACCOUNT = "myAccount";
@@ -76,7 +76,8 @@ public class CustomerController {
         try {
             customer.setName(request.getParameter(Constants.LABEL_NAME));
             customer.setEmailId(request.getParameter(Constants.LABEL_EMAIL_ID));
-            customer.setMobileNumber(request.getParameter(Constants.LABEL_MOBILE_NUMBER));
+            customer.setMobileNumber(
+                    request.getParameter(Constants.LABEL_MOBILE_NUMBER));
             if (customerService.updateCustomer(customer)) {
                 session.setAttribute(Constants.LABEL_CUSTOMER, customer);
             }
@@ -93,8 +94,8 @@ public class CustomerController {
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "CustomerUpdate" is view name and
-     *         customer is model.
+     *         and view. In this method "myAccount" is view name and customer is
+     *         model.
      */
     @GetMapping("myaccount")
     public ModelAndView modifyAccount(HttpServletRequest request) {
@@ -119,8 +120,8 @@ public class CustomerController {
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "myOrders" is the view name and set of
+     *         orders and customer is the model.
      */
     @GetMapping("myOrders")
     public ModelAndView myOrders(HttpServletRequest request) {
@@ -151,7 +152,8 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to cancel particular order item details
+     * This method is used to cancel particular order item details. After
+     * cancelled order return to customer orders page.
      * </p>
      *
      * @return ModelAndView ModelAndView is an object that holds both the model
@@ -160,12 +162,10 @@ public class CustomerController {
      */
     @PostMapping("cancelOrder")
     public ModelAndView cancelOrder(HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
         try {
-            Integer orderItemId = Integer
-                    .parseInt(request.getParameter(Constants.LABEL_ORDER_ITEM_ID));
+            Integer orderItemId = Integer.parseInt(
+                    request.getParameter(Constants.LABEL_ORDER_ITEM_ID));
             List<Integer> orderItemIds = new ArrayList<Integer>();
             orderItemIds.add(orderItemId);
             List<OrderItem> orderItems = customerService
@@ -178,6 +178,32 @@ public class CustomerController {
                     break;
                 }
             }
+            modelAndView = cancelOrder(request, orderItems, cancelledOrderItem);
+        } catch (EcommerceException e) {
+            modelAndView.addObject(Constants.LABEL_MESSAGE, e.getMessage());
+        }
+        return modelAndView;
+    }
+
+    /**
+     * <p>
+     * This method is used to cancel particular order item detail and increase
+     * the quantity of cancelled warehouse product.
+     * </p>
+     * 
+     * @param orderItems         needed for cancel the orderItem.
+     * @param cancelledOrderItem needed for increase the quantity.
+     * @return ModelAndView ModelAndView is an object that holds both the model
+     *         and view. In this method "myOrders" is the view name and set of
+     *         orders and customer is the model.
+     */
+    private ModelAndView cancelOrder(HttpServletRequest request,
+            List<OrderItem> orderItems, OrderItem cancelledOrderItem) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
+        try {
             if (customerService.cancelOrder(orderItems)) {
                 Order order = new Order();
                 List<OrderItem> cancelOrder = new ArrayList<OrderItem>();
@@ -202,7 +228,8 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to return particular product order details
+     * This method is used to return particular product after delivered from
+     * e-commerce web-site, If the customer didn't satisfy that product.
      * </p>
      *
      * @return ModelAndView ModelAndView is an object that holds both the model
@@ -213,10 +240,11 @@ public class CustomerController {
     public ModelAndView returnOrder(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
         try {
-            Integer orderItemId = Integer
-                    .parseInt(request.getParameter(Constants.LABEL_ORDER_ITEM_ID));
+            Integer orderItemId = Integer.parseInt(
+                    request.getParameter(Constants.LABEL_ORDER_ITEM_ID));
             List<Integer> orderItemIds = new ArrayList<Integer>();
             orderItemIds.add(orderItemId);
             List<OrderItem> orderItems = customerService
@@ -239,19 +267,19 @@ public class CustomerController {
                         Constants.MSG_RETURN_ORDER_FAIL);
             }
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_RETURN_ORDER_FAIL);
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_RETURN_ORDER_FAIL);
         }
         return modelAndView;
     }
 
     /**
      * <p>
-     * This method is used to display particular customer order details
+     * This method is used to display particular customer cart product details
      * </p>
      *
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "Cart" is the view name and set of
-     *         cartItems is the model.
+     *         and view. In this method "Cart" is the view name.
      */
     @GetMapping("Cart")
     public ModelAndView myCart(HttpServletRequest request) {
@@ -268,20 +296,21 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to display particular customer order details
+     * This method is used to customer add product to their cart.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "Cart" is the view name.
      */
     @PostMapping("addCart")
     public ModelAndView addToCart(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
         try {
-            Integer id = Integer.parseInt(request.getParameter(Constants.LABEL_ID));
+            Integer id = Integer
+                    .parseInt(request.getParameter(Constants.LABEL_ID));
             WarehouseProduct warehouseProduct = customerService
                     .getWarehouseProduct(id);
             List<CartItem> cartItems = customer.getCartItems();
@@ -330,19 +359,20 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to remove particular product from cart
+     * This method is used to remove particular product from cart.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "Cart" is the view name.
      */
     @PostMapping("removeFromCart")
-    public ModelAndView removeFromCart(@RequestParam(Constants.LABEL_ID) String id,
+    public ModelAndView removeFromCart(
+            @RequestParam(Constants.LABEL_ID) String id,
             HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
         try {
             List<CartItem> cartItems = customer.getCartItems();
             for (Integer i = 0; i < cartItems.size(); i++) {
@@ -360,7 +390,8 @@ public class CustomerController {
             }
             modelAndView.setViewName(JSP_CART);
         } catch (EcommerceException e) {
-            modelAndView.addObject(Constants.LABEL_MESSAGE, Constants.MSG_ADD_CART_FAIL);
+            modelAndView.addObject(Constants.LABEL_MESSAGE,
+                    Constants.MSG_ADD_CART_FAIL);
             modelAndView.setViewName(JSP_CART);
         }
         return modelAndView;
@@ -368,24 +399,26 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to remove particular product from cart
+     * This method is used to increase or decrease particular product quantity
+     * in cart.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "Cart" is the view name.
      */
     @PostMapping("updateCart")
     public ModelAndView updateCart(@RequestParam(Constants.LABEL_ID) String id,
             HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
         try {
             List<CartItem> cartItems = customer.getCartItems();
             Integer quantity = Integer
                     .parseInt(request.getParameter(Constants.LABEL_QUANTITY));
-            Float price = Float.parseFloat(request.getParameter(Constants.LABEL_PRICE));
+            Float price = Float
+                    .parseFloat(request.getParameter(Constants.LABEL_PRICE));
             for (Integer i = 0; i < cartItems.size(); i++) {
                 if (Integer.parseInt(id) == cartItems.get(i).getId()) {
                     cartItems.get(i).setQuantity(quantity);
@@ -406,15 +439,18 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to add the delivery address for place an order.
+     * This method is used to display selected product to purchase which
+     * contains the details of product price, seller name, price of product,
+     * delivery address and mode of payment.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "OrdersPage" is the view name and set of
+     *         orders and customer is the model.
      */
     @PostMapping("orderProduct")
-    public ModelAndView OrderDetails(@RequestParam(Constants.LABEL_ID) Integer id,
+    public ModelAndView OrderDetails(
+            @RequestParam(Constants.LABEL_ID) Integer id,
             HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(Constants.LABEL_BUY_PRODUCT, Boolean.TRUE);
@@ -425,11 +461,13 @@ public class CustomerController {
             warehouseProducts.add(warehouseProduct);
             Map<Integer, Integer> quantities = new HashMap<Integer, Integer>();
             quantities.put(id, 1);
-            modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS, warehouseProducts);
+            modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS,
+                    warehouseProducts);
             modelAndView.addObject(Constants.LABEL_QUANTITIES, quantities);
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
-            modelAndView.addObject(Constants.LABEL_TOTAL_PRICE, warehouseProduct.getPrice());
+            modelAndView.addObject(Constants.LABEL_TOTAL_PRICE,
+                    warehouseProduct.getPrice());
             modelAndView.setViewName(JSP_ORDER_PAGE);
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
@@ -441,20 +479,17 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to purchase particular product or multiple products
-     * with different quantities.
+     * This method is used to purchase multiple products with different quantities.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "OrdersPage" is the view name and set of
+     *         orders and customer is the model.
      */
     @PostMapping("buyProducts")
     public ModelAndView OrderDetails(HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(Constants.LABEL_BUY_PRODUCT, Boolean.FALSE);
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
         try {
             List<Integer> warehouseProductIds = new ArrayList<Integer>();
             String[] warehouseProductIdsExists = request
@@ -471,28 +506,9 @@ public class CustomerController {
             }
             List<WarehouseProduct> warehouseProducts = customerService
                     .getWarehouseProductsByIds(warehouseProductIds);
-            List<CartItem> cartItems = customer.getCartItems();
-            Map<Integer, Integer> quantities = new HashMap<Integer, Integer>();
-            Float totalPrice = (float) 0;
-            for (Integer i = 0; i < cartItems.size(); i++) {
-                for (Integer j = 0; j < warehouseProducts.size(); j++) {
-                    if (warehouseProducts.get(j).getId() == cartItems.get(i)
-                            .getWarehouseProduct().getId()) {
-                        quantities.put(warehouseProducts.get(j).getId(),
-                                cartItems.get(i).getQuantity());
-                        totalPrice = totalPrice + (cartItems.get(i)
-                                .getQuantity()
-                                * (warehouseProducts.get(j)).getPrice());
-                    }
-                }
-            }
-            modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS, warehouseProducts);
-            modelAndView.addObject(Constants.LABEL_QUANTITIES, quantities);
+            modelAndView = OrderDetails(request, warehouseProducts);
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
-            modelAndView.addObject(Constants.LABEL_TOTAL_PRICE, totalPrice);
-            modelAndView.setViewName(JSP_ORDER_PAGE);
-
         } catch (EcommerceException e) {
             modelAndView.addObject(Constants.LABEL_MESSAGE,
                     Constants.MSG_ADD_ORDER_FAIL);
@@ -503,19 +519,56 @@ public class CustomerController {
 
     /**
      * <p>
+     * This method is used assign values to ModelAndView Object. This objects
+     * have product details of customer ordered product anf=d their
+     * corresponding quantities
+     * </p>
+     * 
+     * @param warehouseProducts needed for placing an order.
+     */
+    private ModelAndView OrderDetails(HttpServletRequest request,
+            List<WarehouseProduct> warehouseProducts) {
+        HttpSession session = request.getSession(Boolean.FALSE);
+        ModelAndView modelAndView = new ModelAndView();
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
+        List<CartItem> cartItems = customer.getCartItems();
+        Map<Integer, Integer> quantities = new HashMap<Integer, Integer>();
+        Float totalPrice = (float) 0;
+        for (Integer i = 0; i < cartItems.size(); i++) {
+            for (Integer j = 0; j < warehouseProducts.size(); j++) {
+                if (warehouseProducts.get(j).getId() == cartItems.get(i)
+                        .getWarehouseProduct().getId()) {
+                    quantities.put(warehouseProducts.get(j).getId(),
+                            cartItems.get(i).getQuantity());
+                    totalPrice = totalPrice + (cartItems.get(i).getQuantity()
+                            * (warehouseProducts.get(j)).getPrice());
+                }
+            }
+        }
+        modelAndView.addObject(Constants.LABEL_WAREHOUSE_PRODUCTS,
+                warehouseProducts);
+        modelAndView.addObject(Constants.LABEL_QUANTITIES, quantities);
+        modelAndView.addObject(Constants.LABEL_TOTAL_PRICE, totalPrice);
+        modelAndView.setViewName(JSP_ORDER_PAGE);
+        return modelAndView;
+    }
+
+    /**
+     * <p>
      * This method is used to purchase particular product or multiple products
      * with different quantities.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "myOrders" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "myOrders" is the view name and set of
+     *         orders and customer is the model.
      */
     @PostMapping("placeOrder")
     public ModelAndView placeOrder(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        Boolean buyProduct = Boolean
-                .parseBoolean(request.getParameter(Constants.LABEL_BUY_PRODUCT));
+        Boolean buyProduct = Boolean.parseBoolean(
+                request.getParameter(Constants.LABEL_BUY_PRODUCT));
         if (buyProduct) {
             modelAndView = PurchaseProductDirect(request);
         } else {
@@ -526,17 +579,18 @@ public class CustomerController {
 
     /**
      * <p>
-     * This method is used to purchase a particular product.
+     * This method is used to purchase a particular product from product page.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "OrdersDisplay" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "OrdersPage" is the view name.
      */
     private ModelAndView PurchaseProductDirect(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView(Constants.REDIRECT + "myOrders");
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
+        ModelAndView modelAndView = new ModelAndView(
+                Constants.REDIRECT + "myOrders");
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
         try {
             Integer warehouseProductId = Integer
                     .parseInt(request.getParameter(Constants.LABEL_ID));
@@ -552,7 +606,8 @@ public class CustomerController {
             Address address = new Address();
             address.setId(addressId);
             order.setAddress(address);
-            order.setModeOfPayment(request.getParameter(Constants.LABEL_MODE_OF_PAYMENT));
+            order.setModeOfPayment(
+                    request.getParameter(Constants.LABEL_MODE_OF_PAYMENT));
             OrderItem orderItem = new OrderItem();
             orderItem.setQuantity(1);
             orderItem.setPrice(warehouseProduct.getPrice());
@@ -584,22 +639,25 @@ public class CustomerController {
     /**
      * <p>
      * This method is used to purchase list of products for a particular
-     * customer.
+     * customer from selected cart products.
      * </p>
      * 
      * @return ModelAndView ModelAndView is an object that holds both the model
-     *         and view. In this method "myOrders" is the view name and set
-     *         of orders and customer is the model.
+     *         and view. In this method "myOrders" is the view name and set of
+     *         orders and customer is the model.
      */
     public ModelAndView PurchaseProductFromCart(HttpServletRequest request) {
         HttpSession session = request.getSession(Boolean.FALSE);
-        ModelAndView modelAndView = new ModelAndView(Constants.REDIRECT + "myOrders");
+        ModelAndView modelAndView = new ModelAndView(
+                Constants.REDIRECT + "myOrders");
         Order order;
         OrderItem orderItem;
-        Customer customer = (Customer) session.getAttribute(Constants.LABEL_CUSTOMER);
+        Customer customer = (Customer) session
+                .getAttribute(Constants.LABEL_CUSTOMER);
         try {
             Address address = new Address();
-            address.setId(Integer.parseInt(request.getParameter(Constants.LABEL_ADDRESS_ID)));
+            address.setId(Integer.parseInt(
+                    request.getParameter(Constants.LABEL_ADDRESS_ID)));
             List<Integer> warehouseProductIds = new ArrayList<Integer>();
             for (String id : request.getParameterValues(Constants.LABEL_ID)) {
                 warehouseProductIds.add(Integer.parseInt(id));
@@ -607,7 +665,6 @@ public class CustomerController {
             List<WarehouseProduct> warehouseProducts = customerService
                     .getWarehouseProductsByIds(warehouseProductIds);
             List<CartItem> cartItems = customer.getCartItems();
-            List<Order> orders = customer.getOrders();
             List<OrderItem> orderItems = new ArrayList<OrderItem>();
             Float totalPrice = (float) 0;
             for (Integer i = 0; i < cartItems.size(); i++) {
@@ -693,19 +750,20 @@ public class CustomerController {
      */
     @PostMapping("searchProduct")
     public ModelAndView searchProduct(HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         try {
-            Integer categoryId = Integer
-                    .parseInt(request.getParameter(Constants.LABEL_CATEGORY_ID));
+            Integer categoryId = Integer.parseInt(
+                    request.getParameter(Constants.LABEL_CATEGORY_ID));
             String productName = request.getParameter(Constants.LABEL_NAME);
             List<Product> products = new ArrayList<Product>();
             if (0 == categoryId) {
                 products = customerService
-                        .searchProduct(Constants.PERCENT_SYMBOL + productName + Constants.PERCENT_SYMBOL);
+                        .searchProduct(Constants.PERCENT_SYMBOL + productName
+                                + Constants.PERCENT_SYMBOL);
             } else {
                 products = customerService.searchProduct(categoryId,
-                        Constants.PERCENT_SYMBOL + productName + Constants.PERCENT_SYMBOL);
+                        Constants.PERCENT_SYMBOL + productName
+                                + Constants.PERCENT_SYMBOL);
             }
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
@@ -730,12 +788,9 @@ public class CustomerController {
     @PostMapping("productPage")
     public ModelAndView getProduct(@RequestParam(Constants.LABEL_ID) Integer id,
             HttpServletRequest request) {
-        HttpSession session = request.getSession(Boolean.FALSE);
         ModelAndView modelAndView = new ModelAndView();
         try {
             Product product = customerService.searchProduct(id);
-            List<WarehouseProduct> warehouseProducts = product
-                    .getWarehouseProducts();
             modelAndView.addObject(Constants.LABEL_PRODUCT, product);
             modelAndView.addObject(Constants.LABEL_CATEGORIES,
                     customerService.getAllCategories());
@@ -757,8 +812,8 @@ public class CustomerController {
     public ModelAndView getProductsByCategory(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            Integer categoryId = Integer
-                    .parseInt(request.getParameter(Constants.LABEL_CATEGORY_ID));
+            Integer categoryId = Integer.parseInt(
+                    request.getParameter(Constants.LABEL_CATEGORY_ID));
             Category category = customerService.getCategory(categoryId);
             List<Product> products = category.getProducts();
             modelAndView.addObject(Constants.LABEL_PRODUCTS, products);
