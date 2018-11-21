@@ -82,3 +82,9 @@ form > div > .btn-default {
 	text-align: center;
 	vertical-align: middle;
 }
+
+.table-wrapper {
+	display: block;
+	max-height: 60%;
+	overflow-y: auto;
+}

@@ -93,3 +93,9 @@ form > div > .btn-default {
 .modal {
 	margin-top: 16%;
 }
+
+.table-wrapper {
+	display: block;
+	max-height: 60%;
+	overflow-y: auto;
+}

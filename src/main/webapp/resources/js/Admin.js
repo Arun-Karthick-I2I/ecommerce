@@ -2,7 +2,7 @@ function searchbar() {
 	$(document).ready(function(){
 		$("#search").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
-		    	$("#myTable tr").filter(function() {
+		    	$("#table-body tr").filter(function() {
 		    		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		    	});
 		});
@@ -16,8 +16,8 @@ function showSnackBar() {
 }
 
 function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("mySidebar").style.width = "160px";
+    document.getElementById("main").style.marginLeft = "160px";
 }
 
 function closeNav() {
