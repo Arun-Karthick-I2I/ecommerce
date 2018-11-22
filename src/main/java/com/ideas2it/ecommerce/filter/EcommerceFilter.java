@@ -27,7 +27,7 @@ import com.ideas2it.ecommerce.common.enums.USER_ROLES;
  */
 public class EcommerceFilter implements Filter {
 
-    private static final String ADDITIONAL_FILES_PATTERN = ".*(js|css|jpg|png|gif|woff2)";
+    private static final String ADDITIONAL_FILES_PATTERN = ".*(js|css|jpeg|jpg|png|gif|woff2)";
     private static final String ADDRESS_PATH = "Address";
     private static final String ADMIN_HOME_PATH = "/category/display";
     private static final String ADMIN_PATH = "/admin/";
